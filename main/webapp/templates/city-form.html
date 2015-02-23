@@ -1,0 +1,88 @@
+<form class='form-inline'>
+    <fieldset>
+        <legend>City Generator</legend>
+        <div class='row'>
+            <div class='span3 panel-group' id='accordian' role='tablist' aria-multiselectable='true'>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Size
+                                <span class="float-right">{{cityForm.size}}</span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <div class='btn-group-vertical'>
+                                <label class='btn btn-default' ng-class="{'active': !cityForm.size}">
+                                    <input type='radio' ng-model="cityForm.size" ng-value="">Random
+                                </label>
+                                <label ng-repeat="size in cityVals.size" class="btn btn-default"
+                                       ng-class="{'active': cityForm.size == size}">
+                                    <input type='radio' ng-model="cityForm.size" ng-value="size">{{size}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='span3 panel-group' id='accordian2' role='tablist' aria-multiselectable='true'>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                Dominant Species
+                                <span class="float-right">{{cityForm.spec}}</span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <div class='btn-group-vertical'>
+                                <label class='btn btn-default' ng-class="{'active': !cityForm.spec}">
+                                    <input type='radio' ng-model="cityForm.spec" ng-value="">Random
+                                </label>
+                                <label ng-repeat="spec in cityVals.species" class="btn btn-default"
+                                       ng-class="{'active': cityForm.spec == spec}">
+                                    <input type='radio' ng-model="cityForm.spec" ng-value="spec">{{spec}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='span3 panel-group' id='accordian3' role='tablist' aria-multiselectable='true'>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                Diversity
+                                <span class="float-right">{{cityForm.div}}</span>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <div class='btn-group-vertical'>
+                                <label class='btn btn-default' ng-class="{'active': !cityForm.div}">
+                                    <input type='radio' ng-model="cityForm.div" ng-value="">Random
+                                </label>
+                                <label ng-repeat="div in cityVals.diversity" class="btn btn-default"
+                                       ng-class="{'active': cityForm.div == div}">
+                                    <input type='radio' ng-model="cityForm.div" value="{{div}}">{{div}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button class="btn btn-primary span2 generate-button" ng-click="generate(cityForm)">
+                <span ng-show="!state.generating">Generate!</span>
+                <img ng-show="state.generating" src="resources/loading.gif" height="20px" width="20px">
+            </button>
+        </div>
+    </fieldset>
+</form>

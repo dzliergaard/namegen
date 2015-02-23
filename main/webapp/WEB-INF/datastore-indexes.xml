@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<datastore-indexes autoGenerate="false">
+    <datastore-index kind="Name" ancestor="false" source="manual">
+        <property name="user" direction="asc"/>
+        <property name="content" direction="asc"/>
+    </datastore-index>
+    <datastore-index kind="City" ancestor="false" source="manual">
+        <property name="name" direction="asc"/>
+        <property name="ruler" direction="asc"/>
+        <property name="population" direction="asc"/>
+        <property name="user" direction="asc"/>
+        <property name="inns" direction="asc"/>
+    </datastore-index>
+</datastore-indexes>

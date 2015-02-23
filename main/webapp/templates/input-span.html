@@ -1,0 +1,4 @@
+<strong class="span12" ng-if="!state.editing" ng-click="edit()">
+    {{inputSpan.text}}
+</strong>
+<input class="form-control" ng-if="state.editing" enter="done()" ng-model="inputSpan.text" ng-blur="done()"/>

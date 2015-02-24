@@ -1,22 +1,16 @@
 package com.rptools.shared.items;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.users.User;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.rptools.shared.util.Logger;
 import com.rptools.shared.util.WeightedList;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonMethod;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 @SuppressWarnings("unchecked")
@@ -122,7 +116,7 @@ public class City {
         this.user = user;
     }
 
-    @JsonAutoDetect(JsonMethod.FIELD)
+    @JsonAutoDetect
     public static class Population {
         public List<RacePop> people = Lists.newArrayList();
         public int tot = 0;

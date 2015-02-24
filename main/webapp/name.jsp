@@ -1,7 +1,6 @@
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <html ng-app="NameGen">
 <jsp:include page="header.jsp"/>
 <script type="text/javascript" src="js/resources/name-calls.js"></script>
@@ -21,14 +20,13 @@
     nameGen.value("userAuth", <%= UserServiceFactory.getUserService().getCurrentUser() != null %>);
 
     nameGen.config(function ($httpProvider) {
-        $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
-        $httpProvider.defaults.headers.common['Accept'] = 'text/html,application/xhtml+xml,application/json';
+        $httpProvider.defaults.headers.common['Accept'] = '*/*';
     });
 </script>
 
 <body>
 <div class='content row' ng-controller="NameCtrl">
-    <div class='alert alert-error' ng-show='state.error'><span>{{state.error}}</span></div>
+    <div class='alert alert-error row' ng-show='state.error'><span class="col-xs-12">{{state.error}}</span></div>
     <form class="form-inline col-mid-12">
         <fieldset>
             <div class="row">
@@ -43,7 +41,7 @@
                     <div class="row">
                         <div class="col-xs-8">
                                 <div class="label-input form-group">
-                                    <label for="how-many" class="col-xs-6">How Many?</label>
+                                    <label for="how-many" class="col-xs-7">How Many?</label>
                                     <input id="how-many" type='text' class='col-xs-4 input-lg'
                                            enter='generate(numNames)' ng-model="numNames" placeholder='10'/>
                                 </div>

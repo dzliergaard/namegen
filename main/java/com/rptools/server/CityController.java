@@ -1,11 +1,9 @@
-package com.rptools.server.city;
+package com.rptools.server;
 
 import com.google.appengine.api.users.User;
 import com.rptools.shared.items.City;
-import com.rptools.shared.items.Name;
 import com.rptools.shared.util.CityUtils;
 import com.rptools.shared.util.Logger;
-import com.rptools.shared.util.NameUtils;
 import com.rptools.util.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping(value="city")
@@ -39,11 +35,11 @@ public class CityController {
     }
 
     @RequestMapping(value="delete", method=RequestMethod.POST)
-    public void delete(@RequestBody(required=true) Name name, HttpServletResponse response){
+    public void delete(@RequestBody(required=true) City city, HttpServletResponse response){
     }
 
     @RequestMapping(value="save", method= RequestMethod.POST)
-    public @ResponseBody Name save(@RequestBody(required=false) String name, HttpServletResponse response){
+    public @ResponseBody City save(@RequestBody(required=false) City city, HttpServletResponse response){
         return null;
     }
 }

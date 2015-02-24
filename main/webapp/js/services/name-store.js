@@ -26,9 +26,6 @@ angular.module('dzl.services')
                 } else {
                     names.stored.push(angular.fromJson(response.data));
                 }
-                names.stored.sort(function (a, b) {
-                    return a.text > b.text
-                });
             },
             function () {
                 state.error = "Error attempting to save name " + newName.text + "!!";

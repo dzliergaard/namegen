@@ -1,4 +1,4 @@
-package com.rptools.server.name;
+package com.rptools.server;
 
 import com.google.appengine.api.users.User;
 import com.google.common.collect.Lists;
@@ -7,7 +7,6 @@ import com.rptools.shared.util.Logger;
 import com.rptools.shared.util.NameUtils;
 import com.rptools.util.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@Controller
-@RequestMapping(value={"name", ""})
+@RestController
+@RequestMapping(value={"name", ""}, produces = "application/json")
 public class NameController {
     private static Logger log = Logger.getLogger(NameController.class);
     @Autowired Provider<User> userProvider;
@@ -37,8 +36,8 @@ public class NameController {
         return mav;
     }
 
-    @RequestMapping(value="generate", method=RequestMethod.GET, headers="Accept=application/json")
-    public @ResponseBody List<Name> generate(@RequestParam(required=false) Integer numNames, HttpServletResponse response){
+    @RequestMapping(value="generate", method=RequestMethod.GET, produces="application/json")
+    public List<Name> generate(@RequestParam(required=false, value="numNames") Integer numNames){
         if(numNames == null){
             numNames = 10;
         }
@@ -73,7 +72,7 @@ public class NameController {
     }
 
     @RequestMapping(value="save", method= RequestMethod.POST)
-    public @ResponseBody Name save(@RequestBody(required=false) Name name, HttpServletResponse response){
+    public Name save(@RequestBody(required=false) Name name, HttpServletResponse response){
         if(name == null || !userProvider.has()){
             try {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST);

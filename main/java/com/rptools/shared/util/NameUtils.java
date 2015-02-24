@@ -6,7 +6,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.rptools.shared.items.Name;
 import com.rptools.shared.items.NameGenData;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

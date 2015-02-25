@@ -1,11 +1,10 @@
 package com.rptools.server.city;
 
 import com.google.appengine.api.users.User;
-import com.rptools.shared.items.City;
-import com.rptools.shared.items.Name;
-import com.rptools.shared.util.CityUtils;
-import com.rptools.shared.util.Logger;
-import com.rptools.shared.util.NameUtils;
+import com.rptools.items.City;
+import com.rptools.items.Name;
+import com.rptools.util.CityUtils;
+import com.rptools.util.Logger;
 import com.rptools.util.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping(value="city")

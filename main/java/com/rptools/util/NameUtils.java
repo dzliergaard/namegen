@@ -1,11 +1,11 @@
-package com.rptools.shared.util;
+package com.rptools.util;
 
 import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.users.User;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.rptools.shared.items.Name;
-import com.rptools.shared.items.NameGenData;
+import com.rptools.items.Name;
+import com.rptools.items.NameGenData;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

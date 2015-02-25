@@ -1,9 +1,9 @@
-package com.rptools.shared.items;
+package com.rptools.items;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.rptools.shared.util.Logger;
-import com.rptools.shared.util.WeightedList;
+import com.rptools.util.Logger;
+import com.rptools.util.WeightedList;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

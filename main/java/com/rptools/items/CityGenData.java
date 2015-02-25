@@ -1,9 +1,9 @@
-package com.rptools.shared.items;
+package com.rptools.items;
 
 import com.google.appengine.api.users.User;
 import com.google.common.collect.Lists;
-import com.rptools.shared.util.Logger;
-import com.rptools.shared.util.NameUtils;
+import com.rptools.util.Logger;
+import com.rptools.util.NameUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.BufferedReader;

@@ -2,9 +2,9 @@ package com.rptools.server.name;
 
 import com.google.appengine.api.users.User;
 import com.google.common.collect.Lists;
-import com.rptools.shared.items.Name;
-import com.rptools.shared.util.Logger;
-import com.rptools.shared.util.NameUtils;
+import com.rptools.items.Name;
+import com.rptools.util.Logger;
+import com.rptools.util.NameUtils;
 import com.rptools.util.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

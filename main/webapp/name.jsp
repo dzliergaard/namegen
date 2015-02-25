@@ -69,6 +69,9 @@
                  ng-if="names.stored.length > 0" btn-action="remove" btn-text="Remove" edit-action="saveName"></name-list>
         </div>
     </div>
+    <div class="row">
+        <div class="alert learning col-xs-12"
+    </div>
     <span class="footer note1" ng-show="showfooter">*results may vary</span>
 </div>
 </body>

@@ -1,10 +1,10 @@
 package com.rptools.shared.items;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.appengine.api.users.User;
 import com.google.common.collect.Lists;
 import com.rptools.shared.util.Logger;
 import com.rptools.shared.util.NameUtils;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,9 +12,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by DZL on 2/22/14.
- */
 public class CityGenData {
     private static final Logger log = Logger.getLogger(CityGenData.class);
     private static CityData cityData;

@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping(value={"name", ""})
+@RequestMapping(value={"name", ""}, method={RequestMethod.GET, RequestMethod.HEAD})
 public class NameController {
     private static Logger log = Logger.getLogger(NameController.class);
     @Autowired Provider<User> userProvider;

@@ -1,10 +1,10 @@
-package com.rptools.shared.items;
+package com.rptools.items;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.appengine.api.users.User;
 import com.google.common.collect.Lists;
-import com.rptools.shared.util.Logger;
-import com.rptools.shared.util.NameUtils;
+import com.rptools.util.Logger;
+import com.rptools.util.NameUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,23 +1,26 @@
-package com.rptools.shared.util;
+package com.rptools.util;
+
+import java.util.List;
 
 import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.users.User;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.rptools.shared.items.Name;
-import com.rptools.shared.items.NameGenData;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
+import com.rptools.items.Name;
+import com.rptools.items.NameGenData;
+import com.rptools.items.TrainingName;
 
 public class NameUtils {
+
     private static final Logger log = Logger.getLogger(NameUtils.class);
     private static DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     public static List<Name> get(User user) {
         Query.Filter userEq = new Query.FilterPredicate("user", Query.FilterOperator.EQUAL, user);
         Query.Filter usernameEq = new Query.FilterPredicate("user", Query.FilterOperator.EQUAL, user.getEmail());
-        Query.Filter userOr = new Query.CompositeFilter(Query.CompositeFilterOperator.OR,  Lists.newArrayList(userEq, usernameEq));
+        Query.Filter userOr = new Query.CompositeFilter(Query.CompositeFilterOperator.OR, Lists.newArrayList(
+                userEq,
+                usernameEq));
         Query query = new Query("Name").setFilter(userOr).addSort("content");
         List<Entity> names = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
         return Lists.transform(names, entityToName);
@@ -26,7 +29,7 @@ public class NameUtils {
     public static Name get(Long keyStr, User user) throws EntityNotFoundException {
         Key key = KeyFactory.createKey("Name", keyStr);
         Name name = entityToName.apply(datastore.get(key));
-        if(name == null || !user.equals(name.getUser())){
+        if (name == null || !user.equals(name.getUser())) {
             throw new EntityNotFoundException(key);
         }
         return name;
@@ -43,6 +46,7 @@ public class NameUtils {
     }
 
     private static Function<Entity, Name> entityToName = new Function<Entity, Name>() {
+
         @Override
         public Name apply(Entity entity) {
             return Name.fromEntity(entity);
@@ -62,5 +66,13 @@ public class NameUtils {
             names.add(new Name(NameGenData.makeName(), user));
         }
         return names;
+    }
+
+    public static TrainingName getTrainingName() {
+        return NameGenData.getTrainingName();
+    }
+
+    public static void addTrainingData(TrainingName name) {
+
     }
 }

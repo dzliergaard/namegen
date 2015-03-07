@@ -2,3 +2,4 @@ main/webapp/lib
 out
 .idea
 *.iml
+target

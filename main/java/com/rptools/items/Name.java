@@ -1,11 +1,11 @@
-package com.rptools.shared.items;
+package com.rptools.items;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.users.User;
-import com.rptools.shared.util.Logger;
+import com.rptools.util.Logger;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Name {

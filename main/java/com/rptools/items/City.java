@@ -1,13 +1,12 @@
-package com.rptools.shared.items;
+package com.rptools.items;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.users.User;
 import com.google.common.collect.Lists;
-import com.rptools.shared.util.Logger;
-import com.rptools.shared.util.WeightedList;
+import com.rptools.util.Logger;
+import com.rptools.util.WeightedList;
 
 import java.io.IOException;
 import java.util.List;

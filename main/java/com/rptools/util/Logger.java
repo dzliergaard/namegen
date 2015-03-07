@@ -1,4 +1,4 @@
-package com.rptools.shared.util;
+package com.rptools.util;
 
 import com.google.common.collect.Maps;
 

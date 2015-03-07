@@ -1,9 +1,4 @@
-package com.rptools.shared.items;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.rptools.shared.util.Logger;
-import com.rptools.shared.util.WeightedList;
+package com.rptools.items;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,8 +9,16 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.rptools.util.Logger;
+import com.rptools.util.WeightedList;
+
 public class NameGenData {
+
     private static final Logger log = Logger.getLogger(NameGenData.class);
+    private static WeightedList<String> origFirst = new WeightedList<String>();
+    private static WeightedList<String> origLast = new WeightedList<String>();
     private static WeightedNameData first;
     private static WeightedNameData last;
     private static boolean init = false;
@@ -25,16 +28,19 @@ public class NameGenData {
     private static Pattern end = Pattern.compile("[AEIOUY]+[^AEIOUY]+([AEIOUY]+[^AEIOUY]*[E]?)$");
     private static Pattern namePat = Pattern.compile("[\\w]+");
 
-    public NameGenData(){}
+    public NameGenData() {
+    }
 
-    public static WeightedNameData getFirst(){
+    public static WeightedNameData getFirst() {
         return first;
     }
-    public static WeightedNameData getLast(){
+
+    public static WeightedNameData getLast() {
         return last;
     }
 
     public static class WeightedNameData {
+
         double mean;
         double deviation;
         WeightedList<String> beg;
@@ -50,14 +56,20 @@ public class NameGenData {
         }
     }
 
-    private static class NameData{
+    private static class NameData {
+
         Map<String, Integer> beg;
         Map<String, Integer> mid;
         Map<String, Integer> end;
         double mean;
         double deviation;
 
-        public NameData(Map<String, Integer> beg, Map<String, Integer> mid, Map<String, Integer> end, double mean, double deviation){
+        public NameData(
+                Map<String, Integer> beg,
+                Map<String, Integer> mid,
+                Map<String, Integer> end,
+                double mean,
+                double deviation) {
             this.beg = beg;
             this.mid = mid;
             this.end = end;
@@ -68,10 +80,12 @@ public class NameGenData {
 
     private static int getGroups(Matcher matcher, Map<String, Integer> groups) {
         int i = 0;
-        while(matcher.find()){
+        while (matcher.find()) {
             String str = matcher.group(1);
             Integer num = groups.get(str);
-            if(num == null){ num = 0; }
+            if (num == null) {
+                num = 0;
+            }
             num++;
             groups.put(str, num);
             i++;
@@ -79,7 +93,7 @@ public class NameGenData {
         return i;
     }
 
-    private static NameData parseNames(BufferedReader br) throws IOException {
+    private static NameData parseNames(BufferedReader br, WeightedList<String> orig) throws IOException {
         String str, nameDataStr = "";
         while ((str = br.readLine()) != null) {
             nameDataStr += str.trim();
@@ -92,9 +106,10 @@ public class NameGenData {
         Map<String, Integer> ends = Maps.newHashMap();
         double total = 0, meanTotal = 0, i = 0;
         List<Integer> syls = Lists.newArrayList();
-        while(nameMatcher.find()){
+        while (nameMatcher.find()) {
             i++;
             String name = nameMatcher.group();
+            orig.add(1, name);
             int syl = getGroups(beg.matcher(name), begs);
             syl += getGroups(mid.matcher(name), mids);
             syl += getGroups(end.matcher(name), ends);
@@ -103,7 +118,7 @@ public class NameGenData {
         }
         double mean = total / i;
         // second pass to get mean total
-        for(Integer s : syls){
+        for (Integer s : syls) {
             double var = s - mean;
             meanTotal += var * var;
         }
@@ -112,8 +127,12 @@ public class NameGenData {
 
     private static void parseNameData() {
         try {
-            first = new WeightedNameData(parseNames(new BufferedReader(new FileReader("resources/names.txt"))));
-            last = new WeightedNameData(parseNames(new BufferedReader(new FileReader("resources/lastnames.txt"))));
+            first = new WeightedNameData(parseNames(
+                    new BufferedReader(new FileReader("resources/names.txt")),
+                    origFirst));
+            last = new WeightedNameData(parseNames(
+                    new BufferedReader(new FileReader("resources/lastnames.txt")),
+                    origLast));
         } catch (IOException e) {
             log.warning("Error parsing name data: %e", e.getCause().toString());
         }
@@ -121,7 +140,7 @@ public class NameGenData {
     }
 
     public static String makeName() {
-        if(!init){
+        if (!init) {
             parseNameData();
         }
         return makeName(NameGenData.getFirst()) + " " + makeName(NameGenData.getLast());
@@ -130,20 +149,28 @@ public class NameGenData {
     private static String makeName(WeightedNameData nameData) {
         String name = nameData.beg.random();
         int syl = (int) Math.round(new Random().nextGaussian() * nameData.deviation + nameData.mean);
-        if(--syl == 0){
+        if (--syl == 0) {
             return format(name);
         }
-        if(--syl == 0) {
+        if (--syl == 0) {
             return format(name + nameData.end.random());
         }
-        while(syl-- > 0){
+        while (syl-- > 0) {
             name += nameData.mid.random();
         }
         name += nameData.end.random();
         return format(name);
     }
 
-    private static String format(String name){
+    public static String format(String name) {
         return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+    }
+
+    public static TrainingName getTrainingName() {
+        if(!init){
+            parseNameData();
+        }
+        String name = format(origFirst.random()) + " " + format(origFirst.random());
+        return new TrainingName(name, NameAttribute.random());
     }
 }

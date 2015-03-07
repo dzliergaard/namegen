@@ -1,16 +1,14 @@
-package com.rptools.shared.util;
+package com.rptools.util;
 
 import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.users.User;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.rptools.shared.items.City;
-import com.rptools.shared.items.CityGenData;
-import com.rptools.shared.items.Name;
+import com.rptools.items.City;
+import com.rptools.items.CityGenData;
+import com.rptools.items.Name;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 /**

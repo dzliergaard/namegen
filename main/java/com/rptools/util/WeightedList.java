@@ -1,4 +1,4 @@
-package com.rptools.shared.util;
+package com.rptools.util;
 
 import java.util.Map;
 import java.util.Map.Entry;

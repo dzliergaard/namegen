@@ -1,7 +1,6 @@
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <html ng-app="NameGen">
 <jsp:include page="header.jsp"/>
 <script type="text/javascript" src="js/resources/name-calls.js"></script>

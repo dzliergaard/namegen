@@ -1,10 +1,13 @@
 package com.rptools.items;
 
-public class TrainingName {
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.appengine.api.datastore.Entity;
 
+public class TrainingName {
     private String name;
     private NameAttribute attribute;
-    private boolean sounds;
+    private int agree;
 
     public TrainingName() {
     }
@@ -34,11 +37,27 @@ public class TrainingName {
         this.attribute = attribute;
     }
 
-    public boolean isSounds() {
-        return sounds;
+    public int getAgree(){
+        return agree;
     }
 
-    public void setSounds(boolean sounds) {
-        this.sounds = sounds;
+    public void setAgree(int agree){
+        this.agree = agree;
+    }
+
+    public Entity entity(){
+        Entity entity;
+        entity = new Entity("TrainingName");
+        entity.setProperty("content", name);
+        entity.setProperty("attribute", attribute.name());
+        return entity;
+    }
+
+    public String toString(){
+        try {
+            return new ObjectMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            return "{}";
+        }
     }
 }

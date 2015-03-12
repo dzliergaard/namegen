@@ -7,6 +7,7 @@ import com.google.appengine.api.users.User;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.rptools.items.Name;
+import com.rptools.items.NameAttribute;
 import com.rptools.items.NameGenData;
 import com.rptools.items.TrainingName;
 
@@ -72,7 +73,9 @@ public class NameUtils {
         return NameGenData.getTrainingName();
     }
 
-    public static void addTrainingData(TrainingName name) {
-
+    public static void train(TrainingName name) {
+        if(name.getAttribute() == NameAttribute.NONE){ return; }
+        log.info("Saving name " + name.entity());
+        datastore.put(name.entity());
     }
 }

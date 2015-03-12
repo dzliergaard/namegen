@@ -16,7 +16,7 @@ nameLine.directive('nameLine', function (userAuth) {
             };
             scope.done = function () {
                 scope.state.edit = false;
-                if(scope.editAction) scope.editAction(scope.name);
+                if (scope.editAction) scope.editAction(scope.name);
             };
             scope.userAuth = userAuth;
             scope.signinToSave = "sign in with Google to persist names between sessions";

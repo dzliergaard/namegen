@@ -3,6 +3,7 @@ package com.rptools.server;
 import com.google.appengine.api.users.User;
 import com.google.common.collect.Lists;
 import com.rptools.items.Name;
+import com.rptools.items.TrainingName;
 import com.rptools.util.Logger;
 import com.rptools.util.NameUtils;
 import com.rptools.util.Provider;
@@ -27,11 +28,13 @@ public class NameController {
 
     private static final String ATTR_NAMES = "names";
     private static final String ATTR_TRAINING_NAME = "trainingName";
+    private static final String ATTR_TRAINING_ATTRIBUTES = "trainingAttributes";
 
     @RequestMapping(method=RequestMethod.GET)
     public ModelAndView getNames(){
         ModelAndView mav = new ModelAndView("name.jsp");
         mav.addObject(ATTR_TRAINING_NAME, NameUtils.getTrainingName());
+        mav.addObject(ATTR_TRAINING_ATTRIBUTES, TrainingName.NameAttribute.values());
         if(userProvider.get() == null){
             mav.addObject(ATTR_NAMES, Lists.newArrayList());
             return mav;
@@ -93,31 +96,9 @@ public class NameController {
         return name;
     }
 
-    @RequestMapping(value = "createTable", method = RequestMethod.GET)
-    public boolean createNamesTable() throws ClassNotFoundException, SQLException {
-        String url;
-//        if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
-            // Connecting from App Engine.
-            // Load the class that provides the "jdbc:google:mysql://"
-            // prefix.
-//            Class.forName("com.mysql.jdbc.GoogleDriver");
-            url = "jdbc:mysql://dzlier-rptools:rpdata?user=root";
-//        } else {
-//            // You may also assign an IP Address from the access control
-//            // page and use it to connect from an external network.
-            Class.forName("com.mysql.jdbc.Driver");
-//            url = "jdbc:mysql://127.0.0.1:3306/rpdata?user=root";
-//        }
-
-        Connection conn = DriverManager.getConnection(url);
-        conn.close();
-//        boolean createD = conn.createStatement().execute("CREATE DATABASE names");
-//        boolean createT = conn.createStatement().execute(
-//                "CREATE TABLE names.SAVED ("
-//                        + "ENTRY_ID INT NOT NULL AUTO_INCREMENT,"
-//                        + "NAME VARCHAR(255),"
-//                        + "USER VARCHAR(255))");
-
-        return true;
+    @RequestMapping(value="train", method=RequestMethod.POST)
+    public @ResponseBody TrainingName train(@RequestBody TrainingName name){
+        NameUtils.train(name);
+        return NameUtils.getTrainingName();
     }
 }

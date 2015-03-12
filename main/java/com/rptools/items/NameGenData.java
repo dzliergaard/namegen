@@ -3,25 +3,29 @@ package com.rptools.items;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.rptools.util.Logger;
 import com.rptools.util.WeightedList;
 
 public class NameGenData {
-
     private static final Logger log = Logger.getLogger(NameGenData.class);
     private static WeightedList<String> origFirst = new WeightedList<String>();
     private static WeightedList<String> origLast = new WeightedList<String>();
     private static WeightedNameData first;
     private static WeightedNameData last;
     private static boolean init = false;
+    private static Map<String, AttributeNameData> attributeNameData;
+    private static DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     private static Pattern beg = Pattern.compile("^([^AEIOUY]*[AEIOUY]+[^AEIOUY]*(?:E$)?)?");
     private static Pattern mid = Pattern.compile("[AEIOUY]+[^AEIOUY]+([AEIOUY]+[^AEIOUY]+)[AEIOUY]");
@@ -31,51 +35,8 @@ public class NameGenData {
     public NameGenData() {
     }
 
-    public static WeightedNameData getFirst() {
-        return first;
-    }
-
-    public static WeightedNameData getLast() {
-        return last;
-    }
-
-    public static class WeightedNameData {
-
-        double mean;
-        double deviation;
-        WeightedList<String> beg;
-        WeightedList<String> mid;
-        WeightedList<String> end;
-
-        public WeightedNameData(NameData nameData) {
-            mean = nameData.mean;
-            deviation = nameData.deviation;
-            beg = WeightedList.fromItemToWeightMap(nameData.beg);
-            mid = WeightedList.fromItemToWeightMap(nameData.mid);
-            end = WeightedList.fromItemToWeightMap(nameData.end);
-        }
-    }
-
-    private static class NameData {
-
-        Map<String, Integer> beg;
-        Map<String, Integer> mid;
-        Map<String, Integer> end;
-        double mean;
-        double deviation;
-
-        public NameData(
-                Map<String, Integer> beg,
-                Map<String, Integer> mid,
-                Map<String, Integer> end,
-                double mean,
-                double deviation) {
-            this.beg = beg;
-            this.mid = mid;
-            this.end = end;
-            this.mean = mean;
-            this.deviation = deviation;
-        }
+    private static Collection<TrainingName> getTrainingNamesForAttribute(NameAttribute attr){
+        return null;
     }
 
     private static int getGroups(Matcher matcher, Map<String, Integer> groups) {
@@ -127,12 +88,16 @@ public class NameGenData {
 
     private static void parseNameData() {
         try {
+            // generate the normal name stacks
             first = new WeightedNameData(parseNames(
-                    new BufferedReader(new FileReader("resources/names.txt")),
-                    origFirst));
+                    new BufferedReader(new FileReader("resources/names.txt")), origFirst));
             last = new WeightedNameData(parseNames(
-                    new BufferedReader(new FileReader("resources/lastnames.txt")),
-                    origLast));
+                    new BufferedReader(new FileReader("resources/lastnames.txt")), origLast));
+
+            // generate the attribute name lists
+            for(NameAttribute attr : NameAttribute.values()){
+
+            }
         } catch (IOException e) {
             log.warning("Error parsing name data: %e", e.getCause().toString());
         }
@@ -143,7 +108,7 @@ public class NameGenData {
         if (!init) {
             parseNameData();
         }
-        return makeName(NameGenData.getFirst()) + " " + makeName(NameGenData.getLast());
+        return makeName(first) + " " + makeName(last);
     }
 
     private static String makeName(WeightedNameData nameData) {
@@ -170,7 +135,7 @@ public class NameGenData {
         if(!init){
             parseNameData();
         }
-        String name = format(origFirst.random()) + " " + format(origFirst.random());
-        return new TrainingName(name, NameAttribute.random());
+        String name = format(origFirst.random()) + " " + format(origLast.random());
+        return new TrainingName(name);
     }
 }

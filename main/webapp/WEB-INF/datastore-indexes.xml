@@ -14,6 +14,5 @@
     <datastore-index kind="TrainingName" ancestor="false" source="manual">
         <property name="name" direction="asc"/>
         <property name="attribute" direction="asc"/>
-        <property name="agree" direction="asc"/>
     </datastore-index>
 </datastore-indexes>

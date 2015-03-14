@@ -47,7 +47,6 @@ public class NameUtils {
     }
 
     private static Function<Entity, Name> entityToName = new Function<Entity, Name>() {
-
         @Override
         public Name apply(Entity entity) {
             return Name.fromEntity(entity);
@@ -61,10 +60,10 @@ public class NameUtils {
         return new Name(NameGenData.makeName(), user);
     }
 
-    public static List<Name> generateNames(int numNames, User user) {
+    public static List<Name> generateNames(int numNames, User user, NameAttribute attribute) {
         List<Name> names = Lists.newArrayList();
         while (numNames-- > 0) {
-            names.add(new Name(NameGenData.makeName(), user));
+            names.add(new Name(NameGenData.makeName(attribute), user));
         }
         return names;
     }
@@ -74,8 +73,8 @@ public class NameUtils {
     }
 
     public static void train(TrainingName name) {
-        if(name.getAttribute() == NameAttribute.NONE){ return; }
-        log.info("Saving name " + name.entity());
-        datastore.put(name.entity());
+        if(name.getAttribute() == NameAttribute.SKIP){ return; }
+        log.info("Training name " + name.entity());
+        NameGenData.train(name);
     }
 }

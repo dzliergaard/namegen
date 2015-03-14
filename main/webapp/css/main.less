@@ -195,7 +195,7 @@ a {
 }
 
 .alert div:hover strong {
-    color: @lightgrey;
+    color: @teal;
 }
 
 .alert input {
@@ -225,9 +225,17 @@ a {
     background-color: @yellow;
 }
 
-.alert.learning, .alert.learning h3, .alert.learning div:hover strong {
+.alert.learning {
     color: @purple;
-    font-size: 28px;
+
+    .alert.learning h3 {
+        color: @purple;
+        font-size: 28px;
+    }
+
+    span, div:hover strong, div strong, button {
+        font-size: 20px;
+    }
 }
 
 table th:first-child,

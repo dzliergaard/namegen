@@ -1,8 +1,13 @@
 package com.rptools.server;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.appengine.api.users.User;
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.rptools.items.Name;
+import com.rptools.items.NameAttribute;
 import com.rptools.items.TrainingName;
 import com.rptools.util.Logger;
 import com.rptools.util.NameUtils;
@@ -30,11 +35,18 @@ public class NameController {
     private static final String ATTR_TRAINING_NAME = "trainingName";
     private static final String ATTR_TRAINING_ATTRIBUTES = "trainingAttributes";
 
+    private static final Function<NameAttribute, String> attributeToString = new Function<NameAttribute, String>(){
+        @Override
+        public String apply(NameAttribute attribute){
+            return attribute.name();
+        }
+    };
+
     @RequestMapping(method=RequestMethod.GET)
-    public ModelAndView getNames(){
+    public ModelAndView getNames() throws JsonProcessingException {
         ModelAndView mav = new ModelAndView("name.jsp");
         mav.addObject(ATTR_TRAINING_NAME, NameUtils.getTrainingName());
-        mav.addObject(ATTR_TRAINING_ATTRIBUTES, TrainingName.NameAttribute.values());
+        mav.addObject(ATTR_TRAINING_ATTRIBUTES, new ObjectMapper().writeValueAsString(NameAttribute.values()));
         if(userProvider.get() == null){
             mav.addObject(ATTR_NAMES, Lists.newArrayList());
             return mav;
@@ -47,12 +59,14 @@ public class NameController {
     }
 
     @RequestMapping(value="generate", method=RequestMethod.GET, headers="Accept=application/json")
-    public @ResponseBody List<Name> generate(@RequestParam(required=false) Integer numNames, HttpServletResponse response){
-        if(numNames == null){
+    public @ResponseBody List<Name> generate(@RequestParam(required=false) Integer numNames,
+                                             @RequestParam(required=false) NameAttribute attribute,
+                                             HttpServletResponse response){
+        if(numNames == null) {
             numNames = 10;
         }
 
-        return NameUtils.generateNames(numNames, userProvider.get());
+        return NameUtils.generateNames(numNames, userProvider.get(), attribute);
     }
 
     @RequestMapping(value="delete", method=RequestMethod.POST)

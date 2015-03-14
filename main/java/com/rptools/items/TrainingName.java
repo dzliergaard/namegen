@@ -7,7 +7,6 @@ import com.google.appengine.api.datastore.Entity;
 public class TrainingName {
     private String name;
     private NameAttribute attribute;
-    private int agree;
 
     public TrainingName() {
     }
@@ -37,14 +36,6 @@ public class TrainingName {
         this.attribute = attribute;
     }
 
-    public int getAgree(){
-        return agree;
-    }
-
-    public void setAgree(int agree){
-        this.agree = agree;
-    }
-
     public Entity entity(){
         Entity entity;
         entity = new Entity("TrainingName");
@@ -59,5 +50,11 @@ public class TrainingName {
         } catch (JsonProcessingException e) {
             return "{}";
         }
+    }
+
+    public static TrainingName fromEntity(Entity e){
+        String name = (String)e.getProperty("content");
+        NameAttribute attribute = NameAttribute.valueOf((String)e.getProperty("attribute"));
+        return new TrainingName(name, attribute);
     }
 }

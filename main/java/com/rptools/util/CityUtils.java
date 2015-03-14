@@ -42,7 +42,7 @@ public class CityUtils {
     };
 
     public static City generateCity(City.CityTemplate template, City.Diversity diversity, City.Race race, User user) {
-        List<Name> names = NameUtils.generateNames(2, user);
+        List<Name> names = NameUtils.generateNames(2, user, null);
         String name;
         if (rand.nextDouble() < .2) {
             name = names.get(0).getText();

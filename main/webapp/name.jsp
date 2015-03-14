@@ -15,7 +15,7 @@
     var nameGen = angular.module("NameGen", ['dzl.controllers', 'dzl.directives']);
 
     // initialize saved name list
-    nameGen.value("savedNames", angular.fromJson('${names}' || '{}'));
+    nameGen.value("savedNames", angular.fromJson('${names}' || '[{}]'));
     nameGen.value("initTrainingName", angular.fromJson('${trainingName}'));
     nameGen.value("nameAttributes", angular.fromJson('${trainingAttributes}'));
 
@@ -78,8 +78,8 @@
             <div class="alert learning">
                 <h3 class="col-xs-11">Help train the name generator by choosing an option below.</h3>
                 <div class="col-xs-11">
-                    <span class="col-xs-6">The name <strong>{{names.training.name}}</strong> sounds {{names.training.attribute}}</span>
-                    <button class="col-xs-1" ng-repeat="attribute in nameAttributes" ng-click="train(names.training.attribute = attribute)">{{attribute}}</button>
+                    <span class="col-xs-4">The name <strong>{{names.training.name}}</strong> sounds </span>
+                    <button ng-repeat="attribute in nameAttributes" ng-click="train(names.training.attribute = attribute)">{{attribute}}</button>
                 </div>
             </div>
         </div>

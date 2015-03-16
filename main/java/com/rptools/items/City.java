@@ -1,25 +1,20 @@
 package com.rptools.items;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.users.User;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.rptools.util.Logger;
-import com.rptools.util.WeightedList;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonMethod;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.users.User;
+import com.google.common.collect.Lists;
+import com.rptools.util.Logger;
+import com.rptools.util.WeightedList;
+
 @SuppressWarnings("unchecked")
 public class City {
+
     private static final Logger log = Logger.getLogger(City.class);
     private static final Random rand = new Random();
     private String name;
@@ -27,9 +22,10 @@ public class City {
     private Population population;
     private List<String> inns;
     private Long key;
-    @JsonIgnore private User user;
+    @JsonIgnore
+    private User user;
 
-    @java.beans.ConstructorProperties({"name", "ruler", "population", "inns", "key", "user"})
+    @java.beans.ConstructorProperties({ "name", "ruler", "population", "inns", "key", "user" })
     public City(String name, String ruler, Population population, List<String> inns, Long key, User user) {
         this.name = name;
         this.ruler = ruler;
@@ -63,13 +59,13 @@ public class City {
         return entity;
     }
 
-    public static City fromEntity(Entity entity){
-        String name = (String)entity.getProperty("name");
-        String ruler = (String)entity.getProperty("ruler");
-        Population population = (Population)entity.getProperty("population");
-        List<String> inns = (List<String>)entity.getProperty("inns");
+    public static City fromEntity(Entity entity) {
+        String name = (String) entity.getProperty("name");
+        String ruler = (String) entity.getProperty("ruler");
+        Population population = (Population) entity.getProperty("population");
+        List<String> inns = (List<String>) entity.getProperty("inns");
         Long key = entity.getKey().getId();
-        User user = (User)entity.getProperty("user");
+        User user = (User) entity.getProperty("user");
         return new City(name, ruler, population, inns, key, user);
     }
 
@@ -121,23 +117,27 @@ public class City {
         this.user = user;
     }
 
-    @JsonAutoDetect(JsonMethod.FIELD)
     public static class Population {
+
         public List<RacePop> people = Lists.newArrayList();
         public int tot = 0;
         public String searchMod;
         // search mods are static numbers based on population
-        private static WeightedList<String> searchMods = new WeightedList<String>() {{
-            this.add(250, "-6");
-            this.add(500, "-4");
-            this.add(1500, "-2");
-            this.add(4500, "0");
-            this.add(6750, "+1");
-            this.add(26500, "+3");
-            this.add(34500, "+5");
-        }};
+        private static WeightedList<String> searchMods = new WeightedList<String>() {
 
-        public Population() {}
+            {
+                this.add(250, "-6");
+                this.add(500, "-4");
+                this.add(1500, "-2");
+                this.add(4500, "0");
+                this.add(6750, "+1");
+                this.add(26500, "+3");
+                this.add(34500, "+5");
+            }
+        };
+
+        public Population() {
+        }
 
         public void add(Race race, CityTemplate template, Diversity diversity) {
             if (people.contains(new RacePop(race))) {
@@ -149,39 +149,21 @@ public class City {
             tot += population;
             searchMod = searchMods.get(tot);
         }
-//        public List<RacePop> getPeople() {
-//            return people;
-//        }
-//
-//        public int getTot() {
-//            return this.tot;
-//        }
-//
-//        public String getSearchMod() {
-//            return this.searchMod;
-//        }
-//
-//        public void setPeople(List<RacePop> people) {
-//            this.people = people;
-//        }
-//
-//        public void setTot(int tot) {
-//            this.tot = tot;
-//        }
-//
-//        public void setSearchMod(String searchMod) {
-//            this.searchMod = searchMod;
-//        }
     }
 
     public static class RacePop {
+
         public Race race;
         public int population;
-        public RacePop(Race race, int population){
+
+        public RacePop(Race race, int population) {
             this.race = race;
             this.population = population;
         }
-        public RacePop(Race race){ this.race = race; }
+
+        public RacePop(Race race) {
+            this.race = race;
+        }
 
         @Override
         public boolean equals(Object o) {

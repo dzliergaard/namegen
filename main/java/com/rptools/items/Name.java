@@ -2,38 +2,38 @@ package com.rptools.items;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.users.User;
-import com.google.appengine.labs.repackaged.com.google.common.base.Strings;
 import com.rptools.util.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Name {
+
     private static final Logger log = Logger.getLogger(Name.class);
 
     private String text;
     private Long key = -1L;
-    @JsonIgnore private User user;
+    @JsonIgnore
+    private User user;
 
-    public Name(){}
+    public Name() {
+    }
 
-    public Name(String text, User user){
+    public Name(String text, User user) {
         this.text = text;
         this.user = user;
     }
 
-    public Name(String text, Long key){
+    public Name(String text, Long key) {
         this.text = text;
         this.key = key;
     }
 
-    public Name(String text, User user, Long key){
+    public Name(String text, User user, Long key) {
         this.text = text;
         this.user = user;
-        this.key  = key;
+        this.key = key;
     }
 
     @Override
@@ -46,9 +46,9 @@ public class Name {
         return String.format("{'text':'%s','key':'%s'}", text, key);
     }
 
-    public Entity entity(){
+    public Entity entity() {
         Entity entity;
-        if(key > 0){
+        if (key > 0) {
             entity = new Entity("Name", key);
         } else {
             entity = new Entity("Name");
@@ -58,8 +58,8 @@ public class Name {
         return entity;
     }
 
-    public static Name fromEntity(Entity entity){
-        String name = (String)entity.getProperty("content");
+    public static Name fromEntity(Entity entity) {
+        String name = (String) entity.getProperty("content");
         Long key = entity.getKey().getId();
         return new Name(name, key);
     }

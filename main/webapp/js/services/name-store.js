@@ -1,9 +1,9 @@
-angular.module('dzl.services')
-    .service('NameStore', function NameStore(NameCalls, savedNames) {
+angular.module('dzl.services').service('NameStore', function NameStore(NameCalls, savedNames, initTrainingName) {
     var state = {};
     var names = {
         generated: [],
-        stored: savedNames
+        stored: savedNames,
+        training: initTrainingName
     };
 
     function getNames() {
@@ -64,11 +64,24 @@ angular.module('dzl.services')
             }
         );
     }
+    function train(agree) {
+        NameCalls.train(
+            names.training,
+            function (response) {
+                names.training = response;
+            },
+            function (response) {
+
+            }
+        );
+    }
+
     return {
         names:    names,
         state:    state,
         save:     save,
         generate: generate,
-        remove:   remove
+        remove:   remove,
+        train:    train
     }
 });

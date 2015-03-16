@@ -3,18 +3,20 @@ nameCalls.factory('NameCalls', function ($resource) {
     function toArray(data, headers) {
         data = data ? angular.fromJson(data) : [];
         return {data: data};
-    };
+    }
+
     function toString(data, headers) {
         data = data ? angular.fromJson(data) : "";
         return {data: data};
-    };
+    }
+
     return $resource('/name/:action', null, {
         get: {
             method: 'GET',
             params: {
                 action: 'get'
             },
-            transformResponse: toArray
+            isArray: true
         },
         generate: {
             method: 'GET',
@@ -35,6 +37,12 @@ nameCalls.factory('NameCalls', function ($resource) {
                 action: 'save'
             },
             transformResponse: toString
+        },
+        train: {
+            method: 'POST',
+            params: {
+                action: 'train'
+            }
         }
     });
 });

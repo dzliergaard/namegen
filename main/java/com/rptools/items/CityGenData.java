@@ -1,34 +1,44 @@
 package com.rptools.items;
 
-import com.google.appengine.api.users.User;
-import com.google.common.collect.Lists;
-import com.rptools.util.Logger;
-import com.rptools.util.NameUtils;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by DZL on 2/22/14.
- */
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.appengine.api.users.User;
+import com.google.common.collect.Lists;
+import com.rptools.util.Logger;
+import com.rptools.util.NameUtils;
+
 public class CityGenData {
+
     private static final Logger log = Logger.getLogger(CityGenData.class);
     private static CityData cityData;
     private static Random rand = new Random();
     private static boolean init = false;
 
-    private static class CityData{
+    private static class CityData {
+
         List<String> beg;
         List<String> end;
 
-        public List<String> getBeg() { return beg; }
-        public List<String> getEnd() { return end; }
-        public void setBeg(List<String> beg) { this.beg = beg; }
-        public void setEnd(List<String> end) { this.end = end; }
+        public List<String> getBeg() {
+            return beg;
+        }
+
+        public List<String> getEnd() {
+            return end;
+        }
+
+        public void setBeg(List<String> beg) {
+            this.beg = beg;
+        }
+
+        public void setEnd(List<String> end) {
+            this.end = end;
+        }
     }
 
     public static void parseCityData(BufferedReader br) throws IOException {
@@ -42,7 +52,7 @@ public class CityGenData {
     }
 
     public static List<String> generateInns(int population, User user) {
-        if(!init){
+        if (!init) {
             try {
                 parseCityData(new BufferedReader(new FileReader("resources/cityData.json")));
             } catch (IOException e) {

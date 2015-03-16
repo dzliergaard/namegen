@@ -1,4 +1,4 @@
-package com.rptools.server.city;
+package com.rptools.server;
 
 import com.google.appengine.api.users.User;
 import com.rptools.items.City;

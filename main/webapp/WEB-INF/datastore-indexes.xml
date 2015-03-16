@@ -11,4 +11,8 @@
         <property name="user" direction="asc"/>
         <property name="inns" direction="asc"/>
     </datastore-index>
+    <datastore-index kind="TrainingName" ancestor="false" source="manual">
+        <property name="name" direction="asc"/>
+        <property name="attribute" direction="asc"/>
+    </datastore-index>
 </datastore-indexes>

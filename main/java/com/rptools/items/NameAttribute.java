@@ -1,15 +1,12 @@
 package com.rptools.items;
 
 public enum NameAttribute {
-    COOL,
-    DISCIPLINED,
-    DULL,
-    EVIL,
+    DEVIOUS,
+    DUMB,
     EXOTIC,
     GRUFF,
-    MYSTERIOUS,
     NOBLE,
-    SLY,
+    SKEEVY,
     SMART,
     SKIP
 }

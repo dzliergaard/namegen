@@ -26,7 +26,7 @@ public class NameFileParser {
         try {
             return parseNames(new BufferedReader(new FileReader(fileName)));
         } catch (IOException e) {
-            log.warning("Error parsing name data: %e", e.getCause().toString());
+            log.warning("Error parsing name data: %e", e.getMessage());
         }
         return new WeightedNames();
     }

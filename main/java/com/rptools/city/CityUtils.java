@@ -1,11 +1,4 @@
-package com.rptools.util;
-
-import java.util.List;
-import java.util.Random;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+package com.rptools.city;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -13,15 +6,17 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.rptools.city.City;
-import com.rptools.city.CityGen;
-import com.rptools.city.CityTemplate;
-import com.rptools.city.Diversity;
-import com.rptools.city.Race;
 import com.rptools.name.Name;
+import com.rptools.name.NameUtils;
+import com.rptools.util.DataStoreQuery;
+import com.rptools.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Random;
 
 @Component
-@Scope("session")
 public class CityUtils {
     private static final Logger log = Logger.getLogger(CityUtils.class);
     private static DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -30,14 +25,14 @@ public class CityUtils {
         public City apply(Entity entity) {
             return City.fromEntity(entity);
         }
-    }
+    };
 
-    private final DataStoreQuery dataStoreQuery;
-    private final CityGen cityGen;
-    private final NameUtils nameUtils;
+    private DataStoreQuery dataStoreQuery;
+    private CityGen cityGen;
+    private NameUtils nameUtils;
 
     @Autowired
-    public CityUtils(CityGen cityGen, DataStoreQuery dataStoreQuery, NameUtils nameUtils) {
+    public CityUtils(DataStoreQuery dataStoreQuery, CityGen cityGen, NameUtils nameUtils) {
         this.dataStoreQuery = dataStoreQuery;
         this.cityGen = cityGen;
         this.nameUtils = nameUtils;
@@ -45,7 +40,7 @@ public class CityUtils {
 
     public List<City> get() {
         List<Entity> cities = datastore.prepare(dataStoreQuery.getQuery("City", "name")).asList(
-            FetchOptions.Builder.withDefaults());
+                FetchOptions.Builder.withDefaults());
         return Lists.transform(cities, entityToCity);
     }
 

@@ -1,21 +1,15 @@
 package com.rptools.server;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.rptools.name.Name;
+import com.rptools.name.NameUtils;
+import com.rptools.util.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.rptools.name.Name;
-import com.rptools.util.Logger;
-import com.rptools.util.NameUtils;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 @RestController("NameController")
 @RequestMapping(value = { "name", "" }, produces = "application/json")
@@ -23,12 +17,7 @@ public class NameController {
     private static Logger log = Logger.getLogger(NameController.class);
     private static final String ATTR_NAMES = "names";
 
-    private NameUtils nameUtils;
-
-    @Autowired
-    public NameController(NameUtils nameUtils) {
-        this.nameUtils = nameUtils;
-    }
+    @Autowired private NameUtils nameUtils;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getNames() {

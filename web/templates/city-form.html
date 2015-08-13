@@ -2,7 +2,7 @@
     <fieldset>
         <legend>City Generator</legend>
         <div class='row'>
-            <div class='span3 panel-group' id='accordian' role='tablist' aria-multiselectable='true'>
+            <div class='col-xs-3 panel-group' id='accordian' role='tablist' aria-multiselectable='true'>
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne">
                         <h4 class="panel-title">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class='span3 panel-group' id='accordian2' role='tablist' aria-multiselectable='true'>
+            <div class='col-xs-3 panel-group' id='accordian2' role='tablist' aria-multiselectable='true'>
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingTwo">
                         <h4 class="panel-title">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <div class='span3 panel-group' id='accordian3' role='tablist' aria-multiselectable='true'>
+            <div class='col-xs-3 panel-group' id='accordian3' role='tablist' aria-multiselectable='true'>
                 <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingThree">
                         <h4 class="panel-title">
@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="row">
-            <button class="btn btn-primary span2 generate-button" ng-click="generate(cityForm)">
+            <button class="btn btn-primary col-xs-2 generate-button" ng-click="generate(cityForm)">
                 <span ng-show="!state.generating">Generate!</span>
                 <img ng-show="state.generating" src="resources/loading.gif" height="20px" width="20px">
             </button>

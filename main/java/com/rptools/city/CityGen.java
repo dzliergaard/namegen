@@ -1,20 +1,17 @@
 package com.rptools.city;
 
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+import com.rptools.name.NameUtils;
+import com.rptools.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import com.google.appengine.api.users.User;
-import com.google.common.collect.Lists;
-import com.google.gson.Gson;
-import com.rptools.util.Logger;
-import com.rptools.util.NameUtils;
-import com.rptools.util.Provider;
 
 @Component
 public class CityGen {
@@ -23,14 +20,8 @@ public class CityGen {
     private static Cities cityData;
     private static Random rand = new Random();
 
-    private final NameUtils nameUtils;
-    private final Provider<User> userProvider;
-
     @Autowired
-    public CityGen(NameUtils nameUtils, Provider<User> userProvider) {
-        this.nameUtils = nameUtils;
-        this.userProvider = userProvider;
-    }
+    private NameUtils nameUtils;
 
     public void parseCityData(BufferedReader br) throws IOException {
         String str, cityDataStr = "";
@@ -43,24 +34,21 @@ public class CityGen {
     }
 
     public List<String> generateInns(int population) {
-        if (!init) {
-            try {
-                parseCityData(new BufferedReader(new FileReader("resources/cityData.json")));
-            } catch (IOException e) {
-                log.warning("Error getting nameData.json: %e", e.getCause().toString());
-            }
-            init = true;
+        try {
+            parseCityData(new BufferedReader(new FileReader("resources/cityData.json")));
+        } catch (IOException e) {
+            log.warning("Error getting nameData.json: %e", e.getCause().toString());
         }
         double size = Math.sqrt(Math.sqrt(population));
         List<String> inns = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
-            inns.add(generateInn(userProvider.get()));
+            inns.add(generateInn());
         }
         return inns;
     }
 
     private String generateInn() {
-        String inn = getNamePart(cityData.beg, user) + " " + getNamePart(cityData.end, user);
+        String inn = getNamePart(cityData.beg) + " " + getNamePart(cityData.end);
         if (inn.matches(".*\\{-\\}.*")) {
             inn = inn.replace("{-}", "");
         } else {

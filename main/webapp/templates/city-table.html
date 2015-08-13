@@ -22,13 +22,10 @@
         <td>Population:</td>
         <td>
             <strong>{{city.population.tot}} (Search Mod: {{city.population.searchMod}})</strong><br/>
-            <span ng-repeat="rp in city.population.people|orderBy:population">{{rp.race}} {{rp.population}}<br></span>
-        </td>
-        <td>
-            <button type='button' class='btn btn-default btn-sm' ng-click="getNew('population')">
-                <span class='glyphicon glyphicon-refresh'></span>
-            </button>
-        </td>
+            <span ng-repeat="rp in city.population.people|orderBy:population">{{rp.race}} {{rp.population}}<br></span></td>
+        <td><button type='button' class='btn btn-default btn-sm' ng-click="getNew('population')">
+            <span class='glyphicon glyphicon-refresh'></span>
+        </button></td>
     </tr>
     <tr>
         <td>Inns/Shoppes:</td>

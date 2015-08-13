@@ -17,9 +17,8 @@
     <link rel="stylesheet" href="css/bootstrap.css.map"/>
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css.map">
-    <link rel="stylesheet/less" type="text/css" href="css/main.less"/>
+    <link rel="stylesheet" href="css/main.css"/>
 </head>
-<script src="js/less.js"></script>
 <resource href="resources/loading.gif" height="40" width="40">
     <meta http-equiv="Content-type" content="image/gif">
 </resource>
@@ -41,21 +40,21 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <%
-                    UserService userService = UserServiceFactory.getUserService();
-                    User user = userService.getCurrentUser();
-                    String logURL, listItemClass;
-                    boolean signin;
-                    if (user == null) {
-                        logURL = userService.createLoginURL(request.getRequestURI().replace(".jsp", ""));
-                        listItemClass = "signin";
-                        signin = true;
-                    } else {
-                        logURL = userService.createLogoutURL(request.getRequestURI().replace(".jsp", ""));
-                        listItemClass = "signout";
-                        signin = false;
-                    }
-                %>
+            <%
+                UserService userService = UserServiceFactory.getUserService();
+                User user = userService.getCurrentUser();
+                String logURL, listItemClass;
+                boolean signin;
+                if (user == null) {
+                    logURL = userService.createLoginURL(request.getRequestURI().replace(".jsp", ""));
+                    listItemClass = "signin";
+                    signin = true;
+                } else {
+                    logURL = userService.createLogoutURL(request.getRequestURI().replace(".jsp", ""));
+                    listItemClass = "signout";
+                    signin = false;
+                }
+            %>
                 <li class="<%= listItemClass %>">
                     <a href="<%= logURL %>">
                         <%= signin ? "sign in" : "sign out" %>

@@ -1,9 +1,9 @@
-angular.module('dzl.services').service('NameStore', function NameStore(NameCalls, savedNames, initTrainingName) {
+angular.module('dzl.services')
+    .service('NameStore', function NameStore(NameCalls, savedNames) {
     var state = {};
     var names = {
         generated: [],
-        stored: savedNames,
-        training: initTrainingName
+        stored: savedNames
     };
 
     function getNames() {
@@ -26,9 +26,6 @@ angular.module('dzl.services').service('NameStore', function NameStore(NameCalls
                 } else {
                     names.stored.push(angular.fromJson(response.data));
                 }
-                names.stored.sort(function (a, b) {
-                    return a.text > b.text
-                });
             },
             function () {
                 state.error = "Error attempting to save name " + newName.text + "!!";
@@ -64,24 +61,11 @@ angular.module('dzl.services').service('NameStore', function NameStore(NameCalls
             }
         );
     }
-    function train(agree) {
-        NameCalls.train(
-            names.training,
-            function (response) {
-                names.training = response;
-            },
-            function (response) {
-
-            }
-        );
-    }
-
     return {
         names:    names,
         state:    state,
         save:     save,
         generate: generate,
-        remove:   remove,
-        train:    train
+        remove:   remove
     }
 });

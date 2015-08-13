@@ -1,4 +1,4 @@
-package com.rptools.items;
+package com.rptools.city;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,52 +6,43 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.google.appengine.api.users.User;
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
 import com.rptools.util.Logger;
 import com.rptools.util.NameUtils;
+import com.rptools.util.Provider;
 
-public class CityGenData {
-
-    private static final Logger log = Logger.getLogger(CityGenData.class);
-    private static CityData cityData;
+@Component
+public class CityGen {
+    private static final Logger log = Logger.getLogger(CityGen.class);
+    private static final Gson gson = new Gson();
+    private static Cities cityData;
     private static Random rand = new Random();
-    private static boolean init = false;
 
-    private static class CityData {
+    private final NameUtils nameUtils;
+    private final Provider<User> userProvider;
 
-        List<String> beg;
-        List<String> end;
-
-        public List<String> getBeg() {
-            return beg;
-        }
-
-        public List<String> getEnd() {
-            return end;
-        }
-
-        public void setBeg(List<String> beg) {
-            this.beg = beg;
-        }
-
-        public void setEnd(List<String> end) {
-            this.end = end;
-        }
+    @Autowired
+    public CityGen(NameUtils nameUtils, Provider<User> userProvider) {
+        this.nameUtils = nameUtils;
+        this.userProvider = userProvider;
     }
 
-    public static void parseCityData(BufferedReader br) throws IOException {
+    public void parseCityData(BufferedReader br) throws IOException {
         String str, cityDataStr = "";
         while ((str = br.readLine()) != null) {
             cityDataStr += str.trim();
         }
         br.close();
 
-        cityData = new ObjectMapper().reader(CityData.class).readValue(cityDataStr);
+        cityData = gson.fromJson(cityDataStr, Cities.class);
     }
 
-    public static List<String> generateInns(int population, User user) {
+    public List<String> generateInns(int population) {
         if (!init) {
             try {
                 parseCityData(new BufferedReader(new FileReader("resources/cityData.json")));
@@ -63,13 +54,13 @@ public class CityGenData {
         double size = Math.sqrt(Math.sqrt(population));
         List<String> inns = Lists.newArrayList();
         for (int i = 0; i < size; i++) {
-            inns.add(generateInn(user));
+            inns.add(generateInn(userProvider.get()));
         }
         return inns;
     }
 
-    private static String generateInn(User user) {
-        String inn = getNamePart(cityData.getBeg(), user) + " " + getNamePart(cityData.getEnd(), user);
+    private String generateInn() {
+        String inn = getNamePart(cityData.beg, user) + " " + getNamePart(cityData.end, user);
         if (inn.matches(".*\\{-\\}.*")) {
             inn = inn.replace("{-}", "");
         } else {
@@ -78,17 +69,17 @@ public class CityGenData {
         return inn;
     }
 
-    private static String getNamePart(List<String> list, User user) {
+    private String getNamePart(List<String> list) {
         String name = getFrom(list, false);
         while (name.matches(".*\\{[^-]\\}.*")) {
-            name = name.replaceFirst("\\{1\\}", getFrom(cityData.getBeg(), true));
-            name = name.replaceFirst("\\{2\\}", getFrom(cityData.getEnd(), true));
-            name = name.replaceFirst("\\{n\\}", NameUtils.generateName(user).getText().split(" ")[0]);
+            name = name.replaceFirst("\\{1\\}", getFrom(cityData.beg, true));
+            name = name.replaceFirst("\\{2\\}", getFrom(cityData.end, true));
+            name = name.replaceFirst("\\{n\\}", nameUtils.generateName().text.split(" ")[0]);
         }
         return name;
     }
 
-    private static String getFrom(List<String> list, boolean noTemplates) {
+    private String getFrom(List<String> list, boolean noTemplates) {
         if (!noTemplates) {
             return list.get(rand.nextInt(list.size()));
         }

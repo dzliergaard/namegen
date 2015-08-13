@@ -4,22 +4,14 @@
     src: url("/fonts/BebasNeue.otf") format("opentype");
 }
 
-@lavender: #c1b2c9;
-@lightgrey: #bfd8d2;
-@puce: #bcbb48;
-@purple: #501168;
-@teal: #34515a;
-@white: #ffffff;
-@yellow: #e8e74e;
-
 body {
     width: 100%;
     height: 100%;
     font-family: BebasNeue, sans-serif;
     font-size: 30px;
     letter-spacing: 1px;
-    color: @lavender;
-    background-color: @purple;
+    color: #c1b2c9;
+    background-color: #501168;
     padding-left: 10px;
 }
 
@@ -40,12 +32,12 @@ body {
 .navbar-nav,
 .navbar-nav .dropdown-toggle {
     font-size: 30px;
-    color: @white;
-    background-color: @lavender;
+    color: #ffffff;
+    background-color: #c1b2c9;
 }
 
 .navbar-nav .dropdown-toggle:hover {
-    color: @teal;
+    color: #23527c;
 }
 
 .navbar-header {
@@ -54,7 +46,7 @@ body {
 
 legend {
     font-size: 40px;
-    color: @white;
+    color: #fff;
     border-bottom: none;
     margin-bottom: 0;
 }
@@ -75,13 +67,13 @@ a {
 :-moz-placeholder,
 ::-moz-placeholder,
 :-ms-input-placeholder {
-    color: @purple;
-    opacity: 1;
+    color:    #501168;
+    opacity:  1;
 }
 
 .label-input,
 .label-input * {
-    background-color: @lavender;
+    background-color: #c1b2c9;
     border-radius: 6px;
     font-weight: normal;
     font-family: Arial Helvetica, sans-serif;
@@ -90,12 +82,12 @@ a {
 
 .label-input > * {
     float: inherit;
-    background-color: @lavender;
+    background-color: #c1b2c9;
     vertical-align: middle;
 }
 
 .label-input label {
-    color: @purple;
+    color: #501168;
     font-size: 18px;
     font-weight: normal;
 }
@@ -103,7 +95,7 @@ a {
 .label-input input,
 .label-input input:focus {
     border-width: 0;
-    color: @purple;
+    color:    #501168;
     outline: none;
     -webkit-box-shadow: none;
     font-size: 18px;
@@ -136,9 +128,13 @@ a {
     width: 100%;
 }
 
+.alert-error {
+    color: #501168;
+}
+
 .alert-hidden {
-    background-color: @purple;
-    border-color: @purple;
+    background-color: #501168;
+    border-color: #501168;
 }
 
 .alert {
@@ -154,16 +150,16 @@ a {
 
 .generate-button,
 .generate-button:focus {
-    background-color: @lightgrey;
-    color: @purple;
+    background-color: #bfd8d2;
+    color: #501168;
     float: right;
 }
 
 .generate-button:hover {
-    color: @lightgrey;
-    background-color: @teal;
-    border-color: @teal;
-    outline-color: @teal !important;
+    color: #bfd8d2;
+    background-color: #34515a;
+    border-color: #34515a;
+    outline-color: #34515a !important;
 }
 
 .loading {
@@ -175,27 +171,25 @@ a {
 }
 
 .name-line:hover {
-    background-color: @lightgrey;
+    background-color: #bfd8d2;
+}
+
+.alert {
+    background-color: #c1b2c9;
+    border-color: #c1b2c9;
 }
 
 .names {
     padding-left: 15px;
 }
 
-.alert {
-    background-color: @lavender;
-    border-color: @lavender;
-    width: 100%;
-    float: left;
-}
-
 .alert strong {
-    color: @purple;
+    color: #501168;
     font-size: 28px;
 }
 
 .alert div:hover strong {
-    color: @teal;
+    color: grey;
 }
 
 .alert input {
@@ -204,38 +198,25 @@ a {
 }
 
 .alert button {
-    color: @purple;
+    color: #501168;
     background-color: inherit;
     outline: none;
     border: none inherit;
 }
 
 .alert button:hover {
-    color: @white;
+    color: #fff;
     outline: none;
     border: none;
 }
 
 .alert.stored {
-    background-color: @puce;
-    border-color: @puce;
+    background-color: #bcbb48;
+    border-color: #bcbb48;
 }
 
 .alert.stored .name-line:hover {
-    background-color: @yellow;
-}
-
-.alert.learning {
-    color: @purple;
-
-    .alert.learning h3 {
-        color: @purple;
-        font-size: 28px;
-    }
-
-    span, div:hover strong, div strong, button {
-        font-size: 20px;
-    }
+    background-color: #e8e74e;
 }
 
 table th:first-child,
@@ -263,7 +244,12 @@ table td:last-child {
 
 label input[type=radio] {
     display: none;
-}z
+}
+
+name-list {
+    float: left;
+    width: 100%;
+}
 
 city-table th:first-child,
 city-table td:first-child {

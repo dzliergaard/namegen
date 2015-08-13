@@ -1,15 +1,15 @@
-package com.rptools.items;
+package com.rptools.name;
 
 import java.util.Map;
 
-public class NameData {
-    Map<String, Integer> beg;
-    Map<String, Integer> mid;
-    Map<String, Integer> end;
-    double mean;
-    double deviation;
+public class Names {
+    protected Map<String, Integer> beg;
+    protected Map<String, Integer> mid;
+    protected Map<String, Integer> end;
+    protected double mean;
+    protected double deviation;
 
-    public NameData(
+    public Names(
             Map<String, Integer> beg,
             Map<String, Integer> mid,
             Map<String, Integer> end,

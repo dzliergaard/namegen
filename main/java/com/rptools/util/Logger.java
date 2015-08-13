@@ -1,8 +1,8 @@
 package com.rptools.util;
 
-import com.google.common.collect.Maps;
-
 import java.util.Map;
+
+import com.google.common.collect.Maps;
 
 /**
  * Created by DZL on 2/15/14.

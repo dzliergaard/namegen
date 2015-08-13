@@ -1,13 +1,9 @@
 var nameCtrl = angular.module('dzl.controllers');
 
-nameCtrl.controller('NameCtrl', function ($scope, NameStore, nameAttributes) {
-    angular.extend($scope, {
-        nameAttributes: nameAttributes,
-        state: NameStore.state,
-        names: NameStore.names,
-        saveName: NameStore.save,
-        generate: NameStore.generate,
-        remove: NameStore.remove,
-        train: NameStore.train
-    });
+nameCtrl.controller('NameCtrl', function ($scope, NameStore) {
+    $scope.state = NameStore.state;
+    $scope.names = NameStore.names;
+    $scope.saveName = NameStore.save;
+    $scope.generate = NameStore.generate;
+    $scope.remove = NameStore.remove;
 });

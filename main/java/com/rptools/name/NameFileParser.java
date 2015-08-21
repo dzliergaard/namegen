@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Lists;
@@ -31,6 +32,11 @@ public class NameFileParser {
         return new WeightedNames();
     }
 
+    /**
+     * Parses the name file in BufferedReader into the WeightedNames data for random generation
+     * 
+     * @throws IOException
+     */
     private WeightedNames parseNames(BufferedReader br) throws IOException {
         String str, nameDataStr = "";
         while ((str = br.readLine()) != null) {
@@ -42,24 +48,19 @@ public class NameFileParser {
         Map<String, Integer> begs = Maps.newHashMap();
         Map<String, Integer> mids = Maps.newHashMap();
         Map<String, Integer> ends = Maps.newHashMap();
-        double total = 0, meanTotal = 0, i = 0;
+
+        SummaryStatistics stats = new SummaryStatistics();
+        // double total = 0, meanTotal = 0, i = 0;
         List<Integer> syls = Lists.newArrayList();
         while (nameMatcher.find()) {
-            i++;
             String name = nameMatcher.group();
             int syl = getGroups(beg.matcher(name), begs);
             syl += getGroups(mid.matcher(name), mids);
             syl += getGroups(end.matcher(name), ends);
-            total += syl;
             syls.add(syl);
+            stats.addValue(syl);
         }
-        double mean = total / i;
-        // second pass to get mean total
-        for (Integer s : syls) {
-            double var = s - mean;
-            meanTotal += var * var;
-        }
-        return new WeightedNames(new Names(begs, mids, ends, mean, Math.sqrt(meanTotal / i)));
+        return new WeightedNames(new Names(begs, mids, ends), stats);
     }
 
     private int getGroups(Matcher matcher, Map<String, Integer> groups) {

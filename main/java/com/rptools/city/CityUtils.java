@@ -1,5 +1,11 @@
 package com.rptools.city;
 
+import java.util.List;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -10,11 +16,6 @@ import com.rptools.name.Name;
 import com.rptools.name.NameUtils;
 import com.rptools.util.DataStoreQuery;
 import com.rptools.util.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Random;
 
 @Component
 public class CityUtils {
@@ -23,7 +24,7 @@ public class CityUtils {
     private static Random rand = new Random();
     private static Function<Entity, City> entityToCity = new Function<Entity, City>() {
         public City apply(Entity entity) {
-            return City.fromEntity(entity);
+            return City.fromEntity(entity, City.class);
         }
     };
 
@@ -39,8 +40,8 @@ public class CityUtils {
     }
 
     public List<City> get() {
-        List<Entity> cities = datastore.prepare(dataStoreQuery.getQuery("City", "name")).asList(
-                FetchOptions.Builder.withDefaults());
+        List<Entity> cities = datastore.prepare(dataStoreQuery.getQuery("City")).asList(
+            FetchOptions.Builder.withDefaults());
         return Lists.transform(cities, entityToCity);
     }
 

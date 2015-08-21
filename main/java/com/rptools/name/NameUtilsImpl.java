@@ -1,17 +1,24 @@
 package com.rptools.name;
 
-import com.google.appengine.api.datastore.*;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.EntityNotFoundException;
+import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.users.User;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.rptools.util.DataStoreQuery;
 import com.rptools.util.Logger;
 import com.rptools.util.Provider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @Scope("request")
@@ -20,7 +27,14 @@ public class NameUtilsImpl implements NameUtils {
     private static DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     private static Function<Entity, Name> entityToName = new Function<Entity, Name>() {
         public Name apply(Entity entity) {
-            return Name.fromEntity(entity);
+            try {
+                return Name.fromEntity(entity, Name.class);
+            } catch (Exception e) {
+                Name name = new Name();
+                name.text = (String) entity.getProperty("content");
+                name.key = entity.getKey().getId();
+                return name;
+            }
         }
     };
 
@@ -38,10 +52,10 @@ public class NameUtilsImpl implements NameUtils {
     @Override
     public List<Name> get() {
         try {
-            List<Entity> names = datastore.prepare(dataStoreQuery.getQuery("Name", "content")).asList(
-                    FetchOptions.Builder.withDefaults());
+            List<Entity> names = datastore.prepare(dataStoreQuery.getQuery("Name")).asList(
+                FetchOptions.Builder.withDefaults());
             return Lists.transform(names, entityToName);
-        } catch (NullPointerException npe){
+        } catch (NullPointerException npe) {
             return Lists.newArrayList();
         }
     }
@@ -59,8 +73,9 @@ public class NameUtilsImpl implements NameUtils {
     @Override
     public void save(Name name) {
         name.user = userProvider.get();
-        log.info("Saving name " + name.entity());
-        Key key = datastore.put(name.entity());
+        Entity entity = name.entity();
+        log.info("Saving name " + entity);
+        Key key = datastore.put(entity);
         name.key = key.getId();
     }
 

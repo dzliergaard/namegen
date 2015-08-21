@@ -1,44 +1,36 @@
 package com.rptools.city;
 
-import com.google.common.collect.Lists;
-import com.google.gson.Gson;
-import com.rptools.name.NameUtils;
-import com.rptools.util.Logger;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-import java.util.Random;
+import com.google.common.base.Stopwatch;
+import com.google.common.collect.Lists;
+import com.rptools.name.NameUtils;
+import com.rptools.util.Logger;
 
 @Component
 public class CityGen {
-    private static final Logger log = Logger.getLogger(CityGen.class);
-    private static final Gson gson = new Gson();
-    private static Cities cityData;
     private static Random rand = new Random();
+    private Cities cityData;
 
-    @Autowired
     private NameUtils nameUtils;
 
-    public void parseCityData(BufferedReader br) throws IOException {
-        String str, cityDataStr = "";
-        while ((str = br.readLine()) != null) {
-            cityDataStr += str.trim();
-        }
-        br.close();
-
-        cityData = gson.fromJson(cityDataStr, Cities.class);
+    @Autowired
+    public CityGen(CityFileParser cityFileParser, NameUtils nameUtils) {
+        this.nameUtils = nameUtils;
+        Stopwatch timer = Stopwatch.createStarted();
+        cityData = cityFileParser.parseCityFile("resources/cityData.json");
+        timer.stop();
+        Logger.getLogger(CityGen.class).info(
+            "City data parsed in %d milliseconds.",
+            timer.elapsed(TimeUnit.MILLISECONDS));
     }
 
     public List<String> generateInns(int population) {
-        try {
-            parseCityData(new BufferedReader(new FileReader("resources/cityData.json")));
-        } catch (IOException e) {
-            log.warning("Error getting nameData.json: %e", e.getCause().toString());
-        }
         double size = Math.sqrt(Math.sqrt(population));
         List<String> inns = Lists.newArrayList();
         for (int i = 0; i < size; i++) {

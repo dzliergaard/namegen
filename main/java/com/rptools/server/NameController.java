@@ -1,23 +1,34 @@
 package com.rptools.server;
 
-import com.rptools.name.Name;
-import com.rptools.name.NameUtils;
-import com.rptools.util.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.rptools.name.Name;
+import com.rptools.name.NameUtils;
+import com.rptools.util.Logger;
+
 @RestController("NameController")
-@RequestMapping(value = { "name", "" }, produces = "application/json")
+@RequestMapping(value = { "name", "" })
 public class NameController {
     private static Logger log = Logger.getLogger(NameController.class);
     private static final String ATTR_NAMES = "names";
 
-    @Autowired private NameUtils nameUtils;
+    private NameUtils nameUtils;
+
+    @Autowired
+    public NameController(NameUtils nameUtils) {
+        this.nameUtils = nameUtils;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getNames() {

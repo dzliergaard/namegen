@@ -5,12 +5,16 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 import com.rptools.util.WeightedList;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter @Setter
 public class Population {
     private static Random rand = new Random();
-    public List<RacePop> people = Lists.newArrayList();
-    public int tot = 0;
-    public String searchMod;
+    private List<RacePop> people = Lists.newArrayList();
+    private int tot = 0;
+    private String searchMod;
+
     // search mods are static numbers based on population
     private static WeightedList<String> searchMods = new WeightedList<String>() {
         {
@@ -23,9 +27,6 @@ public class Population {
             this.add(34500, "+5");
         }
     };
-
-    public Population() {
-    }
 
     public void add(Race race, CityTemplate template, Diversity diversity) {
         if (people.contains(new RacePop(race))) {
@@ -51,7 +52,7 @@ public class Population {
     public String getWeightedRace() {
         WeightedList<Race> races = new WeightedList<Race>();
         for (RacePop rp : people) {
-            races.add(rp.population * 3, rp.race);
+            races.add(rp.getPopulation() * 3, rp.getRace());
         }
         return races.random().name();
     }

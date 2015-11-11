@@ -1,11 +1,5 @@
 package com.rptools.city;
 
-import java.util.List;
-import java.util.Random;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -16,6 +10,11 @@ import com.rptools.name.Name;
 import com.rptools.name.NameUtils;
 import com.rptools.util.DataStoreQuery;
 import com.rptools.util.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Random;
 
 @Component
 public class CityUtils {
@@ -55,19 +54,19 @@ public class CityUtils {
         // generate name for city and ruler in same call
         List<Name> names = nameUtils.generateNames(2);
         if (rand.nextDouble() < .2) {
-            city.name = names.get(0).text;
+            city.setName(names.get(0).getText());
         } else {
-            city.name = names.get(0).text.split(" ")[0];
+            city.setName(names.get(0).getText().split(" ")[0]);
         }
-        city.population.add(race, template, diversity);
+        city.getPopulation().add(race, template, diversity);
         // add 3 races, or sometimes 2 for low-diversity places
-        while (city.population.completePop(diversity)) {
-            city.population.add(Race.rand(), template, diversity);
+        while (city.getPopulation().completePop(diversity)) {
+            city.getPopulation().add(Race.rand(), template, diversity);
         }
 
-        city.ruler = String.format("%s (%s)", names.get(1).text, city.population.getWeightedRace());
+        city.setRuler(String.format("%s (%s)", names.get(1).getText(), city.getPopulation().getWeightedRace()));
 
-        city.inns = cityGen.generateInns(city.population.tot);
+        city.setInns(cityGen.generateInns(city.getPopulation().getTot()));
         return city;
     }
 }

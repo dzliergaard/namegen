@@ -1,6 +1,7 @@
 package com.rptools.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +9,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.users.User;
 
 @Component
-@Scope("request")
+ @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class DataStoreQueryImpl implements DataStoreQuery {
     @Autowired private Provider<User> userProvider;
 

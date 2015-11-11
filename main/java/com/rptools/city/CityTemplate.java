@@ -1,7 +1,10 @@
 package com.rptools.city;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.Random;
 
+@RequiredArgsConstructor
 public enum CityTemplate {
     Village(50, 500),
     Town(500, 5000),
@@ -10,12 +13,7 @@ public enum CityTemplate {
 
     private static final Random rand = new Random();
 
-    private int min, max;
-
-    CityTemplate(int min, int max) {
-        this.min = min;
-        this.max = max;
-    }
+    private final int min, max;
 
     public int pop() {
         return rand.nextInt(max - min) + min;

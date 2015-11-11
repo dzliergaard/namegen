@@ -5,16 +5,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.rptools.name.NameAttribute;
+import com.rptools.name.NameUtils;
+import com.rptools.name.TrainingName;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rptools.name.Name;
-import com.rptools.name.NameUtils;
 import com.rptools.util.Logger;
 
 @RestController("NameController")
@@ -22,6 +20,8 @@ import com.rptools.util.Logger;
 public class NameController {
     private static Logger log = Logger.getLogger(NameController.class);
     private static final String ATTR_NAMES = "names";
+    private static final String ATTR_TRAINING_NAME = "trainingName";
+    private static final String ATTR_NAME_ATTRIBUTES = "nameAttributes";
 
     private NameUtils nameUtils;
 
@@ -36,10 +36,12 @@ public class NameController {
         List<Name> names = nameUtils.get();
         log.info("Names retrieved from datastore: " + names);
         mav.addObject(ATTR_NAMES, names);
+        mav.addObject(ATTR_TRAINING_NAME, nameUtils.getTrainingName());
+        mav.addObject(ATTR_NAME_ATTRIBUTES, NameAttribute.asList());
         return mav;
     }
 
-    @RequestMapping(value = "generate", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "generate", method = RequestMethod.GET)
     public List<Name> generate(@RequestParam(required = false, value = "numNames") Integer numNames) {
         if (numNames == null) {
             numNames = 10;
@@ -71,7 +73,7 @@ public class NameController {
     }
 
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public Name save(@RequestBody(required = false) Name name, HttpServletResponse response) {
+    public @ResponseBody Name save(@RequestBody(required = false) Name name, HttpServletResponse response) {
         if (name == null) {
             try {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST);
@@ -82,5 +84,11 @@ public class NameController {
         }
         nameUtils.save(name);
         return name;
+    }
+
+    @RequestMapping(value = "train", method = RequestMethod.POST)
+    public @ResponseBody TrainingName train(@RequestBody TrainingName trainName){
+        nameUtils.train(trainName);
+        return nameUtils.getTrainingName();
     }
 }

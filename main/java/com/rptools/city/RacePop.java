@@ -1,8 +1,12 @@
 package com.rptools.city;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class RacePop {
-    public Race race;
-    public int population;
+    private Race race;
+    private int population;
 
     public RacePop(Race race, int population) {
         this.race = race;

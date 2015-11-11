@@ -4,18 +4,18 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.rptools.util.RPEntity;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class City extends RPEntity {
-    public String name;
-    public String ruler;
-    public Population population = new Population();
-    public List inns = Lists.newArrayList();
+    private String name;
+    private String ruler;
+    private Population population = new Population();
+    private List inns = Lists.newArrayList();
 
     public City() {
-    }
-
-    @Override
-    public String getType() {
-        return "City";
     }
 }

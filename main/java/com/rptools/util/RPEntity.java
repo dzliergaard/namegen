@@ -5,11 +5,13 @@ import java.io.Serializable;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.users.User;
 import com.google.gson.Gson;
+import lombok.Getter;
+import lombok.Setter;
 
 public class RPEntity<T> implements Serializable {
-    public static final Gson gson = new Gson();
-    public Long key = -1L;
-    public transient User user;
+    protected static final Gson gson = new Gson();
+    protected Long key = -1L;
+    protected transient User user;
 
     public RPEntity() {
     }
@@ -38,6 +40,22 @@ public class RPEntity<T> implements Serializable {
     }
 
     public String getType() {
-        return null;
+        return this.getClass().getSimpleName();
+    }
+
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
+    }
+
+    public Long getKey(){
+        return key;
+    }
+
+    public void setKey(Long key){
+        this.key = key;
     }
 }

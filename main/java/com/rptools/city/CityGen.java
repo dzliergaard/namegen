@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import com.rptools.name.NameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
-import com.rptools.name.NameUtils;
 import com.rptools.util.Logger;
 
 @Component
@@ -40,7 +40,7 @@ public class CityGen {
     }
 
     private String generateInn() {
-        String inn = getNamePart(cityData.beg) + " " + getNamePart(cityData.end);
+        String inn = getNamePart(cityData.getBeg()) + " " + getNamePart(cityData.getEnd());
         if (inn.matches(".*\\{-\\}.*")) {
             inn = inn.replace("{-}", "");
         } else {
@@ -52,9 +52,9 @@ public class CityGen {
     private String getNamePart(List<String> list) {
         String name = getFrom(list, false);
         while (name.matches(".*\\{[^-]\\}.*")) {
-            name = name.replaceFirst("\\{1\\}", getFrom(cityData.beg, true));
-            name = name.replaceFirst("\\{2\\}", getFrom(cityData.end, true));
-            name = name.replaceFirst("\\{n\\}", nameUtils.generateName().text.split(" ")[0]);
+            name = name.replaceFirst("\\{1\\}", getFrom(cityData.getBeg(), true));
+            name = name.replaceFirst("\\{2\\}", getFrom(cityData.getEnd(), true));
+            name = name.replaceFirst("\\{n\\}", nameUtils.generateName().getText().split(" ")[0]);
         }
         return name;
     }

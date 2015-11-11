@@ -1,8 +1,11 @@
 package com.rptools.city;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class Cities {
-    protected List<String> beg;
-    protected List<String> end;
+    private List<String> beg;
+    private List<String> end;
 }

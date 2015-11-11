@@ -45,6 +45,10 @@ public class NameGen {
         return capitalize(name);
     }
 
+    public TrainingName getTrainingName() {
+        return new TrainingName(makeName());
+    }
+
     private String capitalize(String name){
         return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     }

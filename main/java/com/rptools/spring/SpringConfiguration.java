@@ -7,7 +7,7 @@ import com.google.appengine.api.users.User;
 import com.rptools.util.Provider;
 
 @Configuration
-@ComponentScan(value="com.rptools", scopedProxy = ScopedProxyMode.INTERFACES)
+@ComponentScan(value="com.rptools", scopedProxy = ScopedProxyMode.NO)
 @EnableWebMvc
 public class SpringConfiguration {
     @Bean

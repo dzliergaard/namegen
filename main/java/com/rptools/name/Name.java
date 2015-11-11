@@ -2,12 +2,15 @@ package com.rptools.name;
 
 import com.google.appengine.api.users.User;
 import com.rptools.util.RPEntity;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter @Setter
+@NoArgsConstructor
 public class Name extends RPEntity {
-    public String text;
-
-    public Name() {
-    }
+    private String text;
 
     public Name(String text, Long key) {
         this.text = text;
@@ -18,10 +21,5 @@ public class Name extends RPEntity {
         this.text = text;
         this.user = user;
         this.key = key;
-    }
-
-    @Override
-    public String getType() {
-        return "Name";
     }
 }

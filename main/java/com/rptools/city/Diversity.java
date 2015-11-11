@@ -1,7 +1,10 @@
 package com.rptools.city;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.Random;
 
+@RequiredArgsConstructor
 public enum Diversity {
     Low(.1),
     Medium(.2),
@@ -10,11 +13,7 @@ public enum Diversity {
 
     private static final Random rand = new Random();
 
-    private double modifier;
-
-    Diversity(double modifier) {
-        this.modifier = modifier;
-    }
+    private final double modifier;
 
     public double mod() {
         return modifier;

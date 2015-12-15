@@ -3,28 +3,28 @@ package com.rptools.city;
 import java.util.List;
 import java.util.Random;
 
+import lombok.Data;
+
 import com.google.common.collect.Lists;
 import com.rptools.util.WeightedList;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
+@Data
 public class Population {
     private static Random rand = new Random();
     private List<RacePop> people = Lists.newArrayList();
     private int tot = 0;
-    private String searchMod;
+    private int searchMod;
 
     // search mods are static numbers based on population
-    private static WeightedList<String> searchMods = new WeightedList<String>() {
+    private static WeightedList<Integer> searchMods = new WeightedList<Integer>() {
         {
-            this.add(250, "-6");
-            this.add(500, "-4");
-            this.add(1500, "-2");
-            this.add(4500, "0");
-            this.add(6750, "+1");
-            this.add(26500, "+3");
-            this.add(34500, "+5");
+            this.add(250, -6);
+            this.add(500, -4);
+            this.add(1500, -2);
+            this.add(4500, 0);
+            this.add(6750, 1);
+            this.add(26500, 3);
+            this.add(34500, 5);
         }
     };
 

@@ -1,6 +1,9 @@
 package com.rptools.city;
 
+import java.util.List;
 import java.util.Random;
+
+import com.google.common.collect.Lists;
 
 public enum Race {
     Human,
@@ -24,5 +27,9 @@ public enum Race {
         } catch (Exception e) {
             return rand();
         }
+    }
+
+    public static List<Race> asList() {
+        return Lists.newArrayList(Race.values());
     }
 }

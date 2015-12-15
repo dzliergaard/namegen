@@ -1,8 +1,11 @@
 package com.rptools.city;
 
+import java.util.List;
+import java.util.Random;
+
 import lombok.RequiredArgsConstructor;
 
-import java.util.Random;
+import com.google.common.collect.Lists;
 
 @RequiredArgsConstructor
 public enum CityTemplate {
@@ -29,5 +32,9 @@ public enum CityTemplate {
         } catch (Exception e) {
             return rand();
         }
+    }
+
+    public static List<CityTemplate> asList() {
+        return Lists.newArrayList(CityTemplate.values());
     }
 }

@@ -1,5 +1,11 @@
 package com.rptools.city;
 
+import java.util.List;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -10,11 +16,6 @@ import com.rptools.name.Name;
 import com.rptools.name.NameUtils;
 import com.rptools.util.DataStoreQuery;
 import com.rptools.util.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Random;
 
 @Component
 public class CityUtils {
@@ -39,8 +40,8 @@ public class CityUtils {
     }
 
     public List<City> get() {
-        List<Entity> cities = datastore.prepare(dataStoreQuery.getQuery("City")).asList(
-            FetchOptions.Builder.withDefaults());
+        List<Entity> cities =
+                datastore.prepare(dataStoreQuery.getQuery("City")).asList(FetchOptions.Builder.withDefaults());
         return Lists.transform(cities, entityToCity);
     }
 
@@ -64,7 +65,7 @@ public class CityUtils {
             city.getPopulation().add(Race.rand(), template, diversity);
         }
 
-        city.setRuler(String.format("%s (%s)", names.get(1).getText(), city.getPopulation().getWeightedRace()));
+        city.setRuler(new Ruler(names.get(1), Race.valueOf(city.getPopulation().getWeightedRace())));
 
         city.setInns(cityGen.generateInns(city.getPopulation().getTot()));
         return city;

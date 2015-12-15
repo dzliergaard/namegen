@@ -1,0 +1,47 @@
+<div class="row">
+    <form class="form-inline col-mid-12">
+        <fieldset>
+            <div class="row">
+                <div class="col-xs-6">
+                    <legend>
+                        Name Generator <strong (mouseover)="showfooter = true"
+                                               (mouseleave)="showfooter = false">*</strong>
+                    </legend>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="label-input form-group">
+                                <label for="how-many" class="col-xs-7">How Many?</label>
+                                <input id="how-many" type='text' class='col-xs-4 input-lg' [(ng-model)]="numNames"
+                                       placeholder='10'/>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 col-xs-offset-1">
+                            <button class="btn generate-button float-right" (click)='generate(numNames)'>
+                                <span>Generate</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <img class="loading" *ng-if="generating" src="resources/static/loading.gif" height="30px" width="30px">
+            </div>
+        </fieldset>
+    </form>
+    <div class="row">
+        <div class="col-xs-5 alert" [hidden]="!generated[0]">
+            <name-list [(names)]="generated" btn-text="Save" (primary)="saveName($event)"
+                       [disabled]="!userAuth"></name-list>
+        </div>
+        <div class="col-xs-5 col-xs-offset-{{generated[0] ? 1 : 6}} alert stored" [hidden]="!saved[0]">
+            <name-list [(names)]="saved" btn-text="Remove" (primary)="removeName($event)"
+                       (secondary)="saveName($event)"></name-list>
+        </div>
+    </div>
+    <div class="row">
+        <name-learn [name-attributes]="nameAttributes" [training-name]="trainingName"></name-learn>
+    </div>
+    <span class="footer note1" *ng-if="showfooter">*results may vary</span>
+</div>

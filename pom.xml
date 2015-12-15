@@ -11,9 +11,17 @@
 
     <properties>
         <appengine.app.version>1</appengine.app.version>
-        <appengine.target.version>1.9.21</appengine.target.version>
+        <appengine.target.version>1.9.28</appengine.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.target.version>4.2.2.RELEASE</spring.target.version>
+        <datanucleus.appengine.version>2.1.2</datanucleus.appengine.version>
+        <datanucleus.jpa.version>3.1.1</datanucleus.jpa.version>
+        <gcloud.gcloud_directory>C:\Program Files\Google\Cloud SDK\google-cloud-sdk</gcloud.gcloud_directory>
     </properties>
+
+    <prerequisites>
+        <maven>3.1.0</maven>
+    </prerequisites>
 
     <dependencies>
         <!-- Compile/runtime dependencies -->
@@ -32,11 +40,11 @@
             <artifactId>appengine-tools-sdk</artifactId>
             <version>${appengine.target.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.appengine.orm</groupId>
-            <artifactId>datanucleus-appengine</artifactId>
-            <version>2.1.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.google.appengine.orm</groupId>-->
+            <!--<artifactId>datanucleus-appengine</artifactId>-->
+            <!--<version>2.1.2</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
@@ -71,28 +79,29 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>4.1.5.RELEASE</version>
+            <version>${spring.target.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>4.1.5.RELEASE</version>
+            <version>${spring.target.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>4.1.5.RELEASE</version>
+            <version>${spring.target.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>4.1.5.RELEASE</version>
+            <version>${spring.target.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>4.1.5.RELEASE</version>
+            <version>${spring.target.version}</version>
         </dependency>
+
 
         <!-- Test Dependencies -->
         <dependency>
@@ -124,48 +133,50 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <version>3.2</version>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
                 <configuration>
-                    <source>7</source>
-                    <target>7</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>otf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
-                    <archiveClasses>true</archiveClasses>
                     <webResources>
                         <!-- in order to interpolate version from pom into appengine-web.xml -->
                         <resource>
                             <directory>${basedir}/web</directory>
-                            <filtering>true</filtering>
-                            <targetPath>/</targetPath>
-                            <!--<excludes>-->
-                                <!--<exclude>**/*.ttf</exclude>-->
-                                <!--<exclude>**/*.woff</exclude>-->
-                                <!--<exclude>**/*.woff2</exclude>-->
-                            <!--</excludes>-->
+                            <filtering>false</filtering>
                         </resource>
                     </webResources>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>com.google.appengine</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>${appengine.target.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.datanucleus</groupId>
+                        <artifactId>datanucleus-enhancer</artifactId>
+                        <version>${datanucleus.jpa.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <jvmFlags>
+                        <jvmFlag>-Ddatastore.backing_store=${project.basedir}/target/local_db.bin</jvmFlag>
+                        <jvmFlag>-Xdebug</jvmFlag>
+                        <jvmFlag>-Dcom.google.appengine.devappserver_module.analysis.port=8081</jvmFlag>
+                        <jvmFlag>-XX:MaxPermSize=512m</jvmFlag>
+                        <jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8001,server=y,suspend=n</jvmFlag>
+                    </jvmFlags>
+                    <!--<enhancerApi>JPA</enhancerApi>-->
+                <fullScanSeconds>2</fullScanSeconds>
+            </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -18,6 +18,11 @@ Array.prototype.remove = function (targ) {
 
     var inds = [];
     this.forEach(function (it, i) {
+        if (typeof targ == 'function') {
+            if (targ(it)) {
+
+            }
+        }
         if (it == targ) {
             inds.push(i);
         }

@@ -4,10 +4,11 @@
   <version>1</version>
   <threadsafe>true</threadsafe>
   <sessions-enabled>true</sessions-enabled>
-  <vm>true</vm>
-  <manual-scaling>
-    <instances>1</instances>
-  </manual-scaling>
+  <!--Comment out below when ready to run on a Google VM-->
+  <!--<vm>true</vm>-->
+  <!--<manual-scaling>-->
+    <!--<instances>1</instances>-->
+  <!--</manual-scaling>-->
   <beta-settings>
     <setting name="java_quickstart" value="true" />
   </beta-settings>

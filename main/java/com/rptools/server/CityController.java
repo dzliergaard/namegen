@@ -1,45 +1,49 @@
 package com.rptools.server;
 
-import javax.servlet.http.HttpServletResponse;
-
-import com.rptools.city.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.google.appengine.labs.repackaged.com.google.common.base.Optional;
+import com.rptools.city.*;
 
 @Controller
 @RequestMapping(value = "city")
-public class CityController {
-    @Autowired private CityUtils cityUtils;
+public class CityController extends EntityServerBase<City> {
+    private final CityUtils cityUtils;
 
-    public CityController(){}
+    @Autowired
+    public CityController(CityUtils cityUtils) {
+        this.cityUtils = cityUtils;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getNames() {
-        return new ModelAndView("city.jsp");
+    public ModelAndView get() {
+        ModelAndView model = new ModelAndView("city.jsp");
+        model.addObject("speciesValues", Race.asList());
+        model.addObject("diversityValues", Diversity.asList());
+        model.addObject("sizeValues", CityTemplate.asList());
+        return model;
     }
 
     @RequestMapping(value = "generate", method = RequestMethod.GET, headers = "Accept=application/json")
-    public @ResponseBody City generate(@RequestParam(required = false) CityTemplate size, @RequestParam(
-            required = false) Diversity diversity, @RequestParam(required = false) Race race) {
-        size = size == null ? CityTemplate.rand() : size;
-        diversity = diversity == null ? Diversity.rand() : diversity;
-        race = race == null ? Race.rand() : race;
-
-        return cityUtils.generateCity(size, diversity, race);
+    public @ResponseBody City generate(
+            @RequestParam(required = false) CityTemplate size,
+            @RequestParam(required = false) Diversity diversity,
+            @RequestParam(required = false) Race race) {
+        return cityUtils.generateCity(
+            Optional.fromNullable(size).or(CityTemplate.rand()),
+            Optional.fromNullable(diversity).or(Diversity.rand()),
+            Optional.fromNullable(race).or(Race.rand()));
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public void delete(@RequestBody(required = true) City city, HttpServletResponse response) {
+    public void delete(@RequestBody(required = true) City city) {
     }
 
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public @ResponseBody City save(@RequestBody(required = false) City city, HttpServletResponse response) {
+    public @ResponseBody City save(@RequestBody(required = false) City city) {
         return null;
     }
 }

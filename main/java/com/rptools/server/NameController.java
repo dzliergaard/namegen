@@ -1,19 +1,17 @@
 package com.rptools.server;
 
-import java.util.List;
-
-import lombok.NonNull;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.google.common.base.Optional;
 import com.rptools.name.Name;
 import com.rptools.name.NameAttribute;
 import com.rptools.name.NameUtils;
 import com.rptools.name.TrainingName;
 import com.rptools.util.Logger;
+import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @RestController("NameController")
 @RequestMapping(value = { "name", "" })

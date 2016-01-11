@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.appengine.labs.repackaged.com.google.common.base.Optional;
+import com.google.common.base.Optional;
 import com.rptools.city.*;
 
 @Controller
@@ -33,9 +33,9 @@ public class CityController extends EntityServerBase<City> {
             @RequestParam(required = false) Diversity diversity,
             @RequestParam(required = false) Race race) {
         return cityUtils.generateCity(
-            Optional.fromNullable(size).or(CityTemplate.rand()),
-            Optional.fromNullable(diversity).or(Diversity.rand()),
-            Optional.fromNullable(race).or(Race.rand()));
+                Optional.fromNullable(size).or(CityTemplate.rand()),
+                Optional.fromNullable(diversity).or(Diversity.rand()),
+                Optional.fromNullable(race).or(Race.rand()));
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)

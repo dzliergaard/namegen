@@ -1,29 +1,147 @@
-var Name = (function () {
-    function Name(text, key) {
-        this.text = text;
-        this.key = key;
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var core_1 = require("angular2/core");
+var name_store_1 = require("name/name-store");
+var input_strong_1 = require("util/input-strong");
+var user_content_1 = require("app/user-content");
+var _ = require("underscore");
+/**
+ * Base class represents the *concept* of a name, not an actual URI element.
+ */
+var Name = (function (_super) {
+    __extends(Name, _super);
+    function Name(nameStore) {
+        _super.call(this);
+        this.nameStore = nameStore;
     }
+    Name.prototype.saveName = function () {
+        var _this = this;
+        this.save();
+        this.nameStore.save(this.nameData).subscribe(function (n) { return _this.saveCallback(n); }, function (e) { return _this.saveError(e); });
+    };
+    Name.prototype.saveCallback = function (response) {
+        this.doneSaving();
+        this.text = response.text;
+        this.lastSavedText = response.text;
+    };
+    Name.prototype.saveError = function (error) {
+        console.log("Error attempting to save name: " + this.text + "\n" + error);
+    };
+    Name.prototype.doPrimary = function () {
+    };
+    Name.prototype.doSecondary = function () {
+    };
+    Name.prototype.btnText = function () {
+        return "";
+    };
+    Name.prototype.btnDisabled = function () {
+        return false;
+    };
+    Object.defineProperty(Name.prototype, "nameData", {
+        get: function () {
+            return {
+                id: this.id,
+                text: this.text
+            };
+        },
+        set: function (nameData) {
+            this.id = nameData.id;
+            this.text = nameData.text;
+            this.lastSavedText = nameData.text;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Name = __decorate([
+        __param(0, core_1.Inject(name_store_1.NameStore))
+    ], Name);
     return Name;
-})();
+}(input_strong_1.InputStrongData));
 exports.Name = Name;
-var Names = (function () {
-    function Names() {
-        this.generated = [];
-        this.saved = [];
+var GeneratedName = (function (_super) {
+    __extends(GeneratedName, _super);
+    function GeneratedName(nameStore, userContent) {
+        _super.call(this, nameStore);
+        this.nameStore = nameStore;
+        this.userContent = userContent;
     }
-    Names.prototype.getGenerated = function () {
-        return this.generated;
+    GeneratedName.prototype.saveCallback = function (response) {
+        _super.prototype.saveCallback.call(this, response);
+        this.userContent.savedNames.push(response);
+        console.log("New name saved: " + JSON.stringify(response));
     };
-    Names.prototype.getSaved = function () {
-        return this.saved;
+    GeneratedName.prototype.doPrimary = function () {
+        return this.saveName();
     };
-    Names.prototype.setSaved = function () {
-
+    GeneratedName.prototype.btnText = function () {
+        return this.isEditing() ? "Done" : "Save";
     };
-    Names.prototype.remove = function (item) {
-        this.saved = _.reject(this.saved, item);
+    GeneratedName.prototype.btnDisabled = function () {
+        return !this.isEditing() && !this.userContent.isSignedIn;
     };
-    return Names;
-})();
-exports.Names = Names;
+    GeneratedName = __decorate([
+        core_1.Directive({
+            selector: '[dz-generated-name]',
+            inputs: ['nameData: dz-generated-name']
+        }),
+        __param(0, core_1.Inject(name_store_1.NameStore)),
+        __param(1, core_1.Inject(user_content_1.UserContent))
+    ], GeneratedName);
+    return GeneratedName;
+}(Name));
+exports.GeneratedName = GeneratedName;
+var SavedName = (function (_super) {
+    __extends(SavedName, _super);
+    function SavedName(nameStore, userContent) {
+        _super.call(this, nameStore);
+        this.userContent = userContent;
+    }
+    SavedName.prototype.saveCallback = function (response) {
+        _super.prototype.saveCallback.call(this, response);
+        this.id = response.id;
+        console.log("Name updated: " + JSON.stringify(response));
+    };
+    SavedName.prototype.doneEditing = function () {
+        _super.prototype.doneEditing.call(this);
+        this.doSecondary();
+    };
+    SavedName.prototype.doPrimary = function () {
+        var _this = this;
+        this.save();
+        return this.nameStore.remove(this.nameData).subscribe(function () {
+            _this.userContent.savedNames = _.reject(_this.userContent.savedNames, function (n) { return n.id == _this.id; });
+        }, function (err) { return _this.doneSaving(); });
+    };
+    SavedName.prototype.doSecondary = function () {
+        if (this.text != this.lastSavedText) {
+            this.saveName();
+        }
+    };
+    SavedName.prototype.btnText = function () {
+        return this.isEditing() ? "Done" : "Remove";
+    };
+    SavedName = __decorate([
+        core_1.Directive({
+            selector: '[dz-saved-name]',
+            inputs: ['nameData: dz-saved-name']
+        }),
+        __param(0, core_1.Inject(name_store_1.NameStore)),
+        __param(1, core_1.Inject(user_content_1.UserContent))
+    ], SavedName);
+    return SavedName;
+}(Name));
+exports.SavedName = SavedName;
 //# sourceMappingURL=name.js.map

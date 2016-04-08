@@ -16,11 +16,11 @@
                         <div class="panel-body">
                             <div class='btn-group-vertical'>
                                 <label class='btn btn-default' ng-class="{'active': !cityForm.size}">
-                                    <input type='radio' ng-model="cityForm.size" ng-value="">Random
+                                    <input type='radio' ngModel="cityForm.size" ng-value="">Random
                                 </label>
                                 <label ng-repeat="size in cityVals.size" class="btn btn-default"
                                        ng-class="{'active': cityForm.size == size}">
-                                    <input type='radio' ng-model="cityForm.size" ng-value="size">{{size}}
+                                    <input type='radio' ngModel="cityForm.size" ng-value="size">{{size}}
                                 </label>
                             </div>
                         </div>
@@ -41,11 +41,11 @@
                         <div class="panel-body">
                             <div class='btn-group-vertical'>
                                 <label class='btn btn-default' ng-class="{'active': !cityForm.spec}">
-                                    <input type='radio' ng-model="cityForm.spec" ng-value="">Random
+                                    <input type='radio' ngModel="cityForm.spec" ng-value="">Random
                                 </label>
                                 <label ng-repeat="spec in cityVals.species" class="btn btn-default"
                                        ng-class="{'active': cityForm.spec == spec}">
-                                    <input type='radio' ng-model="cityForm.spec" ng-value="spec">{{spec}}
+                                    <input type='radio' ngModel="cityForm.spec" ng-value="spec">{{spec}}
                                 </label>
                             </div>
                         </div>
@@ -66,11 +66,11 @@
                         <div class="panel-body">
                             <div class='btn-group-vertical'>
                                 <label class='btn btn-default' ng-class="{'active': !cityForm.div}">
-                                    <input type='radio' ng-model="cityForm.div" ng-value="">Random
+                                    <input type='radio' ngModel="cityForm.div" ng-value="">Random
                                 </label>
                                 <label ng-repeat="div in cityVals.diversity" class="btn btn-default"
                                        ng-class="{'active': cityForm.div == div}">
-                                    <input type='radio' ng-model="cityForm.div" value="{{div}}">{{div}}
+                                    <input type='radio' ngModel="cityForm.div" value="{{div}}">{{div}}
                                 </label>
                             </div>
                         </div>

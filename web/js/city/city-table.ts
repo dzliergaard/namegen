@@ -1,18 +1,19 @@
-import {Component, EventEmitter, Input, Output, CORE_DIRECTIVES} from 'angular2/angular2';
+import {Component, EventEmitter, Input, Output} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
 import {City} from './city';
 
 @Component({
     selector: 'tr[city-row]',
     directives: [CORE_DIRECTIVES],
     template: `
-        <th *ng-if="isHeader" class="col-xs-2">{{heading}}:</th>
-        <th *ng-if="isHeader"><strong *ng-for="#value of values">{{value}}<br/></strong></th>
-        <th *ng-if="isHeader"><a type='button' class='btn btn-default btn-sm' (click)="refresh.next()">
+        <th *ngIf="isHeader" class="col-xs-2">{{heading}}:</th>
+        <th *ngIf="isHeader"><strong *ngFor="#value of values">{{value}}<br/></strong></th>
+        <th *ngIf="isHeader"><a type='button' class='btn btn-default btn-sm' (click)="refresh.next()">
             <span class='glyphicon glyphicon-refresh'></span>
         </a></th>
-        <td *ng-if="!isHeader" class="col-xs-2">{{heading}}:</td>
-        <td *ng-if="!isHeader"><strong *ng-for="#value of values">{{value}}<br/></strong></td>
-        <td *ng-if="!isHeader"><a type='button' class='btn btn-default btn-sm' (click)="refresh.next()">
+        <td *ngIf="!isHeader" class="col-xs-2">{{heading}}:</td>
+        <td *ngIf="!isHeader"><strong *ngFor="#value of values">{{value}}<br/></strong></td>
+        <td *ngIf="!isHeader"><a type='button' class='btn btn-default btn-sm' (click)="refresh.next()">
             <span class='glyphicon glyphicon-refresh'></span>
         </a></td>
     `

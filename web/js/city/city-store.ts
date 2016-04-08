@@ -1,4 +1,4 @@
-import {ng, Injectable} from 'angular2/angular2';
+import {ng, Injectable} from 'angular2/core';
 import {RequestOptions} from 'angular2/http';
 import {EntityStore} from '../util/entity-store';
 import {City} from './city';

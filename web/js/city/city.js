@@ -1,10 +1,11 @@
+"use strict";
 var RacePop = (function () {
     function RacePop(race, population) {
         this.race = race;
         this.population = population;
     }
     return RacePop;
-})();
+}());
 exports.RacePop = RacePop;
 var Population = (function () {
     function Population(people, tot, searchMod) {
@@ -13,7 +14,7 @@ var Population = (function () {
         this.searchMod = searchMod;
     }
     return Population;
-})();
+}());
 exports.Population = Population;
 var Ruler = (function () {
     function Ruler(name, race) {
@@ -21,7 +22,7 @@ var Ruler = (function () {
         this.race = race;
     }
     return Ruler;
-})();
+}());
 exports.Ruler = Ruler;
 var City = (function () {
     function City(name, ruler, population, inns) {
@@ -31,6 +32,6 @@ var City = (function () {
         this.inns = inns;
     }
     return City;
-})();
+}());
 exports.City = City;
 //# sourceMappingURL=city.js.map

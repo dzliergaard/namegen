@@ -1,19 +1,16 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-        case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
-        case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
-        case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
-    }
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var angular2_1 = require('angular2/angular2');
-var city_1 = require('./city');
-var city_form_1 = require('./city-form');
-var city_table_1 = require('./city-table');
-var city_store_1 = require('./city-store');
+var core_d_ts_1 = require("../node_modules/angular2/core.d.ts");
+var common_d_ts_1 = require("../node_modules/angular2/common.d.ts");
+var city_1 = require("./city");
+var city_form_1 = require("./city-form");
+var city_table_1 = require("./city-table");
+var city_store_1 = require("./city-store");
 var CityComponent = (function () {
     function CityComponent(cityStore, city, elementRef) {
         this.cityStore = cityStore;
@@ -22,6 +19,7 @@ var CityComponent = (function () {
         this.state = { generating: false };
         this.cityForm = new city_form_1.CityForm();
     }
+    ;
     CityComponent.prototype.onInit = function () {
         var nativeElement = this.elementRef.nativeElement;
         this.diversityValues = nativeElement.getAttribute('diversity-values').match(/(\w+)/g);
@@ -36,15 +34,14 @@ var CityComponent = (function () {
         });
     };
     CityComponent = __decorate([
-        angular2_1.Component({
+        core_d_ts_1.Component({
             selector: '[city-app]',
-            directives: [city_form_1.CityFormComponent, city_table_1.CityTable, angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES],
-            template: "\n        <div class=\"row\">\n            <city-form (generate)=\"generate()\"\n                       [form]=\"cityForm\"\n                       [state]=\"state\"\n                       [diversity-values]=\"diversityValues\"\n                       [size-values]=\"sizeValues\"\n                       [species-values]=\"speciesValues\"></city-form>\n        </div>\n        <div class=\"row\" *ng-if=\"city.name\">\n            <city [city]=\"city\" class=\"col-xs-6\" (refresh-attr)=\"generate($event)\"></city>\n        </div>\n    "
-        }), 
-        __metadata('design:paramtypes', [city_store_1.CityStore, city_1.City, angular2_1.ElementRef])
+            directives: [city_form_1.CityFormComponent, city_table_1.CityTable, common_d_ts_1.CORE_DIRECTIVES, common_d_ts_1.FORM_DIRECTIVES],
+            template: "\n        <div class=\"row\">\n            <city-form (generate)=\"generate()\"\n                       [form]=\"cityForm\"\n                       [state]=\"state\"\n                       [diversity-values]=\"diversityValues\"\n                       [size-values]=\"sizeValues\"\n                       [species-values]=\"speciesValues\"></city-form>\n        </div>\n        <div class=\"row\" *ngIf=\"city.name\">\n            <city [city]=\"city\" class=\"col-xs-6\" (refresh-attr)=\"generate($event)\"></city>\n        </div>\n    "
+        })
     ], CityComponent);
     return CityComponent;
-})();
+}());
 exports.CityComponent = CityComponent;
-angular2_1.bootstrap(CityComponent, [city_store_1.CityStore, angular2_1.provide(city_1.City, { useValue: new city_1.City(null, null, null, null) })]);
+core_d_ts_1.bootstrap(CityComponent, [city_store_1.CityStore, core_d_ts_1.provide(city_1.City, { useValue: new city_1.City(null, null, null, null) })]);
 //# sourceMappingURL=city-app.js.map

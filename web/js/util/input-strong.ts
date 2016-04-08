@@ -1,39 +1,66 @@
-import {AfterViewChecked, Component, EventEmitter, ElementRef, Input, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
-import $ = require('jquery');
+import {AfterViewChecked, Component, ElementRef, Inject, Input} from "angular2/core";
+import {FORM_DIRECTIVES} from "angular2/common";
+import $ = require("jquery");
+
+export class InputStrongData {
+    protected editing:boolean = false;
+    protected saving:boolean = false;
+
+    public edit() {
+        this.editing = true;
+        this.saving = false;
+    }
+
+    public isEditing() {
+        return this.editing;
+    }
+
+    public doneEditing() {
+        this.editing = false;
+    }
+
+    public save() {
+        this.editing = false;
+        this.saving = true;
+    }
+
+    public isSaving() {
+        return this.saving;
+    }
+
+    public doneSaving() {
+        this.saving = false;
+    }
+}
 
 @Component({
     selector: 'input-strong',
-    outputs: ['edit', 'done'],
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
+    directives: [FORM_DIRECTIVES],
     template: `
-        <strong class="col-xs-12" [hidden]="editing" (click)="doEdit(input)">{{item.text}}</strong>
-        <input #input [hidden]="!editing" class="col-xs-12" (keyup.enter)="doDone()" [(ng-model)]="item.text" (blur)="doDone()"/>
-    `,
-    exportAs: 'inputstrong'
+        <strong class="col-xs-12" [hidden]="item.isEditing()" (click)="select = true; item.edit()">
+            {{item.text}}
+        </strong>
+        <input #input class="col-xs-12" [hidden]="!item.isEditing()" [(ngModel)]="item.text" (keyup.enter)="doDone()" (blur)="doDone()"/>
+    `
 })
 export class InputStrong implements AfterViewChecked {
-    edit = new EventEmitter();
-    done = new EventEmitter();
-    select:boolean = true;
-    public editing:boolean = false;
-    input:ElementRef;
-    @Input() item:any;
+    @Input() private item:InputStrongData;
+    private select:boolean = false;
 
-    afterViewChecked () {
-        if (!this.input || !this.select) { return; }
-        $(this.input).select();
+    constructor(@Inject(ElementRef) private elementRef:ElementRef) {
+    }
+
+    ngAfterViewChecked() {
+        if (this.select) {
+            $(this.elementRef.nativeElement).find('input').select();
+            this.select = false;
+        }
+    }
+
+    doDone() {
         this.select = false;
-    }
-
-    doEdit (input:ElementRef) {
-        this.input = input;
-        this.editing = true;
-        this.select = true;
-        this.edit.next(this.item);
-    }
-
-    doDone () {
-        this.editing = false;
-        this.done.next(this.item);
+        if (this.item.isEditing()) {
+            this.item.doneEditing();
+        }
     }
 }

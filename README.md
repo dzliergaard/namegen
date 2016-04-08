@@ -1,24 +1,22 @@
-App Engine Java Application
-Copyright (C) 2010-2012 Google Inc.
+Spring Tomcat application that generates random Role Playing Game-related entities, for use by players
+and Game Masters who want some quick tools to help the world-creation process.
 
-## Skeleton application for use with App Engine Java.
+## Name Generator
 
-Requires [Apache Maven](http://maven.apache.org) 3.0 or greater, and JDK 6+ in order to run.
+The name generator can be reached at the /name endpoint, and provides functionality to generate a list of random
+names. If the user authenticates with their Google account and authorizes the application to save to their Google Drive
+appData folder, they can save names that they like and access them from any computer.
 
-To build, run
+There is also a feature to "train" the name generator. When there is enough training data, you may be able to specify
+a particular attribute that you'd like the generated names to embody.
 
-    mvn package
+## City Generator
 
-Building will run the tests, but to explicitly run tests you can use the test target
+The city generator provides various customizable parameters to generate a city, from a tiny hamlet to a sprawling
+metropolis. The definitions of these sizes and races come directly from the D&D DM's guide, but the level of diversity
+is application specific.
 
-    mvn test
+## Development
 
-To start the app, use the [App Engine Maven Plugin](http://code.google.com/p/appengine-maven-plugin/) that is already included in this demo.  Just run the command.
-
-    mvn appengine:devserver
-
-For further information, consult the [Java App Engine](https://developers.google.com/appengine/docs/java/overview) documentation.
-
-To see all the available goals for the App Engine plugin, run
-
-    mvn help:describe -Dplugin=appengine
+Git does not download all the javascript libraries required to run the application. NPM is required to download the
+node_modules within the /web/js folder.

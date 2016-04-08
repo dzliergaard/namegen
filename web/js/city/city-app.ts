@@ -1,8 +1,9 @@
-import {bootstrap, provide, Component, ElementRef, OnInit, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
-import {City, Population, RacePop} from './city';
-import {CityForm, CityFormComponent} from './city-form';
-import {CityTable} from './city-table';
-import {CityStore} from './city-store';
+import {bootstrap, provide, Component, ElementRef, OnInit} from "../node_modules/angular2/core.d.ts";
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "../node_modules/angular2/common.d.ts";
+import {City} from "./city";
+import {CityForm, CityFormComponent} from "./city-form";
+import {CityTable} from "./city-table";
+import {CityStore} from "./city-store";
 
 @Component({
     selector: '[city-app]',
@@ -16,7 +17,7 @@ import {CityStore} from './city-store';
                        [size-values]="sizeValues"
                        [species-values]="speciesValues"></city-form>
         </div>
-        <div class="row" *ng-if="city.name">
+        <div class="row" *ngIf="city.name">
             <city [city]="city" class="col-xs-6" (refresh-attr)="generate($event)"></city>
         </div>
     `
@@ -28,7 +29,7 @@ export class CityComponent implements OnInit {
     sizeValues:Array<string>;
     speciesValues:Array<string>;
 
-    constructor(public cityStore:CityStore, public city:City, private elementRef:ElementRef) {
+    constructor(private cityStore:CityStore, public city:City, private elementRef:ElementRef) {
     };
 
     onInit() {

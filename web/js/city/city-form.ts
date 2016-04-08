@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, Output, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component, EventEmitter, Input, Output} from '../node_modules/angular2/core.d.ts';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '../node_modules/angular2/common.d.ts';
 import {City} from './city';
 import {FormRadio} from '../util/form-radio';
 
@@ -24,7 +25,7 @@ export class CityForm {
                         <button class="btn generate-button" (click)="generate.next()">
                             <span>Generate</span>
                         </button>
-                        <img *ng-if="state.generating" src="/resources/static/loading.gif" height="20px" width="20px">
+                        <img *ngIf="state.generating" src="/resources/static/loading.gif" height="20px" width="20px">
                     </div>
                 </div>
             </fieldset>

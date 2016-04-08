@@ -1,30 +1,128 @@
-export class Name {
-    public attribute:string;
-    constructor (public text: string, public key: number){ }
+import {Directive, Inject} from "angular2/core";
+import {NameStore} from "name/name-store";
+import {InputStrongData} from "util/input-strong";
+import {UserContent} from "app/user-content";
+import _ = require("underscore");
+
+/**
+ * Base class represents the *concept* of a name, not an actual URI element.
+ */
+export class Name extends InputStrongData {
+    public id:string;
+    public text:string;
+    protected lastSavedText:string;
+
+    constructor(@Inject(NameStore) private nameStore:NameStore) {
+        super();
+    }
+
+    protected saveName() {
+        this.save();
+        this.nameStore.save(this.nameData).subscribe(n => this.saveCallback(n), e => this.saveError(e));
+    }
+
+    protected saveCallback(response:any) {
+        this.doneSaving();
+        this.text = response.text;
+        this.lastSavedText = response.text;
+    }
+
+    private saveError(error:any) {
+        console.log("Error attempting to save name: " + this.text + "\n" + error);
+    }
+
+    doPrimary() {
+    }
+    
+    doSecondary() {
+    }
+
+    btnText() {
+        return ""
+    }
+
+    btnDisabled() {
+        return false;
+    }
+
+    get nameData() {
+        return {
+            id: this.id,
+            text: this.text
+        };
+    }
+
+    set nameData(nameData:any) {
+        this.id = nameData.id;
+        this.text = nameData.text;
+        this.lastSavedText = nameData.text;
+    }
 }
 
-export class Names {
-    generated:Array<Name>;
-    saved:Array<Name>;
-
-    constructor(){
-        this.generated = [];
-        this.saved = [];
+@Directive({
+    selector: '[dz-generated-name]',
+    inputs: ['nameData: dz-generated-name']
+})
+export class GeneratedName extends Name {
+    constructor(@Inject(NameStore) private nameStore:NameStore,
+                @Inject(UserContent) private userContent:UserContent) {
+        super(nameStore);
     }
 
-    getGenerated () {
-        return this.generated;
+    protected saveCallback(response:any) {
+        super.saveCallback(response);
+        this.userContent.savedNames.push(response);
+        console.log("New name saved: " + JSON.stringify(response));
     }
 
-    getSaved () {
-        return this.saved;
+    doPrimary() {
+        return this.saveName();
     }
 
-    setSaved () {
-        return
+    btnText() {
+        return this.isEditing() ? "Done" : "Save";
     }
 
-    remove (item) {
-        this.saved = _.reject(this.saved, item);
+    public btnDisabled() {
+        return !this.isEditing() && !this.userContent.isSignedIn;
+    }
+}
+
+@Directive({
+    selector: '[dz-saved-name]',
+    inputs: ['nameData: dz-saved-name']
+})
+export class SavedName extends Name {
+    constructor(@Inject(NameStore) nameStore:NameStore,
+                @Inject(UserContent) private userContent:UserContent) {
+        super(nameStore);
+    }
+
+    protected saveCallback(response:any) {
+        super.saveCallback(response);
+        this.id = response.id;
+        console.log("Name updated: " + JSON.stringify(response));
+    }
+
+    doneEditing() {
+        super.doneEditing();
+        this.doSecondary();
+    }
+
+    doPrimary() {
+        this.save();
+        return this.nameStore.remove(this.nameData).subscribe(() => {
+            this.userContent.savedNames = _.reject(this.userContent.savedNames, n => n.id == this.id);
+        }, err => this.doneSaving());
+    }
+
+    doSecondary() {
+        if (this.text != this.lastSavedText) {
+            this.saveName();
+        }
+    }
+
+    btnText() {
+        return this.isEditing() ? "Done" : "Remove";
     }
 }

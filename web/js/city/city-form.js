@@ -1,15 +1,12 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-        case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
-        case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
-        case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
-    }
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var angular2_1 = require('angular2/angular2');
+var core_d_ts_1 = require('../node_modules/angular2/core.d.ts');
+var common_d_ts_1 = require('../node_modules/angular2/common.d.ts');
 var form_radio_1 = require('../util/form-radio');
 var CityForm = (function () {
     function CityForm(size, race, diversity) {
@@ -18,45 +15,38 @@ var CityForm = (function () {
         this.diversity = diversity;
     }
     return CityForm;
-})();
+}());
 exports.CityForm = CityForm;
 var CityFormComponent = (function () {
     function CityFormComponent() {
-        this.generate = new angular2_1.EventEmitter();
+        this.generate = new core_d_ts_1.EventEmitter();
     }
     __decorate([
-        angular2_1.Input(), 
-        __metadata('design:type', CityForm)
+        core_d_ts_1.Input()
     ], CityFormComponent.prototype, "form");
     __decorate([
-        angular2_1.Input(), 
-        __metadata('design:type', Array)
+        core_d_ts_1.Input()
     ], CityFormComponent.prototype, "diversityValues");
     __decorate([
-        angular2_1.Input(), 
-        __metadata('design:type', Array)
+        core_d_ts_1.Input()
     ], CityFormComponent.prototype, "sizeValues");
     __decorate([
-        angular2_1.Input(), 
-        __metadata('design:type', Array)
+        core_d_ts_1.Input()
     ], CityFormComponent.prototype, "speciesValues");
     __decorate([
-        angular2_1.Input(), 
-        __metadata('design:type', Object)
+        core_d_ts_1.Input()
     ], CityFormComponent.prototype, "state");
     __decorate([
-        angular2_1.Output(), 
-        __metadata('design:type', Object)
+        core_d_ts_1.Output()
     ], CityFormComponent.prototype, "generate");
     CityFormComponent = __decorate([
-        angular2_1.Component({
+        core_d_ts_1.Component({
             selector: 'city-form',
-            directives: [form_radio_1.FormRadio, angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES],
-            template: "\n        <form class='form-inline'>\n            <fieldset>\n                <legend>City Generator</legend>\n                <div class='row'>\n                    <div form-radio [form]=\"form\" [field-name]=\"'size'\" [values]=\"sizeValues\" [heading]=\"'Size'\"></div>\n                    <div form-radio [form]=\"form\" [field-name]=\"'race'\" [values]=\"speciesValues\" [heading]=\"'Dominant Species'\"></div>\n                    <div form-radio [form]=\"form\" [field-name]=\"'diversity'\" [values]=\"diversityValues\" [heading]=\"'Diversity'\"></div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-xs-12\">\n                        <button class=\"btn generate-button\" (click)=\"generate.next()\">\n                            <span>Generate</span>\n                        </button>\n                        <img *ng-if=\"state.generating\" src=\"/resources/static/loading.gif\" height=\"20px\" width=\"20px\">\n                    </div>\n                </div>\n            </fieldset>\n        </form>\n    "
-        }), 
-        __metadata('design:paramtypes', [])
+            directives: [form_radio_1.FormRadio, common_d_ts_1.CORE_DIRECTIVES, common_d_ts_1.FORM_DIRECTIVES],
+            template: "\n        <form class='form-inline'>\n            <fieldset>\n                <legend>City Generator</legend>\n                <div class='row'>\n                    <div form-radio [form]=\"form\" [field-name]=\"'size'\" [values]=\"sizeValues\" [heading]=\"'Size'\"></div>\n                    <div form-radio [form]=\"form\" [field-name]=\"'race'\" [values]=\"speciesValues\" [heading]=\"'Dominant Species'\"></div>\n                    <div form-radio [form]=\"form\" [field-name]=\"'diversity'\" [values]=\"diversityValues\" [heading]=\"'Diversity'\"></div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-xs-12\">\n                        <button class=\"btn generate-button\" (click)=\"generate.next()\">\n                            <span>Generate</span>\n                        </button>\n                        <img *ngIf=\"state.generating\" src=\"/resources/static/loading.gif\" height=\"20px\" width=\"20px\">\n                    </div>\n                </div>\n            </fieldset>\n        </form>\n    "
+        })
     ], CityFormComponent);
     return CityFormComponent;
-})();
+}());
 exports.CityFormComponent = CityFormComponent;
 //# sourceMappingURL=city-form.js.map

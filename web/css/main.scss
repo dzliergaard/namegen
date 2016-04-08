@@ -1,11 +1,11 @@
 @font-face {
   font-family: BebasNeue;
-  src: url("/fonts/BebasNeue Regular.otf") format("opentype"), url("/fonts/TTF/BebasNeue Regular.ttf") format("truetype");
+  src: url("/resources/fonts/BebasNeue Regular.otf") format("opentype"), url("/resources/fonts/TTF/BebasNeue Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: BebasNeueBold;
-  src: url("/fonts/BebasNeue Bold.otf") format("opentype"), url("/fonts/TTF/BebasNeue Bold.ttf") format("truetype");
+  src: url("/resources/fonts/BebasNeue Bold.otf") format("opentype"), url("/resources/fonts/TTF/BebasNeue Bold.ttf") format("truetype");
 }
 
 @mixin bebasFont($size, $weight) {
@@ -35,14 +35,12 @@ body {
   color: $lavender;
   height: 100%;
   letter-spacing: 1px;
-  padding-left: 10px;
   width: 100%;
   @include bebasFont(30px, normal);
 }
 
 /* Nav bars / sub navs  */
 .navbar {
-  margin-left: -10px;
   min-height: 0;
   z-index: 0;
 }
@@ -55,6 +53,19 @@ body {
   background-color: $lavender;
   color: $white;
   @include bebasFont(30px, normal);
+
+  .btn-sign-out, .btn-sign-in {
+    background-color: $lavender;
+    font-weight: normal;
+
+    .google-icon {
+      background: url('https://google-developers.appspot.com/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
+      display: inline-block;
+      vertical-align: middle;
+      width: 42px;
+      height: 42px;
+    }
+  }
 }
 
 legend {
@@ -77,7 +88,7 @@ a {
 
   label {
     color: $purple;
-    @include bebasFont(18px, normal);
+    @include bebasFont(26px, normal);
   }
 
   input {
@@ -85,7 +96,7 @@ a {
     color: $purple;
     outline: none;
     -webkit-box-shadow: none;
-    @include bebasFont(18px, normal);
+    @include bebasFont(26px, normal);
   }
 
   & > div.row {
@@ -160,6 +171,7 @@ a {
 
 .alert {
   background-color: $lavender;
+  overflow: auto;
   padding: 0;
   border: {
     color: $lavender;
@@ -174,11 +186,13 @@ a {
     @include bebasFont(28px, bold);
   }
 
-  name-line {
+  .name-line {
+    padding-top: 5px;
     cursor: pointer;
 
     &:hover {
       color: grey;
+      background-color: $off-white;
     }
   }
 
@@ -204,7 +218,7 @@ a {
     background-color: $tan;
     border-color: $tan;
 
-    name-line:hover {
+    .name-line:hover {
       background-color: $yellow;
     }
   }
@@ -213,74 +227,49 @@ a {
 /* Page Specific */
 
 .content {
-  margin: 25px;
+  table tbody tr:nth-child(odd) {
+    color: $purple;
+  }
 
-  /* /name */
-  &-name {
-    name {
-      padding-left: 15px;
+  table th:first-child,
+  table td:first-child {
+    width: 20%;
+  }
+
+  table th:last-child,
+  table td:last-child {
+    width: 10%;
+  }
+
+  .panel-title a {
+    width: 100%;
+  }
+
+  label input[type=radio] {
+    display: none;
+  }
+
+  city-form {
+    .panel-title a {
+      @include bebasFont(26px, bold);
     }
 
-    name-list {
-      float: left;
-      width: 100%;
-    }
-
-    name-line {
-      padding-top: 5px;
-
-      &:hover {
-        background-color: $off-white;
-      }
+    label.btn {
+      @include bebasFont(20px, normal);
     }
   }
 
-  /* /city */
-  &-city {
-    table tbody tr:nth-child(odd) {
-      color: $purple;
+  city {
+    th {
+      @include bebasFont(22px, bold);
     }
 
-    table th:first-child,
-    table td:first-child {
-      width: 20%;
+    td {
+      @include bebasFont(22px, normal);
     }
 
-    table th:last-child,
-    table td:last-child {
-      width: 10%;
-    }
-
-    .panel-title a {
-      width: 100%;
-    }
-
-    label input[type=radio] {
-      display: none;
-    }
-
-    city-form {
-      .panel-title a {
-        @include bebasFont(26px, bold);
-      }
-
-      label.btn {
-        @include bebasFont(20px, normal);
-      }
-    }
-
-    city {
-      th {
-        @include bebasFont(22px, bold);
-      }
-
-      td {
-        @include bebasFont(22px, normal);
-      }
-
-      * {
-        white-space: nowrap;
-      }
+    * {
+      white-space: nowrap;
     }
   }
 }

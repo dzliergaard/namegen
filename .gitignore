@@ -1,12 +1,10 @@
 .idea
 *.iml
+codeFormatter.xml
 target
 web/js/node_modules
-web/js/name/*.js
-web/js/city/*.js
-web/js/util/*.js
-web/js/name/*.js.map
-web/js/city/*.js.map
-web/js/util/*.js.map
-web/css/main.css
+web/js/**/*.js.map
+web/js/**/*.js
+web/css/*.css
 web/css/main.css.map
+src/dzlier_rptools_secret

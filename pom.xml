@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.rptools</groupId>
-    <artifactId>RPTools</artifactId>
+    <groupId>dzlier-rptools</groupId>
+    <artifactId>com.rptools</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -21,6 +21,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.0</version>
@@ -34,15 +39,24 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client-servlet</artifactId>
             <version>${google.api.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.google.apis</groupId>
@@ -75,6 +89,11 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.javaconfig</groupId>
+            <artifactId>spring-javaconfig</artifactId>
+            <version>1.0.0.m3</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
@@ -83,10 +102,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-aws-context</artifactId>
             <version>${spring-cloud.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-aws-autoconfigure</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -118,73 +133,59 @@
     </dependencyManagement>
 
     <build>
-        <resources>
-            <resource>
-                <directory>web/js</directory>
-                <excludes>
-                    <exclude>node_modules/**</exclude>
-                </excludes>
-                <includes>
-                    <include>node_modules/angular2/bundles/angular2.dev.js</include>
-                    <include>node_modules/angular2/bundles/angular2-polyfills.js</include>
-                    <include>node_modules/angular2/bundles/router.dev.js</include>
-                    <include>node_modules/angular2/bundles/http.dev.js</include>
-                    <include>node_modules/es6-shim/es6-shim.js</include>
-                    <include>node_modules/rxjs/bundles/Rx.js</include>
-                    <include>node_modules/systemjs/dist/system.src.js</include>
-                    <include>node_modules/systemjs/dist/system-polyfills.js</include>
-                    <include>node_modules/systemjs/dist/system-polyfills.src.js</include>
-                    <include>node_modules/systemjs/dist/system.src.js</include>
-                    <include>node_modules/underscore/underscore.js</include>
-                    <include>node_modules/underscore/underscore-min.js</include>
-                </includes>
-            </resource>
-        </resources>
+        <finalName>com.rptools</finalName>
+        <sourceDirectory>src/main/java</sourceDirectory>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <warSourceIncludes>
+                        resources/css/**/*,
+                        resources/fonts/**/*,
+                        resources/images/**/*,
+                        resources/js/app/**/*,
+                        resources/js/city/**/*,
+                        resources/js/name/**/*,
+                        resources/js/util/**/*,
+                        resources/js/*,
+                        resources/templates/**/*,
+                        resources/js/node_modules/angular2/bundles/angular2.dev.js,
+                        resources/js/node_modules/angular2/bundles/angular2-polyfills.js,
+                        resources/js/node_modules/angular2/bundles/router.dev.js,
+                        resources/js/node_modules/angular2/bundles/http.dev.js,
+                        resources/js/node_modules/es6-shim/es6-shim.js,
+                        resources/js/node_modules/rxjs/bundles/Rx.js,
+                        resources/js/node_modules/systemjs/dist/system.src.js,
+                        resources/js/node_modules/systemjs/dist/system-polyfills.js,
+                        resources/js/node_modules/systemjs/dist/system-polyfills.src.js,
+                        resources/js/node_modules/systemjs/dist/system.src.js,
+                        resources/js/node_modules/underscore/underscore.js,
+                        resources/js/node_modules/underscore/underscore-min.js,
+                        WEB-INF/**/*
+                    </warSourceIncludes>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
-                <executions>
-                    <execution>
-                        <id>tomcat-run</id>
-                        <goals>
-                            <goal>exec-war-only</goal>
-                        </goals>
-                        <phase>package</phase>
-                        <configuration>
-                            <path>web</path>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
                 <configuration>
-                    <delimiters>
-                        <delimiter>@</delimiter>
-                    </delimiters>
-                    <useDefaultDelimiters>false</useDefaultDelimiters>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <warSourceDirectory>web</warSourceDirectory>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <server>dzlier_rptools.server</server>
+                    <path>/</path>
+                    <port>80</port>
                 </configuration>
             </plugin>
         </plugins>

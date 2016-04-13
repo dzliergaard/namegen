@@ -18,6 +18,10 @@
 
 package com.rptools.spring;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -38,31 +42,11 @@ public class RPToolsWebAppInitializer extends AbstractAnnotationConfigDispatcher
     protected Class<?>[] getServletConfigClasses() {
         return null;
     }
-    // @Override
-    // protected void registerContextLoaderListener(ServletContext servletContext) {
-    // super.registerContextLoaderListener(servletContext);
-    // }
-    // @Override
-    // public void onStartup(ServletContext container) {
-    // // Create the 'root' Spring application context
-    // AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-    // rootContext.register(SpringConfiguration.class);
-    // rootContext.setConfigLocation("/WEB-INF/classes/aws-config.xml");
-    //
-    // // Manage the lifecycle of the root application context
-    // container.addListener(new ContextLoaderListener(rootContext));
-    //
-    // // Add request/session scope listener
-    // container.addListener(RequestContextListener.class);
-    //
-    // // Create the dispatcher servlet's Spring application context
-    // AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-    // dispatcherContext.register(SpringConfiguration.class);
-    //
-    // // Register and map the dispatcher servlet
-    // ServletRegistration.Dynamic dispatcher =
-    // container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
-    // dispatcher.setLoadOnStartup(1);
-    // dispatcher.addMapping("/");
-    // }
+
+    @Override
+    public void onStartup(ServletContext container) throws ServletException {
+        super.onStartup(container);
+        // Add request/session scope listener
+        container.addListener(RequestContextListener.class);
+    }
 }

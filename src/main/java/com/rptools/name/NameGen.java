@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import lombok.extern.apachecommons.CommonsLog;
 
+import org.apache.commons.lang3.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,31 +52,6 @@ public class NameGen {
         log.info(String.format(PARSED_TIME, timer.elapsed(TimeUnit.MILLISECONDS)));
     }
 
-    public String makeName() {
-        return JOINER.join(makeName(first), makeName(last));
-    }
-
-    private String makeName(Names names) {
-        String name = names.beg.random();
-        String group = name;
-        int groups = names.groups() - 1;
-        group = names.beg.random(group).orElse("");
-        name += group;
-
-        if (--groups == 0 || !name.matches(".*[AEIOUY]+.*")) {
-            return capitalize(name);
-        }
-
-        while (groups-- > 1 || !name.matches(".*[AEIOUY]+.*")) {
-            group = names.mid.random(group).orElse("");
-            name += group;
-        }
-
-        name += names.end.random(group).orElse("");
-
-        return capitalize(name);
-    }
-
     public List<Name> generateNames(int numNames) {
         List<Name> names = Lists.newArrayList();
         while (numNames-- > 0) {
@@ -85,14 +61,14 @@ public class NameGen {
         return names;
     }
 
-    public void train(TrainingName name) {
-    }
-
     public TrainingName getTrainingName() {
         return new TrainingName(makeName());
     }
 
-    private String capitalize(String name) {
-        return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+    public void train(TrainingName name) {
+    }
+
+    private String makeName() {
+        return WordUtils.capitalize(JOINER.join(first.makeName(), last.makeName()));
     }
 }

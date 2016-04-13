@@ -45,16 +45,15 @@ import com.rptools.annotation.RequiresGoogleAuth;
 @Aspect
 @Component
 public class GoogleAuthAdvisor {
-    private static final String PARAMETERS_REQUIRED_EXCEPTION =
-            "Request and response parameters are required for @RequiresGoogleAuth methods";
+    private static final String PARAMETERS_REQUIRED_EXCEPTION = "Request and response parameters are required for @RequiresGoogleAuth methods";
 
     private final Gson gson;
-    private final UserCredentials userCredentials;
+    private final GoogleAuth googleAuth;
 
     @Autowired
-    public GoogleAuthAdvisor(Gson gson, UserCredentials userCredentials) {
+    public GoogleAuthAdvisor(Gson gson, GoogleAuth googleAuth) {
         this.gson = gson;
-        this.userCredentials = userCredentials;
+        this.googleAuth = googleAuth;
     }
 
     @Pointcut("@annotation(requiresGoogleAuth)")
@@ -67,11 +66,19 @@ public class GoogleAuthAdvisor {
      */
     @Around("requiresGoogleAuth(annotation)")
     public Object checkAccessCode(ProceedingJoinPoint joinPoint, RequiresGoogleAuth annotation) throws Throwable {
-        if (userCredentials.getCredential().isPresent()) {
+        if (googleAuth.getCredential().isPresent()) {
             return joinPoint.proceed();
         }
-        HttpServletRequest request = getJoinPointArg(joinPoint.getArgs(), HttpServletRequest.class);
-        HttpServletResponse response = getJoinPointArg(joinPoint.getArgs(), HttpServletResponse.class);
+        HttpServletRequest request = null;
+        HttpServletResponse response = null;
+        for (Object ob : joinPoint.getArgs()) {
+            if (HttpServletRequest.class.isAssignableFrom(ob.getClass())) {
+                request = (HttpServletRequest) ob;
+            } else if (HttpServletResponse.class.isAssignableFrom(ob.getClass())) {
+                response = (HttpServletResponse) ob;
+            }
+        }
+
         if (request != null && response != null) {
             redirectToGoogleAuth(request, response);
         } else if (response != null) {
@@ -91,15 +98,5 @@ public class GoogleAuthAdvisor {
 
         response.sendRedirect(
             new URIBuilder(requestURL.build()).addParameter("state", gson.toJson(parameterMap)).build().toString());
-    }
-
-    @SuppressWarnings("unchecked")
-    private <T> T getJoinPointArg(Object[] args, Class<T> clazz) {
-        for (Object ob : args) {
-            if (clazz.isAssignableFrom(ob.getClass())) {
-                return (T) ob;
-            }
-        }
-        return null;
     }
 }

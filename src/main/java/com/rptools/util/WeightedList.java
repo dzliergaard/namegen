@@ -27,7 +27,7 @@ import java.util.stream.Stream;
  * Implementation of a weighted list to choose randomly from. Extends TreeMap
  * 
  * @param <E>
- *            The elements to choose from
+ *            The element type to choose from
  */
 public class WeightedList<E> extends TreeMap<Integer, E> {
     public WeightedList() {
@@ -53,23 +53,11 @@ public class WeightedList<E> extends TreeMap<Integer, E> {
         return ceilingEntry(value).getValue();
     }
 
-    public E remove() {
-        return remove(new Random().nextInt(floorKey(Integer.MAX_VALUE)));
-    }
-
-    public E remove(int value) {
-        Entry<Integer, E> entry = ceilingEntry(value);
-        if (entry == null) {
-            entry = floorEntry(value);
-        }
-        return super.remove(entry.getKey());
-    }
-
     public String toString() {
         return entrySet().toString();
     }
 
-    public Stream<E> valueStream() {
+    Stream<E> valueStream() {
         return this.values().stream();
     }
 }

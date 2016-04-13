@@ -23,31 +23,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
-import java.util.Collection;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow.Builder;
+import com.google.api.client.auth.oauth2.StoredCredential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
-import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.apache.ApacheHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.store.DataStoreFactory;
+import com.google.api.client.util.store.DataStore;
 import com.google.api.client.util.store.FileDataStoreFactory;
-import com.google.common.base.Splitter;
 
+/**
+ * Beans required by GoogleAuthorizationCodeFlow.Builder and GoogleCredential.Builder
+ */
 @Configuration
 public class GoogleAuthConfig {
-
     @Bean
     public JsonFactory jsonFactory() {
         return new JacksonFactory();
@@ -71,29 +67,12 @@ public class GoogleAuthConfig {
     }
 
     @Bean
-    public File fileStoreData(ApplicationContext context) throws IOException {
+    public File fileStoreData() throws IOException {
         return Paths.get("data", "credentials").toFile();
     }
 
     @Bean
-    public FileDataStoreFactory fileDataStoreFactory(File fileStoreData) throws IOException {
-        return new FileDataStoreFactory(fileStoreData);
-    }
-
-    @Bean
-    public GoogleAuthorizationCodeFlow googleFlow(
-            HttpTransport transport,
-            JsonFactory jsonFactory,
-            GoogleClientSecrets clientSecrets,
-            DataStoreFactory dataStore,
-            @Value("${com.rptools.googleScopes}") String googleScopes) throws IOException {
-        return new Builder(transport, jsonFactory, clientSecrets, parseScopes(googleScopes))
-            .setAccessType("offline")
-            .setDataStoreFactory(dataStore)
-            .build();
-    }
-
-    private Collection<String> parseScopes(String googleScopes) {
-        return Splitter.on(" ").splitToList(googleScopes);
+    public DataStore<StoredCredential> fileDataStoreFactory(File fileStoreData) throws IOException {
+        return StoredCredential.getDefaultDataStore(new FileDataStoreFactory(fileStoreData));
     }
 }

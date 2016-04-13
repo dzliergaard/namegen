@@ -34,7 +34,7 @@ import com.google.api.services.drive.Drive.Builder;
 import com.google.api.services.drive.Drive.Files;
 import com.google.api.services.drive.Drive.Files.Get;
 import com.google.api.services.drive.DriveRequest;
-import com.rptools.auth.UserCredentials;
+import com.rptools.auth.GoogleAuth;
 
 /**
  * Bean to create Google {@link com.google.api.services.drive.Drive} class using current user credential
@@ -48,21 +48,21 @@ public class DriveService {
 
     private final HttpTransport transport;
     private final JsonFactory jsonFactory;
-    private final UserCredentials userCredentials;
+    private final GoogleAuth googleAuth;
 
     @Autowired
-    public DriveService(HttpTransport transport, JsonFactory jsonFactory, UserCredentials userCredentials) {
+    public DriveService(HttpTransport transport, JsonFactory jsonFactory, GoogleAuth googleAuth) {
         this.transport = transport;
         this.jsonFactory = jsonFactory;
-        this.userCredentials = userCredentials;
+        this.googleAuth = googleAuth;
     }
 
-    public Files getDriveFiles() {
-        Credential credential = userCredentials.getCredential().orElseThrow(() -> new RuntimeException(AUTH_REQ_EXC));
+    Files getDriveFiles() {
+        Credential credential = googleAuth.getCredential().orElseThrow(() -> new RuntimeException(AUTH_REQ_EXC));
         return new Builder(transport, jsonFactory, credential).setApplicationName(APPLICATION_NAME).build().files();
     }
 
-    public <T> T execute(DriveRequest<T> driveRequest) throws IOException {
+    <T> T execute(DriveRequest<T> driveRequest) throws IOException {
         int tries = 3;
         while (tries > 0) {
             try {
@@ -76,7 +76,7 @@ public class DriveService {
         return null;
     }
 
-    public InputStream executeMediaAsInputStream(Get driveRequest) throws IOException {
+    InputStream executeMediaAsInputStream(Get driveRequest) throws IOException {
         int tries = 3;
         while (tries > 0) {
             try {

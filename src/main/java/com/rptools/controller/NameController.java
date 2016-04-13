@@ -18,7 +18,6 @@
 
 package com.rptools.controller;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -75,13 +74,6 @@ public class NameController {
     @RequestMapping(value = "generate", method = RequestMethod.GET)
     public Map<String, List<Name>> generate(@RequestParam(required = false) Integer num) {
         return ImmutableMap.of("data", nameGen.generateNames(Optional.ofNullable(num).orElse(10)));
-    }
-
-    @RequiresGoogleAuth
-    @RequestMapping(method = RequestMethod.GET, value = "getNames")
-    public Collection<Name> getNames(HttpServletRequest request, HttpServletResponse response) {
-        userSavedContent.refreshContent();
-        return userSavedContent.getNames();
     }
 
     @RequestMapping(value = "train", method = RequestMethod.POST)

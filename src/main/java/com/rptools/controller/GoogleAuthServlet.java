@@ -20,7 +20,6 @@ package com.rptools.controller;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,26 +30,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.apachecommons.CommonsLog;
 
-import org.apache.http.NameValuePair;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.api.client.auth.oauth2.DataStoreCredentialRefreshListener;
 import com.google.api.client.auth.oauth2.TokenResponse;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeTokenRequest;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.gson.Gson;
-import com.rptools.auth.UserCredentials;
+import com.rptools.auth.GoogleAuth;
 
 /**
  * REST controller that handles user authentication-related requests
@@ -59,27 +48,13 @@ import com.rptools.auth.UserCredentials;
 @RestController
 @RequestMapping("/googleAuth")
 public class GoogleAuthServlet {
-    private final GoogleAuthorizationCodeFlow googleFlow;
+    private final GoogleAuth googleAuth;
     private final Gson gson;
-    private final UserCredentials userCredentials;
-    private final FileDataStoreFactory fileDataStoreFactory;
-    private final String googleClientId;
-    private final String googleScopes;
 
     @Autowired
-    public GoogleAuthServlet(
-            GoogleAuthorizationCodeFlow googleFlow,
-            Gson gson,
-            UserCredentials userCredentials,
-            FileDataStoreFactory fileDataStoreFactory,
-            @Value("${com.rptools.googleClientId}") String googleClientId,
-            @Value("${com.rptools.googleScopes}") String googleScopes) {
-        this.googleFlow = googleFlow;
+    public GoogleAuthServlet(GoogleAuth googleAuth, Gson gson) {
+        this.googleAuth = googleAuth;
         this.gson = gson;
-        this.userCredentials = userCredentials;
-        this.fileDataStoreFactory = fileDataStoreFactory;
-        this.googleClientId = googleClientId;
-        this.googleScopes = googleScopes;
     }
 
     /**
@@ -91,10 +66,9 @@ public class GoogleAuthServlet {
             HttpServletRequest request,
             HttpServletResponse response,
             @RequestParam(value = "state", required = false) String state) throws URISyntaxException, IOException {
-        GoogleAuthorizationCodeRequestUrl requestUrl = googleFlow.newAuthorizationUrl();
         response.sendRedirect(
-            new URIBuilder(requestUrl.build())
-                .setParameters(createAuthorizationCodeRequestParameters(request, state))
+            new URIBuilder(googleAuth.newAuthorizationUrl().build())
+                .setParameters(googleAuth.createAuthorizationCodeRequestParameters(request, state))
                 .build()
                 .toString());
     }
@@ -115,59 +89,27 @@ public class GoogleAuthServlet {
         response.sendRedirect(returnUri);
     }
 
-    private List<NameValuePair> createAuthorizationCodeRequestParameters(HttpServletRequest request, String state) {
-        GenericUrl url = new GenericUrl(request.getRequestURL().toString());
-        url.setRawPath("/googleAuth");
-        return Arrays.asList(
-            new BasicNameValuePair("scope", googleScopes),
-            new BasicNameValuePair("state", state),
-            new BasicNameValuePair("redirect_uri", url.build()),
-            new BasicNameValuePair("response_type", "code"),
-            new BasicNameValuePair("client_id", googleClientId));
-    }
-
-    private TokenResponse refreshAccessCode(HttpServletRequest request, String authorizationCode)
+    private void refreshAccessCode(HttpServletRequest request, String authorizationCode)
             throws URISyntaxException, IOException {
         int tries = 3;
-        boolean success = false;
-        TokenResponse tokenResponse = null;
-        while (!success && tries > 0) {
+        while (tries > 0) {
             try {
-                tokenResponse = getTokenResponse(request, authorizationCode);
-                success = true;
+                TokenResponse tokenResponse = googleAuth.getTokenResponse(request, authorizationCode);
+                googleAuth.createAndStoreCredential(tokenResponse);
+                return;
             } catch (NoHttpResponseException e) {
                 log.error("No HTTP response from accounts.google.com on try " + Integer.toString(4 - tries), e);
                 tries--;
             }
         }
-        if (!success) {
-            return null;
-        }
-        googleFlow.createAndStoreCredential(tokenResponse, "me");
-        GoogleCredential credential = new GoogleCredential.Builder()
-            .addRefreshListener(new DataStoreCredentialRefreshListener("me", fileDataStoreFactory))
-            .build();
-        credential.setFromTokenResponse(tokenResponse);
-        userCredentials.setFromCredential(credential);
-
-        return tokenResponse;
-    }
-
-    private TokenResponse getTokenResponse(HttpServletRequest request, String authorizationCode) throws IOException {
-        GoogleAuthorizationCodeTokenRequest tokenRequest =
-                googleFlow.newTokenRequest(authorizationCode).setGrantType("authorization_code").setRedirectUri(
-                    request.getRequestURL().toString());
-
-        return tokenRequest.execute();
     }
 
     /**
      * Signs the user out of their Google account.
      */
-    @RequestMapping("clear")
+    @RequestMapping("signOut")
     public void signOut(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        userCredentials.setCredential(null);
-        googleFlow.getCredentialDataStore().delete("me");
+        googleAuth.deleteCredential();
         response.sendRedirect(Optional.ofNullable((String) request.getAttribute("returnUri")).orElse("/"));
     }
 
@@ -176,6 +118,6 @@ public class GoogleAuthServlet {
      */
     @RequestMapping("isSignedIn")
     public boolean isSignedIn() {
-        return userCredentials.getCredential().isPresent();
+        return googleAuth.getCredential().isPresent();
     }
 }

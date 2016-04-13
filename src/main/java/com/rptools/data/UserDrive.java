@@ -42,11 +42,10 @@ import com.google.api.services.drive.model.FileList;
 @CommonsLog
 @Component
 public class UserDrive {
-    public static final String FIELDS = "files(id, name)";
-    public static final String APP_DATA = "appDataFolder";
+    private static final String FIELDS = "files(id, name)";
+    private static final String APP_DATA = "appDataFolder";
     private final DriveService driveService;
     private final UserSavedContent userSavedContent;
-    private File contentFile;
 
     @Autowired
     public UserDrive(DriveService driveService, UserSavedContent userSavedContent) {
@@ -54,10 +53,7 @@ public class UserDrive {
         this.userSavedContent = userSavedContent;
     }
 
-    public InputStream downloadAppDataFile() {
-        if (contentFile != null) {
-            return this.downloadFile(contentFile);
-        }
+    InputStream downloadAppDataFile() {
         return getAppDataFile().map(this::downloadFile).orElse(null);
     }
 
@@ -65,32 +61,14 @@ public class UserDrive {
         try {
             List driveRequest = driveService.getDriveFiles().list().setSpaces(APP_DATA).setFields(FIELDS);
             FileList files = driveService.execute(driveRequest);
-            Optional<File> file = Optional
-                .ofNullable(files.getFiles())
-                .filter(li -> !li.isEmpty())
-                .map(li -> li.get(0));
-            file.ifPresent(file1 -> this.contentFile = file1);
-            return file;
+            return Optional.ofNullable(files.getFiles()).filter(li -> !li.isEmpty()).map(li -> li.get(0));
         } catch (IOException e) {
             log.error("Exception getting app data file.", e);
             throw new RuntimeException("Exception getting app data file.", e);
         }
     }
 
-    private InputStream downloadFile(File file) {
-        try {
-            log.info("Downloading appData file " + file.getName());
-            return driveService.executeMediaAsInputStream(driveService.getDriveFiles().get(file.getId()));
-        } catch (GoogleJsonResponseException e) {
-            log.error("GoogleJsonResponseException downloading file.", e);
-            return null;
-        } catch (IOException e) {
-            log.error("Exception downloading file.", e);
-            throw new RuntimeException("Exception downloading file.", e);
-        }
-    }
-
-    public File writeContentFile() {
+    File writeContentFile() {
         try {
             InputStream contentStream = IOUtils.toInputStream(userSavedContent.toString(), "UTF-8");
             InputStreamContent content = new InputStreamContent("application/json", contentStream);
@@ -107,6 +85,19 @@ public class UserDrive {
         return null;
     }
 
+    private InputStream downloadFile(File file) {
+        try {
+            log.info("Downloading appData file " + file.getName());
+            return driveService.executeMediaAsInputStream(driveService.getDriveFiles().get(file.getId()));
+        } catch (GoogleJsonResponseException e) {
+            log.error("GoogleJsonResponseException downloading file.", e);
+            return null;
+        } catch (IOException e) {
+            log.error("Exception downloading file.", e);
+            throw new RuntimeException("Exception downloading file.", e);
+        }
+    }
+
     /**
      * A bug in google-api-java-client-1.21.0 incorrectly throws an IllegalArgumentException
      * when the method of a call is PATCH. 1.22.0 Has the issue fixed but is not available yet.
@@ -116,8 +107,7 @@ public class UserDrive {
         try {
             deleteAppDataFile(fileId);
             log.info("Old content file deleted, uploading new file.");
-            contentFile = driveService.execute(driveService.getDriveFiles().create(file, content).setFields("id"));
-            return contentFile;
+            return driveService.execute(driveService.getDriveFiles().create(file, content).setFields("id"));
         } catch (IOException e) {
             log.error("Exception updating drive file.", e);
             throw new RuntimeException("Exception updating drive file.", e);
@@ -137,8 +127,7 @@ public class UserDrive {
     private File createContentFile(File file, InputStreamContent content) {
         try {
             log.info("Creating content app data file " + file.getName());
-            contentFile = driveService.execute(driveService.getDriveFiles().create(file, content).setFields("id"));
-            return contentFile;
+            return driveService.execute(driveService.getDriveFiles().create(file, content).setFields("id"));
         } catch (IOException e) {
             log.error("Exception creating drive file.", e);
             throw new RuntimeException("Exception creating drive file.", e);

@@ -18,6 +18,9 @@
 
 package com.rptools.data;
 
+import static org.springframework.context.annotation.ScopedProxyMode.TARGET_CLASS;
+import static org.springframework.web.context.WebApplicationContext.SCOPE_SESSION;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +37,6 @@ import lombok.extern.apachecommons.CommonsLog;
 import org.apache.commons.lang3.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import com.google.api.client.repackaged.com.google.common.base.Strings;
@@ -43,7 +45,6 @@ import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.rptools.city.City;
 import com.rptools.name.Name;
-import org.springframework.web.context.WebApplicationContext;
 
 /**
  * Session-scoped component that represents the content the application has stored to the user's Google Drive
@@ -51,7 +52,7 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @Component
 @CommonsLog
-@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope(value = SCOPE_SESSION, proxyMode = TARGET_CLASS)
 public class UserSavedContent {
     private final UserDrive userDrive;
     private final Gson gson;
@@ -64,32 +65,6 @@ public class UserSavedContent {
         this.userDrive = userDrive;
         this.gson = gson;
         refreshContent();
-    }
-
-    public void refreshContent() {
-        InputStream is = userDrive.downloadAppDataFile();
-        if (is == null) {
-            return;
-        }
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
-        String line, response = "";
-        try {
-            while ((line = br.readLine()) != null) {
-                response += line;
-            }
-            br.close();
-            parseContentFile(response);
-        } catch (IOException e) {
-            log.error("Exception reading file content", e);
-            throw new RuntimeException("Exception reading file content", e);
-        }
-    }
-
-    private void parseContentFile(String driveData) {
-        UserSavedContent content = gson.fromJson(driveData, UserSavedContent.class);
-        names = content.getNames();
-        cities = content.getCities();
     }
 
     public Name addName(@NonNull Name name) {
@@ -133,5 +108,31 @@ public class UserSavedContent {
 
     public Map<String, UserSavedContent> asDataMap() {
         return ImmutableMap.of("data", this);
+    }
+
+    private void refreshContent() {
+        InputStream is = userDrive.downloadAppDataFile();
+        if (is == null) {
+            return;
+        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+        String line, response = "";
+        try {
+            while ((line = br.readLine()) != null) {
+                response += line;
+            }
+            br.close();
+            parseContentFile(response);
+        } catch (IOException e) {
+            log.error("Exception reading file content", e);
+            throw new RuntimeException("Exception reading file content", e);
+        }
+    }
+
+    private void parseContentFile(String driveData) {
+        UserSavedContent content = gson.fromJson(driveData, UserSavedContent.class);
+        names = content.getNames();
+        cities = content.getCities();
     }
 }

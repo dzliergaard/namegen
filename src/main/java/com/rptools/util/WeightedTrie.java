@@ -20,8 +20,6 @@ package com.rptools.util;
 
 import java.util.Optional;
 
-import lombok.Data;
-
 /**
  * Implementation of Trie with weighted children to choose from
  */
@@ -32,15 +30,20 @@ public class WeightedTrie<T> {
         this.root = root;
     }
 
-    public T random() {
-        return root.random();
+    /**
+     * Returns a random child whose ancestors are T, in order
+     *
+     * @param defaultValue
+     *            T to return if ancestors lead to null entry
+     * @param groups
+     *            T... in-order ancestors of level to retrieve random T from
+     * @return Optional of random child of last element of groups
+     */
+    @SafeVarargs
+    public final T random(T defaultValue, T... groups) {
+        return root.random(groups).orElse(defaultValue);
     }
 
-    public Optional<T> random(T group) {
-        return root.random(group);
-    }
-
-    @Data
     static class TrieNode<T> {
         private T item;
         private Integer weight;
@@ -56,19 +59,24 @@ public class WeightedTrie<T> {
             this.children.add(node.weight, node);
         }
 
-        public T getItem() {
-            return item;
-        }
-
-        public T random() {
+        private T random() {
             if (this.children.isEmpty()) {
                 return null;
             }
-            return this.children.random().getItem();
+            return this.children.random().item;
         }
 
-        public Optional<T> random(T group) {
-            Optional<TrieNode<T>> child = this.children.valueStream().filter(t -> t.matchesItem(group)).findAny();
+        private Optional<T> random(T[] groups) {
+            if (groups == null || groups.length == 0) {
+                return Optional.ofNullable(random());
+            }
+            Optional<TrieNode<T>> child = Optional.of(this);
+            for (T group : groups) {
+                child = child
+                    .map(node -> node.children)
+                    .map(children -> children.valueStream().filter(t -> t.matchesItem(group)).findAny())
+                    .orElse(Optional.empty());
+            }
             return child.map(TrieNode::random);
         }
 

@@ -48,6 +48,6 @@ export class AppComponent {
     }
 
     signOut() {
-        window.location.href = "/googleAuth/clear?returnUri=" + window.location.pathname;
+        window.location.href = "/googleAuth/signOut?returnUri=" + window.location.pathname;
     }
 }

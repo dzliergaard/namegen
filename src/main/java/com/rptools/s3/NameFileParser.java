@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 
 import lombok.extern.apachecommons.CommonsLog;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,13 +30,11 @@ import org.springframework.stereotype.Component;
 import com.amazonaws.services.s3.AmazonS3;
 import com.google.gson.Gson;
 import com.rptools.name.Names;
-import com.rptools.name.WeightedNames;
 import com.rptools.util.FileUtils;
 import com.rptools.util.WeightedTrieBuilder;
-import com.rptools.util.WeightedTrieBuilder.TrieNodeBuilder;
 
 /**
- * Parses first and last name data files from S3. Creates {@link SummaryStatistics} object for {@link WeightedNames} to
+ * Parses first and last name data files from S3. Creates {@link SummaryStatistics} object for {@link Names} to
  * choose from later.
  * 
  * Names are broken down as follows:
@@ -62,8 +59,8 @@ import com.rptools.util.WeightedTrieBuilder.TrieNodeBuilder;
 @Component
 @CommonsLog
 public class NameFileParser extends FileParser<Names> {
-    private static final Pattern groupPat = Pattern.compile("[^AEIOUY]+|[AEIOUY]+(?!$)");
-    private static final Pattern endPat = Pattern.compile("([^AEIOUY]+|[AEIOUY]+)([^AEIOUY]+|[AEIOUY]+)$");
+    private static final Pattern groupPat = Pattern.compile("[^AEIOUY]+|[AEIOUY]+");
+    private static final Pattern endPat = Pattern.compile("(?:[^AEIOUY]+|[AEIOUY]+)$");
     private static final Pattern namePat = Pattern.compile("\\w+:\\d+");
 
     @Autowired
@@ -73,51 +70,52 @@ public class NameFileParser extends FileParser<Names> {
 
     @Override
     protected Names parseFileData(String data) {
-        WeightedTrieBuilder<String> firstTrieBuilder = new WeightedTrieBuilder<>("");
-        WeightedTrieBuilder<String> middleTrieBuilder = new WeightedTrieBuilder<>("");
-        WeightedTrieBuilder<String> endTrieBuilder = new WeightedTrieBuilder<>("");
+        WeightedTrieBuilder<String> firstTrieBuilder = new WeightedTrieBuilder<>();
+        WeightedTrieBuilder<String> middleTrieBuilder = new WeightedTrieBuilder<>();
+        WeightedTrieBuilder<String> endTrieBuilder = new WeightedTrieBuilder<>();
 
         Matcher nameMatcher = namePat.matcher(data);
         SummaryStatistics stats = new SummaryStatistics();
-        double groupTotal = StringUtils.countMatches(data, ",") + 1;
-        double lastPercent = .1;
-        double i = 0;
 
         while (nameMatcher.find()) {
-            i++;
             String[] nameFreq = nameMatcher.group().split(":");
             String name = nameFreq[0];
-            Integer frequency = Integer.valueOf(nameFreq[1]);
+            Integer weight = Integer.valueOf(nameFreq[1]);
             Matcher matcher = groupPat.matcher(name);
+            String parent = null;
+            String group = "";
+            boolean firstChild = true;
             int groups = 0;
 
             // add first syllable as child of first group trie
-            if (matcher.find()) {
-                String group = matcher.group();
-                TrieNodeBuilder<String> parent = firstTrieBuilder.addChild(group, frequency);
-                groups++;
-
-                while (matcher.find()) {
-                    group = matcher.group();
-                    parent.addChild(group, frequency);
-                    parent = middleTrieBuilder.addChild(group, frequency);
-                    groups++;
+            while (matcher.find()) {
+                if (matcher.hitEnd()) {
+                    break;
                 }
-
+                group = matcher.group();
+                // if no ancestors, then this is first group: add to firstTrieBuilder
+                if (parent == null) {
+                    firstTrieBuilder.addChild(group, weight);
+                    parent = group;
+                } else {
+                    // if second group, add as child to firstTrieBuilder
+                    if (firstChild) {
+                        firstTrieBuilder.addChild(group, weight, parent);
+                        firstChild = false;
+                    }
+                    middleTrieBuilder.addChild(group, weight, parent);
+                    parent = group;
+                }
+                groups++;
             }
 
             matcher = endPat.matcher(name);
             if (matcher.find()) {
-                String secondToLast = matcher.group(1);
-                String last = matcher.group(2);
-                endTrieBuilder.addChild(secondToLast, frequency).addChild(last, frequency);
+                endTrieBuilder.addChild(matcher.group(), weight, group);
+                groups++;
             }
 
             stats.addValue(groups);
-            if (i / groupTotal > lastPercent) {
-                lastPercent += .1;
-                log.info(String.format("Parsing names, %2.1f percent complete", (i / groupTotal) * 100.));
-            }
         }
 
         return new Names(firstTrieBuilder.build(), middleTrieBuilder.build(), endTrieBuilder.build(), stats);

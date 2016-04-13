@@ -21,53 +21,81 @@ package com.rptools.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import lombok.Data;
-
 import com.rptools.util.WeightedTrie.TrieNode;
 
-@Data
+/**
+ * Builds a {@link WeightedTrie} by adding nodes from the top one-at-a-time.
+ * 
+ * @param <T>
+ *            element within the trie
+ */
 public class WeightedTrieBuilder<T> {
-    private TrieNodeBuilder<T> root;
+    private final TrieNodeBuilder<T> root = new TrieNodeBuilder<>();
 
-    public WeightedTrieBuilder(T rootItem) {
-        root = new TrieNodeBuilder<>(rootItem);
-    }
-
+    /**
+     * Builds the {@link WeightedTrie} we've all been waiting for
+     * 
+     * @return {@link WeightedTrie} of T items
+     */
     public WeightedTrie<T> build() {
         return new WeightedTrie<>(this.root.build());
     }
 
-    public TrieNodeBuilder<T> addChild(T group, Integer frequency) {
-        return this.root.addChild(group, frequency);
+    /**
+     * Adds a top-level node that contains T with frequency. If a top-level node exists that already contains T, its
+     * weight is increased by frequency.
+     *
+     * @param group
+     *            T item contained by the node to add a child to
+     * @param frequency
+     *            Integer weight to instantiate or add to child element containing element T
+     * @param parents
+     *            T extra args that are the in-order ancestors of the child to add.
+     */
+    @SafeVarargs
+    public final void addChild(T group, Integer frequency, T... parents) {
+        root.addChild(group, frequency, parents);
     }
 
-    @Data
-    public static class TrieNodeBuilder<T> {
+    /**
+     * Builder of individual {@link TrieNode}s
+     * 
+     * @param <T>
+     */
+    private static class TrieNodeBuilder<T> {
         private T item;
         private Integer weight;
         private Map<T, TrieNodeBuilder<T>> children;
 
-        private TrieNodeBuilder(T item) {
-            this(item, 1);
+        TrieNodeBuilder() {
+            this(null, 1);
         }
 
-        private TrieNodeBuilder(T item, Integer weight) {
+        TrieNodeBuilder(T item, Integer weight) {
             this.item = item;
             this.weight = weight;
             this.children = new HashMap<>();
         }
 
-        public TrieNodeBuilder<T> addChild(T childData, Integer weight) {
-            children.computeIfPresent(childData, (k, v) -> incrementWeight(v, weight));
-            return children.computeIfAbsent(childData, v -> new TrieNodeBuilder<>(v, weight));
+        void addChild(T data, Integer weight, T[] ancestors) {
+            TrieNodeBuilder<T> parent = this;
+            if (ancestors != null) {
+                for (T t : ancestors) {
+                    parent = children.compute(t, (key, cur) -> incrementWeight(key, cur, weight));
+                }
+            }
+            parent.children.compute(data, (key, cur) -> incrementWeight(key, cur, weight));
         }
 
-        private TrieNodeBuilder<T> incrementWeight(TrieNodeBuilder<T> value, Integer weight) {
-            value.setWeight(value.getWeight() + weight);
-            return value;
+        TrieNodeBuilder<T> incrementWeight(T key, TrieNodeBuilder<T> currentValue, Integer weight) {
+            if (currentValue == null) {
+                return new TrieNodeBuilder<>(key, weight);
+            }
+            currentValue.weight += weight;
+            return currentValue;
         }
 
-        public TrieNode<T> build() {
+        TrieNode<T> build() {
             TrieNode<T> node = new TrieNode<>(this.item, this.weight);
             for (TrieNodeBuilder<T> child : this.children.values()) {
                 node.addChild(child.build());

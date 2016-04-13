@@ -26,7 +26,6 @@ import lombok.extern.apachecommons.CommonsLog;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 
 /**
  * Represents a generated Name entity
@@ -54,17 +53,8 @@ public class Name {
         this.text = jsonReader.nextString();
     }
 
-    public void writeName(JsonWriter jsonWriter) {
-        try {
-            jsonWriter.name(id).value(text);
-        } catch (IOException e) {
-            log.error("Exception writing Name", e);
-            throw new RuntimeException("Exception writing Name", e);
-        }
-    }
-
     /**
-     * A soft equals that only checks for ID equivalence
+     * A soft equals that only checks for ID equivalence, to match {@code Collection.contains()} calls
      */
     @Override
     public boolean equals(Object o) {

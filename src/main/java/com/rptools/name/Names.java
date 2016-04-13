@@ -26,8 +26,8 @@ import com.rptools.util.WeightedTrie;
 
 /**
  * This class is generated when the application starts and needs to read/parse/interpret data from the name files stored
- * in S3. It contains maps of "syllable" substrings to the frequency in which they appear, at the beginning, middle,
- * and end of the analyzed names. One of these objects is created for first names, one for last
+ * in S3. It contains maps of "group" substrings to the frequency in which they appear at the beginning, middle, and end
+ * of the parsed names. One of these objects is created for first names, one for last
  */
 public class Names {
     private final Double standardDeviation;
@@ -46,6 +46,29 @@ public class Names {
         this.end = end;
         this.standardDeviation = stats.getStandardDeviation();
         this.mean = stats.getMean();
+    }
+
+    public String makeName() {
+        String name = beg.random("");
+        String group = name;
+        int groups = groups() - 1;
+        group = beg.random(group);
+        name += group;
+
+        if (--groups == 0 || !name.matches(".*[AEIOUY]+.*")) {
+            return name;
+        }
+
+        while (groups-- > 1) {
+            group = mid.random("", group);
+            name += group;
+        }
+
+        while (name.matches(".*[AEIOUY]+.*")) {
+            name += end.random("");
+        }
+
+        return name;
     }
 
     public int groups() {

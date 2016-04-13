@@ -24,17 +24,17 @@
 <head>
     <title>RP Toolkit</title>
     <base href="/">
-    <spring:url value="/resources/js/node_modules/es6-shim/es6-shim.js" var="es6Shim"/>
-    <spring:url value="/resources/js/node_modules/systemjs/dist/system-polyfills.js" var="sysPolyfills"/>
-    <spring:url value="/resources/js/node_modules/angular2/bundles/angular2-polyfills.js" var="angPolyfills"/>
-    <spring:url value="/resources/js/node_modules/systemjs/dist/system.src.js" var="systemJs"/>
-    <spring:url value="/resources/js/node_modules/rxjs/bundles/Rx.js" var="rxJs"/>
-    <spring:url value="/resources/js/node_modules/angular2/bundles/angular2.dev.js" var="angularDev"/>
-    <spring:url value="/resources/js/node_modules/angular2/bundles/router.dev.js" var="angularRoute"/>
-    <spring:url value="/resources/js/node_modules/angular2/bundles/http.dev.js" var="angularHttp"/>
+    <spring:url value="/js/node_modules/es6-shim/es6-shim.js" var="es6Shim"/>
+    <spring:url value="/js/node_modules/systemjs/dist/system-polyfills.js" var="sysPolyfills"/>
+    <spring:url value="/js/node_modules/angular2/bundles/angular2-polyfills.js" var="angPolyfills"/>
+    <spring:url value="/js/node_modules/systemjs/dist/system.src.js" var="systemJs"/>
+    <spring:url value="/js/node_modules/rxjs/bundles/Rx.js" var="rxJs"/>
+    <spring:url value="/js/node_modules/angular2/bundles/angular2.dev.js" var="angularDev"/>
+    <spring:url value="/js/node_modules/angular2/bundles/router.dev.js" var="angularRoute"/>
+    <spring:url value="/js/node_modules/angular2/bundles/http.dev.js" var="angularHttp"/>
 
-    <spring:url value="/resources/js/node_modules/bootstrap/dist/css/bootstrap.css" var="bootCss"/>
-    <spring:url value="/resources/css/main.css" var="mainCss"/>
+    <spring:url value="/js/node_modules/bootstrap/dist/css/bootstrap.css" var="bootCss"/>
+    <spring:url value="/css/main.css" var="mainCss"/>
 
     <script src="${sysPolyfills}"></script>
     <script src="${es6Shim}"></script>
@@ -60,13 +60,13 @@
 <script type="text/javascript">
     System.config({
         paths: {
-            'app/': '/resources/js/app/',
-            'city/': '/resources/js/city/',
-            'name/': '/resources/js/name/',
-            'util/': '/resources/js/util/',
+            'app/': '/js/app/',
+            'city/': '/js/city/',
+            'name/': '/js/name/',
+            'util/': '/js/util/',
             // 3rd party libraries
-            'jquery': '/resources/js/node_modules/jquery/dist/jquery.min.js',
-            'underscore': '/resources/js/node_modules/underscore/underscore-min.js'
+            'jquery': '/js/node_modules/jquery/dist/jquery.min.js',
+            'underscore': '/js/node_modules/underscore/underscore-min.js'
         },
         packages: {
             app: {
@@ -94,7 +94,7 @@
         meta: {}
     });
 
-    System.import('/resources/js/app/main');
+    System.import('/js/app/main');
 </script>
 
 <body class="content">

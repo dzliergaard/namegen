@@ -25,7 +25,7 @@ export class CityForm {
                         <button class="btn generate-button" (click)="generate.next()">
                             <span>Generate</span>
                         </button>
-                        <img *ngIf="state.generating" src="/resources/static/loading.gif" height="20px" width="20px">
+                        <img *ngIf="state.generating" src="/images/loading.gif" height="20px" width="20px">
                     </div>
                 </div>
             </fieldset>

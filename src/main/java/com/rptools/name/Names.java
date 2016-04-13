@@ -48,14 +48,14 @@ public class Names {
         this.mean = stats.getMean();
     }
 
-    public String makeName() {
+    String makeName() {
         String name = beg.random("");
         String group = name;
         int groups = groups() - 1;
-        group = beg.random(group);
+        group = beg.random("", group);
         name += group;
 
-        if (--groups == 0 || !name.matches(".*[AEIOUY]+.*")) {
+        if (--groups == 0 && !name.matches(".*[AEIOUY]+.*")) {
             return name;
         }
 
@@ -64,7 +64,9 @@ public class Names {
             name += group;
         }
 
-        while (name.matches(".*[AEIOUY]+.*")) {
+        name += end.random("", group);
+
+        while (!name.matches(".*[AEIOUY]+.*")) {
             name += end.random("");
         }
 

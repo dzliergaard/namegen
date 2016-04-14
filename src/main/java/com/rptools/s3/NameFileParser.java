@@ -18,6 +18,7 @@
 
 package com.rptools.s3;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,28 +39,35 @@ import com.rptools.util.WeightedTrieBuilder;
  * choose from later.
  * 
  * Names are broken down as follows:
- * 1) They are split into groups of 1+ vowels or 1+ consonants: MEPHISTOPHOLES = M, E, PH, I, ST, O, PH, O, L, E, S
- * 2) The first group goes into a special "beginning" 2-level TRIE, pointing to all its possible children
- * 3) All other groups go into second 2-level TRIE, with each group pointing to its possible child groups (any
- * groups that follow and how frequently).
+ * 1) They are split into groups of 1+ vowels or 1+ consonants
+ * 2) The first group goes into a special "beginning" 3-level TRIE, pointing to all its possible children and
+ * grandchildren.
+ * 3) All other non-ending groups go into second 3-level TRIE, with each group pointing to its possible children and
+ * grandchildren.
+ * 4) The end group is put into a 3-level TRIE, with its 2 preceding groups leading to it
  * 
+ * This creates believable-sounding names as the ones it create tend to follow groups that they follow in the most
+ * popular real-life names.
+ * 
+ * Example: MEPHISTOPHOLES = M.E.PH.I.ST.O.PH.O.L.E.S
  * End result:
  * firstTrie:
- * M -> E
+ * M -> E -> PH
  * 
  * middleTrie:
- * E -> PH, S
- * PH -> I, O
- * I -> ST
- * ST -> O
- * O -> PH, L
- * L -> E
- * S ->
+ * E -> (PH -> I), (S)
+ * PH -> (I -> ST), (O -> L)
+ * I -> (ST -> O)
+ * ST -> (O -> PH)
+ * O -> (PH -> O), (L -> E)
+ * 
+ * endTrie:
+ * L -> (E -> S)
  */
 @Component
 @CommonsLog
 public class NameFileParser extends FileParser<Names> {
-    private static final Pattern groupPat = Pattern.compile("[^AEIOUY]+|[AEIOUY]+");
+    private static final Pattern groupPat = Pattern.compile("[^QAEIOUY]+|Q?[AEIOUY]+");
     private static final Pattern endPat = Pattern.compile("(?:[^AEIOUY]+|[AEIOUY]+)$");
     private static final Pattern namePat = Pattern.compile("\\w+:\\d+");
 
@@ -81,43 +89,43 @@ public class NameFileParser extends FileParser<Names> {
             String[] nameFreq = nameMatcher.group().split(":");
             String name = nameFreq[0];
             Integer weight = Integer.valueOf(nameFreq[1]);
-            Matcher matcher = groupPat.matcher(name);
-            String parent = null;
-            String group = "";
-            boolean firstChild = true;
-            int groups = 0;
-
-            // add first syllable as child of first group trie
-            while (matcher.find()) {
-                if (matcher.hitEnd()) {
-                    break;
+            String[] groups = groupifyName(name);
+            int numGroups = groups.length;
+            if (numGroups < 2) {
+                continue;
+            } else if (numGroups <= 3) {
+                firstTrieBuilder.addChain(weight, groups);
+            } else {
+                firstTrieBuilder.addChain(weight, Arrays.copyOfRange(groups, 0, 3));
+                int i = 1;
+                while (i++ < numGroups - 1) {
+                    middleTrieBuilder.addChain(weight, Arrays.copyOfRange(groups, i, i + 3));
                 }
-                group = matcher.group();
-                // if no ancestors, then this is first group: add to firstTrieBuilder
-                if (parent == null) {
-                    firstTrieBuilder.addChild(group, weight);
-                    parent = group;
-                } else {
-                    // if second group, add as child to firstTrieBuilder
-                    if (firstChild) {
-                        firstTrieBuilder.addChild(group, weight, parent);
-                        firstChild = false;
-                    }
-                    middleTrieBuilder.addChild(group, weight, parent);
-                    parent = group;
-                }
-                groups++;
+                endTrieBuilder.addChain(weight, Arrays.copyOfRange(groups, numGroups - 2, numGroups));
             }
-
-            matcher = endPat.matcher(name);
-            if (matcher.find()) {
-                endTrieBuilder.addChild(matcher.group(), weight, group);
-                groups++;
-            }
-
-            stats.addValue(groups);
+            stats.addValue(numGroups);
         }
 
         return new Names(firstTrieBuilder.build(), middleTrieBuilder.build(), endTrieBuilder.build(), stats);
+    }
+
+    /**
+     * Break {@param name} down into groups of 1+ consonants or 1+ vowels (give or take a Q
+     * 
+     * @return name groups as array
+     */
+    private String[] groupifyName(String name) {
+        int o = 0;
+        Matcher groupMatcher = groupPat.matcher(name);
+        while (groupMatcher.find()) {
+            o++;
+        }
+        String[] result = new String[o];
+        groupMatcher.reset();
+        int i = 0;
+        while (groupMatcher.find()) {
+            result[i++] = groupMatcher.group();
+        }
+        return result;
     }
 }

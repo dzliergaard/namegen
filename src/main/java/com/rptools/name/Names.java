@@ -18,8 +18,10 @@
 
 package com.rptools.name;
 
+import java.util.Optional;
 import java.util.Random;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import com.rptools.util.WeightedTrie;
@@ -49,26 +51,23 @@ public class Names {
     }
 
     String makeName() {
-        String name = beg.random("");
-        String group = name;
-        int groups = groups() - 1;
-        group = beg.random("", group);
-        name += group;
+        int groups = groups();
 
-        if (--groups == 0 && !name.matches(".*[AEIOUY]+.*")) {
-            return name;
-        }
+        String grandparent = beg.random("");
+        String parent = beg.random("", grandparent);
+        String name = grandparent + parent;
 
         while (groups-- > 1) {
-            group = mid.random("", group);
+            String group = Optional
+                .of(mid.random("", grandparent, parent))
+                .map(StringUtils::stripToNull)
+                .orElse(mid.random("", parent));
             name += group;
+            grandparent = parent;
+            parent = group;
         }
 
-        name += end.random("", group);
-
-        while (!name.matches(".*[AEIOUY]+.*")) {
-            name += end.random("");
-        }
+        name += end.random("", grandparent, parent);
 
         return name;
     }

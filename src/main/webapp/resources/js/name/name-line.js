@@ -1,52 +1,108 @@
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var core_1 = require("angular2/core");
-var common_1 = require("angular2/common");
-var name_1 = require("name/name");
-var input_strong_1 = require("util/input-strong");
-var NameLine = (function () {
-    function NameLine(generatedName, savedName) {
-        if (generatedName) {
-            this.name = generatedName;
-        }
-        else if (savedName) {
-            this.name = savedName;
+System.register(["angular2/core", "angular2/common", "name/name", "util/input-strong", "util/materials"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata = (this && this.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var __param = (this && this.__param) || function (paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    };
+    var core_1, common_1, name_1, input_strong_1, materials_1;
+    var NameLine;
+    return {
+        setters:[
+            function (core_1_1) {
+                core_1 = core_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
+            },
+            function (name_1_1) {
+                name_1 = name_1_1;
+            },
+            function (input_strong_1_1) {
+                input_strong_1 = input_strong_1_1;
+            },
+            function (materials_1_1) {
+                materials_1 = materials_1_1;
+            }],
+        execute: function() {
+            NameLine = (function () {
+                function NameLine(generatedName, savedName, materials, elementRef) {
+                    this.materials = materials;
+                    this.elementRef = elementRef;
+                    this.saveButton = false;
+                    this.name = generatedName ? generatedName : savedName;
+                    this.saveButton = !!savedName;
+                    var opts = ['flat'];
+                    if (this.saveButton) {
+                        opts.push('primary');
+                    }
+                    var btnCellClass = materials.cellClass({ all: 2 }, {}, 'mdl-list__item-secondary-action');
+                    this.btnBaseClass = this.materials.btnClass(opts, btnCellClass);
+                }
+                NameLine.prototype.ngAfterViewInit = function () {
+                    componentHandler.upgradeElements(this.elementRef.nativeElement.children);
+                };
+                NameLine.prototype.btnClass = function () {
+                    var ret = [this.btnBaseClass];
+                    if (!this.saveButton || !this.name.isSaving()) {
+                        ret.push('mdl-button--raised');
+                    }
+                    return ret.join(" ");
+                };
+                NameLine.prototype.spinnerClass = function () {
+                    var ret = ["mdl-spinner mdl-js-spinner mdl-spinner--single-color is-upgraded"];
+                    if (this.name.isSaving()) {
+                        ret.push('is-active');
+                    }
+                    else {
+                        ret.push('hidden');
+                    }
+                    return ret.join(" ");
+                };
+                NameLine.prototype.btnClick = function ($event) {
+                    if ($event.button !== 0) {
+                        return;
+                    }
+                    return this.name.isEditing() ? this.name.doSecondary() : this.name.doPrimary();
+                };
+                NameLine.prototype.btnContent = function () {
+                    if (this.name.isSaving()) {
+                        return "";
+                    }
+                    else if (!this.name.isEditing()) {
+                        return this.name.btnText();
+                    }
+                    else {
+                        return "Done";
+                    }
+                };
+                NameLine = __decorate([
+                    core_1.Component({
+                        selector: '[dz-name-line]',
+                        directives: [input_strong_1.InputStrong, common_1.CORE_DIRECTIVES],
+                        template: "\n        <span input-strong class=\"mdl-list__item-primary-content mdl-cell--stretch\" [(item)]=\"name\" (done)=\"name.doSecondary(name)\"></span>\n        <button [class]=\"btnClass()\" (mousedown)=\"btnClick($event)\" [disabled]=\"name.btnDisabled()\">\n            <span >{{btnContent()}}</span>\n            <div [class]=\"spinnerClass()\"></div>\n        </button>\n    "
+                    }),
+                    __param(0, core_1.Inject(name_1.GeneratedName)),
+                    __param(0, core_1.Optional()),
+                    __param(1, core_1.Inject(name_1.SavedName)),
+                    __param(1, core_1.Optional()),
+                    __param(2, core_1.Inject(materials_1.Materials)),
+                    __param(3, core_1.Inject(core_1.ElementRef)), 
+                    __metadata('design:paramtypes', [(typeof (_a = typeof name_1.GeneratedName !== 'undefined' && name_1.GeneratedName) === 'function' && _a) || Object, (typeof (_b = typeof name_1.SavedName !== 'undefined' && name_1.SavedName) === 'function' && _b) || Object, (typeof (_c = typeof materials_1.Materials !== 'undefined' && materials_1.Materials) === 'function' && _c) || Object, core_1.ElementRef])
+                ], NameLine);
+                return NameLine;
+                var _a, _b, _c;
+            }());
+            exports_1("NameLine", NameLine);
         }
     }
-    NameLine.prototype.btnClick = function () {
-        return this.name.isEditing() ? this.name.doSecondary() : this.name.doPrimary();
-    };
-    NameLine.prototype.btnContent = function () {
-        if (this.name.isSaving()) {
-            return "";
-        }
-        else if (!this.name.isEditing()) {
-            return this.name.btnText();
-        }
-        else {
-            return "Done";
-        }
-    };
-    NameLine = __decorate([
-        core_1.Component({
-            selector: '[dz-name-line]',
-            directives: [input_strong_1.InputStrong, common_1.CORE_DIRECTIVES],
-            template: "\n        <input-strong class=\"col-xs-8\" [(item)]=\"name\" (done)=\"name.doSecondary(name)\"></input-strong>\n        <button class=\"btn col-xs-4\" (mousedown)=\"btnClick()\" [disabled]=\"name.btnDisabled()\">\n            {{btnContent()}}\n            <img class=\"loading\" *ngIf=\"name.isSaving()\" src=\"/images/loading.gif\" height=\"30px\" width=\"30px\">\n        </button>\n    "
-        }),
-        __param(0, core_1.Inject(name_1.GeneratedName)),
-        __param(0, core_1.Optional()),
-        __param(1, core_1.Inject(name_1.SavedName)),
-        __param(1, core_1.Optional())
-    ], NameLine);
-    return NameLine;
-}());
-exports.NameLine = NameLine;
+});
 //# sourceMappingURL=name-line.js.map

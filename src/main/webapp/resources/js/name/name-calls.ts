@@ -25,4 +25,8 @@ export class NameCalls {
     train(name:any) {
         return this.http.post('/name/train', name);
     }
+
+    attributes() {
+        return this.http.get('/name/nameAttributes');
+    }
 }

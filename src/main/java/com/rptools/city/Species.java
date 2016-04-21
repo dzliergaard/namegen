@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
 /**
  * All the major (playable) races of main D&D worlds
  */
-public enum Race {
+public enum Species {
     Dragonborn,
     Dwarf,
     Elf,
@@ -38,11 +38,11 @@ public enum Race {
 
     private static final Random rand = new Random();
 
-    public static Race rand() {
+    public static Species rand() {
         return values()[rand.nextInt(values().length)];
     }
 
-    public static Race get(String s) {
+    public static Species get(String s) {
         try {
             return valueOf(s);
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public enum Race {
         }
     }
 
-    public static List<Race> asList() {
-        return Lists.newArrayList(Race.values());
+    public static List<Species> asList() {
+        return Lists.newArrayList(Species.values());
     }
 }

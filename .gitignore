@@ -9,3 +9,4 @@ codeFormatter.xml
 **/css/*.css
 **/css/*.css.map
 **/dzlier_rptools_secret
+**/security.properties

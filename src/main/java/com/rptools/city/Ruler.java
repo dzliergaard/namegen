@@ -28,5 +28,5 @@ import com.rptools.name.Name;
 @Data
 public class Ruler {
     private final Name name;
-    private final Race race;
+    private final Species species;
 }

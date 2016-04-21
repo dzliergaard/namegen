@@ -36,7 +36,7 @@ public class Population {
     private int tot = 0;
     private int searchMod;
 
-    // search mods are static numbers based on population
+    // search mods are static numbers based on number
     private static WeightedList<Integer> searchMods = new WeightedList<Integer>() {
         {
             this.add(250, -6);
@@ -49,31 +49,31 @@ public class Population {
         }
     };
 
-    public void add(Race race, CityTemplate template, Diversity diversity) {
-        if (people.contains(new RacePop(race))) {
+    public void add(Species species, CityTemplate template, Diversity diversity) {
+        if (people.contains(new RacePop(species))) {
             return;
         }
         int population = template.pop();
         population *= Math.pow(diversity.mod(), people.size());
-        people.add(new RacePop(race, population));
+        people.add(new RacePop(species, population));
         tot += population;
         searchMod = searchMods.get(tot);
     }
 
     /**
-     * Checks whether population has 3 races, or sometimes 2 for low-population areas
+     * Checks whether number has 3 races, or sometimes 2 for low-number areas
      */
     public boolean completePop(Diversity diversity) {
         return people.size() < 3 && (people.size() < 2 || rand.nextDouble() * .2 < diversity.mod());
     }
 
     /**
-     * Gets a random Race from population, weighted based on population density
+     * Gets a random Race from number, weighted based on number density
      */
     public String getWeightedRace() {
-        WeightedList<Race> races = new WeightedList<>();
+        WeightedList<Species> races = new WeightedList<>();
         for (RacePop rp : people) {
-            races.add(rp.getPopulation() * 3, rp.getRace());
+            races.add(rp.getPopulation() * 3, rp.getSpecies());
         }
         return races.random().name();
     }

@@ -1,42 +1,50 @@
-import {Component, EventEmitter, Input, Output} from '../node_modules/angular2/core.d.ts';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '../node_modules/angular2/common.d.ts';
-import {City} from './city';
-import {FormRadio} from '../util/form-radio';
-
-export class CityForm {
-    constructor(public size:string, public race:string, public diversity:string) {
-    }
-}
+import {Component, Inject} from "angular2/core";
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
+import {UserData} from "app/user-data";
+import {CityStore} from "city/city-store";
+import {FormRadio} from "util/form-radio";
+import {Materials} from "util/materials";
 
 @Component({
-    selector: 'city-form',
+    selector: '.city-form',
     directives: [FormRadio, CORE_DIRECTIVES, FORM_DIRECTIVES],
-    template: `
-        <form class='form-inline'>
-            <fieldset>
-                <legend>City Generator</legend>
-                <div class='row'>
-                    <div form-radio [form]="form" [field-name]="'size'" [values]="sizeValues" [heading]="'Size'"></div>
-                    <div form-radio [form]="form" [field-name]="'race'" [values]="speciesValues" [heading]="'Dominant Species'"></div>
-                    <div form-radio [form]="form" [field-name]="'diversity'" [values]="diversityValues" [heading]="'Diversity'"></div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <button class="btn generate-button" (click)="generate.next()">
-                            <span>Generate</span>
-                        </button>
-                        <img *ngIf="state.generating" src="/images/loading.gif" height="20px" width="20px">
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    `
+    templateUrl: 'templates/city/city-form.component.html'
 })
-export class CityFormComponent {
-    @Input() form:CityForm;
-    @Input() diversityValues:Array<string>;
-    @Input() sizeValues:Array<string>;
-    @Input() speciesValues:Array<string>;
-    @Input() state:any;
-    @Output() generate = new EventEmitter();
+export class CityForm {
+    private static cardClasses:any = {main: 'primary', text: 'primary-contrast'};
+    private btnClass:string;
+    private radioClass:string;
+    private diversityData:any = {
+        heading: 'Diversity',
+        value: ''
+    };
+    private sizeData:any = {
+        heading: 'Size',
+        value: ''
+    };
+    private speciesData:any = {
+        heading: 'Dominant Species',
+        value: ''
+    };
+
+    constructor(@Inject(CityStore) private cityStore:CityStore,
+                @Inject(UserData) private userData:UserData,
+                @Inject(Materials) private materials:Materials) {
+        cityStore.variables().subscribe(res => {
+            this.diversityData.values = res.diversityValues;
+            this.sizeData.values = res.sizeValues;
+            this.speciesData.values = res.speciesValues;
+        });
+
+        this.btnClass = materials.btnClass([], "mdl-cell mdl-cell--1-col");
+        this.radioClass = materials.cellClass({all: 2}, {}, materials.cardClass(CityForm.cardClasses));
+    }
+
+    private generate() {
+        this.userData.generating = true;
+        this.cityStore.generate(this.sizeData.value, this.speciesData.value, this.diversityData.value).subscribe(res => {
+            this.userData.generatedCity = res;
+            this.userData.generating = false;
+        });
+    }
 }

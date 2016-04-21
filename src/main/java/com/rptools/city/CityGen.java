@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Lists;
+import com.rptools.name.Name;
 import com.rptools.name.NameGen;
 import com.rptools.s3.CityFileParser;
 
@@ -23,10 +24,30 @@ public class CityGen {
     public CityGen(CityFileParser cityFileParser, NameGen nameGen) {
         this.nameGen = nameGen;
         cityData = cityFileParser.parseFile("cityData", Cities.class);
-        // log.info(String.format("City data parsed in %d milliseconds.", timer.elapsed(TimeUnit.MILLISECONDS)));
     }
 
-    public List<String> generateInns(int population) {
+    public City generateCity(CityTemplate template, Diversity diversity, Species species) {
+        City city = new City();
+        // generate name for city and ruler in same call
+        List<Name> names = nameGen.generateNames(2);
+        if (rand.nextDouble() < .2) {
+            city.setName(names.get(0).getText());
+        } else {
+            city.setName(names.get(0).getText().split(" ")[0]);
+        }
+        city.getPopulation().add(species, template, diversity);
+        // add 3 races, or sometimes 2 for low-diversity places
+        while (city.getPopulation().completePop(diversity)) {
+            city.getPopulation().add(Species.rand(), template, diversity);
+        }
+
+        city.setRuler(new Ruler(names.get(1), Species.valueOf(city.getPopulation().getWeightedRace())));
+
+        city.setInns(generateInns(city.getPopulation().getTot()));
+        return city;
+    }
+
+    private List<String> generateInns(int population) {
         double size = Math.sqrt(Math.sqrt(population));
         List<String> inns = Lists.newArrayList();
         for (int i = 0; i < size; i++) {

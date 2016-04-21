@@ -10,15 +10,19 @@ export class CityCalls {
     constructor(@Inject(HttpHelper) private http:HttpHelper) {
     }
 
-    generate(num?:Number) {
-        return this.http.get('/city/generate', {num: num || 10});
+    generate(body) {
+        return this.http.get('/city/generate', body);
     }
 
-    remove(name:any) {
-        return this.http.post('/city/delete', name);
+    remove(city:any) {
+        return this.http.post('/city/delete', city);
     }
 
-    save(name:any) {
-        return this.http.post('/city/save', name);
+    save(city:any) {
+        return this.http.post('/city/save', city);
+    }
+
+    variables() {
+        return this.http.get('/city/variableChoices');
     }
 }

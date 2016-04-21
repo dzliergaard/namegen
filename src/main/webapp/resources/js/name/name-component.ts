@@ -6,7 +6,6 @@ import {NameLearn} from "name/name-learn";
 import {NameLists} from "name/name-lists";
 import {NameStore} from "name/name-store";
 import {TrainingName} from "name/training-name";
-import $ from "jquery";
 
 @Component({
     selector: '[name-app]',

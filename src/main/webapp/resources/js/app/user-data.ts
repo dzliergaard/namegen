@@ -8,7 +8,7 @@ import {HttpHelper} from "util/http-helper";
  * upon creation.
  */
 @Injectable()
-export class UserContent {
+export class UserData {
     public isSignedIn:boolean = false;
     public generating:boolean = false;
     public generatedNames:any[] = [];

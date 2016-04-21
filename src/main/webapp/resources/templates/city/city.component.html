@@ -1,0 +1,4 @@
+<div class="mdl-grid city-form"></div>
+<div class="mdl-grid" *ngIf="userData.generatedCity.name">
+    <table [city]="userData.generatedCity" [class]="tableClass"></table>
+</div>

@@ -18,45 +18,56 @@
 
 package com.rptools.controller;
 
-import org.springframework.stereotype.Controller;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rptools.city.City;
+import com.rptools.city.CityGen;
 import com.rptools.city.CityTemplate;
+import com.rptools.city.CityVariables;
 import com.rptools.city.Diversity;
-import com.rptools.city.Race;
+import com.rptools.city.Species;
 
 /**
  * REST controller that manipulates {@link City} objects
  */
-@Controller
+@RestController
 @RequestMapping(value = "city")
 public class CityController {
+    private final CityGen cityGen;
+
+    @Autowired
+    public CityController(CityGen cityGen) {
+        this.cityGen = cityGen;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get() {
-        ModelAndView model = new ModelAndView("city.jsp");
-        model.addObject("speciesValues", Race.asList());
-        model.addObject("diversityValues", Diversity.asList());
-        model.addObject("sizeValues", CityTemplate.asList());
-        return model;
+        return new ModelAndView("main");
     }
 
     @RequestMapping(value = "generate", method = RequestMethod.GET, headers = "Accept=application/json")
     public @ResponseBody City generate(
             @RequestParam(required = false) CityTemplate size,
             @RequestParam(required = false) Diversity diversity,
-            @RequestParam(required = false) Race race) {
-        return null;
-        // return cityUtils.generateCity(
-        // Optional.fromNullable(size).or(CityTemplate.rand()),
-        // Optional.fromNullable(diversity).or(Diversity.rand()),
-        // Optional.fromNullable(race).or(Race.rand()));
+            @RequestParam(required = false) Species species) {
+        return cityGen.generateCity(
+            Optional.ofNullable(size).orElse(CityTemplate.rand()),
+            Optional.ofNullable(diversity).orElse(Diversity.rand()),
+            Optional.ofNullable(species).orElse(Species.rand()));
+    }
+
+    @RequestMapping(value = "variableChoices", method = RequestMethod.GET)
+    public CityVariables getCityVariables() {
+        return new CityVariables();
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)

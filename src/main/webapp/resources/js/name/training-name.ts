@@ -1,6 +1,6 @@
 import {Component, Inject} from "angular2/core";
-import {NameStore} from "./name-store";
-import $ = require("jquery");
+import {NameStore} from "name/name-store";
+import {Materials} from "util/materials";
 
 /**
  * The training data name at the bottom of the names screen.
@@ -11,28 +11,32 @@ import $ = require("jquery");
 @Component({
     selector: '[training-name]',
     template: `
-        <div class="col-xs-12">
-            <strong class="col-xs-4">{{nameData.text}}</strong>
-            <button class="col-xs-1 btn" *ngFor="#attr of nameAttributes" (click)="trainName(attr)">
-                {{attr}}
-            </button>
-        </div>
+        <strong [class]="nameClass">{{nameData.text}}</strong>
+        <button [class]="btnClass" *ngFor="#attr of nameAttributes" (click)="trainName(attr)">{{attr}}</button>
     `
 })
 export class TrainingName {
-    private nameAttributes:string[] = $('meta#name-attributes').attr('content').match(/\w+/g);
-
+    private static btnCellClasses:any = {all: 1, p: 2};
+    private static nameCellClasses:any = {all: 2, d: 4};
+    private nameAttributes:string[];
     public nameData:any = {};
+    private btnClass:string;
+    private nameClass:string;
 
-    constructor(@Inject(NameStore) private nameStore:NameStore){
-        this.nameData.text = JSON.parse($('meta#training-name').attr('content')).text;
+    constructor(@Inject(NameStore) private nameStore:NameStore, @Inject(Materials) materials:Materials){
+        nameStore.train(null).subscribe(res => this.trainNameCallback(res));
+        nameStore.attributes().subscribe(res => this.nameAttributes = res);
+        this.btnClass = materials.btnClass(["flat"], materials.cellClass(TrainingName.btnCellClasses));
+        this.nameClass = materials.cellClass(TrainingName.nameCellClasses, {}, "mdl-cell--middle");
     }
 
     private trainName(attr:string) {
         this.nameData.attribute = attr;
-        return this.nameStore.train(this.nameData).subscribe(res => {
-            this.nameData.text = res.text;
-            this.nameData.attribute = null;
-        });
+        return this.nameStore.train(this.nameData).subscribe(res => this.trainNameCallback(res));
+    }
+
+    private trainNameCallback(res:any) {
+        this.nameData.text = res.text;
+        this.nameData.attribute = null;
     }
 }

@@ -1,0 +1,16 @@
+<div class="mdl-card__title">
+    <span class="mdl-card__title-text">{{data.heading}}</span>
+</div>
+<div class="mdl-card__actions mdl-grid mdl-grid--no-spacing">
+    <button class="mdl-button" [class]="btnClass"
+            [class.mdl-button--raised]="!data.value"
+            (click)="setValue('')">
+        Random
+    </button>
+    <button *ngFor="#item of data.values"
+            [class]="btnClass"
+            [class.mdl-button--raised]="item == data.value"
+            (click)="setValue(item)">
+        {{item}}
+    </button>
+</div>

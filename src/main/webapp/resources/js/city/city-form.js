@@ -1,52 +1,92 @@
-"use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var core_d_ts_1 = require('../node_modules/angular2/core.d.ts');
-var common_d_ts_1 = require('../node_modules/angular2/common.d.ts');
-var form_radio_1 = require('../util/form-radio');
-var CityForm = (function () {
-    function CityForm(size, race, diversity) {
-        this.size = size;
-        this.race = race;
-        this.diversity = diversity;
+System.register(["angular2/core", "angular2/common", "app/user-data", "city/city-store", "util/form-radio", "util/materials"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata = (this && this.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var __param = (this && this.__param) || function (paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    };
+    var core_1, common_1, user_data_1, city_store_1, form_radio_1, materials_1;
+    var CityForm;
+    return {
+        setters:[
+            function (core_1_1) {
+                core_1 = core_1_1;
+            },
+            function (common_1_1) {
+                common_1 = common_1_1;
+            },
+            function (user_data_1_1) {
+                user_data_1 = user_data_1_1;
+            },
+            function (city_store_1_1) {
+                city_store_1 = city_store_1_1;
+            },
+            function (form_radio_1_1) {
+                form_radio_1 = form_radio_1_1;
+            },
+            function (materials_1_1) {
+                materials_1 = materials_1_1;
+            }],
+        execute: function() {
+            CityForm = (function () {
+                function CityForm(cityStore, userData, materials) {
+                    var _this = this;
+                    this.cityStore = cityStore;
+                    this.userData = userData;
+                    this.materials = materials;
+                    this.diversityData = {
+                        heading: 'Diversity',
+                        value: ''
+                    };
+                    this.sizeData = {
+                        heading: 'Size',
+                        value: ''
+                    };
+                    this.speciesData = {
+                        heading: 'Dominant Species',
+                        value: ''
+                    };
+                    cityStore.variables().subscribe(function (res) {
+                        _this.diversityData.values = res.diversityValues;
+                        _this.sizeData.values = res.sizeValues;
+                        _this.speciesData.values = res.speciesValues;
+                    });
+                    this.btnClass = materials.btnClass([], "mdl-cell mdl-cell--1-col");
+                    this.radioClass = materials.cellClass({ all: 2 }, {}, materials.cardClass(CityForm.cardClasses));
+                }
+                CityForm.prototype.generate = function () {
+                    var _this = this;
+                    this.userData.generating = true;
+                    this.cityStore.generate(this.sizeData.value, this.speciesData.value, this.diversityData.value).subscribe(function (res) {
+                        _this.userData.generatedCity = res;
+                        _this.userData.generating = false;
+                    });
+                };
+                CityForm.cardClasses = { main: 'primary', text: 'primary-contrast' };
+                CityForm = __decorate([
+                    core_1.Component({
+                        selector: '.city-form',
+                        directives: [form_radio_1.FormRadio, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
+                        templateUrl: 'templates/city/city-form.component.html'
+                    }),
+                    __param(0, core_1.Inject(city_store_1.CityStore)),
+                    __param(1, core_1.Inject(user_data_1.UserData)),
+                    __param(2, core_1.Inject(materials_1.Materials)), 
+                    __metadata('design:paramtypes', [(typeof (_a = typeof city_store_1.CityStore !== 'undefined' && city_store_1.CityStore) === 'function' && _a) || Object, (typeof (_b = typeof user_data_1.UserData !== 'undefined' && user_data_1.UserData) === 'function' && _b) || Object, (typeof (_c = typeof materials_1.Materials !== 'undefined' && materials_1.Materials) === 'function' && _c) || Object])
+                ], CityForm);
+                return CityForm;
+                var _a, _b, _c;
+            }());
+            exports_1("CityForm", CityForm);
+        }
     }
-    return CityForm;
-}());
-exports.CityForm = CityForm;
-var CityFormComponent = (function () {
-    function CityFormComponent() {
-        this.generate = new core_d_ts_1.EventEmitter();
-    }
-    __decorate([
-        core_d_ts_1.Input()
-    ], CityFormComponent.prototype, "form");
-    __decorate([
-        core_d_ts_1.Input()
-    ], CityFormComponent.prototype, "diversityValues");
-    __decorate([
-        core_d_ts_1.Input()
-    ], CityFormComponent.prototype, "sizeValues");
-    __decorate([
-        core_d_ts_1.Input()
-    ], CityFormComponent.prototype, "speciesValues");
-    __decorate([
-        core_d_ts_1.Input()
-    ], CityFormComponent.prototype, "state");
-    __decorate([
-        core_d_ts_1.Output()
-    ], CityFormComponent.prototype, "generate");
-    CityFormComponent = __decorate([
-        core_d_ts_1.Component({
-            selector: 'city-form',
-            directives: [form_radio_1.FormRadio, common_d_ts_1.CORE_DIRECTIVES, common_d_ts_1.FORM_DIRECTIVES],
-            template: "\n        <form class='form-inline'>\n            <fieldset>\n                <legend>City Generator</legend>\n                <div class='row'>\n                    <div form-radio [form]=\"form\" [field-name]=\"'size'\" [values]=\"sizeValues\" [heading]=\"'Size'\"></div>\n                    <div form-radio [form]=\"form\" [field-name]=\"'race'\" [values]=\"speciesValues\" [heading]=\"'Dominant Species'\"></div>\n                    <div form-radio [form]=\"form\" [field-name]=\"'diversity'\" [values]=\"diversityValues\" [heading]=\"'Diversity'\"></div>\n                </div>\n                <div class=\"row\">\n                    <div class=\"col-xs-12\">\n                        <button class=\"btn generate-button\" (click)=\"generate.next()\">\n                            <span>Generate</span>\n                        </button>\n                        <img *ngIf=\"state.generating\" src=\"/images/loading.gif\" height=\"20px\" width=\"20px\">\n                    </div>\n                </div>\n            </fieldset>\n        </form>\n    "
-        })
-    ], CityFormComponent);
-    return CityFormComponent;
-}());
-exports.CityFormComponent = CityFormComponent;
+});
 //# sourceMappingURL=city-form.js.map

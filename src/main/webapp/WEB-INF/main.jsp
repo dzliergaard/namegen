@@ -24,6 +24,7 @@
 <head>
     <title>RP Toolkit</title>
     <base href="/">
+    <!-- Angular2 and its dependencies -->
     <spring:url value="/js/node_modules/es6-shim/es6-shim.js" var="es6Shim"/>
     <spring:url value="/js/node_modules/systemjs/dist/system-polyfills.js" var="sysPolyfills"/>
     <spring:url value="/js/node_modules/angular2/bundles/angular2-polyfills.js" var="angPolyfills"/>
@@ -33,7 +34,11 @@
     <spring:url value="/js/node_modules/angular2/bundles/router.dev.js" var="angularRoute"/>
     <spring:url value="/js/node_modules/angular2/bundles/http.dev.js" var="angularHttp"/>
 
-    <spring:url value="/js/node_modules/bootstrap/dist/css/bootstrap.css" var="bootCss"/>
+    <!-- material design from google -->
+    <spring:url value="/js/node_modules/material-design-lite/material.min.js" var="matJs"/>
+    <spring:url value="https://code.getmdl.io/1.1.3/material.purple-orange.min.css" var="matCss"/>
+    <spring:url value="https://fonts.googleapis.com/icon?family=Material+Icons" var="matIcon"/>
+
     <spring:url value="/css/main.css" var="mainCss"/>
 
     <script src="${sysPolyfills}"></script>
@@ -44,10 +49,12 @@
     <script src="${angularRoute}"></script>
     <script src="${rxJs}"></script>
     <script src="${angularHttp}"></script>
+    <script src="${matJs}"></script>
 
-    <link rel="stylesheet" href="${bootCss}"/>
     <link rel="stylesheet" href="${mainCss}"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="${matCss}">
+    <link rel="stylesheet" href="${matIcon}">
+    <%--<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">--%>
 
     <meta id="training-name" content='${trainingName}'>
     <meta id="name-attributes" content='${nameAttributes}'>
@@ -64,8 +71,6 @@
             'city/': '/js/city/',
             'name/': '/js/name/',
             'util/': '/js/util/',
-            // 3rd party libraries
-            'jquery': '/js/node_modules/jquery/dist/jquery.min.js',
             'underscore': '/js/node_modules/underscore/underscore-min.js'
         },
         packages: {
@@ -77,10 +82,6 @@
                 formater: 'register',
                 defaultExtension: 'js'
             },
-//            js: {
-//                formater: 'register',
-//                defaultExtension: 'js'
-//            },
             name: {
                 formater: 'register',
                 defaultExtension: 'js'
@@ -98,7 +99,7 @@
 </script>
 
 <body class="content">
-<input id="user-authed" class="hide" value="${userAuthed}">
+<input id="user-authed" style="display:none" value="${userAuthed}">
 <rptools-app></rptools-app>
 </body>
 </html>

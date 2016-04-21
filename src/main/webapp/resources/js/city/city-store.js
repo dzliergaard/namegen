@@ -1,55 +1,59 @@
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var core_1 = require('angular2/core');
-var entity_store_1 = require('../util/entity-store');
-var CityStore = (function (_super) {
-    __extends(CityStore, _super);
-    function CityStore(city) {
-        _super.call(this, "city");
-        this.city = city;
+System.register(["angular2/core", "city/city-calls"], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata = (this && this.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var __param = (this && this.__param) || function (paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    };
+    var core_1, city_calls_1;
+    var CityStore;
+    return {
+        setters:[
+            function (core_1_1) {
+                core_1 = core_1_1;
+            },
+            function (city_calls_1_1) {
+                city_calls_1 = city_calls_1_1;
+            }],
+        execute: function() {
+            CityStore = (function () {
+                function CityStore(caller) {
+                    this.caller = caller;
+                }
+                CityStore.prototype.generate = function (size, species, diversity) {
+                    return this.caller.generate({
+                        size: size,
+                        species: species,
+                        diversity: diversity
+                    });
+                };
+                CityStore.prototype.save = function (city) {
+                    return this.caller.save(city);
+                };
+                CityStore.prototype.remove = function (city) {
+                    return this.caller.remove(city);
+                };
+                CityStore.prototype.variables = function () {
+                    return this.caller.variables();
+                };
+                CityStore = __decorate([
+                    core_1.Injectable(),
+                    __param(0, core_1.Inject(city_calls_1.CityCalls)), 
+                    __metadata('design:paramtypes', [(typeof (_a = typeof city_calls_1.CityCalls !== 'undefined' && city_calls_1.CityCalls) === 'function' && _a) || Object])
+                ], CityStore);
+                return CityStore;
+                var _a;
+            }());
+            exports_1("CityStore", CityStore);
+        }
     }
-    CityStore.prototype.updateCity = function () {
-        this.updateAttr('name');
-        this.updateAttr('ruler');
-        this.updateAttr('population');
-        this.updateAttr('inns');
-    };
-    CityStore.prototype.updateAttr = function (attr) {
-        this.city[attr] = this.newCity[attr];
-    };
-    CityStore.prototype.generate = function (size, race, diversity, attr) {
-        var _this = this;
-        var answer = _super.prototype.generate.call(this, {
-            size: size,
-            race: race,
-            diversity: diversity
-        });
-        answer.subscribe(function (res) {
-            _this.generating = false;
-            _this.newCity = res.json();
-            if (attr) {
-                _this.updateAttr(attr);
-            }
-            else {
-                _this.updateCity();
-            }
-        });
-        return answer;
-    };
-    CityStore = __decorate([
-        core_1.Injectable()
-    ], CityStore);
-    return CityStore;
-}(entity_store_1.EntityStore));
-exports.CityStore = CityStore;
+});
 //# sourceMappingURL=city-store.js.map

@@ -58,6 +58,14 @@ public class WeightedTrieBuilder<T> {
     }
 
     /**
+     * Adds the {@param chain} of T elements down through the trie. If a part of the chain already exists, it increases
+     * that chain's weight by {@param weight}
+     */
+    public final void addChain(Integer weight, T[] chain) {
+        root.addChain(weight, chain);
+    }
+
+    /**
      * Builder of individual {@link TrieNode}s
      * 
      * @param <T>
@@ -85,6 +93,16 @@ public class WeightedTrieBuilder<T> {
                 }
             }
             parent.children.compute(data, (key, cur) -> incrementWeight(key, cur, weight));
+        }
+
+        void addChain(Integer weight, T[] chain) {
+            TrieNodeBuilder<T> parent = this;
+            for (T t : chain) {
+                if (t == null) {
+                    return;
+                }
+                parent = parent.children.compute(t, (key, cur) -> incrementWeight(key, cur, weight));
+            }
         }
 
         TrieNodeBuilder<T> incrementWeight(T key, TrieNodeBuilder<T> currentValue, Integer weight) {

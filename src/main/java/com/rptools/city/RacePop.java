@@ -5,16 +5,16 @@ import lombok.Setter;
 
 @Getter @Setter
 public class RacePop {
-    private Race race;
+    private Species species;
     private int population;
 
-    public RacePop(Race race, int population) {
-        this.race = race;
+    public RacePop(Species species, int population) {
+        this.species = species;
         this.population = population;
     }
 
-    public RacePop(Race race) {
-        this.race = race;
+    public RacePop(Species species) {
+        this.species = species;
     }
 
     @Override
@@ -23,6 +23,6 @@ public class RacePop {
         if (!(o instanceof RacePop)) return false;
 
         RacePop racePop = (RacePop) o;
-        return race == racePop.race;
+        return species == racePop.species;
     }
 }

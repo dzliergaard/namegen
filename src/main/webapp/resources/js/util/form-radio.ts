@@ -1,42 +1,23 @@
-import {Component, Input} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
+import {Component, Input, Inject} from "angular2/core";
+import {CORE_DIRECTIVES} from "angular2/common";
+import {Materials} from "util/materials";
 
 @Component({
     selector: '[form-radio]',
     directives: [CORE_DIRECTIVES],
-    template: `
-        <div class='col-xs-3 panel-group' id='accordian' role='tablist' aria-multiselectable='true'>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse"
-                           data-parent="#accordion"
-                           aria-expanded="true"
-                           [attr.href]="'#collapse' + heading"
-                           [attr.aria-controls]="'collapse' + heading">
-                            {{heading}}
-                        </a>
-                    </h4>
-                </div>
-                <div role="tabpanel" [attr.aria-labelledby]="'heading' + heading">
-                    <div class="panel-body">
-                        <div class='btn-group-vertical'>
-                            <label class='btn btn-default' [class.active]="!form[fieldName]">
-                                <input type='radio' (click)="form[fieldName] = ''" [value]="">Random
-                            </label>
-                            <label *ng-for="#item of values" class="btn btn-default" [class.active]="form[fieldName] == item">
-                                <input type='radio' (click)="form[fieldName] = item">{{item}}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `
+    templateUrl: 'templates/form-radio.component.html'
 })
 export class FormRadio {
-    @Input() private fieldName:string;
-    @Input() private values:Array<string>;
-    @Input() private heading:string;
-    @Input() private form:any;
+    @Input('data') private data:any;
+    private btnClass:string;
+    private activeBtnClass:string;
+
+    constructor(@Inject(Materials) private materials:Materials){
+        this.btnClass = materials.btnClass([], materials.cellClass({d: 12, t: 8, p: 4}));
+        this.activeBtnClass = "mdl-button--raised";
+    }
+
+    private setValue(value) {
+        this.data.value = value;
+    }
 }

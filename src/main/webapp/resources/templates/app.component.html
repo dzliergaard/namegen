@@ -1,27 +1,35 @@
-<nav class="navbar" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand">DZ Liergaard</a>
+<div class="mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--scroll  mdl-color--primary-dark">
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout__title">RPG Toolkit</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" [routerLink]="['Name']">Name Generator</a>
+                <a class="mdl-navigation__link" [routerLink]="['City']">City Generator</a>
+            </nav>
+            <div class="mdl-layout-spacer"></div>
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect"
+                            *ngIf="!userData.isSignedIn" (click)="signIn()">
+                        Sign In
+                        &nbsp;<i class="material-icons">account_circle</i>
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect"
+                            *ngIf="userData.isSignedIn" (click)="signOut()">
+                        Sign Out
+                    </button>
+                </a>
+            </nav>
         </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a [routerLink]="['Name']">Name Gen</a></li>
-                <li><a
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="Returning soon!"
-                        disabled>
-                    City Gen
-                </a></li>
-            </ul>
-            <div class="nav navbar-nav navbar-right">
-                <button class="btn btn-sign-in" *ngIf="!userContent.isSignedIn" (click)="signIn()">
-                    Sign In
-                    &nbsp;<span class="google-icon"></span>
-                </button>
-                <button class="btn btn-sign-out" *ngIf="userContent.isSignedIn" (click)="signOut()">Sign Out</button>
-            </div>
-        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout__title">RPG Toolkit</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" [routerLink]="['Name']">Name Generator</a>
+            <a class="mdl-navigation__link" [routerLink]="['City']">City Generator</a>
+        </nav>
     </div>
-</nav>
-<router-outlet></router-outlet>
+    <main class="mdl-layout__content  mdl-color--primary mdl-color-text--primary-contrast">
+        <router-outlet></router-outlet>
+    </main>
+</div>

@@ -18,27 +18,13 @@
 
 package com.rptools.city;
 
-import java.util.List;
-
-import lombok.Data;
-
-import com.google.common.collect.Lists;
+import lombok.Getter;
 
 /**
- * Represents a single generated City item.
+ * Provides all possible values for Species, Diversity, and Size to front end
  */
-@Data
-public class City {
-    private String id;
-    private String name;
-    private Ruler ruler;
-    private Population population = new Population();
-    private List<String> inns = Lists.newArrayList();
-
-    public City() {
-    }
-
-    public City(String id) {
-        this.id = id;
-    }
+public class CityVariables {
+    @Getter private final Species[] speciesValues = Species.values();
+    @Getter private final Diversity[] diversityValues = Diversity.values();
+    @Getter private final CityTemplate[] sizeValues = CityTemplate.values();
 }

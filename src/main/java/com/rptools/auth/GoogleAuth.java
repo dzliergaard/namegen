@@ -22,6 +22,7 @@ import static org.springframework.context.annotation.ScopedProxyMode.TARGET_CLAS
 import static org.springframework.web.context.WebApplicationContext.SCOPE_SESSION;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -63,7 +64,7 @@ import com.google.common.base.Splitter;
 @CommonsLog
 @Component
 @Scope(value = SCOPE_SESSION, proxyMode = TARGET_CLASS)
-public class GoogleAuth {
+public class GoogleAuth implements Serializable {
     private static final Splitter SPLITTER = Splitter.on(" ");
     private final GoogleAuthorizationCodeFlow googleFlow;
     private final GoogleCredential.Builder credentialBuilder;
@@ -117,10 +118,9 @@ public class GoogleAuth {
     }
 
     public TokenResponse getTokenResponse(HttpServletRequest request, String authorizationCode) throws IOException {
-        GoogleAuthorizationCodeTokenRequest tokenRequest = googleFlow
-            .newTokenRequest(authorizationCode)
-            .setGrantType("authorization_code")
-            .setRedirectUri(request.getRequestURL().toString());
+        GoogleAuthorizationCodeTokenRequest tokenRequest =
+                googleFlow.newTokenRequest(authorizationCode).setGrantType("authorization_code").setRedirectUri(
+                    request.getRequestURL().toString());
 
         return tokenRequest.execute();
     }

@@ -50,9 +50,6 @@ import com.rptools.name.TrainingName;
 @RestController("NameController")
 @RequestMapping(value = { "name" })
 public class NameController {
-    private static final String ATTR_NAME_ATTRIBUTES = "nameAttributes";
-    private static final String ATTR_TRAINING_NAME = "trainingName";
-
     private final NameGen nameGen;
     private final UserSavedContent userSavedContent;
 
@@ -64,11 +61,7 @@ public class NameController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get() {
-        ModelAndView mav = new ModelAndView("main");
-
-        mav.addObject(ATTR_TRAINING_NAME, nameGen.getTrainingName());
-        mav.addObject(ATTR_NAME_ATTRIBUTES, NameAttribute.asList());
-        return mav;
+        return new ModelAndView("main");
     }
 
     @RequestMapping(value = "generate", method = RequestMethod.GET)
@@ -76,9 +69,14 @@ public class NameController {
         return ImmutableMap.of("data", nameGen.generateNames(Optional.ofNullable(num).orElse(10)));
     }
 
+    @RequestMapping(value = "nameAttributes", method = RequestMethod.GET)
+    public NameAttribute[] nameAttributes() {
+        return NameAttribute.values();
+    }
+
     @RequestMapping(value = "train", method = RequestMethod.POST)
-    public TrainingName train(@RequestBody TrainingName trainName) {
-        nameGen.train(trainName);
+    public TrainingName train(@RequestBody(required = false) TrainingName trainName) {
+        Optional.ofNullable(trainName).ifPresent(nameGen::train);
         return nameGen.getTrainingName();
     }
 

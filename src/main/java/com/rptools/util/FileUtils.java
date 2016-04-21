@@ -53,6 +53,7 @@ public class FileUtils {
     public void writeFile(String fileName, String content) {
         try {
             Path filePath = Paths.get(baseDir.toString(), fileName + ".json");
+            Files.deleteIfExists(filePath);
             Path localFilePath = Files.createFile(filePath);
             File localFile = localFilePath.toFile();
             com.google.common.io.Files.write(content, localFile, StandardCharsets.UTF_8);

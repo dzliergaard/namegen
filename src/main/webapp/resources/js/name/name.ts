@@ -1,7 +1,7 @@
 import {Directive, Inject} from "angular2/core";
+import {UserData} from "app/user-data";
 import {NameStore} from "name/name-store";
 import {InputStrongData} from "util/input-strong";
-import {UserContent} from "app/user-content";
 import _ = require("underscore");
 
 /**
@@ -65,13 +65,13 @@ export class Name extends InputStrongData {
 })
 export class GeneratedName extends Name {
     constructor(@Inject(NameStore) private nameStore:NameStore,
-                @Inject(UserContent) private userContent:UserContent) {
+                @Inject(UserData) private userData:UserData) {
         super(nameStore);
     }
 
     protected saveCallback(response:any) {
         super.saveCallback(response);
-        this.userContent.savedNames.push(response);
+        this.userData.savedNames.push(response);
         console.log("New name saved: " + JSON.stringify(response));
     }
 
@@ -84,7 +84,7 @@ export class GeneratedName extends Name {
     }
 
     public btnDisabled() {
-        return !this.isEditing() && !this.userContent.isSignedIn;
+        return !this.isEditing() && !this.userData.isSignedIn;
     }
 }
 
@@ -94,7 +94,7 @@ export class GeneratedName extends Name {
 })
 export class SavedName extends Name {
     constructor(@Inject(NameStore) nameStore:NameStore,
-                @Inject(UserContent) private userContent:UserContent) {
+                @Inject(UserData) private userData:UserData) {
         super(nameStore);
     }
 
@@ -112,7 +112,7 @@ export class SavedName extends Name {
     doPrimary() {
         this.save();
         return this.nameStore.remove(this.nameData).subscribe(() => {
-            this.userContent.savedNames = _.reject(this.userContent.savedNames, n => n.id == this.id);
+            this.userData.savedNames = _.reject(this.userData.savedNames, n => n.id == this.id);
         }, err => this.doneSaving());
     }
 

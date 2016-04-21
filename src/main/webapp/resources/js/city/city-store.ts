@@ -1,42 +1,29 @@
-import {ng, Injectable} from 'angular2/core';
-import {RequestOptions} from 'angular2/http';
-import {EntityStore} from '../util/entity-store';
-import {City} from './city';
+import {Inject, Injectable, ng} from "angular2/core";
+import {CityCalls} from "city/city-calls";
+import _ = require('underscore');
 
 @Injectable()
-export class CityStore extends EntityStore {
-    newCity:City;
-
-    constructor(private city:City) {
-        super("city");
+export class CityStore {
+    constructor(@Inject(CityCalls) private caller:CityCalls) {
     }
 
-    updateCity() {
-        this.updateAttr('name');
-        this.updateAttr('ruler');
-        this.updateAttr('population');
-        this.updateAttr('inns');
-    }
-
-    updateAttr(attr:string) {
-        this.city[attr] = this.newCity[attr];
-    }
-
-    generate(size:string, race:string, diversity:string, attr:string) {
-        var answer = super.generate({
+    generate(size:string, species:string, diversity:string) {
+        return this.caller.generate({
             size: size,
-            race: race,
+            species: species,
             diversity: diversity
         });
-        answer.subscribe(res => {
-            this.generating = false;
-            this.newCity = res.json();
-            if (attr) {
-                this.updateAttr(attr);
-            } else {
-                this.updateCity();
-            }
-        });
-        return answer;
+    }
+
+    save(city:any) {
+        return this.caller.save(city);
+    }
+
+    remove(city:any) {
+        return this.caller.remove(city);
+    }
+
+    variables() {
+        return this.caller.variables();
     }
 }

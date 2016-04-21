@@ -22,4 +22,8 @@ export class NameStore {
     train(name:any) {
         return this.caller.train(name);
     }
+
+    attributes() {
+        return this.caller.attributes();
+    }
 }

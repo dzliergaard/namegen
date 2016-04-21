@@ -1,6 +1,5 @@
-import {AfterViewChecked, Component, ElementRef, Inject, Input} from "angular2/core";
+import {AfterViewChecked, Component, Directive, ElementRef, Inject, Input, ViewChild} from "angular2/core";
 import {FORM_DIRECTIVES} from "angular2/common";
-import $ = require("jquery");
 
 export class InputStrongData {
     protected editing:boolean = false;
@@ -33,26 +32,35 @@ export class InputStrongData {
     }
 }
 
+@Directive({
+    selector: 'input'
+})
+class InputElement {
+    constructor(@Inject(ElementRef) public elementRef:ElementRef){
+    }
+}
+
 @Component({
-    selector: 'input-strong',
-    directives: [FORM_DIRECTIVES],
+    selector: '[input-strong]',
+    directives: [InputElement, FORM_DIRECTIVES],
     template: `
-        <strong class="col-xs-12" [hidden]="item.isEditing()" (click)="select = true; item.edit()">
+        <strong class="mdl-cell mdl-cell--12-col" [hidden]="item.isEditing()" (click)="select = true; item.edit()">
             {{item.text}}
         </strong>
-        <input #input class="col-xs-12" [hidden]="!item.isEditing()" [(ngModel)]="item.text" (keyup.enter)="doDone()" (blur)="doDone()"/>
+        <input class="mdl-cell mdl-cell--12-col mdl-textfield__input mdl-textfield--expandable" [hidden]="!item.isEditing()" [(ngModel)]="item.text" (keyup.enter)="doDone(input)" (blur)="doDone()"/>
     `
 })
 export class InputStrong implements AfterViewChecked {
     @Input() private item:InputStrongData;
+    @ViewChild(InputElement) private input:InputElement;
     private select:boolean = false;
 
-    constructor(@Inject(ElementRef) private elementRef:ElementRef) {
+    constructor() {
     }
 
     ngAfterViewChecked() {
         if (this.select) {
-            $(this.elementRef.nativeElement).find('input').select();
+            this.input.elementRef.nativeElement.select();
             this.select = false;
         }
     }

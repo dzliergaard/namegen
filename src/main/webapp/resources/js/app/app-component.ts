@@ -1,12 +1,12 @@
-import {Component, Inject} from "angular2/core";
+import {Component, Inject, AfterViewInit, ElementRef} from "angular2/core";
 import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from "angular2/router";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {HTTP_PROVIDERS} from "angular2/http";
+import {UserData} from "app/user-data";
 import {CityComponent} from "city/city-component";
 import {NameComponent} from "name/name-component";
-import {UserContent} from "app/user-content";
 import {HttpHelper} from "util/http-helper";
-import $ = require("jquery");
+import {Materials} from "util/materials";
 
 /**
  * Parent level application with routing config to switch between name and city
@@ -18,7 +18,8 @@ import $ = require("jquery");
     directives: [NameComponent, CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES],
     providers: [
         HttpHelper,
-        UserContent,
+        Materials,
+        UserData,
         HTTP_PROVIDERS,
         ROUTER_PROVIDERS
     ]
@@ -36,8 +37,12 @@ import $ = require("jquery");
         component: CityComponent
     }
 ])
-export class AppComponent {
-    constructor(@Inject(UserContent) private userContent:UserContent){
+export class AppComponent implements AfterViewInit {
+    constructor(@Inject(UserData) private userData:UserData, @Inject(ElementRef) private elementRef:ElementRef){
+    }
+
+    ngAfterViewInit() {
+        componentHandler.upgradeElements(this.elementRef.nativeElement.children);
     }
 
     signIn() {

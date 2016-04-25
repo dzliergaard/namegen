@@ -158,6 +158,7 @@
                         resources/images/**/*,
                         resources/js/app/**/*,
                         resources/js/city/**/*,
+                        resources/js/mat/**/*,
                         resources/js/name/**/*,
                         resources/js/util/**/*,
                         resources/js/node_modules/angular2/bundles/angular2.dev.js,

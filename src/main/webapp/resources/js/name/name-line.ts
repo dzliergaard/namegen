@@ -9,7 +9,7 @@ import {InputStrong} from "util/input-strong";
     directives: [InputStrong, CORE_DIRECTIVES, MDL_COMPONENTS],
     template: `
         <span input-strong primary class="mdl-cell--stretch" [(item)]=name (done)=name.doSecondary(name)></span>
-        <button secondary cell=2 [mdl-btn]="savedButton ? 'primary': ''" [flat]="savedButton && name.isSaving()" 
+        <button secondary cell=3 p=2 [mdl-btn]="savedButton ? 'primary': ''" [flat]="savedButton && name.isSaving()" 
                 (mousedown)=btnClick($event) [disabled]=name.btnDisabled()>
             <span >{{btnContent()}}</span>
             <mdl-spinner [show]=name.isSaving()></mdl-spinner>

@@ -60,7 +60,7 @@ System.register(["angular2/core", "angular2/common", "mat/materials", "name/name
                     core_1.Component({
                         selector: '[dz-name-line]',
                         directives: [input_strong_1.InputStrong, common_1.CORE_DIRECTIVES, materials_1.MDL_COMPONENTS],
-                        template: "\n        <span input-strong primary class=\"mdl-cell--stretch\" [(item)]=name (done)=name.doSecondary(name)></span>\n        <button secondary cell=2 [mdl-btn]=\"savedButton ? 'primary': ''\" [flat]=\"savedButton && name.isSaving()\" \n                (mousedown)=btnClick($event) [disabled]=name.btnDisabled()>\n            <span >{{btnContent()}}</span>\n            <mdl-spinner [show]=name.isSaving()></mdl-spinner>\n        </button>\n    "
+                        template: "\n        <span input-strong primary class=\"mdl-cell--stretch\" [(item)]=name (done)=name.doSecondary(name)></span>\n        <button secondary cell=3 p=2 [mdl-btn]=\"savedButton ? 'primary': ''\" [flat]=\"savedButton && name.isSaving()\" \n                (mousedown)=btnClick($event) [disabled]=name.btnDisabled()>\n            <span >{{btnContent()}}</span>\n            <mdl-spinner [show]=name.isSaving()></mdl-spinner>\n        </button>\n    "
                     }),
                     __param(0, core_1.Inject(name_1.GeneratedName)),
                     __param(0, core_1.Optional()),

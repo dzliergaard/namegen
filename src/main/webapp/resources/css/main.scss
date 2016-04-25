@@ -35,7 +35,7 @@ body {
     margin-top: 0;
     margin-bottom: 0;
 
-    [input-strong] {
+    [input-strong] * {
       @media (max-width: 769px) {
         @include bebasFont(20px, normal);
       }

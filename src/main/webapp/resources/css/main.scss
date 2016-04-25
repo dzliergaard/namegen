@@ -36,7 +36,13 @@ body {
     margin-bottom: 0;
 
     [input-strong] {
-      @include bebasFont(30px, normal);
+      @media (max-width: 769px) {
+        @include bebasFont(20px, normal);
+      }
+
+      @media (min-width: 770px) {
+        @include bebasFont(30px, normal);
+      }
     }
 
     .name-line {
@@ -46,6 +52,12 @@ body {
 
   .mdl-card__title {
     color: inherit;
+  }
+}
+
+@media (max-width: 769px) {
+  .name-learn button {
+    font-size: 12px;
   }
 }
 

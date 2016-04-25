@@ -1,25 +1,16 @@
-import {Component, Inject, AfterViewInit, ElementRef} from "angular2/core";
+import {Component, Inject} from "angular2/core";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from "angular2/common";
 import {UserData} from "app/user-data";
+import {MDL_COMPONENTS} from "mat/materials";
 import {NameStore} from "name/name-store";
-import {Materials} from "util/materials";
 
 @Component({
     selector: '[name-generate-form]',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MDL_COMPONENTS],
     templateUrl: 'templates/name/name-generate-form.component.html'
 })
-export class NameGenerateForm implements AfterViewInit {
-    private btnClass:string;
-    constructor(@Inject(UserData) private userData:UserData,
-                @Inject(NameStore) private nameStore:NameStore,
-                @Inject(Materials) private materials:Materials,
-                @Inject(ElementRef) private elementRef:ElementRef) {
-        this.btnClass = materials.btnClass([], "mdl-cell");
-    }
-
-    ngAfterViewInit() {
-        componentHandler.upgradeElements(this.elementRef.nativeElement.children);
+export class NameGenerateForm {
+    constructor(@Inject(NameStore) private nameStore:NameStore, @Inject(UserData) private userData:UserData) {
     }
 
     generate (numNames?:number) {

@@ -1,20 +1,11 @@
-<form [class]="materials.cardClass({main:'primary', text:'primary-contrast'}, materials.fullCell())">
-    <div class="mdl-card__title mdl-cell--top mdl-color-text--primary-contrast">
-        <h2 class="mdl-card__title-text">
-            Name Generator <strong (mouseover)="footer = true" (mouseleave)="footer = false">*</strong>
-        </h2>
-    </div>
-    <div class="mdl-card__actions mdl-grid">
-        <div class="mdl-cell mdl-cell--2-col">
-            <input class="mdl-textfield__input mdl-textfield--expandable" type="number" id="num" [(ngModel)]="numNames"
-                   placeholder='How Many? (10)'/>
-        </div>
-        <div [class]="materials.cellClass({all: 2, d: 3}, {d: 1, t: 1})">
-            <button [class]="btnClass" (click)="generate(numNames)">
-                <span *ngIf="!userData.generating">Generate</span>
-                <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner"
-                     [ngClass]="{'is-active': userData.generating}"></div>
-            </button>
-        </div>
+<form cell=12 mdl-card="primary" content-color="primary">
+    <div card-title>Name Generator</div>
+    <div mdl-grid card-actions cell=12>
+        <input cell=2 class="mdl-textfield__input mdl-textfield--expandable" type="number" id="num"
+               [(ngModel)]=numNames placeholder='How Many? (10)'/>
+        <button mdl-btn cell=2 d-o=1 t-o=1 (click)=generate(numNames)>
+            <span *ngIf="!userData.generating">Generate</span>
+            <mdl-spinner [show]=userData.generating></mdl-spinner>
+        </button>
     </div>
 </form>

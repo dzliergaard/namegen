@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/common", "name/name", "util/input-strong", "util/materials"], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/common", "mat/materials", "name/name", "util/input-strong"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(["angular2/core", "angular2/common", "name/name", "util/input-st
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, common_1, name_1, input_strong_1, materials_1;
+    var core_1, common_1, materials_1, name_1, input_strong_1;
     var NameLine;
     return {
         setters:[
@@ -23,50 +23,22 @@ System.register(["angular2/core", "angular2/common", "name/name", "util/input-st
             function (common_1_1) {
                 common_1 = common_1_1;
             },
+            function (materials_1_1) {
+                materials_1 = materials_1_1;
+            },
             function (name_1_1) {
                 name_1 = name_1_1;
             },
             function (input_strong_1_1) {
                 input_strong_1 = input_strong_1_1;
-            },
-            function (materials_1_1) {
-                materials_1 = materials_1_1;
             }],
         execute: function() {
             NameLine = (function () {
-                function NameLine(generatedName, savedName, materials, elementRef) {
-                    this.materials = materials;
-                    this.elementRef = elementRef;
-                    this.saveButton = false;
+                function NameLine(generatedName, savedName) {
+                    this.savedButton = false;
                     this.name = generatedName ? generatedName : savedName;
-                    this.saveButton = !!savedName;
-                    var opts = ['flat'];
-                    if (this.saveButton) {
-                        opts.push('primary');
-                    }
-                    var btnCellClass = materials.cellClass({ all: 2 }, {}, 'mdl-list__item-secondary-action');
-                    this.btnBaseClass = this.materials.btnClass(opts, btnCellClass);
+                    this.savedButton = !!savedName;
                 }
-                NameLine.prototype.ngAfterViewInit = function () {
-                    componentHandler.upgradeElements(this.elementRef.nativeElement.children);
-                };
-                NameLine.prototype.btnClass = function () {
-                    var ret = [this.btnBaseClass];
-                    if (!this.saveButton || !this.name.isSaving()) {
-                        ret.push('mdl-button--raised');
-                    }
-                    return ret.join(" ");
-                };
-                NameLine.prototype.spinnerClass = function () {
-                    var ret = ["mdl-spinner mdl-js-spinner mdl-spinner--single-color is-upgraded"];
-                    if (this.name.isSaving()) {
-                        ret.push('is-active');
-                    }
-                    else {
-                        ret.push('hidden');
-                    }
-                    return ret.join(" ");
-                };
                 NameLine.prototype.btnClick = function ($event) {
                     if ($event.button !== 0) {
                         return;
@@ -87,19 +59,17 @@ System.register(["angular2/core", "angular2/common", "name/name", "util/input-st
                 NameLine = __decorate([
                     core_1.Component({
                         selector: '[dz-name-line]',
-                        directives: [input_strong_1.InputStrong, common_1.CORE_DIRECTIVES],
-                        template: "\n        <span input-strong class=\"mdl-list__item-primary-content mdl-cell--stretch\" [(item)]=\"name\" (done)=\"name.doSecondary(name)\"></span>\n        <button [class]=\"btnClass()\" (mousedown)=\"btnClick($event)\" [disabled]=\"name.btnDisabled()\">\n            <span >{{btnContent()}}</span>\n            <div [class]=\"spinnerClass()\"></div>\n        </button>\n    "
+                        directives: [input_strong_1.InputStrong, common_1.CORE_DIRECTIVES, materials_1.MDL_COMPONENTS],
+                        template: "\n        <span input-strong primary class=\"mdl-cell--stretch\" [(item)]=name (done)=name.doSecondary(name)></span>\n        <button secondary cell=2 [mdl-btn]=\"savedButton ? 'primary': ''\" [flat]=\"savedButton && name.isSaving()\" \n                (mousedown)=btnClick($event) [disabled]=name.btnDisabled()>\n            <span >{{btnContent()}}</span>\n            <mdl-spinner [show]=name.isSaving()></mdl-spinner>\n        </button>\n    "
                     }),
                     __param(0, core_1.Inject(name_1.GeneratedName)),
                     __param(0, core_1.Optional()),
                     __param(1, core_1.Inject(name_1.SavedName)),
-                    __param(1, core_1.Optional()),
-                    __param(2, core_1.Inject(materials_1.Materials)),
-                    __param(3, core_1.Inject(core_1.ElementRef)), 
-                    __metadata('design:paramtypes', [(typeof (_a = typeof name_1.GeneratedName !== 'undefined' && name_1.GeneratedName) === 'function' && _a) || Object, (typeof (_b = typeof name_1.SavedName !== 'undefined' && name_1.SavedName) === 'function' && _b) || Object, (typeof (_c = typeof materials_1.Materials !== 'undefined' && materials_1.Materials) === 'function' && _c) || Object, core_1.ElementRef])
+                    __param(1, core_1.Optional()), 
+                    __metadata('design:paramtypes', [(typeof (_a = typeof name_1.GeneratedName !== 'undefined' && name_1.GeneratedName) === 'function' && _a) || Object, (typeof (_b = typeof name_1.SavedName !== 'undefined' && name_1.SavedName) === 'function' && _b) || Object])
                 ], NameLine);
                 return NameLine;
-                var _a, _b, _c;
+                var _a, _b;
             }());
             exports_1("NameLine", NameLine);
         }

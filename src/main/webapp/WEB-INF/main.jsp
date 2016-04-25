@@ -23,6 +23,7 @@
 <html>
 <head>
     <title>RP Toolkit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <base href="/">
     <!-- Angular2 and its dependencies -->
     <spring:url value="/js/node_modules/es6-shim/es6-shim.js" var="es6Shim"/>
@@ -36,7 +37,7 @@
 
     <!-- material design from google -->
     <spring:url value="/js/node_modules/material-design-lite/material.min.js" var="matJs"/>
-    <spring:url value="https://code.getmdl.io/1.1.3/material.purple-orange.min.css" var="matCss"/>
+    <spring:url value="/js/node_modules/material-design-lite/dist/material.purple-orange.min.css" var="matCss"/>
     <spring:url value="https://fonts.googleapis.com/icon?family=Material+Icons" var="matIcon"/>
 
     <spring:url value="/css/main.css" var="mainCss"/>
@@ -56,9 +57,6 @@
     <link rel="stylesheet" href="${matIcon}">
     <%--<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">--%>
 
-    <meta id="training-name" content='${trainingName}'>
-    <meta id="name-attributes" content='${nameAttributes}'>
-
     <resource href="/loading.gif" height="40" width="40">
         <meta http-equiv="Content-type" content="image/gif">
     </resource>
@@ -69,25 +67,30 @@
         paths: {
             'app/': '/js/app/',
             'city/': '/js/city/',
+            'mat/': '/js/mat/',
             'name/': '/js/name/',
             'util/': '/js/util/',
             'underscore': '/js/node_modules/underscore/underscore-min.js'
         },
         packages: {
             app: {
-                formater: 'register',
+                formatter: 'register',
                 defaultExtension: 'js'
             },
             city: {
-                formater: 'register',
+                formatter: 'register',
+                defaultExtension: 'js'
+            },
+            mat: {
+                formatter: 'register',
                 defaultExtension: 'js'
             },
             name: {
-                formater: 'register',
+                formatter: 'register',
                 defaultExtension: 'js'
             },
             util: {
-                formater: 'register',
+                formatter: 'register',
                 defaultExtension: 'js'
             }
         },

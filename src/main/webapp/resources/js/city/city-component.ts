@@ -6,11 +6,11 @@ import {CityCalls} from "city/city-calls";
 import {CityForm} from "city/city-form";
 import {CityStore} from "city/city-store";
 import {CityTable} from "city/city-table";
-import {Materials} from "util/materials";
+import {MDL_COMPONENTS} from "mat/materials";
 
 @Component({
     selector: '[city-app]',
-    directives: [City, CityForm, CityTable, CORE_DIRECTIVES, FORM_DIRECTIVES],
+    directives: [City, CityForm, CityTable, CORE_DIRECTIVES, FORM_DIRECTIVES, MDL_COMPONENTS],
     templateUrl: 'templates/city/city.component.html',
     providers: [
         CityStore,
@@ -19,8 +19,8 @@ import {Materials} from "util/materials";
 })
 export class CityComponent {
     private tableClass:string;
-    constructor(@Inject(UserData) public userData:UserData, @Inject(Materials) materials:Materials) {
+    constructor(@Inject(UserData) public userData:UserData) {
         this.tableClass = 'mdl-color--primary-dark mdl-color-text--accent ' +
-            'mdl-data-table mdl-js-data-table mdl-shadow--2dp mdl-cell mdl-cell--4-col city-table';
+            'mdl-data-table mdl-js-data-table mdl-shadow--2dp city-table';
     };
 }

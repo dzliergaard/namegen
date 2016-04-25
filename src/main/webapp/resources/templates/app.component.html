@@ -1,5 +1,5 @@
 <div class="mdl-layout mdl-js-layout">
-    <header class="mdl-layout__header mdl-layout__header--scroll  mdl-color--primary-dark">
+    <header class="mdl-layout__header mdl-color--primary-dark">
         <div class="mdl-layout__header-row">
             <span class="mdl-layout__title">RPG Toolkit</span>
             <nav class="mdl-navigation">
@@ -22,14 +22,27 @@
             </nav>
         </div>
     </header>
-    <div class="mdl-layout__drawer">
+    <div class="mdl-layout__drawer mdl-color--primary-dark mdl-color-text--primary-contrast">
         <span class="mdl-layout__title">RPG Toolkit</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" [routerLink]="['Name']">Name Generator</a>
-            <a class="mdl-navigation__link" [routerLink]="['City']">City Generator</a>
+            <a class="mdl-navigation__link">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect"
+                        *ngIf="!userData.isSignedIn" (click)="signIn()">
+                    Sign In
+                    &nbsp;<i class="material-icons">account_circle</i>
+                </button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect"
+                        *ngIf="userData.isSignedIn" (click)="signOut()">
+                    Sign Out
+                </button>
+            </a>
+            <a class="mdl-navigation__link mdl-color-text--primary-contrast" [routerLink]="['Name']">Name Generator</a>
+            <a class="mdl-navigation__link mdl-color-text--primary-contrast" [routerLink]="['City']">City Generator</a>
         </nav>
     </div>
     <main class="mdl-layout__content  mdl-color--primary mdl-color-text--primary-contrast">
-        <router-outlet></router-outlet>
+        <div class="page-content">
+            <router-outlet></router-outlet>
+        </div>
     </main>
 </div>

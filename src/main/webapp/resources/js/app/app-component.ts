@@ -6,7 +6,7 @@ import {UserData} from "app/user-data";
 import {CityComponent} from "city/city-component";
 import {NameComponent} from "name/name-component";
 import {HttpHelper} from "util/http-helper";
-import {Materials} from "util/materials";
+declare var componentHandler;
 
 /**
  * Parent level application with routing config to switch between name and city
@@ -18,7 +18,6 @@ import {Materials} from "util/materials";
     directives: [NameComponent, CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES],
     providers: [
         HttpHelper,
-        Materials,
         UserData,
         HTTP_PROVIDERS,
         ROUTER_PROVIDERS

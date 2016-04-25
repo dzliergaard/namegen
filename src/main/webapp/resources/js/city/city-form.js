@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/common", "app/user-data", "city/city-store", "util/form-radio", "util/materials"], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/common", "app/user-data", "city/city-store", "mat/materials", "util/form-radio"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(["angular2/core", "angular2/common", "app/user-data", "city/city
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, common_1, user_data_1, city_store_1, form_radio_1, materials_1;
+    var core_1, common_1, user_data_1, city_store_1, materials_1, form_radio_1;
     var CityForm;
     return {
         setters:[
@@ -29,19 +29,18 @@ System.register(["angular2/core", "angular2/common", "app/user-data", "city/city
             function (city_store_1_1) {
                 city_store_1 = city_store_1_1;
             },
-            function (form_radio_1_1) {
-                form_radio_1 = form_radio_1_1;
-            },
             function (materials_1_1) {
                 materials_1 = materials_1_1;
+            },
+            function (form_radio_1_1) {
+                form_radio_1 = form_radio_1_1;
             }],
         execute: function() {
             CityForm = (function () {
-                function CityForm(cityStore, userData, materials) {
+                function CityForm(cityStore, userData) {
                     var _this = this;
                     this.cityStore = cityStore;
                     this.userData = userData;
-                    this.materials = materials;
                     this.diversityData = {
                         heading: 'Diversity',
                         value: ''
@@ -59,8 +58,6 @@ System.register(["angular2/core", "angular2/common", "app/user-data", "city/city
                         _this.sizeData.values = res.sizeValues;
                         _this.speciesData.values = res.speciesValues;
                     });
-                    this.btnClass = materials.btnClass([], "mdl-cell mdl-cell--1-col");
-                    this.radioClass = materials.cellClass({ all: 2 }, {}, materials.cardClass(CityForm.cardClasses));
                 }
                 CityForm.prototype.generate = function () {
                     var _this = this;
@@ -70,20 +67,18 @@ System.register(["angular2/core", "angular2/common", "app/user-data", "city/city
                         _this.userData.generating = false;
                     });
                 };
-                CityForm.cardClasses = { main: 'primary', text: 'primary-contrast' };
                 CityForm = __decorate([
                     core_1.Component({
                         selector: '.city-form',
-                        directives: [form_radio_1.FormRadio, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
+                        directives: [form_radio_1.FormRadio, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, materials_1.MDL_COMPONENTS],
                         templateUrl: 'templates/city/city-form.component.html'
                     }),
                     __param(0, core_1.Inject(city_store_1.CityStore)),
-                    __param(1, core_1.Inject(user_data_1.UserData)),
-                    __param(2, core_1.Inject(materials_1.Materials)), 
-                    __metadata('design:paramtypes', [(typeof (_a = typeof city_store_1.CityStore !== 'undefined' && city_store_1.CityStore) === 'function' && _a) || Object, (typeof (_b = typeof user_data_1.UserData !== 'undefined' && user_data_1.UserData) === 'function' && _b) || Object, (typeof (_c = typeof materials_1.Materials !== 'undefined' && materials_1.Materials) === 'function' && _c) || Object])
+                    __param(1, core_1.Inject(user_data_1.UserData)), 
+                    __metadata('design:paramtypes', [(typeof (_a = typeof city_store_1.CityStore !== 'undefined' && city_store_1.CityStore) === 'function' && _a) || Object, (typeof (_b = typeof user_data_1.UserData !== 'undefined' && user_data_1.UserData) === 'function' && _b) || Object])
                 ], CityForm);
                 return CityForm;
-                var _a, _b, _c;
+                var _a, _b;
             }());
             exports_1("CityForm", CityForm);
         }

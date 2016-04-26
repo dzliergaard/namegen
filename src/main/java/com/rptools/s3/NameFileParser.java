@@ -97,11 +97,11 @@ public class NameFileParser extends FileParser<Names> {
                 firstTrieBuilder.addChain(weight, groups);
             } else {
                 firstTrieBuilder.addChain(weight, Arrays.copyOfRange(groups, 0, 3));
-                int i = 1;
-                while (i++ < numGroups - 1) {
+                int i = 0;
+                while (i++ < numGroups - 2) {
                     middleTrieBuilder.addChain(weight, Arrays.copyOfRange(groups, i, i + 3));
                 }
-                endTrieBuilder.addChain(weight, Arrays.copyOfRange(groups, numGroups - 2, numGroups));
+                endTrieBuilder.addChain(weight, Arrays.copyOfRange(groups, numGroups - 3, numGroups));
             }
             stats.addValue(numGroups);
         }

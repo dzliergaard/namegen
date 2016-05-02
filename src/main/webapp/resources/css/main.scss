@@ -55,6 +55,31 @@ body {
   }
 }
 
+.name-learn {
+  .mdl-card__title-text {
+    @media (max-width: 769px) {
+      @include bebasFont(21px, normal);
+    }
+    @media (min-width: 770px) and (max-width: 1049px) {
+      @include bebasFont(28px, normal);
+    }
+    @media (min-width: 1050px) {
+      @include bebasFont(30px, normal);
+    }
+  }
+
+  .training-name {
+    strong, button {
+      @media (max-width: 1049px) {
+        @include bebasFont(18px, normal);
+      }
+      @media (min-width: 1050px) {
+        @include bebasFont(30px, normal);
+      }
+    }
+  }
+}
+
 @media (max-width: 769px) {
   .name-learn button {
     font-size: 12px;

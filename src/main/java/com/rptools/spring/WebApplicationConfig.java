@@ -25,6 +25,8 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
+import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
 
 /**
  * Spring MVC configuration
@@ -32,10 +34,17 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 public class WebApplicationConfig extends WebMvcConfigurationSupport {
     @Bean
+    public VelocityConfigurer velocityConfig() {
+        VelocityConfigurer configurer = new VelocityConfigurer();
+        configurer.setResourceLoaderPath("/WEB-INF/");
+        return configurer;
+    }
+
+    @Bean
     public ViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/");
-        resolver.setSuffix(".jsp");
+        VelocityViewResolver resolver = new VelocityViewResolver();
+        resolver.setPrefix("");
+        resolver.setSuffix(".vm");
         return resolver;
     }
 

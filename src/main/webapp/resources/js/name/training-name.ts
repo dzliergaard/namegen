@@ -9,7 +9,7 @@ import {MDL_COMPONENTS} from "mat/materials";
  * names that are more like the specified attributes.
  */
 @Component({
-    selector: '[training-name]',
+    selector: '.training-name',
     directives: [MDL_COMPONENTS],
     template: `
         <strong cell=8 d=4 class="mdl-cell--middle">{{nameData.text}}</strong>

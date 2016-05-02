@@ -5,7 +5,7 @@ import {NameLine} from "name/name-line";
 import {UserData} from "app/user-data";
 
 @Component({
-    selector: '[name-lists]',
+    selector: '.name-lists',
     directives: [GeneratedName, SavedName, NameLine, MDL_COMPONENTS],
     templateUrl: 'templates/name/name-lists.component.html'
 })

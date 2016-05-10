@@ -8,5 +8,5 @@ codeFormatter.xml
 **/js/**/*.js
 **/css/*.css
 **/css/*.css.map
-**/dzlier_rptools_secret
+**/rptools_secret
 **/security.properties

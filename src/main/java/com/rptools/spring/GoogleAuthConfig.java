@@ -61,7 +61,7 @@ public class GoogleAuthConfig {
 
     @Bean
     public GoogleClientSecrets googleClientSecrets(JsonFactory jsonFactory) throws IOException {
-        Resource resource = new DefaultResourceLoader().getResource("classpath:dzlier_rptools_secret");
+        Resource resource = new DefaultResourceLoader().getResource("classpath:rptools_secret");
         InputStream is = resource.getInputStream();
         return GoogleClientSecrets.load(jsonFactory, new InputStreamReader(is));
     }

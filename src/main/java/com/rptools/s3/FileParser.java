@@ -37,7 +37,7 @@ import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
 import com.google.common.base.Joiner;
 import com.google.gson.Gson;
-import com.rptools.util.FileUtils;
+import com.rptools.io.FileUtils;
 
 /**
  * Abstract class that parses a file from S3 into a tangible/useful object

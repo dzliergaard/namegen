@@ -29,10 +29,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.dzlier.weight.WeightedTrie;
 import com.google.gson.Gson;
+import com.rptools.io.FileUtils;
 import com.rptools.name.Names;
-import com.rptools.util.FileUtils;
-import com.rptools.util.WeightedTrieBuilder;
 
 /**
  * Parses first and last name data files from S3. Creates {@link SummaryStatistics} object for {@link Names} to
@@ -68,7 +68,6 @@ import com.rptools.util.WeightedTrieBuilder;
 @CommonsLog
 public class NameFileParser extends FileParser<Names> {
     private static final Pattern groupPat = Pattern.compile("[^QAEIOUY]+|Q?[AEIOUY]+");
-    private static final Pattern endPat = Pattern.compile("(?:[^AEIOUY]+|[AEIOUY]+)$");
     private static final Pattern namePat = Pattern.compile("\\w+:\\d+");
 
     @Autowired
@@ -78,9 +77,9 @@ public class NameFileParser extends FileParser<Names> {
 
     @Override
     protected Names parseFileData(String data) {
-        WeightedTrieBuilder<String> firstTrieBuilder = new WeightedTrieBuilder<>();
-        WeightedTrieBuilder<String> middleTrieBuilder = new WeightedTrieBuilder<>();
-        WeightedTrieBuilder<String> endTrieBuilder = new WeightedTrieBuilder<>();
+        WeightedTrie<String> firstTrieBuilder = new WeightedTrie<>();
+        WeightedTrie<String> middleTrieBuilder = new WeightedTrie<>();
+        WeightedTrie<String> endTrieBuilder = new WeightedTrie<>();
 
         Matcher nameMatcher = namePat.matcher(data);
         SummaryStatistics stats = new SummaryStatistics();
@@ -88,7 +87,7 @@ public class NameFileParser extends FileParser<Names> {
         while (nameMatcher.find()) {
             String[] nameFreq = nameMatcher.group().split(":");
             String name = nameFreq[0];
-            Integer weight = Integer.valueOf(nameFreq[1]);
+            Double weight = Double.valueOf(nameFreq[1]);
             String[] groups = groupifyName(name);
             int numGroups = groups.length;
             if (numGroups < 2) {
@@ -106,7 +105,7 @@ public class NameFileParser extends FileParser<Names> {
             stats.addValue(numGroups);
         }
 
-        return new Names(firstTrieBuilder.build(), middleTrieBuilder.build(), endTrieBuilder.build(), stats);
+        return new Names(firstTrieBuilder, middleTrieBuilder, endTrieBuilder, stats);
     }
 
     /**

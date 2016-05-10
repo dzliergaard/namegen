@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 import com.amazonaws.services.s3.AmazonS3;
 import com.google.gson.Gson;
 import com.rptools.city.Cities;
-import com.rptools.util.FileUtils;
+import com.rptools.io.FileUtils;
 
 /**
  * Parses the city file from S3, which contains information about how to generate names of inns and shoppes

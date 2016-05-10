@@ -5,6 +5,7 @@ target
 codeFormatter.xml
 **/js/node_modules/**/*
 **/js/**/*.js.map
+**/js/**/*.js
 **/css/*.css
 **/css/*.css.map
 **/dzlier_rptools_secret

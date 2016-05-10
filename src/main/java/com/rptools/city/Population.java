@@ -19,12 +19,14 @@
 package com.rptools.city;
 
 import java.util.List;
+import java.util.NavigableMap;
 import java.util.Random;
+import java.util.TreeMap;
 
 import lombok.Data;
 
+import com.dzlier.weight.WeightedList;
 import com.google.common.collect.Lists;
-import com.rptools.util.WeightedList;
 
 /**
  * Population of a city, consisting of up to three races, each with a number of inhabitants of the given race.
@@ -37,15 +39,15 @@ public class Population {
     private int searchMod;
 
     // search mods are static numbers based on number
-    private static WeightedList<Integer> searchMods = new WeightedList<Integer>() {
+    private static NavigableMap<Integer, Integer> searchMods = new TreeMap<Integer, Integer>() {
         {
-            this.add(250, -6);
-            this.add(500, -4);
-            this.add(1500, -2);
-            this.add(4500, 0);
-            this.add(6750, 1);
-            this.add(26500, 3);
-            this.add(34500, 5);
+            this.put(250, -6);
+            this.put(500, -4);
+            this.put(1500, -2);
+            this.put(4500, 0);
+            this.put(6750, 1);
+            this.put(26500, 3);
+            this.put(34500, 5);
         }
     };
 
@@ -57,7 +59,7 @@ public class Population {
         population *= Math.pow(diversity.mod(), people.size());
         people.add(new RacePop(species, population));
         tot += population;
-        searchMod = searchMods.get(tot);
+        searchMod = searchMods.ceilingEntry(tot).getValue();
     }
 
     /**

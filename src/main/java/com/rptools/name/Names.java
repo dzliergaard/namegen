@@ -24,7 +24,7 @@ import java.util.Random;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
-import com.rptools.util.WeightedTrie;
+import com.dzlier.weight.WeightedTrie;
 
 /**
  * This class is generated when the application starts and needs to read/parse/interpret data from the name files stored

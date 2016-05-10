@@ -2,14 +2,14 @@
     <div mdl-card content-color="dark" cell=4 d=6 [hidden]=!userData.generatedNames[0]>
         <div card-title>Generated Names</div>
         <ul card-actions mdl-list item-class="name-line" class="name-list">
-            <li *ngFor="#name of userData.generatedNames" [dz-generated-name]=name dz-name-line></li>
+            <li *ngFor="let name of userData.generatedNames" [dz-generated-name]=name dz-name-line></li>
         </ul>
     </div>
     <div mdl-card content-color="accent" cell=4 d=6 [d-o]=getOffset(6) [t-o]=getOffset(4)
          [hidden]=!userData.savedNames[0]>
         <div card-title>Saved Names</div>
         <ul card-actions mdl-list item-class="name-line" class="name-list">
-            <li *ngFor="#name of userData.savedNames" [dz-saved-name]=name dz-name-line></li>
+            <li *ngFor="let name of userData.savedNames" [dz-saved-name]=name dz-name-line></li>
         </ul>
     </div>
 </div>

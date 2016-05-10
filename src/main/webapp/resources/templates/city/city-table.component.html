@@ -21,12 +21,12 @@
         <span>Total: {{city.population.tot}}</span>
     </td>
 </tr>
-<tr *ngFor="#pop of city.population.people">
+<tr *ngFor="let pop of city.population.people">
     <td class="mdl-cell mdl-cell--1-col mdl-data-table__cell--non-numeric">
         <span>{{pop.number}} {{pop.species}}<br/></span>
     </td>
 </tr>
-<tr *ngFor="#inn of city.inns; #first = first">
+<tr *ngFor="let inn of city.inns; let first = first">
     <td *ngIf="first" [attr.rowspan]="city.inns.length"
         class="mdl-cell mdl-cell--1-col mdl-data-table__cell--non-numeric">Inns/Shoppes:
     </td>

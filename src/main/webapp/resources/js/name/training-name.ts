@@ -13,7 +13,7 @@ import {MDL_COMPONENTS} from "mat/materials";
     directives: [MDL_COMPONENTS],
     template: `
         <strong cell=8 d=4 class="mdl-cell--middle">{{nameData.text}}</strong>
-        <button mdl-btn flat="true" cell=1 p=2 *ngFor="#attr of nameAttributes" (click)="trainName(attr)">{{attr}}</button>
+        <button mdl-btn flat="true" cell=1 p=2 *ngFor="let attr of nameAttributes" (click)="trainName(attr)">{{attr}}</button>
     `
 })
 export class TrainingName {

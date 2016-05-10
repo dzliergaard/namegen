@@ -18,12 +18,9 @@
 
 package com.rptools.city;
 
-import java.util.List;
 import java.util.Random;
 
 import lombok.RequiredArgsConstructor;
-
-import com.google.common.collect.Lists;
 
 /**
  * Enum useful for defining different sizes of towns/cities
@@ -53,9 +50,5 @@ public enum CityTemplate {
         } catch (Exception e) {
             return rand();
         }
-    }
-
-    public static List<CityTemplate> asList() {
-        return Lists.newArrayList(CityTemplate.values());
     }
 }

@@ -34,9 +34,9 @@ import com.dzlier.weight.WeightedTrie;
 public class Names {
     private final Double standardDeviation;
     private final Double mean;
-    WeightedTrie<String> beg;
-    WeightedTrie<String> mid;
-    WeightedTrie<String> end;
+    private final WeightedTrie<String> beg;
+    private final WeightedTrie<String> mid;
+    private final WeightedTrie<String> end;
 
     public Names(
             WeightedTrie<String> beg,

@@ -41,13 +41,13 @@ public class Population {
     // search mods are static numbers based on number
     private static NavigableMap<Integer, Integer> searchMods = new TreeMap<Integer, Integer>() {
         {
-            this.put(250, -6);
-            this.put(500, -4);
-            this.put(1500, -2);
-            this.put(4500, 0);
-            this.put(6750, 1);
-            this.put(26500, 3);
-            this.put(34500, 5);
+            put(50, -6);
+            put(500, -4);
+            put(1500, -2);
+            put(4500, 0);
+            put(6750, 1);
+            put(26500, 3);
+            put(Integer.MAX_VALUE, 5);
         }
     };
 
@@ -75,7 +75,7 @@ public class Population {
     public String getWeightedRace() {
         WeightedList<Species> races = new WeightedList<>();
         for (RacePop rp : people) {
-            races.add(rp.getPopulation() * 3, rp.getSpecies());
+            races.add(rp.getPopulation() * 3.0, rp.getSpecies());
         }
         return races.random().name();
     }

@@ -1,0 +1,63 @@
+<link rel="import" href="/bower/paper-item/paper-item.html"/>
+<link rel="import" href="/bower/paper-item/paper-item-body.html"/>
+<link rel="import" href="/bower/paper-menu/paper-menu.html"/>
+<link rel="import" href="/bower/paper-menu/paper-submenu.html"/>
+
+<dom-module id="dropdown-options">
+  <style is="custom-style">
+  </style>
+  <template>
+    <paper-submenu id="submenu">
+      <paper-item class="menu-trigger">
+        <paper-item-body>
+          {{heading}}
+          <div secondary>{{selected}}</div>
+        </paper-item-body>
+      </paper-item>
+      <paper-menu class="menu-content" selected="{{selected}}" attr-for-selected="value">
+        <template is="dom-if" if="{{hasRandom}}">
+          <paper-item value="" on-tap="close">Random</paper-item>
+        </template>
+        <template is="dom-repeat" items="{{options}}">
+          <paper-item value="{{item}}" on-tap="close">{{item}}</paper-item>
+        </template>
+      </paper-menu>
+    </paper-submenu>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'dropdown-options',
+      properties: {
+        heading: String,
+        defaultValue: {
+          type: String,
+          computed: 'getDefaultValue(hasRandom)'
+        },
+        hasRandom: {
+          type: Boolean,
+          value: true
+        },
+        options: {
+          type: Array,
+          value: function () {
+            return [];
+          }
+        },
+        selected: {
+          type: String,
+          notify: true,
+          value: function () {
+            return '';
+          }
+        }
+      },
+      close: function (event) {
+        this.$.submenu.toggle();
+      },
+      getDefaultValue: function (hasRandom) {
+        return hasRandom ? 'Random' : this.options[0];
+      }
+    });
+  </script>
+</dom-module>

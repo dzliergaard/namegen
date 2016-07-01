@@ -18,45 +18,33 @@
 
 package com.rptools.controller;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import lombok.extern.apachecommons.CommonsLog;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.google.common.collect.ImmutableMap;
-import com.rptools.annotation.RequiresGoogleAuth;
-import com.rptools.data.UserSavedContent;
 import com.rptools.name.Name;
 import com.rptools.name.NameAttribute;
 import com.rptools.name.NameGen;
 import com.rptools.name.TrainingName;
+import lombok.extern.apachecommons.CommonsLog;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * REST controller that manipulates {@link Name} objects
  */
 @CommonsLog
 @RestController("NameController")
-@RequestMapping(value = { "name" })
+@RequestMapping(value = {"", "name"})
 public class NameController {
+
     private final NameGen nameGen;
-    private final UserSavedContent userSavedContent;
 
     @Autowired
-    public NameController(NameGen nameGen, UserSavedContent userSavedContent) {
+    public NameController(NameGen nameGen) {
         this.nameGen = nameGen;
-        this.userSavedContent = userSavedContent;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -78,23 +66,5 @@ public class NameController {
     public TrainingName train(@RequestBody(required = false) TrainingName trainName) {
         Optional.ofNullable(trainName).ifPresent(nameGen::train);
         return nameGen.getTrainingName();
-    }
-
-    @RequiresGoogleAuth
-    @RequestMapping(value = "save", method = RequestMethod.POST)
-    public Name save(HttpServletRequest request, HttpServletResponse response, @RequestBody Name name) {
-        return userSavedContent.addName(name);
-    }
-
-    @RequiresGoogleAuth
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public void delete(HttpServletRequest request, HttpServletResponse response, @RequestBody Name name) {
-        userSavedContent.deleteName(name);
-    }
-
-    @RequiresGoogleAuth
-    @RequestMapping(value = "clear", method = RequestMethod.GET)
-    public void clear(HttpServletRequest request, HttpServletResponse response) {
-        userSavedContent.clearNames();
     }
 }

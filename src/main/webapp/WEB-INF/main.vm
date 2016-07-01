@@ -1,32 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RP Toolkit</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <base href="/">
-    <!-- Angular2 and its dependencies -->
-    <script src="/js/node_modules/es6-shim/es6-shim.js"></script>
-    <script src="/js/node_modules/systemjs/dist/system-polyfills.js"></script>
-    <script src="/js/node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="/js/node_modules/systemjs/dist/system.src.js"></script>
-    <script src="/js/node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="/js/node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script src="/js/node_modules/angular2/bundles/router.dev.js"></script>
-    <script src="/js/node_modules/angular2/bundles/http.dev.js"></script>
-    <script src="/js/node_modules/material-design-lite/material.min.js"></script>
+  <title>RP Toolkit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <base href="/">
+  <!-- paper and its dependencies -->
+  <script src="/js/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="/templates/polymer/rptools-app.html"></link>
 
-    <link rel="stylesheet" href="/css/main.css"></link>
-    <link rel="stylesheet" href="/js/node_modules/material-design-lite/dist/material.purple-orange.min.css"></link>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
+  <link rel="stylesheet import" href="/css/main.css"></link>
 
-    <resource href="/loading.gif" height="40" width="40">
-        <meta http-equiv="Content-type" content="image/gif">
-    </resource>
+  <style is="custom-style">
+    :root {
+      /* Main colors */
+      --primary-color: var(--paper-deep-purple-50);
+      --dark-primary-color: var(--paper-deep-purple-700);
+      --light-primary-color: var(--primary-color);
+      --accent-color: var(--paper-orange-a200);
+      --dark-accent-color: var(--paper-orange-a400);
+      --light-accent-color: var(--paper-orange-a100);
+
+      /* Main theme */
+      --primary-background-color: var(--light-theme-background-color);
+      --secondary-text-color: var(--light-theme-secondary-color);
+      --disabled-text-color: var(--light-theme-disabled-color);
+      --divider-color: var(--light-theme-divider-color);
+
+      /* light theme */
+      --light-theme-background-color: var(--light-primary-color);
+      --light-theme-base-color: var(--dark-primary-color);
+      --light-theme-text-color: var(--dark-primary-color);
+      --light-theme-secondary-color: var(--paper-deep-purple-200);
+      --light-theme-disabled-color: var(--paper-deep-purple-300);
+      --light-theme-divider-color: var(--paper-deep-puple-200);
+
+      /* dark theme */
+      --dark-theme-background-color: var(--paper-deep-purple-400);
+      --dark-theme-base-color: var(--dark-primary-color);
+      --dark-theme-text-color: var(--light-primary-color);
+      --dark-theme-secondary-color: var(--paper-deep-purple-100); /* for secondary text and icons */
+      --dark-theme-disabled-color: var(--paper-deep-purple-200); /* disabled/hint text */
+      --dark-theme-divider-color: var(--paper-deep-purple-100);
+    }
+
+    :root hr.divider {
+      border-top-color: var(--disabled-text-color);
+    }
+  </style>
+
+  <resource href="/loading.gif" height="40" width="40">
+    <meta http-equiv="Content-type" content="image/gif">
+  </resource>
 </head>
 
-<body class="content">
-<input id="user-authed" style="display:none" value="${userAuthed}">
-<rptools-app></rptools-app>
-<script src="/js/system-init.js"></script>
+<body class="fullbleed vertical layout">
+<rptools-app races='$races'></rptools-app>
 </body>
 </html>

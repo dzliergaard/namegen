@@ -1,0 +1,147 @@
+<link rel="import" href="./name-line.html"/>
+<link rel="import" href="../dark-theme.html"/>
+<link rel="import" href="../util/variable-layout-behavior.html"/>
+<link rel="import" href="/bower/paper-button/paper-button.html"/>
+<link rel="import" href="/bower/paper-card/paper-card.html"/>
+<link rel="import" href="/bower/paper-input/paper-input.html"/>
+<link rel="import" href="/bower/paper-item/paper-item.html"/>
+<link rel="import" href="/bower/paper-menu/paper-menu.html"/>
+<link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="name-page">
+  <template>
+    <style is="custom-style" include="dark-theme iron-flex iron-flex-alignment iron-flex-factors">
+      :host paper-menu.generate-menu {
+        margin: 10px 10px;
+      }
+
+      :host paper-button.generate-button {
+        background-color: var(--accent-color);
+        color: var(--light-theme-text-color);
+      }
+
+      :host paper-card {
+        margin-bottom: 10px
+      }
+
+      :host paper-card.generated {
+        --paper-card-header-color: var(--light-theme-text-color);
+        color: var(--light-theme-text-color);
+        margin-bottom: 10px;
+      }
+
+      :host paper-card.generated .card-content input {
+        color: var(--light-theme-text-color);
+      }
+
+      :host paper-card.saved {
+        margin-bottom: 10px;
+      }
+    </style>
+    <iron-ajax id="generate" url="/name/generate" params="{{generateParams(numNames)}}"
+               on-response="populateNames"></iron-ajax>
+    <div class="vertical around-justified layout">
+      <paper-card class="self-start">
+        <paper-menu class="generate-menu">
+          <div class="horizontal layout">
+            <paper-input label="How Many? (10)" type="Number" value="{{numNames}}"
+                         no-label-float="true"></paper-input>
+            <paper-button raised class="generate-button" on-tap="generateNames">Generate
+            </paper-button>
+            <div class="flex"></div>
+          </div>
+        </paper-menu>
+      </paper-card>
+      <div class$="{{layoutStyle}} layout">
+        <div class="card-content flex-4 layout vertical">
+          <template is="dom-if" if="{{generatedNames}}">
+            <paper-card class="generated" heading="Generated Names">
+              <div class="card-content">
+                <template is="dom-repeat" items="{{generatedNames}}">
+                  <name-line name="{{item}}" prim-hover="star" prim="star-border"></name-line>
+                </template>
+              </div>
+            </paper-card>
+          </template>
+        </div>
+
+        <div class="flex"></div>
+
+        <div class="flex-4 layout vertical">
+          <template is="dom-if" if="{{savedNames.length}}">
+            <paper-card class="dark saved" heading="Saved Names">
+              <div class="card-content">
+                <template is="dom-repeat" items="{{savedNames}}">
+                  <name-line name="{{item}}" prim="delete"></name-line>
+                </template>
+              </div>
+            </paper-card>
+          </template>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'name-page',
+      behaviors: [VariableLayoutBehavior],
+      properties: {
+        isSignedIn: Boolean,
+        generatedNames: {
+          type: Array
+        },
+        numNames: {
+          type: Number
+        },
+        savedNames: {
+          type: Array,
+          notify: true
+        }
+      },
+      listeners: {
+        'name-done-editing': 'doneEditing',
+        'name-primary-tap': 'primaryTap'
+      },
+      doneEditing: function (event) {
+        if (this.isSignedIn && event.target.name.id) {
+          this.fire('saved-name-updated');
+        }
+      },
+      generateNames: function () {
+        this.$.generate.generateRequest();
+      },
+      generateParams: function (numNames) {
+        return {num: numNames || 10};
+      },
+      populateNames: function (event, request) {
+        this.generatedNames = request.response.data;
+      },
+      primaryTap: function (event) {
+        if (!this.isSignedIn) {
+          return;
+        }
+        var index = this.savedNames.indexOf(event.target.name);
+        if (event.target.name.id && index > -1) {
+          this.splice('savedNames', index, 1);
+        } else {
+          this.push('savedNames', {
+            text: event.target.name.text,
+            id: this.uuid()
+          });
+        }
+
+      },
+      uuid: function () {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+      }
+    });
+  </script>
+</dom-module>
+
+

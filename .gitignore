@@ -3,6 +3,7 @@ data
 target
 *.iml
 codeFormatter.xml
+**/js/bower_components/**/*
 **/js/node_modules/**/*
 **/js/**/*.js.map
 **/js/**/*.js

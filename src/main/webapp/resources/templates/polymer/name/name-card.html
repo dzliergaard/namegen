@@ -1,0 +1,107 @@
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html"/>
+<link rel="import" href="/bower/paper-button/paper-button.html"/>
+<link rel="import" href="/bower/paper-input/paper-input.html"/>
+<link rel="import" href="/bower/paper-item/paper-item.html"/>
+
+<dom-module id="name-card">
+  <style is="custom-style" include="iron-flex iron-flex-alignment">
+    :host paper-card.generated {
+      color: var(--dark-theme-text-color);
+      margin-bottom: 10px;
+    }
+
+    :host ::content paper-card .card-content input {
+      color: var(--light-theme-text-color);
+    }
+
+    :host paper-card {
+      --paper-card-actions: {
+        color: var(--light-theme-text-color);
+        background-color: var(--light-theme-background-color);
+      };
+    }
+
+    :host ::content paper-card .card-actions paper-button:hover {
+      font-weight: bold;
+    }
+
+    :host ::content iron-icon {
+      opacity: .5;
+    }
+
+    :host ::content .generated iron-icon {
+      color: var(--dark-primary-color);
+    }
+
+    :host paper-input {
+      --paper-input-container-underline: {
+        display: none;
+      };
+    }
+  </style>
+  <template>
+    <paper-card class$="{{cardClass}} flex">
+      <div class="card-content flex horizontal layout">
+        <template is="dom-if" if="{{!_editing}}">
+          <paper-icon-button icon="create" on-tap="_startEditing"></paper-icon-button>
+        </template>
+        <template is="dom-if" if="{{_editing}}">
+          <paper-icon-button class$="self-center" icon="done"
+                             on-tap="_doneEditing"></paper-icon-button>
+        </template>
+        <paper-input no-label-float id="name-input" class="flex self-center"
+                     on-click="_startEditing"
+                     on-blur="_doneEditing"
+                     value="{{_editingItem}}"></paper-input>
+      </div>
+      <div class="card-actions layout horizontal">
+        <content></content>
+        <paper-button class="flex">Clear</paper-button>
+      </div>
+    </paper-card>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'name-card',
+      properties: {
+        cardClass: String,
+        nameType: String,
+        prim: String,
+        sec: String,
+        _editing: {
+          type: Boolean,
+          value: false
+        },
+        editingItem: {
+          type: String
+        },
+        name: {
+          type: Object,
+          notify: true,
+          observer: "_updateEditingItem"
+        }
+      },
+      _doPrimary: function () {
+        this.fire('name-primary-tap');
+      },
+      _doneEditing: function () {
+        this._editing = false;
+        this.name.text = this._editingItem;
+        this.fire('name-done-editing', {nameType: this.nameType, name: this.name});
+      },
+      _startEditing: function (event) {
+        if (!this._editing) {
+          Polymer.dom(this.root).querySelector('paper-input').querySelector('input').select();
+        }
+        this._editing = true;
+      },
+      _updateEditingItem: function (name) {
+        this._editingItem = this.name.text;
+      }
+    });
+  </script>
+</dom-module>
+
+

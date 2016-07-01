@@ -1,0 +1,48 @@
+<link rel="import" href="/bower/iron-icon/iron-icon.html"/>
+
+<dom-module id="hover-icon">
+  <template>
+    <iron-icon item-icon="{{itemIcon}}"
+               icon="{{composite}}"
+               on-mouseover="_onMouseover"
+               on-mouseleave="_onMouseout">
+    </iron-icon>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'hover-icon',
+      properties: {
+        itemIcon: Boolean,
+        _hover: {
+          type: Boolean,
+          value: false
+        },
+        icon: {
+          type: String,
+          value: ''
+        },
+        hover: {
+          type: String,
+          value: ''
+        },
+        composite: {
+          type: String,
+          computed: 'getComposite(icon, hover, _hover)'
+        }
+      },
+      getComposite: function (icon, hover, _hover) {
+        return (_hover && hover) ? hover : icon;
+      },
+      _isItemIcon: function () {
+        return this.itemIcon ? 'item-icon' : '';
+      },
+      _onMouseout: function (event) {
+        this._hover = false;
+      },
+      _onMouseover: function (event) {
+        this._hover = true;
+      }
+    })
+  </script>
+</dom-module>

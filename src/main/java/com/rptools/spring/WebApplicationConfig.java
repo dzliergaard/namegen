@@ -24,7 +24,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
 import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
 
@@ -54,6 +53,7 @@ public class WebApplicationConfig extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/fonts/**").addResourceLocations("/resources/fonts/");
         registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
+        registry.addResourceHandler("/bower/**").addResourceLocations("/resources/js/bower_components/");
         registry.addResourceHandler("/templates/**").addResourceLocations("/resources/templates/");
     }
 

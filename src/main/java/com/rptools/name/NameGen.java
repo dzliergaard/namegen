@@ -69,6 +69,6 @@ public class NameGen {
     }
 
     private String makeName() {
-        return WordUtils.capitalize(JOINER.join(first.makeName(), last.makeName()));
+        return WordUtils.capitalizeFully(JOINER.join(first.makeName(), last.makeName()));
     }
 }

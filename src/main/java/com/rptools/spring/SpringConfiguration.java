@@ -18,19 +18,13 @@
 
 package com.rptools.spring;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.rptools.data.GsonExclusionStrategy;
+import org.springframework.context.annotation.*;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * Creates various Beans that don't have dedicated Component classes
@@ -54,6 +48,6 @@ public class SpringConfiguration {
 
     @Bean
     public Gson gson() {
-        return new GsonBuilder().addSerializationExclusionStrategy(new GsonExclusionStrategy()).create();
+        return new GsonBuilder().create();
     }
 }

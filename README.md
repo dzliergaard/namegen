@@ -38,6 +38,14 @@ scss --update css/main.scss
 
 In order to run you will need to create a google developer console project Credentials, and save the secret key to the file "src/main/resources/rptools_secret". In addition, you will have to install and set up AWS CLI to retrieve the name and city raw data files. I have made the base files downloadable to anyone, but if you want to make changes you will have to upload your own.
 
+Installing and configuring AWS CLI:
+
+<pre>
+sudo apt-get install -y python-pip
+sudo pip install awscli
+aws configure
+</pre>
+
 ### Running Tomcat with Maven
 
 <pre>

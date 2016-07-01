@@ -1,0 +1,177 @@
+<link rel="import" href="../dark-theme.html"/>
+<link rel="import" href="../util/dropdown-options.html"/>
+<link rel="import" href="../util/variable-layout-behavior.html"/>
+<link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="/bower/paper-card/paper-card.html"/>
+<link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu.html"/>
+<link rel="import" href="/bower/paper-listbox/paper-listbox.html"/>
+<link rel="import" href="/bower/paper-slider/paper-slider.html"/>
+<!--<link rel="import" href="/bower/paper-input/paper-input.html"/>-->
+
+<dom-module id="city-page">
+  <template>
+    <style is="custom-style" include="iron-flex iron-flex-alignment">
+      :host paper-card {
+        --paper-card-header-color: var(--light-theme-text-color);
+        margin-bottom: 10px;
+      }
+
+      :host paper-button.generate-button {
+        background-color: var(--accent-color);
+        color: var(--light-theme-text-color);
+      }
+
+      :host paper-slider {
+        --paper-slider-knob-color: var(--primary-text-color);
+        --paper-slider-active-color: var(--primary-text-color);
+        width: 100%;
+      }
+
+      :host ::content paper-input {
+        --paper-input-container-focus-color: var(--light-theme-secondary-color);
+      }
+
+      :host ::content paper-input paper-input-container div.underline {
+        display: none;
+      }
+
+      :host .city paper-item-body div {
+        color: var(--primary-text-color);
+      }
+
+      :host ::content .city paper-item-body paper-input,
+      :host ::content .city paper-item-body paper-input paper-dropdown-menu, paper-listbox {
+        --paper-input-container-input-color: var(--secondary-text-color);
+      }
+
+      :host .buffer-right {
+        margin-right: 16px;
+      }
+    </style>
+    <iron-ajax id="generate" url="/city/generate" params="{{generateParams(numNames)}}"
+               on-response="populateCity"></iron-ajax>
+    <div class$="{{layoutStyle}} layout start">
+      <paper-menu class="buffer-right self-start">
+        <paper-item>
+          <paper-item-body two-line>
+            <div>Size</div>
+            <paper-slider secondary id="size" value="50"></paper-slider>
+          </paper-item-body>
+        </paper-item>
+        <paper-item>
+          <paper-item-body two-line>
+            <div>Diversity</div>
+            <paper-slider secondary id="diversity" value="50"></paper-slider>
+          </paper-item-body>
+        </paper-item>
+        <paper-item>
+          <paper-dropdown-menu label="Dominant Race">
+            <paper-listbox class="dropdown-content">
+              <paper-item>Random</paper-item>
+              <template is="dom-repeat" items="{{races}}">
+                <paper-item>{{item}}</paper-item>
+              </template>
+            </paper-listbox>
+          </paper-dropdown-menu>
+        </paper-item>
+        <paper-item></paper-item>
+        <paper-item>
+          <paper-button class="generate-button" on-tap="generateCity">Generate</paper-button>
+        </paper-item>
+      </paper-menu>
+      <template is="dom-if" if="{{generatedCity}}">
+        <paper-card class="city" heading="{{generatedCity.name}}">
+          <div class="card-content">
+            <paper-item>
+              <paper-item-body two-line>
+                <div>Ruler</div>
+                <paper-item>
+                  <paper-input secondary no-label-float value="{{generatedCity.ruler.name.text}}">
+                    <paper-dropdown-menu no-label-float suffix horizontal-align="left">
+                      <paper-listbox class="dropdown-content" selected="{{generatedCity.ruler.species}}"
+                                     attr-for-selected="value">
+                        <template is="dom-repeat" items="{{races}}">
+                          <paper-item value="{{item}}">{{item}}</paper-item>
+                        </template>
+                      </paper-listbox>
+                    </paper-dropdown-menu>
+                  </paper-input>
+                </paper-item>
+              </paper-item-body>
+            </paper-item>
+            <paper-item>
+              <paper-item-body three-line>
+                <div>Population: {{generatedCity.population.tot}}</div>
+                <template is="dom-repeat" items="{{generatedCity.population.people}}" as="pop">
+                  <paper-item secondary>
+                    {{pop.species}}: {{pop.population}}
+                  </paper-item>
+                </template>
+              </paper-item-body>
+            </paper-item>
+            <paper-item>
+              <paper-item-body three-line>
+                <div>Inns/Shoppes</div>
+                <template is="dom-repeat" items="{{generatedCity.inns}}">
+                  <paper-item secondary>
+                    {{item}}
+                  </paper-item>
+                </template>
+              </paper-item-body>
+            </paper-item>
+          </div>
+        </paper-card>
+      </template>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'city-page',
+      behaviors: [VariableLayoutBehavior],
+      properties: {
+        races: Array,
+        cityVariables: Object,
+        generatedCity: Object,
+        diversities: [
+          "Exclusive",
+          "Xenophobic",
+          "Intolerant",
+          "Unequal",
+          "Tolerant",
+          "Accepting",
+          "Welcoming",
+          "Enlightened",
+          "Equal"
+        ],
+        sizes: {
+          type: Array,
+          value: [
+            "Family",
+            "Clan",
+            "Village",
+            "Town",
+            "City",
+            "Metropolis",
+            "Capital"
+          ]
+        }
+      },
+      computeTotalPop: function (population) {
+        return population.reduce(function (value, item) {
+          return value + item.population;
+        }, 0);
+      },
+      generateCity: function () {
+        this.$.generate.generateRequest();
+      },
+      populateCity: function (err, request) {
+        this.generatedCity = request.response;
+      }
+    });
+  </script>
+</dom-module>
+
+

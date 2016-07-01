@@ -18,39 +18,32 @@
 
 package com.rptools.city;
 
-import java.util.List;
 import java.util.Random;
-
-import com.google.common.collect.Lists;
 
 /**
  * All the major (playable) races of main D&D worlds
  */
 public enum Species {
-    Dragonborn,
-    Dwarf,
-    Elf,
-    Halfling,
-    Human,
-    Gnome,
-    Goliath,
-    Orc;
+  Dragonborn,
+  Dwarf,
+  Elf,
+  Halfling,
+  Human,
+  Gnome,
+  Goliath,
+  Orc;
 
-    private static final Random rand = new Random();
+  private static final Random rand = new Random();
 
-    public static Species rand() {
-        return values()[rand.nextInt(values().length)];
+  public static Species rand() {
+    return values()[rand.nextInt(values().length)];
+  }
+
+  public static Species get(String s) {
+    try {
+      return valueOf(s);
+    } catch (Exception e) {
+      return rand();
     }
-
-    public static Species get(String s) {
-        try {
-            return valueOf(s);
-        } catch (Exception e) {
-            return rand();
-        }
-    }
-
-    public static List<Species> asList() {
-        return Lists.newArrayList(Species.values());
-    }
+  }
 }

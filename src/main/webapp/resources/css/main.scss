@@ -17,12 +17,12 @@
 }
 
 body {
-  height: 100%;
   letter-spacing: 1px;
-  width: 100%;
+  margin: 0;
+  font-family: Roboto, 'Noto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-  .mdl-card {
-    min-height: inherit;
+  iron-pages {
+    margin: 10px 10px;
   }
 }
 

@@ -1,0 +1,29 @@
+<link rel="import" href="./name/name-page.html">
+<link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
+<link rel="import" href="/bower/iron-pages/iron-pages.html">
+
+<dom-module id="rptools-pages">
+  <template>
+    <iron-pages selected="{{selected}}" attr-for-selected="name">
+      <name-page name="name" user-saved-content="{{userSavedContent}}"></name-page>
+      <div>Page 2</div>
+    </iron-pages>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'rptools-pages',
+      properties: {
+        selected: {
+          type: String,
+          value: "name",
+          notify: true
+        },
+        userSavedContent: {
+          type: Object,
+          notify: true
+        }
+      }
+    });
+  </script>
+</dom-module>

@@ -56,6 +56,12 @@ public class Names {
         String grandparent = beg.random("");
         String parent = beg.random("", grandparent);
         String name = grandparent + parent;
+        if (!parent.equals("")) {
+            groups--;
+        }
+        if (!grandparent.equals("")) {
+            groups--;
+        }
 
         while (groups-- > 1) {
             String group = Optional

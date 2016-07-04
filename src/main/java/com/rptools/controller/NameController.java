@@ -19,6 +19,8 @@
 package com.rptools.controller;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.gson.Gson;
+import com.rptools.city.*;
 import com.rptools.name.Name;
 import com.rptools.name.NameAttribute;
 import com.rptools.name.NameGen;
@@ -41,15 +43,19 @@ import java.util.Optional;
 public class NameController {
 
     private final NameGen nameGen;
+    private final Gson gson;
 
     @Autowired
-    public NameController(NameGen nameGen) {
+    public NameController(NameGen nameGen, Gson gson) {
         this.nameGen = nameGen;
+        this.gson = gson;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get() {
-        return new ModelAndView("main");
+        ModelAndView model = new ModelAndView("main");
+        model.getModel().put("races", gson.toJson(Species.values()));
+        return model;
     }
 
     @RequestMapping(value = "generate", method = RequestMethod.GET)

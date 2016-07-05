@@ -49,7 +49,6 @@ public class WebApplicationConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
         registry.addResourceHandler("/fonts/**").addResourceLocations("/resources/fonts/");
         registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");

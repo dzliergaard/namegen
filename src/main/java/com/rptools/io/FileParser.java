@@ -16,7 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.rptools.s3;
+package com.rptools.io;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

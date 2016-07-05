@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.collect.Lists;
 import com.rptools.name.Name;
 import com.rptools.name.NameGen;
-import com.rptools.s3.CityFileParser;
+import com.rptools.io.CityFileParser;
 
 @Component
 @CommonsLog

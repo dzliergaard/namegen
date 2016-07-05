@@ -15,9 +15,7 @@ The city generator provides various customizable parameters to generate a city, 
 The following technologies are required to build the project:
 
 <pre>
-Typescript transpiler "tsc"
-Scss compiler "scss"
-Node.js installer "npm"
+Node.js installer "npm" & bower
 Maven task runner "mvn"
 </pre>
 
@@ -27,24 +25,13 @@ Maven task runner "mvn"
 git clone https://github.com/dzliergaard/namegen.git
 # install node dependencies and transpile typescript files
 cd namegen/src/main/webapp/resources/js
-npm install
-tsc */*.ts
-# compile main.scss into main.css
-cd ..
-scss --update css/main.scss
+npm install -g bower
+bower install
 </pre>
 
-### AWS and Google authentication
+### Google authentication
 
-In order to run you will need to create a google developer console project Credentials, and save the secret key to the file "src/main/resources/rptools_secret". In addition, you will have to install and set up AWS CLI to retrieve the name and city raw data files. I have made the base files downloadable to anyone, but if you want to make changes you will have to upload your own.
-
-Installing and configuring AWS CLI:
-
-<pre>
-sudo apt-get install -y python-pip
-sudo pip install awscli
-aws configure
-</pre>
+In order to run you will need to create a google developer console project Credentials and allow the javascript origin of whatever endpoint you'd like to call the signin & drive API from.
 
 ### Running Tomcat with Maven
 

@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
 import com.google.common.base.Joiner;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
-import com.rptools.s3.NameFileParser;
+import com.rptools.io.NameFileParser;
 
 /**
  * Helper component that generates names from the {@link Names} object returned by {@link NameFileParser}

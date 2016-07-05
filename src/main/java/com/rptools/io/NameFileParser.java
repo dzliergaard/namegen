@@ -16,7 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.rptools.s3;
+package com.rptools.io;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -28,10 +28,8 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.amazonaws.services.s3.AmazonS3;
 import com.dzlier.weight.WeightedTrie;
 import com.google.gson.Gson;
-import com.rptools.io.FileUtils;
 import com.rptools.name.Names;
 
 /**

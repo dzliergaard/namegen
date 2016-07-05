@@ -1,9 +1,0 @@
-<div mdl-card="primary" content-color="dark" cell=12>
-    <div card-title>{{data.heading}}</div>
-    <div card-actions mdl-grid class="mdl-grid--no-spacing">
-        <button mdl-btn cell=12 [flat]=data.value (click)="data.value =''">Random</button>
-        <button *ngFor="let item of data.values" mdl-btn cell=12 [flat]="item!=data.value" (click)="data.value = item">
-            {{item}}
-        </button>
-    </div>
-</div>

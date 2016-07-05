@@ -6,7 +6,7 @@
   <base href="/">
   <!-- paper and its dependencies -->
   <script src="/js/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-  <link rel="import" href="/templates/polymer/rptools-app.html"></link>
+  <link rel="import" href="/templates/rptools-app.html"></link>
 
   <link rel="stylesheet import" href="/css/main.css"></link>
 

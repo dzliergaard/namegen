@@ -1,5 +1,4 @@
 .idea
-data
 target
 *.iml
 codeFormatter.xml
@@ -7,7 +6,5 @@ codeFormatter.xml
 **/js/node_modules/**/*
 **/js/**/*.js.map
 **/js/**/*.js
-**/css/*.css
-**/css/*.css.map
 **/rptools_secret
 **/security.properties

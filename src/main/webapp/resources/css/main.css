@@ -1,0 +1,9 @@
+body {
+    letter-spacing: 1px;
+    margin: 0;
+    font-family: Roboto, 'Noto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+iron-pages {
+    margin: 10px 10px;
+}

@@ -18,10 +18,7 @@
 
 package com.rptools.city;
 
-import java.util.List;
-import java.util.NavigableMap;
-import java.util.Random;
-import java.util.TreeMap;
+import java.util.*;
 
 import lombok.Data;
 
@@ -41,7 +38,7 @@ public class Population {
     // search mods are static numbers based on number
     private static NavigableMap<Integer, Integer> searchMods = new TreeMap<Integer, Integer>() {
         {
-            put(50, -6);
+            put(0, -6);
             put(500, -4);
             put(1500, -2);
             put(4500, 0);
@@ -51,12 +48,13 @@ public class Population {
         }
     };
 
-    public void add(Species species, CityTemplate template, Diversity diversity) {
+    public void add(Double size, Double diversity, Species species) {
         if (people.contains(new RacePop(species))) {
             return;
         }
-        int population = template.pop();
-        population *= Math.pow(diversity.mod(), people.size());
+
+        int population = new Double(size * (rand.nextDouble() + .5)).intValue();
+        population *= Math.pow(diversity, people.size());
         people.add(new RacePop(species, population));
         tot += population;
         searchMod = searchMods.ceilingEntry(tot).getValue();
@@ -65,8 +63,8 @@ public class Population {
     /**
      * Checks whether number has 3 races, or sometimes 2 for low-number areas
      */
-    public boolean completePop(Diversity diversity) {
-        return people.size() < 3 && (people.size() < 2 || rand.nextDouble() * .2 < diversity.mod());
+    public boolean incompletePop(Double diversity) {
+        return people.size() < 3 && (people.size() < 2 || rand.nextDouble() * .2 < diversity);
     }
 
     /**

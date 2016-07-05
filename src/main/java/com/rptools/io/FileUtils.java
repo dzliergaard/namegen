@@ -46,13 +46,13 @@ public class FileUtils {
         }
     }
 
-    public Optional<Path> getLocalContentFile(String fileName) {
-        return Optional.of(Paths.get(baseDir.toString(), fileName + ".json")).filter(path -> Files.exists(path));
+    public Path localFilePath(String fileName) {
+        return Paths.get(baseDir.toString(), fileName);
     }
 
     public void writeFile(String fileName, String content) {
         try {
-            Path filePath = Paths.get(baseDir.toString(), fileName + ".json");
+            Path filePath = Paths.get(baseDir.toString(), fileName);
             Files.deleteIfExists(filePath);
             Path localFilePath = Files.createFile(filePath);
             File localFile = localFilePath.toFile();

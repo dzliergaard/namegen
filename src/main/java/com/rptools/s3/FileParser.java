@@ -26,12 +26,7 @@ import java.util.Optional;
 
 import lombok.extern.apachecommons.CommonsLog;
 
-import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Qualifier;
-
-import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
@@ -57,14 +52,10 @@ public abstract class FileParser<T> {
     private static final Joiner JOINER = Joiner.on("");
     private static final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
-    private final AmazonS3 s3;
-    private final String bucketName;
     private final FileUtils fileUtils;
     private final Gson gson;
 
-    public FileParser(AmazonS3 s3, String bucketName, @Qualifier("appContent") FileUtils fileUtils, Gson gson) {
-        this.s3 = s3;
-        this.bucketName = bucketName;
+    public FileParser(FileUtils fileUtils, Gson gson) {
         this.fileUtils = fileUtils;
         this.gson = gson;
     }
@@ -74,54 +65,12 @@ public abstract class FileParser<T> {
      * If not, will save the file locally so it can use it next time.
      */
     public T parseFile(String fileName, Class<T> tClass) {
-        // if local file does not exist, load from S3
-        Optional<Path> localFilePath = fileUtils.getLocalContentFile(fileName);
-
-        return localFilePath
-            .filter(path -> !localFileOutOfDate(path, getS3ObjectMetadata(fileName)))
-            .map(path -> parseLocalJsonFile(path, tClass))
-            .orElseGet(() -> this.getFileFromS3(fileName));
-    }
-
-    private boolean localFileOutOfDate(Path localFilePath, ObjectMetadata s3Metadata) {
-        try {
-            DateTime localModified = new DateTime(Files.getLastModifiedTime(localFilePath).toMillis());
-            DateTime s3Modified = new DateTime(s3Metadata.getLastModified());
-            return localModified.isBefore(s3Modified);
-        } catch (IOException e) {
-            log.error("Exception accessing local file last modified time", e);
-            return true;
-        }
-    }
-
-    private T parseLocalJsonFile(Path filePath, Class<T> tClass) {
+        Path filePath = fileUtils.localFilePath(fileName + ".json");
         try {
             String content = JOINER.join(Files.readAllLines(filePath, UTF8_CHARSET));
             return gson.fromJson(content, tClass);
         } catch (IOException e) {
             log.error(String.format("Error parsing local JSON file %s, getting from S3", filePath.getFileName()), e);
-            return null;
-        }
-    }
-
-    private ObjectMetadata getS3ObjectMetadata(String fileName) {
-        return s3.getObjectMetadata(bucketName, fileName + ".txt");
-    }
-
-    private T getFileFromS3(String fileName) {
-        GetObjectRequest gor = new GetObjectRequest(bucketName, fileName + ".txt");
-        Optional<S3Object> file = Optional.ofNullable(s3.getObject(gor));
-        Optional<T> result = file.map(S3Object::getObjectContent).map(str -> parseStream(str, fileName));
-        return result.orElse(null);
-    }
-
-    private T parseStream(S3ObjectInputStream stream, String fileName) {
-        try {
-            T object = parseFileData(IOUtils.toString(stream).trim());
-            fileUtils.writeFile(fileName, gson.toJson(object));
-            return object;
-        } catch (IOException e) {
-            log.warn("Error parsing s3 file data", e);
             return null;
         }
     }

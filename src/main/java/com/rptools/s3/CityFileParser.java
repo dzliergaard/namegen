@@ -37,8 +37,8 @@ public class CityFileParser extends FileParser<Cities> {
     private static final Gson gson = new Gson();
 
     @Autowired
-    public CityFileParser(AmazonS3 s3, FileUtils fileUtils, Gson gson) {
-        super(s3, "dzlier-resources", fileUtils, gson);
+    public CityFileParser(FileUtils fileUtils, Gson gson) {
+        super(fileUtils, gson);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class CityGen {
         cityData = cityFileParser.parseFile("cityData", Cities.class);
     }
 
-    public City generateCity(CityTemplate template, Diversity diversity, Species species) {
+    public City generateCity(Double size, Double diversity, Species species) {
         City city = new City();
         // generate name for city and ruler in same call
         List<Name> names = nameGen.generateNames(2);
@@ -35,10 +35,11 @@ public class CityGen {
         } else {
             city.setName(names.get(0).getText().split(" ")[0]);
         }
-        city.getPopulation().add(species, template, diversity);
+
+        city.getPopulation().add(size, diversity, species);
         // add 3 races, or sometimes 2 for low-diversity places
-        while (city.getPopulation().completePop(diversity)) {
-            city.getPopulation().add(Species.rand(), template, diversity);
+        while (city.getPopulation().incompletePop(diversity)) {
+            city.getPopulation().add(size, diversity, Species.rand());
         }
 
         city.setRuler(new Ruler(names.get(1), Species.valueOf(city.getPopulation().getWeightedRace())));

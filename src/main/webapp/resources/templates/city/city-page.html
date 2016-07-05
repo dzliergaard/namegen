@@ -8,7 +8,6 @@
 <link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu.html"/>
 <link rel="import" href="/bower/paper-listbox/paper-listbox.html"/>
 <link rel="import" href="/bower/paper-slider/paper-slider.html"/>
-<!--<link rel="import" href="/bower/paper-input/paper-input.html"/>-->
 
 <dom-module id="city-page">
   <template>
@@ -49,29 +48,33 @@
       :host .buffer-right {
         margin-right: 16px;
       }
+
+      .caption {
+        padding-left: 12px;
+        color: var(--secondary-text-color);
+      }
     </style>
-    <iron-ajax id="generate" url="/city/generate" params="{{generateParams(numNames)}}"
-               on-response="populateCity"></iron-ajax>
+    <iron-ajax id="generate" url="/city/generate" params="{{generateParams}}" on-response="populateCity"></iron-ajax>
     <div class$="{{layoutStyle}} layout start">
       <paper-menu class="buffer-right self-start">
         <paper-item>
           <paper-item-body two-line>
-            <div>Size</div>
-            <paper-slider secondary id="size" value="50"></paper-slider>
+            <div>Size <span id="sizecaption" class="caption"></span></div>
+            <paper-slider secondary id="size" value="50" min="1" on-value-change="updateSizeCaption"></paper-slider>
           </paper-item-body>
         </paper-item>
         <paper-item>
           <paper-item-body two-line>
-            <div>Diversity</div>
-            <paper-slider secondary id="diversity" value="50"></paper-slider>
+            <div>Diversity <span id="diversitycaption" class="caption"></span></div>
+            <paper-slider secondary id="diversity" value="50" min="1" on-value-change="updateDiversityCaption"></paper-slider>
           </paper-item-body>
         </paper-item>
         <paper-item>
-          <paper-dropdown-menu label="Dominant Race">
+          <paper-dropdown-menu id="race" label="Dominant Race">
             <paper-listbox class="dropdown-content">
               <paper-item>Random</paper-item>
               <template is="dom-repeat" items="{{races}}">
-                <paper-item>{{item}}</paper-item>
+                <paper-item value="{{race}}">{{item}}</paper-item>
               </template>
             </paper-listbox>
           </paper-dropdown-menu>
@@ -135,17 +138,24 @@
         races: Array,
         cityVariables: Object,
         generatedCity: Object,
-        diversities: [
-          "Exclusive",
-          "Xenophobic",
-          "Intolerant",
-          "Unequal",
-          "Tolerant",
-          "Accepting",
-          "Welcoming",
-          "Enlightened",
-          "Equal"
-        ],
+        generateParams: {
+          type: Object,
+          computed: '_generateParams()'
+        },
+        diversities: {
+          type: Array,
+          value: [
+            "Exclusive",
+            "Xenophobic",
+            "Intolerant",
+            "Unequal",
+            "Tolerant",
+            "Accepting",
+            "Welcoming",
+            "Enlightened",
+            "Equal"
+          ]
+        },
         sizes: {
           type: Array,
           value: [
@@ -159,12 +169,34 @@
           ]
         }
       },
+      updateDiversityCaption: function(event) {
+        if (!this.diversities) {
+          return;
+        }
+        var index = Math.trunc(this.$.diversity.value / 100 * (this.diversities.length - 1) + .5);
+        this.$.diversitycaption.textContent = this.diversities[index];
+      },
+      updateSizeCaption: function(event) {
+        if (!this.sizes) {
+          return;
+        }
+        var index = Math.trunc(this.$.size.value / 100 * (this.sizes.length - 1) + .5);
+        this.$.sizecaption.textContent = this.sizes[index];
+      },
       computeTotalPop: function (population) {
         return population.reduce(function (value, item) {
           return value + item.population;
         }, 0);
       },
       generateCity: function () {
+        this.$.generate.params = {
+          diversity: this.$.diversity.value,
+          size: this.$.size.value,
+          race: this.$.race.value || ""
+        };
+        if(this.$.generate.params.race == "Random"){
+          this.$.generate.params.race = "";
+        }
         this.$.generate.generateRequest();
       },
       populateCity: function (err, request) {

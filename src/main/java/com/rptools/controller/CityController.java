@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
+import java.util.Random;
 
 /**
  * REST controller that manipulates {@link City} objects
@@ -32,6 +33,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "city")
 public class CityController {
+    private static final Random rand = new Random();
 
     private final CityGen cityGen;
     private final Gson gson;
@@ -51,13 +53,15 @@ public class CityController {
 
     @RequestMapping(value = "generate", method = RequestMethod.GET, headers = "Accept=application/json")
     public @ResponseBody City generate(
-            @RequestParam(required = false) CityTemplate size,
-            @RequestParam(required = false) Diversity diversity,
+            @RequestParam(required = false) Double size,
+            @RequestParam(required = false) Double diversity,
             @RequestParam(required = false) Species race) {
-        return cityGen.generateCity(
-                Optional.ofNullable(size).orElse(CityTemplate.rand()),
-                Optional.ofNullable(diversity).orElse(Diversity.rand()),
-                Optional.ofNullable(race).orElse(Species.rand()));
+        size = Math.pow(size * size, 1.1);
+
+        diversity = Optional.ofNullable(diversity).orElse(rand.nextInt(99) + 1.0);
+        diversity = .1 + (.3 / 100) * diversity;
+
+        return cityGen.generateCity(size, diversity, Optional.ofNullable(race).orElse(Species.rand()));
     }
 
     @RequestMapping(value = "races", method = RequestMethod.GET)

@@ -1,34 +1,22 @@
-<link rel="import" href="../util/hover-icon.html"/>
+<link rel="import" href="../util/editing-item.html"/>
 <link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html"/>
 <link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html"/>
-<link rel="import" href="/bower/paper-button/paper-button.html"/>
-<link rel="import" href="/bower/paper-input/paper-input.html"/>
-<link rel="import" href="/bower/iron-icon/iron-icon.html"/>
 <link rel="import" href="/bower/paper-item/paper-icon-item.html"/>
 
 <dom-module id="name-line">
-  <style is="custom-style" include="iron-flex iron-flex-alignment">
+  <style is="custom-style" include="iron-flex">
     :host ::content iron-icon {
       opacity: .5;
     }
 
-    :host ::content paper-input paper-input-container div.underline {
+    :host ::content editing-item paper-input paper-input-container div.underline .unfocused-line {
       display: none;
     }
   </style>
   <template>
-    <paper-icon-item>
-      <hover-icon item-icon icon="{{prim}}" hover="{{primHover}}" on-tap="_doPrimary"></hover-icon>
-      <paper-input no-label-float id="name-input" class="flex self-center"
-                   on-click="_startEditing"
-                   on-blur="_doneEditing"
-                   value="{{_editingItem}}"></paper-input>
-      <template is="dom-if" if="{{!_editing}}">
-        <iron-icon icon="create" on-tap="_startEditing"></iron-icon>
-      </template>
-      <template is="dom-if" if="{{_editing}}">
-        <iron-icon class$="self-center" icon="done" on-tap="_doneEditing"></iron-icon>
-      </template>
+    <paper-icon-item class="layout horizontal">
+      <hover-icon item-icon id="icon" icon="{{prim}}" hover="{{primHover}}" on-tap="_doPrimary"></hover-icon>
+      <editing-item id="editor" class="flex" item="{{name.text}}" editing="{{editing}}"></editing-item>
     </paper-icon-item>
   </template>
 
@@ -38,35 +26,22 @@
       properties: {
         prim: String,
         primHover: String,
-        _editing: {
-          type: Boolean,
-          value: false
-        },
-        editingItem: {
-          type: String
-        },
         name: {
           type: Object,
-          notify: true,
-          observer: "_updateEditingItem"
+          notify: true
         }
+      },
+      ready: function () {
+        this.editor = this.$.editor;
       },
       _doPrimary: function () {
         this.fire('name-primary-tap');
       },
       _doneEditing: function () {
-        this._editing = false;
-        this.name.text = this._editingItem;
-        this.fire('name-done-editing');
+        this.$.editor.doneEditing();
       },
       _startEditing: function (event) {
-        if (!this._editing) {
-          Polymer.dom(this.root).querySelector('paper-input').querySelector('input').select();
-        }
-        this._editing = true;
-      },
-      _updateEditingItem: function (name) {
-        this._editingItem = this.name.text;
+        this.$.editor.startEditing();
       }
     });
   </script>

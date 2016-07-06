@@ -1,0 +1,61 @@
+<link rel="import" href="/bower/paper-input/paper-input.html"/>
+
+<dom-module id="editing-item">
+  <template>
+    <paper-input no-label-float id="editor"
+                 value="{{_editingItem}}"
+                 on-click="startEditing"
+                 on-blur="doneEditing"
+                 on-keydown="_keyCheck"
+                 value="{{_editingItem}}">
+      <iron-icon suffix icon="{{_icon(editing)}}"></iron-icon>
+    </paper-input>
+  </template>
+
+  <script>
+    Polymer({
+      id: 'editing-item',
+      properties: {
+        _editingItem: String,
+        editing: {
+          type: Boolean,
+          notify: true,
+          value: false
+        },
+        item: {
+          type: String,
+          notify: true,
+          observer: '_setEditingItem'
+        }
+      },
+      ready: function () {
+        this._editingItem = this.item;
+      },
+      _icon: function (editing) {
+        return editing ? 'none' : 'create';
+      },
+      _keyCheck: function (event) {
+        switch (event.keyCode) {
+          case 13:
+            this.doneEditing();
+            break;
+          case 27:
+            this.editing = false;
+            this._editingItem = this.item;
+            break;
+        }
+      },
+      _setEditingItem: function () {
+        this._editingItem = this.item;
+      },
+      doneEditing: function () {
+        this.editing = false;
+        this.item = this._editingItem;
+        this.$.editor.$.input.blur();
+      },
+      startEditing: function (event) {
+        this.editing = true;
+      }
+    })
+  </script>
+</dom-module>

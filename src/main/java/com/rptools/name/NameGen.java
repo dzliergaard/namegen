@@ -50,20 +50,13 @@ public class NameGen {
         log.info(String.format(PARSED_TIME, timer.elapsed(TimeUnit.MILLISECONDS)));
     }
 
-    public List<Name> generateNames(int numNames) {
-        List<Name> names = Lists.newArrayList();
+    public List<String> generateNames(int numNames) {
+        List<String> names = Lists.newArrayList();
         while (numNames-- > 0) {
-            Name name = new Name(makeName());
+            String name = makeName();
             names.add(name);
         }
         return names;
-    }
-
-    public TrainingName getTrainingName() {
-        return new TrainingName(makeName());
-    }
-
-    public void train(TrainingName name) {
     }
 
     private String makeName() {

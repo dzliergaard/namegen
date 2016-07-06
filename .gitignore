@@ -1,10 +1,8 @@
 .idea
 target
 *.iml
-codeFormatter.xml
 **/js/bower_components/**/*
 **/js/node_modules/**/*
-**/js/**/*.js.map
-**/js/**/*.js
-**/rptools_secret
+**/js/bower_components
+**/js/bower_components
 **/security.properties

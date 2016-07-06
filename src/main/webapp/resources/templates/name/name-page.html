@@ -13,6 +13,10 @@
 <dom-module id="name-page">
   <template>
     <style is="custom-style" include="dark-theme iron-flex iron-flex-alignment iron-flex-factors">
+      :host ::content .generated name-line {
+        --paper-input-container-focus-color: var(--light-theme-text-color);
+      }
+
       :host paper-menu.generate-menu {
         margin: 10px 10px;
       }
@@ -54,13 +58,14 @@
           </div>
         </paper-menu>
       </paper-card>
+
       <div class$="{{layoutStyle}} layout">
         <div class="card-content flex-4 layout vertical">
           <template is="dom-if" if="{{generatedNames}}">
             <paper-card class="generated" heading="Generated Names">
               <div class="card-content">
                 <template is="dom-repeat" items="{{generatedNames}}">
-                  <name-line name="{{item}}" prim-hover="star" prim="star-border"></name-line>
+                  <name-line name="{{makeName(item)}}" prim-hover="star" prim="star-border"></name-line>
                 </template>
               </div>
             </paper-card>
@@ -115,6 +120,11 @@
       },
       generateParams: function (numNames) {
         return {num: numNames || 10};
+      },
+      makeName: function (text) {
+        return {
+          text: text
+        };
       },
       populateNames: function (event, request) {
         this.generatedNames = request.response.data;

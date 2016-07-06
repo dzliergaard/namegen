@@ -20,14 +20,15 @@ package com.rptools.controller;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
-import com.rptools.city.*;
-import com.rptools.name.Name;
+import com.rptools.city.Species;
 import com.rptools.name.NameAttribute;
 import com.rptools.name.NameGen;
-import com.rptools.name.TrainingName;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -35,7 +36,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * REST controller that manipulates {@link Name} objects
+ * REST controller that manipulates Name strings
  */
 @CommonsLog
 @RestController("NameController")
@@ -59,18 +60,12 @@ public class NameController {
     }
 
     @RequestMapping(value = "generate", method = RequestMethod.GET)
-    public Map<String, List<Name>> generate(@RequestParam(required = false) Integer num) {
+    public Map<String, List<String>> generate(@RequestParam(required = false) Integer num) {
         return ImmutableMap.of("data", nameGen.generateNames(Optional.ofNullable(num).orElse(10)));
     }
 
     @RequestMapping(value = "nameAttributes", method = RequestMethod.GET)
     public NameAttribute[] nameAttributes() {
         return NameAttribute.values();
-    }
-
-    @RequestMapping(value = "train", method = RequestMethod.POST)
-    public TrainingName train(@RequestBody(required = false) TrainingName trainName) {
-        Optional.ofNullable(trainName).ifPresent(nameGen::train);
-        return nameGen.getTrainingName();
     }
 }

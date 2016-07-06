@@ -1,19 +1,27 @@
 <dom-module id="dark-theme">
   <template>
     <style is="custom-style">
-      .dark {
+      :host .dark {
         --primary-color: var(--dark-primary-color);
         --primary-text-color: var(--dark-theme-text-color);
         --primary-background-color: var(--dark-theme-background-color);
         --secondary-text-color: var(--dark-theme-secondary-color);
         --divider-color: var(--dark-theme-divider-color);
 
+        --iron-icon-fill-color: var(--dark-theme-secondary-color);
         --paper-card-header-color: var(--dark-theme-text-color);
+        --paper-input-container-color: var(--dark-theme-text-color);
+        --paper-input-container-focus-color: var(--dark-theme-secondary-color);
+
+        color: var(--dark-theme-text-color);
       }
 
-      :host ::content .dark paper-input .input-content .paper-input-container input,
-      :host ::content .dark paper-icon-item {
+      :host ::content .dark paper-input paper-input-container .input-content.paper-input-container input {
         color: var(--dark-theme-text-color);
+      }
+
+      :host .dark [secondary] {
+        color: var(--dark-theme-secondary-color);
       }
     </style>
   </template>

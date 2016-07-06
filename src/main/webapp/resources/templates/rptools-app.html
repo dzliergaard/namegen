@@ -14,6 +14,7 @@
 <link rel="import" href="/bower/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="/bower/paper-item/paper-icon-item.html">
 <link rel="import" href="/bower/paper-menu/paper-menu.html"/>
+<link rel="import" href="/bower/paper-toast/paper-toast.html">
 <link rel="import" href="/bower/paper-toolbar/paper-toolbar.html">
 
 <dom-module id="rptools-app">
@@ -53,12 +54,14 @@
           <h2>{{selected}}</h2>
         </paper-toolbar>
         <iron-pages selected="{{selected}}" attr-for-selected="name">
-          <name-page name="{{_pageNames.name}}" saved-names="{{userSavedContent.names}}"
-                     is-signed-in="{{isSignedIn}}"></name-page>
-          <city-page name="{{_pageNames.city}}" races="{{races}}"></city-page>
+          <name-page name="{{_pageNames.name}}" is-signed-in="{{isSignedIn}}"
+                     saved-names="{{userSavedContent.names}}"></name-page>
+          <city-page name="{{_pageNames.city}}" races="{{races}}" is-signed-in="{{isSignedIn}}"
+                     saved-cities="{{userSavedContent.cities}}"></city-page>
         </iron-pages>
       </paper-header-panel>
     </paper-drawer-panel>
+    <paper-toast id="savesuccess" text="User content saved!"></paper-toast>
   </template>
 
   <script>
@@ -105,13 +108,18 @@
       },
       listeners: {
         'google-signin-success': 'userSignedIn',
-        'google-signed-out': 'userSignedOut',
-        'saved-name-updated': 'namesUpdated'
+        'google-signed-out': 'userSignedOut'
       },
       observers: [
-        'namesUpdated(userSavedContent.names.splices)',
+        'contentUpdated(userSavedContent.names.*)',
+        'contentUpdated(userSavedContent.cities.*)',
+        'contentUpdated(userSavedContent.names.splices)',
+        'contentUpdated(userSavedContent.cities.splices)',
         '_setSelected(location.page)'
       ],
+      citiesUpdated: function (cities) {
+        console.log("cities updated");
+      },
       ready: function () {
         this.gapi = document.querySelector('google-js-api');
         this.drive = document.querySelector('google-client-loader');
@@ -136,11 +144,12 @@
       closeDrawer: function (event) {
         this.$.drawer.closeDrawer();
       },
-      namesUpdated: function (names) {
+      contentUpdated: function (names) {
         if (!this.listening || !this.isSignedIn) {
           return;
         }
         this.gapi.api.client.request(this.updateRequestParams).execute();
+        this.$.savesuccess.open();
       },
       userSignedIn: function () {
         this.isSignedIn = true;

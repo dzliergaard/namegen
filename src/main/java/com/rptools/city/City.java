@@ -18,27 +18,25 @@
 
 package com.rptools.city;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
 import lombok.Data;
 
-import com.google.common.collect.Lists;
+import java.util.List;
 
 /**
  * Represents a single generated City item.
  */
 @Data
 public class City {
-    private String id;
     private String name;
     private Ruler ruler;
     private Population population = new Population();
     private List<String> inns = Lists.newArrayList();
+    private List<String> guilds = Lists.newArrayList();
 
-    public City() {
-    }
-
-    public City(String id) {
-        this.id = id;
+    @Data
+    public static class Ruler {
+        private final String name;
+        private final Species species;
     }
 }

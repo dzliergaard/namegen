@@ -1,25 +1,39 @@
+<link rel="import" href="city-card.html"/>
 <link rel="import" href="../dark-theme.html"/>
 <link rel="import" href="../util/dropdown-options.html"/>
+<link rel="import" href="../util/hover-icon.html"/>
 <link rel="import" href="../util/variable-layout-behavior.html"/>
 <link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
+<link rel="import" href="/bower/iron-collapse/iron-collapse.html"/>
 <link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html"/>
 <link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="/bower/paper-button/paper-button.html"/>
 <link rel="import" href="/bower/paper-card/paper-card.html"/>
 <link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu.html"/>
+<link rel="import" href="/bower/paper-input/paper-input.html"/>
 <link rel="import" href="/bower/paper-listbox/paper-listbox.html"/>
 <link rel="import" href="/bower/paper-slider/paper-slider.html"/>
 
 <dom-module id="city-page">
   <template>
-    <style is="custom-style" include="iron-flex iron-flex-alignment">
-      :host paper-card {
-        --paper-card-header-color: var(--light-theme-text-color);
-        margin-bottom: 10px;
+    <style is="custom-style" include="iron-flex iron-flex-alignment dark-theme">
+      :host ::content paper-input paper-input-container div.underline .unfocused-line {
+        display: none;
       }
 
-      :host paper-button.generate-button {
-        background-color: var(--accent-color);
+      :host .city-menu .caption {
+        color: var(--light-theme-secondary-color);
+        font-weight: normal;
+      }
+
+      :host ::content city-card.generated {
+        --paper-input-container-focus-color: var(--light-theme-text-color);
+        --iron-icon-fill-color: var(--light-theme-text-color);
         color: var(--light-theme-text-color);
+      }
+
+      :host ::content city-card.generated {
+        --paper-input-container-input-color: var(--light-theme-secondary-color);
       }
 
       :host paper-slider {
@@ -28,53 +42,40 @@
         width: 100%;
       }
 
-      :host ::content paper-input {
-        --paper-input-container-focus-color: var(--light-theme-secondary-color);
+      :host paper-button.generate-button {
+        background-color: var(--accent-color);
+        color: var(--light-theme-text-color);
       }
 
-      :host ::content paper-input paper-input-container div.underline {
-        display: none;
-      }
-
-      :host .city paper-item-body div {
-        color: var(--primary-text-color);
-      }
-
-      :host ::content .city paper-item-body paper-input,
-      :host ::content .city paper-item-body paper-input paper-dropdown-menu, paper-listbox {
-        --paper-input-container-input-color: var(--secondary-text-color);
-      }
-
-      :host .buffer-right {
+      :host .city-menu,
+      :host city-card {
         margin-right: 16px;
-      }
-
-      .caption {
-        padding-left: 12px;
-        color: var(--secondary-text-color);
+        margin-bottom: 16px;
       }
     </style>
     <iron-ajax id="generate" url="/city/generate" params="{{generateParams}}" on-response="populateCity"></iron-ajax>
-    <div class$="{{layoutStyle}} layout start">
-      <paper-menu class="buffer-right self-start">
+    <iron-ajax id="refresh" url="/city/generate" params="{{generateParams}}"></iron-ajax>
+    <div class$="{{layoutStyle}} layout start wrap">
+      <paper-menu class="city-menu self-start">
         <paper-item>
           <paper-item-body two-line>
             <div>Size <span id="sizecaption" class="caption"></span></div>
-            <paper-slider secondary id="size" value="50" min="1" on-value-change="updateSizeCaption"></paper-slider>
+            <paper-slider secondary id="size" value="50" min="1" on-value-change="updateSize"></paper-slider>
           </paper-item-body>
         </paper-item>
         <paper-item>
           <paper-item-body two-line>
             <div>Diversity <span id="diversitycaption" class="caption"></span></div>
-            <paper-slider secondary id="diversity" value="50" min="1" on-value-change="updateDiversityCaption"></paper-slider>
+            <paper-slider secondary id="diversity" value="50" min="1"
+                          on-value-change="updateDiversity"></paper-slider>
           </paper-item-body>
         </paper-item>
         <paper-item>
           <paper-dropdown-menu id="race" label="Dominant Race">
-            <paper-listbox class="dropdown-content">
+            <paper-listbox class="dropdown-content" selected="0">
               <paper-item>Random</paper-item>
               <template is="dom-repeat" items="{{races}}">
-                <paper-item value="{{race}}">{{item}}</paper-item>
+                <paper-item>{{item}}</paper-item>
               </template>
             </paper-listbox>
           </paper-dropdown-menu>
@@ -84,48 +85,22 @@
           <paper-button class="generate-button" on-tap="generateCity">Generate</paper-button>
         </paper-item>
       </paper-menu>
+
       <template is="dom-if" if="{{generatedCity}}">
-        <paper-card class="city" heading="{{generatedCity.name}}">
-          <div class="card-content">
-            <paper-item>
-              <paper-item-body two-line>
-                <div>Ruler</div>
-                <paper-item>
-                  <paper-input secondary no-label-float value="{{generatedCity.ruler.name.text}}">
-                    <paper-dropdown-menu no-label-float suffix horizontal-align="left">
-                      <paper-listbox class="dropdown-content" selected="{{generatedCity.ruler.species}}"
-                                     attr-for-selected="value">
-                        <template is="dom-repeat" items="{{races}}">
-                          <paper-item value="{{item}}">{{item}}</paper-item>
-                        </template>
-                      </paper-listbox>
-                    </paper-dropdown-menu>
-                  </paper-input>
-                </paper-item>
-              </paper-item-body>
-            </paper-item>
-            <paper-item>
-              <paper-item-body three-line>
-                <div>Population: {{generatedCity.population.tot}}</div>
-                <template is="dom-repeat" items="{{generatedCity.population.people}}" as="pop">
-                  <paper-item secondary>
-                    {{pop.species}}: {{pop.population}}
-                  </paper-item>
-                </template>
-              </paper-item-body>
-            </paper-item>
-            <paper-item>
-              <paper-item-body three-line>
-                <div>Inns/Shoppes</div>
-                <template is="dom-repeat" items="{{generatedCity.inns}}">
-                  <paper-item secondary>
-                    {{item}}
-                  </paper-item>
-                </template>
-              </paper-item-body>
-            </paper-item>
-          </div>
-        </paper-card>
+        <city-card class="generated"
+                   city="{{generatedCity}}"
+                   races="{{races}}"
+                   generate-params="{{generateParams}}"
+                   main-icon="star-border"
+                   opened="true"
+                   on-primary-tap="saveCity"></city-card>
+      </template>
+      <template is="dom-repeat" items="{{savedCities}}">
+        <city-card class="dark"
+                   city="{{item}}"
+                   races="{{races}}"
+                   generate-params="{{generateParams}}"
+                   on-primary-tap="removeCity"></city-card>
       </template>
     </div>
   </template>
@@ -138,9 +113,18 @@
         races: Array,
         cityVariables: Object,
         generatedCity: Object,
+        isSignedIn: Boolean,
+        race: {
+          type: String,
+          value: "Random"
+        },
         generateParams: {
           type: Object,
-          computed: '_generateParams()'
+          computed: '_generateParams(diversity, size, race)'
+        },
+        savedCities: {
+          type: Object,
+          notify: true
         },
         diversities: {
           type: Array,
@@ -169,19 +153,49 @@
           ]
         }
       },
-      updateDiversityCaption: function(event) {
+      listeners: {
+        'race.iron-select': 'updateRace'
+      },
+      _keyCheck: function (event) {
+        switch (event.keyCode) {
+          case 13:
+            this.doneEditing();
+            break;
+          case 27:
+            this._editing = false;
+            this._editingItem = this.name.text;
+            break;
+        }
+      },
+      _generateParams: function (diversity, size, race) {
+        var params = {
+          diversity: diversity,
+          size: size,
+          race: race || ""
+        };
+        if (params.race == "Random") {
+          params.race = "";
+        }
+        return params;
+      },
+      updateDiversity: function (event) {
+        this.set('diversity', this.$.diversity.value);
         if (!this.diversities) {
           return;
         }
         var index = Math.trunc(this.$.diversity.value / 100 * (this.diversities.length - 1) + .5);
         this.$.diversitycaption.textContent = this.diversities[index];
       },
-      updateSizeCaption: function(event) {
+      updateSize: function (event) {
+        this.set('size', this.$.size.value);
         if (!this.sizes) {
           return;
         }
         var index = Math.trunc(this.$.size.value / 100 * (this.sizes.length - 1) + .5);
         this.$.sizecaption.textContent = this.sizes[index];
+      },
+      updateRace: function (event) {
+        this.set('race', this.$.race.value);
       },
       computeTotalPop: function (population) {
         return population.reduce(function (value, item) {
@@ -189,18 +203,39 @@
         }, 0);
       },
       generateCity: function () {
-        this.$.generate.params = {
-          diversity: this.$.diversity.value,
-          size: this.$.size.value,
-          race: this.$.race.value || ""
-        };
-        if(this.$.generate.params.race == "Random"){
-          this.$.generate.params.race = "";
-        }
         this.$.generate.generateRequest();
       },
       populateCity: function (err, request) {
         this.generatedCity = request.response;
+      },
+      refreshCityPart: function (cityPart) {
+        this.$.refresh.generateRequest().completes.then(function (request) {
+          this.set('generatedCity.' + cityPart, request.response[cityPart]);
+        }.bind(this));
+      },
+      refreshName: function () {
+        this.refreshCityPart('name');
+      },
+      refreshRuler: function () {
+        this.refreshCityPart('ruler');
+      },
+      refreshPopulation: function () {
+        this.refreshCityPart('population');
+      },
+      refreshInns: function () {
+        this.refreshCityPart('inns');
+      },
+      refreshGuilds: function () {
+        this.refreshCityPart('guilds');
+      },
+      removeCity: function (event) {
+        var index = this.savedCities.indexOf(event.target.city);
+        if (index >= 0) {
+          this.splice('savedCities', index, 1);
+        }
+      },
+      saveCity: function (event) {
+        this.push('savedCities', this.generatedCity);
       }
     });
   </script>

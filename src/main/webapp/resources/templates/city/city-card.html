@@ -1,0 +1,195 @@
+<link rel="import" href="../dark-theme.html"/>
+<link rel="import" href="../util/editing-item.html"/>
+<link rel="import" href="/bower/iron-collapse/iron-collapse.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="/bower/iron-icon/iron-icon.html"/>
+<link rel="import" href="/bower/iron-icons/hardware-icons.html">
+<link rel="import" href="/bower/paper-card/paper-card.html"/>
+<link rel="import" href="/bower/paper-item/paper-item.html"/>
+<link rel="import" href="/bower/paper-item/paper-icon-item.html"/>
+
+<dom-module id="city-card">
+  <template>
+    <style is="custom-style" include="iron-flex dark-theme iron-flex-alignment">
+      :host ::content paper-input.city-name .input-content.paper-input-container input {
+        font-size: 24px;
+      }
+
+      :host ::content editing-item.city-name paper-input .input-content.paper-input-container input {
+        font-size: 24px;
+        color: var(--primary-text-color);
+      }
+
+      :host ::content editing-item paper-input paper-input-container div.underline .unfocused-line {
+        display: none;
+      }
+
+      :host ::content iron-icon {
+        padding-left: -16px;
+        margin-right: 16px;
+      }
+    </style>
+
+    <iron-ajax id="refresh" url="/city/generate" params="{{generateParams}}"></iron-ajax>
+    <paper-card class$="city">
+      <div class="header paper-card">
+        <div class="title-text paper-card layout horizontal">
+          <span class="flex">
+            <editing-item class="city-name" item="{{city.name}}"></editing-item>
+          </span>
+          <iron-icon class="self-center" icon="{{mainIcon}}" on-tap="primaryTap"></iron-icon>
+        </div>
+      </div>
+      <div class="card-content">
+        <paper-item class="layout horizontal">
+          <paper-item-body>
+            <div class="layout horizontal">
+              <iron-icon id="rulerIcon" class="self-start" icon="{{down}}" on-tap="toggleRuler"></iron-icon>
+              <span class="flex" on-tap="toggleRuler">Ruler</span>
+              <iron-icon secondary class="self-end" icon="refresh" on-tap="refreshRuler"></iron-icon>
+            </div>
+            <iron-collapse id="ruler">
+              <paper-item>
+                <paper-input secondary no-label-float value="{{city.ruler.name}}" on-keydown="_keyCheck">
+                  <span suffix class="flex self-end">{{city.ruler.species}}</span>
+                </paper-input>
+              </paper-item>
+            </iron-collapse>
+          </paper-item-body>
+        </paper-item>
+        <paper-item>
+          <paper-item-body>
+            <div class="layout horizontal">
+              <iron-icon id="populationIcon" class="self-start" icon="{{down}}" on-tap="togglePopulation"></iron-icon>
+              <span class="flex" on-tap="togglePopulation">Population: {{city.population.tot}}</span>
+              <iron-icon secondary class="self-end" icon="refresh" on-tap="refreshPopulation"></iron-icon>
+            </div>
+            <iron-collapse id="population">
+              <template is="dom-repeat" items="{{city.population.people}}" as="pop">
+                <paper-item secondary>
+                  {{pop.species}}: {{pop.population}}
+                </paper-item>
+              </template>
+            </iron-collapse>
+          </paper-item-body>
+        </paper-item>
+        <paper-item>
+          <paper-item-body>
+            <div class="layout horizontal">
+              <iron-icon id="innsIcon" class="self-start" icon="{{down}}" on-tap="toggleInns"></iron-icon>
+              <span class="flex" on-tap="toggleInns">Inns/Shoppes</span>
+              <iron-icon secondary class="self-end" icon="refresh" on-tap="refreshInns"></iron-icon>
+            </div>
+            <iron-collapse id="inns">
+              <template is="dom-repeat" items="{{city.inns}}">
+                <paper-item secondary>
+                  {{item}}
+                </paper-item>
+              </template>
+            </iron-collapse>
+          </paper-item-body>
+        </paper-item>
+        <paper-item>
+          <paper-item-body>
+            <div class="layout horizontal">
+              <iron-icon id="guildsIcon" class="self-start" icon="{{down}}" on-tap="toggleGuilds"></iron-icon>
+              <span class="flex" on-tap="toggleGuilds">Guilds</span>
+              <iron-icon secondary class="self-end" icon="refresh" on-tap="refreshGuilds"></iron-icon>
+            </div>
+            <iron-collapse id="guilds">
+              <template is="dom-repeat" items="{{city.guilds}}">
+                <paper-item secondary>
+                  {{item}}
+                </paper-item>
+              </template>
+            </iron-collapse>
+          </paper-item-body>
+        </paper-item>
+      </div>
+    </paper-card>
+  </template>
+
+  <script>
+    Polymer({
+      id: 'city-card',
+      properties: {
+        generateParams: Object,
+        races: Array,
+        city: {
+          type: Object,
+          notify: true
+        },
+        mainIcon: {
+          type: String,
+          value: 'delete'
+        },
+        opened: {
+          type: Boolean,
+          value: false
+        },
+        down: {
+          type: String,
+          value: "hardware:keyboard-arrow-down"
+        },
+        up: {
+          type: String,
+          value: "hardware:keyboard-arrow-up"
+        }
+      },
+      ready: function () {
+        if (this.opened) {
+          this.toggleRuler();
+          this.togglePopulation();
+          this.toggleInns();
+          this.toggleGuilds();
+        }
+      },
+      primaryTap: function () {
+        this.fire("primary-tap");
+      },
+
+      refreshCityPart: function (cityPart) {
+        this.$.refresh.generateRequest().completes.then(function (request) {
+          this.set('city.' + cityPart, request.response[cityPart]);
+        }.bind(this));
+      },
+      refreshName: function () {
+        this.refreshCityPart('name');
+      },
+      refreshRuler: function () {
+        this.refreshCityPart('ruler');
+      },
+      refreshPopulation: function () {
+        this.refreshCityPart('population');
+      },
+      refreshInns: function () {
+        this.refreshCityPart('inns');
+      },
+      refreshGuilds: function () {
+        this.refreshCityPart('guilds');
+      },
+
+      toggleIcon: function (collapse, iconItem) {
+        collapse.toggle();
+        if (collapse.opened) {
+          iconItem.icon = this.up;
+        } else {
+          iconItem.icon = this.down;
+        }
+      },
+      toggleRuler: function () {
+        this.toggleIcon(this.$.ruler, this.$.rulerIcon);
+      },
+      togglePopulation: function () {
+        this.toggleIcon(this.$.population, this.$.populationIcon);
+      },
+      toggleInns: function () {
+        this.toggleIcon(this.$.inns, this.$.innsIcon);
+      },
+      toggleGuilds: function () {
+        this.toggleIcon(this.$.guilds, this.$.guildsIcon);
+      }
+    })
+  </script>
+</dom-module>

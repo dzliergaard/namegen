@@ -23,10 +23,27 @@ import lombok.Data;
 import java.util.List;
 
 /**
- *
+ * Represents the parsed city data from cityData.json.
+ * An inn is a pattern formed by {begPat} {endPat}, where either will have placeholders for
+ * things like adjectives, names, and qualifiers
  */
 @Data
 public class Cities {
-    private List<String> beg;
-    private List<String> end;
+    private Inns inns;
+    private Guilds guilds;
+
+    @Data
+    public static class Inns {
+        private List<String> begPat;
+        private List<String> beg;
+        private List<String> endPat;
+        private List<String> end;
+    }
+
+    @Data
+    public static class Guilds {
+        private List<String> pat;
+        private List<String> group;
+        private List<String> noun;
+    }
 }

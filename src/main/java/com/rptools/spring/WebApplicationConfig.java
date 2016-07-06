@@ -49,7 +49,6 @@ public class WebApplicationConfig extends WebMvcConfigurationSupport {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
         registry.addResourceHandler("/bower/**").addResourceLocations("/resources/js/bower_components/");
         registry.addResourceHandler("/templates/**").addResourceLocations("/resources/templates/");
     }

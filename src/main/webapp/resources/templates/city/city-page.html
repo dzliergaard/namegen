@@ -235,7 +235,8 @@
         }
       },
       saveCity: function (event) {
-        this.push('savedCities', this.generatedCity);
+        this.unshift('savedCities', this.generatedCity);
+        this.generatedCity = undefined;
       }
     });
   </script>

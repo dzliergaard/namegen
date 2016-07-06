@@ -23,7 +23,6 @@ import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.amazonaws.services.s3.AmazonS3;
 import com.google.gson.Gson;
 import com.rptools.city.Cities;
 
@@ -33,11 +32,12 @@ import com.rptools.city.Cities;
 @Component
 @CommonsLog
 public class CityFileParser extends FileParser<Cities> {
-    private static final Gson gson = new Gson();
+    private final Gson gson;
 
     @Autowired
     public CityFileParser(FileUtils fileUtils, Gson gson) {
-        super(fileUtils, gson);
+        super(fileUtils);
+        this.gson = gson;
     }
 
     @Override

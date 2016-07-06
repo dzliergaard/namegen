@@ -18,19 +18,17 @@
 
 package com.rptools.io;
 
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import com.dzlier.weight.WeightedTrie;
+import com.google.gson.Gson;
+import com.rptools.name.Names;
 import lombok.extern.apachecommons.CommonsLog;
-
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.dzlier.weight.WeightedTrie;
-import com.google.gson.Gson;
-import com.rptools.name.Names;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Parses first and last name data files from S3. Creates {@link SummaryStatistics} object for {@link Names} to
@@ -69,8 +67,8 @@ public class NameFileParser extends FileParser<Names> {
     private static final Pattern namePat = Pattern.compile("\\w+:\\d+");
 
     @Autowired
-    public NameFileParser(FileUtils fileUtils, Gson gson) {
-        super(fileUtils, gson);
+    public NameFileParser(FileUtils fileUtils) {
+        super(fileUtils);
     }
 
     @Override

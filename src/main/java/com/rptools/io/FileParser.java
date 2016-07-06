@@ -18,21 +18,12 @@
 
 package com.rptools.io;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Optional;
-
+import com.google.common.base.Joiner;
 import lombok.extern.apachecommons.CommonsLog;
 
-import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.amazonaws.util.IOUtils;
-import com.google.common.base.Joiner;
-import com.google.gson.Gson;
-import com.rptools.io.FileUtils;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Abstract class that parses a file from S3 into a tangible/useful object
@@ -50,14 +41,11 @@ import com.rptools.io.FileUtils;
 @CommonsLog
 public abstract class FileParser<T> {
     private static final Joiner JOINER = Joiner.on("");
-    private static final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
     private final FileUtils fileUtils;
-    private final Gson gson;
 
-    public FileParser(FileUtils fileUtils, Gson gson) {
+    public FileParser(FileUtils fileUtils) {
         this.fileUtils = fileUtils;
-        this.gson = gson;
     }
 
     /**
@@ -65,10 +53,11 @@ public abstract class FileParser<T> {
      * If not, will save the file locally so it can use it next time.
      */
     public T parseFile(String fileName, Class<T> tClass) {
-        Path filePath = fileUtils.localFilePath(fileName + ".json");
+        Path filePath = fileUtils.localFilePath(fileName + ".txt");
         try {
-            String content = JOINER.join(Files.readAllLines(filePath, UTF8_CHARSET));
-            return gson.fromJson(content, tClass);
+            return parseFileData(JOINER.join(Files.readAllLines(filePath)));
+//            String content = JOINER.join(Files.readAllLines(filePath, UTF8_CHARSET));
+//            return gson.fromJson(content, tClass);
         } catch (IOException e) {
             log.error(String.format("Error parsing local JSON file %s, getting from S3", filePath.getFileName()), e);
             return null;

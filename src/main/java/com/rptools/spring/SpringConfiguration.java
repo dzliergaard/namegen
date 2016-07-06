@@ -18,8 +18,6 @@
 
 package com.rptools.spring;
 
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.context.annotation.*;
@@ -39,11 +37,6 @@ public class SpringConfiguration {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
-    }
-
-    @Bean
-    public AmazonS3 s3() {
-        return new AmazonS3Client();
     }
 
     @Bean

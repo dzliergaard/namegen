@@ -1,7 +1,12 @@
 package com.rptools.npc;
 
 /**
- * Created by DZ on 7/4/2016.
+ * Represents a randomly generated non-player character
  */
 public class Character {
+
+
+    enum Appearance {
+        DistinctiveJewelry
+    }
 }

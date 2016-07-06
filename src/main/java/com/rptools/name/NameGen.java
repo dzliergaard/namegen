@@ -18,19 +18,17 @@
 
 package com.rptools.name;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import lombok.extern.apachecommons.CommonsLog;
-
-import org.apache.commons.lang3.text.WordUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.google.common.base.Joiner;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.rptools.io.NameFileParser;
+import lombok.extern.apachecommons.CommonsLog;
+import org.apache.commons.lang3.text.WordUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Helper component that generates names from the {@link Names} object returned by {@link NameFileParser}
@@ -46,8 +44,8 @@ public class NameGen {
     @Autowired
     public NameGen(NameFileParser nameFileParser) {
         Stopwatch timer = Stopwatch.createStarted();
-        first = nameFileParser.parseFile("names", Names.class);
-        last = nameFileParser.parseFile("lastNames", Names.class);
+        first = nameFileParser.parseFile("names.txt", Names.class);
+        last = nameFileParser.parseFile("lastNames.txt", Names.class);
         timer.stop();
         log.info(String.format(PARSED_TIME, timer.elapsed(TimeUnit.MILLISECONDS)));
     }

@@ -8,8 +8,6 @@
   <script src="/js/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
   <link rel="import" href="/templates/rptools-app.html"></link>
 
-  <link rel="stylesheet import" href="/css/main.css"></link>
-
   <style is="custom-style">
     :root {
       /* Main colors */
@@ -47,20 +45,16 @@
       border-top-color: var(--disabled-text-color);
     }
 
-    body {
-        letter-spacing: 1px;
-        margin: 0;
-        font-family: Roboto, 'Noto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    :root iron-pages {
+      margin: 10px 10px;
     }
 
-    iron-pages {
-        margin: 10px 10px;
+    body {
+      letter-spacing: 1px;
+      margin: 0;
+      font-family: Roboto, 'Noto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
   </style>
-
-  <resource href="/loading.gif" height="40" width="40">
-    <meta http-equiv="Content-type" content="image/gif">
-  </resource>
 </head>
 
 <body class="fullbleed vertical layout">

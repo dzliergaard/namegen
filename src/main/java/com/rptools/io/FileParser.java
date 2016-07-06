@@ -27,16 +27,15 @@ import java.nio.file.Path;
 
 /**
  * Abstract class that parses a file from S3 into a tangible/useful object
- *
+ * <p>
  * Children are responsible for writing implementation of parsing the .txt file in S3.
- *
+ * <p>
  * When {@code parseFile ()} is called, it first checks if a local json file exists for the file name.
  * If the local file exists and is more recent than the s3 file, it parses it and returns.
  * Otherwise, it gets the file from S3, parses it to an object, and saves it in JSON form to a local file to be read
  * next time.
  *
- * @param <T>
- *            The type of data the file is parsed into
+ * @param <T> The type of data the file is parsed into
  */
 @CommonsLog
 public abstract class FileParser<T> {
@@ -53,11 +52,9 @@ public abstract class FileParser<T> {
      * If not, will save the file locally so it can use it next time.
      */
     public T parseFile(String fileName, Class<T> tClass) {
-        Path filePath = fileUtils.localFilePath(fileName + ".txt");
+        Path filePath = fileUtils.localFilePath(fileName);
         try {
             return parseFileData(JOINER.join(Files.readAllLines(filePath)));
-//            String content = JOINER.join(Files.readAllLines(filePath, UTF8_CHARSET));
-//            return gson.fromJson(content, tClass);
         } catch (IOException e) {
             log.error(String.format("Error parsing local JSON file %s, getting from S3", filePath.getFileName()), e);
             return null;

@@ -45,8 +45,8 @@
       border-top-color: var(--disabled-text-color);
     }
 
-    :root iron-pages {
-      margin: 10px 10px;
+    :root .layout > :not(.layout) {
+      margin: 8px 8px;
     }
 
     body {

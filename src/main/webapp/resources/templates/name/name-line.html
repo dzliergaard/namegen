@@ -15,7 +15,7 @@
   </style>
   <template>
     <paper-icon-item class="layout horizontal">
-      <hover-icon item-icon id="icon" icon="{{prim}}" hover="{{primHover}}" on-tap="_doPrimary"></hover-icon>
+      <content select="[item-icon]"></content>
       <editing-item id="editor" class="flex" item="{{name.text}}" editing="{{editing}}"></editing-item>
     </paper-icon-item>
   </template>
@@ -24,24 +24,10 @@
     Polymer({
       is: 'name-line',
       properties: {
-        prim: String,
-        primHover: String,
         name: {
           type: Object,
           notify: true
         }
-      },
-      ready: function () {
-        this.editor = this.$.editor;
-      },
-      _doPrimary: function () {
-        this.fire('name-primary-tap');
-      },
-      _doneEditing: function () {
-        this.$.editor.doneEditing();
-      },
-      _startEditing: function (event) {
-        this.$.editor.startEditing();
       }
     });
   </script>

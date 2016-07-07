@@ -1,6 +1,6 @@
 <link rel="import" href="name-line.html"/>
 <link rel="import" href="../dark-theme.html"/>
-<link rel="import" href="../util/variable-layout-behavior.html"/>
+<link rel="import" href="../util/hover-icon.html"/>
 <link rel="import" href="/bower/paper-button/paper-button.html"/>
 <link rel="import" href="/bower/paper-card/paper-card.html"/>
 <link rel="import" href="/bower/paper-input/paper-input.html"/>
@@ -12,9 +12,17 @@
 
 <dom-module id="name-page">
   <template>
-    <style is="custom-style" include="dark-theme iron-flex iron-flex-alignment iron-flex-factors">
+    <style is="custom-style" include="dark-theme iron-flex iron-flex-alignment">
       :host ::content .generated name-line {
         --paper-input-container-focus-color: var(--light-theme-text-color);
+      }
+
+      :host ::content iron-icon {
+        opacity: .5;
+      }
+
+      :host ::content editing-item paper-input paper-input-container div.underline .unfocused-line {
+        display: none;
       }
 
       :host paper-menu.generate-menu {
@@ -46,7 +54,7 @@
     </style>
     <iron-ajax id="generate" url="/name/generate" params="{{generateParams(numNames)}}"
                on-response="populateNames"></iron-ajax>
-    <div class="vertical around-justified layout">
+    <div class="around-justified vertical layout">
       <paper-card class="self-start">
         <paper-menu class="generate-menu">
           <div class="horizontal layout">
@@ -59,27 +67,30 @@
         </paper-menu>
       </paper-card>
 
-      <div class$="{{layoutStyle}} layout">
-        <div class="card-content flex-4 layout vertical">
+      <div class$="{{layoutClass}} layout">
+        <div class$="{{_cardClass(layoutData.twelveColumns)}} layout vertical">
           <template is="dom-if" if="{{generatedNames}}">
             <paper-card class="generated" heading="Generated Names">
               <div class="card-content">
                 <template is="dom-repeat" items="{{generatedNames}}">
-                  <name-line name="{{makeName(item)}}" prim-hover="star" prim="star-border"></name-line>
+                  <paper-icon-item class="layout horizontal">
+                    <hover-icon item-icon icon="star-border" hover="star" on-tap="addName"></hover-icon>
+                    <editing-item class="flex" item="{{item}}"></editing-item>
+                  </paper-icon-item>
                 </template>
               </div>
             </paper-card>
           </template>
         </div>
-
-        <div class="flex"></div>
-
-        <div class="flex-4 layout vertical">
+        <div class$="{{_cardClass(layoutData.twelveColumns)}} layout vertical">
           <template is="dom-if" if="{{savedNames.length}}">
             <paper-card class="dark saved" heading="Saved Names">
               <div class="card-content">
                 <template is="dom-repeat" items="{{savedNames}}">
-                  <name-line name="{{item}}" prim="delete"></name-line>
+                  <paper-icon-item class="layout horizontal">
+                    <hover-icon item-icon icon="delete" on-tap="removeName"></hover-icon>
+                    <editing-item class="flex" item="{{item.text}}"></editing-item>
+                  </paper-icon-item>
                 </template>
               </div>
             </paper-card>
@@ -92,11 +103,15 @@
   <script>
     Polymer({
       is: 'name-page',
-      behaviors: [VariableLayoutBehavior],
       properties: {
         isSignedIn: Boolean,
+        layoutData: Object,
         generatedNames: {
           type: Array
+        },
+        layoutClass: {
+          type: String,
+          computed: '_layoutClass(layoutData.twelveColumns)'
         },
         numNames: {
           type: Number
@@ -106,14 +121,11 @@
           notify: true
         }
       },
-      listeners: {
-        'name-done-editing': 'doneEditing',
-        'name-primary-tap': 'primaryTap'
+      _cardClass: function (twelveColumns) {
+        return twelveColumns ? 'flex' : '';
       },
-      doneEditing: function (event) {
-        if (this.isSignedIn && event.target.name.id) {
-          this.fire('saved-name-updated');
-        }
+      _layoutClass: function (twelveColumns) {
+        return twelveColumns ? 'horizontal start' : 'vertical';
       },
       generateNames: function () {
         this.$.generate.generateRequest();
@@ -121,28 +133,23 @@
       generateParams: function (numNames) {
         return {num: numNames || 10};
       },
-      makeName: function (text) {
-        return {
-          text: text
-        };
-      },
       populateNames: function (event, request) {
         this.generatedNames = request.response.data;
       },
-      primaryTap: function (event) {
+      addName: function (event) {
         if (!this.isSignedIn) {
           return;
         }
-        var index = this.savedNames.indexOf(event.target.name);
-        if (event.target.name.id && index > -1) {
+        this.push('savedNames', {
+          text: event.model.item,
+          id: this.uuid()
+        });
+      },
+      removeName: function (event) {
+        var index = this.savedNames.indexOf(event.model.item);
+        if (event.model.item.id && index > -1) {
           this.splice('savedNames', index, 1);
-        } else {
-          this.push('savedNames', {
-            text: event.target.name.text,
-            id: this.uuid()
-          });
         }
-
       },
       uuid: function () {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {

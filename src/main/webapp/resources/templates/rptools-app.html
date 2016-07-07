@@ -5,10 +5,11 @@
 <link rel="import" href="/bower/google-apis/google-client-loader.html">
 <link rel="import" href="/bower/google-apis/google-js-api.html">
 <link rel="import" href="/bower/google-signin/google-signin.html">
-<link rel="import" href="/bower/iron-pages/iron-pages.html">
 <link rel="import" href="/bower/iron-icon/iron-icon.html">
 <link rel="import" href="/bower/iron-icons/iron-icons.html">
 <link rel="import" href="/bower/iron-icons/social-icons.html">
+<link rel="import" href="/bower/iron-media-query/iron-media-query.html">
+<link rel="import" href="/bower/iron-pages/iron-pages.html">
 <link rel="import" href="/bower/paper-drawer-panel/paper-drawer-panel.html">
 <link rel="import" href="/bower/paper-header-panel/paper-header-panel.html">
 <link rel="import" href="/bower/paper-icon-button/paper-icon-button.html">
@@ -32,51 +33,54 @@
     <app-route route="{{route}}" pattern="/:page" data="{{location}}"></app-route>
     <google-js-api id="gapi"></google-js-api>
     <google-client-loader id="drive" name="drive" version="v3"></google-client-loader>
-    <paper-drawer-panel id="drawer">
+    <paper-drawer-panel id="drawer" responsive-width="840px">
       <paper-header-panel drawer mode="seamed">
         <paper-toolbar>
           <google-signin client-id="{{clientId}}" scopes="{{scopes}}"></google-signin>
         </paper-toolbar>
-        <paper-menu selected="{{selected}}" attr-for-selected="name">
-          <paper-icon-item name="{{_pageNames.name}}" on-tap="closeDrawer">
+        <paper-menu selected="{{location.page}}" attr-for-selected="name">
+          <paper-icon-item name="name" on-tap="closeDrawer">
             <iron-icon item-icon icon="social:person"></iron-icon>
-            {{_pageNames.name}}
+            Name Generator
           </paper-icon-item>
-          <paper-icon-item name="{{_pageNames.city}}" on-tap="closeDrawer">
+          <paper-icon-item name="city" on-tap="closeDrawer">
             <iron-icon item-icon icon="social:location-city"></iron-icon>
-            {{_pageNames.city}}
+            City Generator
           </paper-icon-item>
         </paper-menu>
       </paper-header-panel>
       <paper-header-panel main mode="scroll">
         <paper-toolbar>
           <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-          <h2>{{selected}}</h2>
+          <h2>{{pageName(location.page)}}</h2>
         </paper-toolbar>
-        <iron-pages selected="{{selected}}" attr-for-selected="name">
-          <name-page name="{{_pageNames.name}}" is-signed-in="{{isSignedIn}}"
-                     saved-names="{{userSavedContent.names}}"></name-page>
-          <city-page name="{{_pageNames.city}}" races="{{races}}" is-signed-in="{{isSignedIn}}"
-                     saved-cities="{{userSavedContent.cities}}"></city-page>
+        <iron-pages selected="{{location.page}}" attr-for-selected="name">
+          <name-page name="name"
+                     is-signed-in="{{isSignedIn}}"
+                     saved-names="{{userSavedContent.names}}"
+                     layout-data="{{layoutData}}"></name-page>
+          <city-page name="city" races="{{races}}"
+                     is-signed-in="{{isSignedIn}}"
+                     saved-cities="{{userSavedContent.cities}}"
+                     layout-data="{{layoutData}}"></city-page>
         </iron-pages>
       </paper-header-panel>
     </paper-drawer-panel>
     <paper-toast id="savesuccess" text="User content saved!"></paper-toast>
+    <iron-media-query query="(max-width: 480px)" query-matches="{{four}}"></iron-media-query>
+    <iron-media-query query="(min-width: 480px) and (max-width: 840px)" query-matches="{{eight}}"></iron-media-query>
+    <iron-media-query query="(min-width: 840px)" query-matches="{{twelve}}"></iron-media-query>
   </template>
 
   <script>
     Polymer({
       is: 'rptools-app',
       properties: {
+        four: Boolean,
+        eight: Boolean,
+        twelve: Boolean,
         races: Array,
         userSavedContent: Object,
-        _pageNames: {
-          type: Object,
-          value: {
-            city: 'City Generator',
-            name: 'Name Generator'
-          }
-        },
         appDataFileMetadata: {
           type: Object,
           value: {
@@ -92,6 +96,10 @@
           type: Boolean,
           value: false
         },
+        layoutData: {
+          type: Object,
+          computed: '_layoutData(four, eight, twelve)'
+        },
         listening: {
           type: Boolean,
           value: false
@@ -103,8 +111,7 @@
         scopes: {
           type: String,
           value: "profile https://www.googleapis.com/auth/drive.appdata"
-        },
-        selected: String
+        }
       },
       listeners: {
         'google-signin-success': 'userSignedIn',
@@ -114,12 +121,8 @@
         'contentUpdated(userSavedContent.names.*)',
         'contentUpdated(userSavedContent.cities.*)',
         'contentUpdated(userSavedContent.names.splices)',
-        'contentUpdated(userSavedContent.cities.splices)',
-        '_setSelected(location.page)'
+        'contentUpdated(userSavedContent.cities.splices)'
       ],
-      citiesUpdated: function (cities) {
-        console.log("cities updated");
-      },
       ready: function () {
         this.gapi = document.querySelector('google-js-api');
         this.drive = document.querySelector('google-client-loader');
@@ -138,11 +141,24 @@
           body: JSON.stringify(this.userSavedContent)
         }
       },
-      _setSelected: function (page) {
-        this.selected = this._pageNames[page] || this._pageNames.name;
+      _layoutData: function (four, eight, twelve) {
+        return {
+          fourColumns: four,
+          eightColumns: eight,
+          twelveColumns: twelve
+        };
       },
       closeDrawer: function (event) {
         this.$.drawer.closeDrawer();
+      },
+      pageName: function (page) {
+        switch (page) {
+          default:
+          case 'name':
+            return 'Name Generator';
+          case 'city':
+            return 'City Generator';
+        }
       },
       contentUpdated: function (names) {
         if (!this.listening || !this.isSignedIn) {

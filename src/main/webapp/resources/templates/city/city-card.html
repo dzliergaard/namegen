@@ -118,7 +118,8 @@
         races: Array,
         city: {
           type: Object,
-          notify: true
+          notify: true,
+          observer: '_newGeneratedCity'
         },
         mainIcon: {
           type: String,
@@ -137,13 +138,16 @@
           value: "hardware:keyboard-arrow-up"
         }
       },
-      ready: function () {
+      _newGeneratedCity: function (change) {
+        console.log('new city');
         if (this.opened) {
           this.toggleRuler();
           this.togglePopulation();
           this.toggleInns();
           this.toggleGuilds();
         }
+      },
+      ready: function () {
       },
       primaryTap: function () {
         this.fire("primary-tap");

@@ -12,6 +12,7 @@
         --paper-card-header-color: var(--dark-theme-text-color);
         --paper-input-container-color: var(--dark-theme-text-color);
         --paper-input-container-focus-color: var(--dark-theme-secondary-color);
+        --paper-item-body-secondary-color: var(--dark-theme-secondary-color);
 
         color: var(--dark-theme-text-color);
       }
@@ -20,7 +21,7 @@
         color: var(--dark-theme-text-color);
       }
 
-      :host .dark [secondary] {
+      :host ::content .dark [secondary] paper-input paper-input-container .input-content.paper-input-container input {
         color: var(--dark-theme-secondary-color);
       }
     </style>

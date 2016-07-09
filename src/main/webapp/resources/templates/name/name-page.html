@@ -55,7 +55,7 @@
     <iron-ajax id="generate" url="/name/generate" params="{{generateParams(numNames)}}"
                on-response="populateNames"></iron-ajax>
     <div class="around-justified vertical layout">
-      <paper-card class="self-start">
+      <paper-card class="flex self-start">
         <paper-menu class="generate-menu">
           <div class="horizontal layout">
             <paper-input label="How Many? (10)" type="Number" value="{{numNames}}"
@@ -67,8 +67,8 @@
         </paper-menu>
       </paper-card>
 
-      <div class$="{{layoutClass}} layout">
-        <div class$="{{_cardClass(layoutData.twelveColumns)}} layout vertical">
+      <div class$="{{_layoutClass(columns)}}">
+        <div class="flex layout vertical">
           <template is="dom-if" if="{{generatedNames}}">
             <paper-card class="generated" heading="Generated Names">
               <div class="card-content">
@@ -82,7 +82,7 @@
             </paper-card>
           </template>
         </div>
-        <div class$="{{_cardClass(layoutData.twelveColumns)}} layout vertical">
+        <div class="flex layout vertical">
           <template is="dom-if" if="{{savedNames.length}}">
             <paper-card class="dark saved" heading="Saved Names">
               <div class="card-content">
@@ -104,14 +104,10 @@
     Polymer({
       is: 'name-page',
       properties: {
+        columns: Number,
         isSignedIn: Boolean,
-        layoutData: Object,
         generatedNames: {
           type: Array
-        },
-        layoutClass: {
-          type: String,
-          computed: '_layoutClass(layoutData.twelveColumns)'
         },
         numNames: {
           type: Number
@@ -121,11 +117,8 @@
           notify: true
         }
       },
-      _cardClass: function (twelveColumns) {
-        return twelveColumns ? 'flex' : '';
-      },
-      _layoutClass: function (twelveColumns) {
-        return twelveColumns ? 'horizontal start' : 'vertical';
+      _layoutClass: function (columns) {
+        return columns == 12 ? 'horizontal layout start' : '';
       },
       generateNames: function () {
         this.$.generate.generateRequest();

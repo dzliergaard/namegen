@@ -15,7 +15,7 @@
 
 <dom-module id="city-page">
   <template>
-    <style is="custom-style" include="dark-theme iron-flex iron-flex-alignment">
+    <style is="custom-style" include="dark-theme iron-flex iron-flex-alignment iron-flex-factors">
       :host ::content paper-input paper-input-container div.underline .unfocused-line {
         display: none;
       }
@@ -35,6 +35,10 @@
         --paper-input-container-input-color: var(--light-theme-secondary-color);
       }
 
+      :host ::content paper-item [secondary] {
+        font-size: 12px;
+      }
+
       :host paper-slider {
         --paper-slider-knob-color: var(--primary-text-color);
         --paper-slider-active-color: var(--primary-text-color);
@@ -45,35 +49,26 @@
         background-color: var(--accent-color);
         color: var(--light-theme-text-color);
       }
-
-      :host .city-menu,
-      :host city-card {
-        margin-right: 16px;
-        margin-bottom: 16px;
-      }
     </style>
     <iron-ajax id="generate" url="/city/generate"
                params="{{generateParams(diversity, size, race)}}"
                on-response="populateCity"></iron-ajax>
     <iron-ajax id="refresh" url="/city/generate" params="{{generateParams(diversity, size, race)}}"></iron-ajax>
-    <div class$="{{layoutClass}} layout">
-      <div class="vertical layout">
-        <paper-menu class="city-menu">
-          <paper-item>
-            <paper-item-body two-line>
-              <div>Size <span id="sizecaption" class="caption"></span></div>
-              <paper-slider secondary id="size" value="50" min="1" on-value-change="updateSize"></paper-slider>
-            </paper-item-body>
-          </paper-item>
-          <paper-item>
-            <paper-item-body two-line>
-              <div>Diversity <span id="diversitycaption" class="caption"></span></div>
-              <paper-slider secondary id="diversity" value="50" min="1"
-                            on-value-change="updateDiversity"></paper-slider>
-            </paper-item-body>
-          </paper-item>
-          <paper-item>
-            <paper-dropdown-menu id="race" label="Dominant Race">
+    <div class="vertical layout">
+      <paper-card class="city-menu">
+        <div class$="card-content {{_layoutClass(columns)}} layout">
+          <div class="flex">
+            <div class="caption">Size <span id="sizecaption" class="caption"></span></div>
+            <paper-slider secondary id="size" value="50" min="1" on-value-change="updateSize"></paper-slider>
+          </div>
+          <div class="flex">
+            <div class="caption">Diversity <span id="diversitycaption" class="caption"></span></div>
+            <paper-slider secondary id="diversity" value="50" min="1"
+                          on-value-change="updateDiversity"></paper-slider>
+          </div>
+          <div class="flex">
+            <div class="caption">Dominant Race</div>
+            <paper-dropdown-menu no-label-float id="race" class="flex">
               <paper-listbox class="dropdown-content" selected="0">
                 <paper-item>Random</paper-item>
                 <template is="dom-repeat" items="{{races}}">
@@ -81,15 +76,14 @@
                 </template>
               </paper-listbox>
             </paper-dropdown-menu>
-          </paper-item>
-          <paper-item></paper-item>
-          <paper-item>
-            <paper-button class="generate-button" on-tap="generateCity">Generate</paper-button>
-          </paper-item>
-        </paper-menu>
+          </div>
+          <paper-button class="generate-button" on-tap="generateCity">Generate</paper-button>
+        </div>
+      </paper-card>
 
+      <div class$="{{_layoutClass(columns)}} layout wrap">
         <template is="dom-if" if="{{generatedCity}}">
-          <city-card class="generated"
+          <city-card class="generated layout horizontal"
                      city="{{generatedCity}}"
                      races="{{races}}"
                      generate-params="{{generateParams(diversity, size, race)}}"
@@ -97,9 +91,6 @@
                      opened="true"
                      on-primary-tap="saveCity"></city-card>
         </template>
-      </div>
-
-      <div class="horizontal layout wrap">
         <template is="dom-repeat" items="{{savedCities}}">
           <city-card class="dark"
                      city="{{item}}"
@@ -117,12 +108,9 @@
       properties: {
         races: Array,
         cityVariables: Object,
+        columns: Number,
         generatedCity: Object,
         isSignedIn: Boolean,
-        layoutClass: {
-          type: String,
-          computed: '_layoutClass(layoutData.twelveColumns)'
-        },
         race: {
           type: String,
           value: "Random"
@@ -161,19 +149,8 @@
       listeners: {
         'race.iron-select': 'updateRace'
       },
-      _keyCheck: function (event) {
-        switch (event.keyCode) {
-          case 13:
-            this.doneEditing();
-            break;
-          case 27:
-            this._editing = false;
-            this._editingItem = this.name.text;
-            break;
-        }
-      },
-      _layoutClass: function (twelveColumns) {
-        return twelveColumns ? 'horizontal start' : 'vertical';
+      _layoutClass: function (columns) {
+        return columns == 12 ? 'horizontal start' : 'vertical';
       },
       generateParams: function (diversity, size, race) {
         var params = {
@@ -186,7 +163,7 @@
         }
         return params;
       },
-      updateDiversity: function (event) {
+      updateDiversity: function () {
         this.set('diversity', this.$.diversity.value);
         if (!this.diversities) {
           return;
@@ -194,7 +171,7 @@
         var index = Math.trunc(this.$.diversity.value / 100 * (this.diversities.length - 1) + .5);
         this.$.diversitycaption.textContent = this.diversities[index];
       },
-      updateSize: function (event) {
+      updateSize: function () {
         this.set('size', this.$.size.value);
         if (!this.sizes) {
           return;
@@ -202,7 +179,7 @@
         var index = Math.trunc(this.$.size.value / 100 * (this.sizes.length - 1) + .5);
         this.$.sizecaption.textContent = this.sizes[index];
       },
-      updateRace: function (event) {
+      updateRace: function () {
         this.set('race', this.$.race.value);
       },
       computeTotalPop: function (population) {
@@ -242,7 +219,7 @@
           this.splice('savedCities', index, 1);
         }
       },
-      saveCity: function (event) {
+      saveCity: function () {
         this.unshift('savedCities', this.generatedCity);
         this.generatedCity = undefined;
       }

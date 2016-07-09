@@ -41,14 +41,6 @@
       --dark-theme-divider-color: var(--paper-deep-purple-100);
     }
 
-    :root hr.divider {
-      border-top-color: var(--disabled-text-color);
-    }
-
-    :root .layout > :not(.layout) {
-      margin: 8px 8px;
-    }
-
     body {
       letter-spacing: 1px;
       margin: 0;

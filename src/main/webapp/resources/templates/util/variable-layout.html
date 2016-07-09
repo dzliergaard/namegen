@@ -1,0 +1,35 @@
+<link rel="import" href="/bower/iron-media-query/iron-media-query.html">
+<dom-module is="variable-layout">
+  <template>
+    <iron-media-query query="(max-width: 480px)" query-matches="{{four}}"></iron-media-query>
+    <iron-media-query query="(min-width: 480px) and (max-width: 840px)"
+                      query-matches="{{eight}}"></iron-media-query>
+    <iron-media-query query="(min-width: 840px)" query-matches="{{twelve}}"></iron-media-query>
+  </template>
+  <script>
+    Polymer({
+      id: 'variable-layout',
+      properties: {
+        four: Boolean,
+        eight: Boolean,
+        twelve: Boolean,
+        columns: {
+          type: Number,
+          notify: true,
+          computed: '_columns(four, eight, twelve)'
+        }
+      },
+      _columns: function (four, eight, twelve) {
+        if (four) {
+          return 4;
+        }
+        if (eight) {
+          return 8;
+        }
+        if (twelve) {
+          return 12;
+        }
+      }
+    });
+  </script>
+</dom-module>

@@ -21,14 +21,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.2</version>
-        </dependency>
-        <dependency>
             <groupId>com.dzlier</groupId>
             <artifactId>dzlier.collections</artifactId>
             <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -47,38 +47,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.oauth-client</groupId>
-            <artifactId>google-oauth-client-servlet</artifactId>
-            <version>${google.api.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.google.apis</groupId>
-            <artifactId>google-api-services-drive</artifactId>
-            <version>v3-rev17-1.19.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.google.guava</groupId>
-                    <artifactId>guava-jdk5</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.google.http-client</groupId>
-                    <artifactId>google-http-client</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.3.1</version>
@@ -90,18 +58,8 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.javaconfig</groupId>
-            <artifactId>spring-javaconfig</artifactId>
-            <version>1.0.0.m3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -125,18 +83,6 @@
         </dependency>
     </dependencies>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Brixton.M5</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <build>
         <finalName>com.rptools</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
@@ -158,43 +104,31 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <warSourceIncludes>
-                        resources/css/**/*,
-                        resources/fonts/**/*,
-                        resources/images/**/*,
-                        resources/js/app/**/*,
-                        resources/js/city/**/*,
-                        resources/js/mat/**/*,
-                        resources/js/name/**/*,
-                        resources/js/util/**/*,
-                        resources/js/node_modules/angular2/bundles/angular2.dev.js,
-                        resources/js/node_modules/angular2/bundles/angular2-polyfills.js,
-                        resources/js/node_modules/angular2/bundles/router.dev.js,
-                        resources/js/node_modules/angular2/bundles/http.dev.js,
-                        resources/js/node_modules/es6-shim/es6-shim.js,
-                        resources/js/node_modules/material-design-lite/material.min.js,
-                        resources/js/node_modules/material-design-lite/dist/material.purple-orange.min.css,
-                        resources/js/node_modules/rxjs/bundles/Rx.js,
-                        resources/js/node_modules/systemjs/dist/system.src.js,
-                        resources/js/node_modules/systemjs/dist/system-polyfills.js,
-                        resources/js/node_modules/systemjs/dist/system-polyfills.src.js,
-                        resources/js/node_modules/systemjs/dist/system.src.js,
-                        resources/js/node_modules/underscore/underscore.js,
-                        resources/js/node_modules/underscore/underscore-min.js,
-                        resources/js/system-init.js,
                         resources/templates/**/*,
                         WEB-INF/**/*
                     </warSourceIncludes>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <server>dzlier_rptools.server</server>
-                    <path>/</path>
-                    <port>8080</port>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals><goal>copy</goal></goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.github.jsimone</groupId>
+                                    <artifactId>webapp-runner</artifactId>
+                                    <version>8.0.30.2</version>
+                                    <destFileName>webapp-runner.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 

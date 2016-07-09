@@ -11,7 +11,7 @@
 
 <dom-module id="city-card">
   <template>
-    <style is="custom-style" include="iron-flex dark-theme iron-flex-alignment">
+    <style is="custom-style" include="dark-theme iron-flex iron-flex-alignment">
       :host ::content paper-input.city-name .input-content.paper-input-container input {
         font-size: 24px;
       }
@@ -32,7 +32,7 @@
     </style>
 
     <iron-ajax id="refresh" url="/city/generate" params="{{generateParams}}"></iron-ajax>
-    <paper-card class$="city">
+    <paper-card class="city flex">
       <div class="header paper-card">
         <div class="title-text paper-card layout horizontal">
           <span class="flex">
@@ -141,10 +141,10 @@
       _newGeneratedCity: function (change) {
         console.log('new city');
         if (this.opened) {
-          this.toggleRuler();
-          this.togglePopulation();
-          this.toggleInns();
-          this.toggleGuilds();
+          this.toggleIcon(this.$.ruler, this.$.rulerIcon, 'open');
+          this.toggleIcon(this.$.population, this.$.populationIcon, 'open');
+          this.toggleIcon(this.$.inns, this.$.innsIcon, 'open');
+          this.toggleIcon(this.$.guilds, this.$.guildsIcon, 'open');
         }
       },
       ready: function () {
@@ -174,12 +174,19 @@
         this.refreshCityPart('guilds');
       },
 
-      toggleIcon: function (collapse, iconItem) {
-        collapse.toggle();
-        if (collapse.opened) {
-          iconItem.icon = this.up;
-        } else {
-          iconItem.icon = this.down;
+      toggleIcon: function (collapse, iconItem, force) {
+        switch (force) {
+          case 'open':
+            collapse.show();
+            iconItem.icon = this.up;
+            break;
+          case 'close':
+            collapse.hide();
+            iconItem.icon = this.down;
+            break;
+          default:
+            collapse.toggle();
+            iconItem.icon = collapse.opened ? this.up : this.down;
         }
       },
       toggleRuler: function () {

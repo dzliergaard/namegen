@@ -40,7 +40,7 @@ import java.util.Optional;
  */
 @CommonsLog
 @RestController("NameController")
-@RequestMapping(value = {"", "name"})
+@RequestMapping("name")
 public class NameController {
 
     private final NameGen nameGen;

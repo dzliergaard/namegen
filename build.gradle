@@ -2,7 +2,6 @@ apply plugin: 'base'
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'war'
-apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 
 group = 'com.dzlier-rptools'
 version = '1.0.0-SNAPSHOT'
@@ -19,14 +18,17 @@ clean.delete << file('src/main/webapp/resources/js/bower')
 buildscript {
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin' }
     }
 
     dependencies {
         classpath 'com.moowork.gradle:gradle-node-plugin:0.13'
+        classpath 'org.akhikhl.gretty:gretty:1.1.9'
     }
 }
 
 apply plugin: 'com.moowork.node'
+apply plugin: 'org.akhikhl.gretty'
 
 repositories {
     jcenter()

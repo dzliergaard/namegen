@@ -18,67 +18,69 @@
 
 package com.rptools.name;
 
-import java.util.Optional;
-import java.util.Random;
+import com.dzlier.weight.WeightedTrie;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
-import com.dzlier.weight.WeightedTrie;
+import java.util.Optional;
+import java.util.Random;
 
 /**
- * This class is generated when the application starts and needs to read/parse/interpret data from the name files stored
- * in S3. It contains maps of "group" substrings to the frequency in which they appear at the beginning, middle, and end
- * of the parsed names. One of these objects is created for first names, one for last
+ * This class is generated when the application starts and needs to read/parse/interpret data from
+ * the name files stored in S3. It contains maps of "group" substrings to the frequency in which
+ * they appear at the beginning, middle, and end of the parsed names. One of these objects is
+ * created for first names, one for last
  */
 public class Names {
-    private final Double standardDeviation;
-    private final Double mean;
-    private final WeightedTrie<String> beg;
-    private final WeightedTrie<String> mid;
-    private final WeightedTrie<String> end;
 
-    public Names(
-            WeightedTrie<String> beg,
-            WeightedTrie<String> mid,
-            WeightedTrie<String> end,
-            SummaryStatistics stats) {
-        this.beg = beg;
-        this.mid = mid;
-        this.end = end;
-        this.standardDeviation = stats.getStandardDeviation();
-        this.mean = stats.getMean();
+  private final Double standardDeviation;
+  private final Double mean;
+  private final WeightedTrie<String> beg;
+  private final WeightedTrie<String> mid;
+  private final WeightedTrie<String> end;
+
+  public Names(
+      WeightedTrie<String> beg,
+      WeightedTrie<String> mid,
+      WeightedTrie<String> end,
+      SummaryStatistics stats) {
+    this.beg = beg;
+    this.mid = mid;
+    this.end = end;
+    this.standardDeviation = stats.getStandardDeviation();
+    this.mean = stats.getMean();
+  }
+
+  String makeName() {
+    int groups = groups();
+
+    String grandparent = beg.random("");
+    String parent = beg.random("", grandparent);
+    String name = grandparent + parent;
+    if (!parent.equals("")) {
+      groups--;
+    }
+    if (!grandparent.equals("")) {
+      groups--;
     }
 
-    String makeName() {
-        int groups = groups();
-
-        String grandparent = beg.random("");
-        String parent = beg.random("", grandparent);
-        String name = grandparent + parent;
-        if (!parent.equals("")) {
-            groups--;
-        }
-        if (!grandparent.equals("")) {
-            groups--;
-        }
-
-        while (groups-- > 1) {
-            String group = Optional
-                .of(mid.random("", grandparent, parent))
-                .map(StringUtils::stripToNull)
-                .orElse(mid.random("", parent));
-            name += group;
-            grandparent = parent;
-            parent = group;
-        }
-
-        name += end.random("", grandparent, parent);
-
-        return name;
+    while (groups-- > 1) {
+      String group = Optional
+          .of(mid.random("", grandparent, parent))
+          .map(StringUtils::stripToNull)
+          .orElse(mid.random("", parent));
+      name += group;
+      grandparent = parent;
+      parent = group;
     }
 
-    public int groups() {
-        return (int) Math.round(new Random().nextGaussian() * standardDeviation + mean);
-    }
+    name += end.random("", grandparent, parent);
+
+    return name;
+  }
+
+  public int groups() {
+    return (int) Math.round(new Random().nextGaussian() * standardDeviation + mean);
+  }
 }

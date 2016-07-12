@@ -32,29 +32,30 @@ import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
  */
 @Configuration
 public class WebApplicationConfig extends WebMvcConfigurationSupport {
-    @Bean
-    public VelocityConfigurer velocityConfig() {
-        VelocityConfigurer configurer = new VelocityConfigurer();
-        configurer.setResourceLoaderPath("/WEB-INF/");
-        return configurer;
-    }
 
-    @Bean
-    public ViewResolver viewResolver() {
-        VelocityViewResolver resolver = new VelocityViewResolver();
-        resolver.setPrefix("");
-        resolver.setSuffix(".vm");
-        return resolver;
-    }
+  @Bean
+  public VelocityConfigurer velocityConfig() {
+    VelocityConfigurer configurer = new VelocityConfigurer();
+    configurer.setResourceLoaderPath("/WEB-INF/");
+    return configurer;
+  }
 
-    @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/bower/**").addResourceLocations("/resources/js/bower_components/");
-        registry.addResourceHandler("/templates/**").addResourceLocations("/resources/templates/");
-    }
+  @Bean
+  public ViewResolver viewResolver() {
+    VelocityViewResolver resolver = new VelocityViewResolver();
+    resolver.setPrefix("");
+    resolver.setSuffix(".vm");
+    return resolver;
+  }
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
+  @Override
+  public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/bower/**").addResourceLocations("/resources/js/bower/");
+    registry.addResourceHandler("/templates/**").addResourceLocations("/resources/templates/");
+  }
+
+  @Override
+  public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+    configurer.enable();
+  }
 }

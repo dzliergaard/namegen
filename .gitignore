@@ -2,7 +2,10 @@
 .gradle
 .idea
 build
+gradle
 node_modules
 out
 gradle.properties
+gradlew
+gradlew.bat
 src/main/webapp/resources/js/bower

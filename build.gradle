@@ -33,7 +33,7 @@ repositories {
     mavenLocal()
 }
 dependencies {
-    compile project(':dzlier-collections')
+    compile project('dzlier-collections')
     compile group: 'commons-io', name: 'commons-io', version: '2.2'
     compile group: 'com.github.jsimone', name: 'webapp-runner', version: '8.0.30.2'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
@@ -101,7 +101,7 @@ task bowerPackages(type: Sync) {
 processResources.dependsOn bowerPackages
 
 task stage() {
-    dependsOn clean, war
+    dependsOn clean, bowerPackages, war
 }
 tasks.stage.doLast() {
     delete fileTree(dir: "build/distributions")
@@ -109,6 +109,7 @@ tasks.stage.doLast() {
     delete fileTree(dir: "build/distributions")
     delete fileTree(dir: "build/libs", exclude: "*.war")
 }
+bowerPackages.mustRunAfter clean
 war.mustRunAfter clean
 
 task copyToLib(type: Copy) {

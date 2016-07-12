@@ -1,0 +1,14 @@
+{
+  "engines": {
+    "node": "0.12.x"
+  },
+  "name": "dzlier-rptools",
+  "private": false,
+  "description": "RPG toolkit website featuring random name and city generation - http://rptools.heroku.com",
+  "repository": "https://github.com/dzliergaard/namegen",
+  "license": "Apache",
+  "main": "",
+  "dependencies": {
+    "bower": "^1.4.0"
+  }
+}

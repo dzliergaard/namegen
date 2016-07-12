@@ -35,8 +35,7 @@ public class CityFileParser extends FileParser<Cities> {
     private final Gson gson;
 
     @Autowired
-    public CityFileParser(FileUtils fileUtils, Gson gson) {
-        super(fileUtils);
+    public CityFileParser(Gson gson) {
         this.gson = gson;
     }
 

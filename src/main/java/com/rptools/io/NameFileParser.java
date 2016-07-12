@@ -66,11 +66,6 @@ public class NameFileParser extends FileParser<Names> {
     private static final Pattern groupPat = Pattern.compile("[^QAEIOUY]+|Q?[AEIOUY]+");
     private static final Pattern namePat = Pattern.compile("\\w+:\\d+");
 
-    @Autowired
-    public NameFileParser(FileUtils fileUtils) {
-        super(fileUtils);
-    }
-
     @Override
     protected Names parseFileData(String data) {
         WeightedTrie<String> firstTrieBuilder = new WeightedTrie<>();

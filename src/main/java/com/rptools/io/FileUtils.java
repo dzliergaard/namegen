@@ -18,17 +18,16 @@
 
 package com.rptools.io;
 
+import lombok.extern.apachecommons.CommonsLog;
+
+import org.springframework.stereotype.Component;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
-
-import lombok.extern.apachecommons.CommonsLog;
-
-import org.springframework.stereotype.Component;
 
 /**
  * Helpful file read/write utilities
@@ -39,6 +38,7 @@ public class FileUtils {
     private final Path baseDir;
 
     public FileUtils() throws IOException {
+
         this.baseDir = Paths.get("data");
         if (!Files.exists(baseDir) || !Files.isDirectory(baseDir)) {
             Files.deleteIfExists(baseDir);

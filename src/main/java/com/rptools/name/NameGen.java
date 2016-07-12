@@ -21,8 +21,11 @@ package com.rptools.name;
 import com.google.common.base.Joiner;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
+
 import com.rptools.io.NameFileParser;
+
 import lombok.extern.apachecommons.CommonsLog;
+
 import org.apache.commons.lang3.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,35 +34,37 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Helper component that generates names from the {@link Names} object returned by {@link NameFileParser}
+ * Helper component that generates names from the {@link Names} object returned by {@link
+ * NameFileParser}
  */
 @Component
 @CommonsLog
 public class NameGen {
-    private static final Joiner JOINER = Joiner.on(" ");
-    private static final String PARSED_TIME = "Name data parsed in %d milliseconds.";
-    private final Names first;
-    private final Names last;
 
-    @Autowired
-    public NameGen(NameFileParser nameFileParser) {
-        Stopwatch timer = Stopwatch.createStarted();
-        first = nameFileParser.parseFile("names.txt", Names.class);
-        last = nameFileParser.parseFile("lastNames.txt", Names.class);
-        timer.stop();
-        log.info(String.format(PARSED_TIME, timer.elapsed(TimeUnit.MILLISECONDS)));
-    }
+  private static final Joiner JOINER = Joiner.on(" ");
+  private static final String PARSED_TIME = "Name data parsed in %d milliseconds.";
+  private final Names first;
+  private final Names last;
 
-    public List<String> generateNames(int numNames) {
-        List<String> names = Lists.newArrayList();
-        while (numNames-- > 0) {
-            String name = makeName();
-            names.add(name);
-        }
-        return names;
-    }
+  @Autowired
+  public NameGen(NameFileParser nameFileParser) {
+    Stopwatch timer = Stopwatch.createStarted();
+    first = nameFileParser.parseFile("names.txt");
+    last = nameFileParser.parseFile("lastNames.txt");
+    timer.stop();
+    log.info(String.format(PARSED_TIME, timer.elapsed(TimeUnit.MILLISECONDS)));
+  }
 
-    private String makeName() {
-        return WordUtils.capitalizeFully(JOINER.join(first.makeName(), last.makeName()));
+  public List<String> generateNames(int numNames) {
+    List<String> names = Lists.newArrayList();
+    while (numNames-- > 0) {
+      String name = makeName();
+      names.add(name);
     }
+    return names;
+  }
+
+  private String makeName() {
+    return WordUtils.capitalizeFully(JOINER.join(first.makeName(), last.makeName()));
+  }
 }

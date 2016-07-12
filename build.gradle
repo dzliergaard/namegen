@@ -28,10 +28,6 @@ buildscript {
 apply plugin: 'com.moowork.node'
 apply plugin: 'com.bmuschko.tomcat'
 
-exec {
-    commandLine('git', 'submodule', 'update', '--recursive', '--init')
-}
-
 repositories {
     mavenCentral()
     mavenLocal()

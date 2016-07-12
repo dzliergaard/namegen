@@ -19,17 +19,14 @@ clean.delete << file('src/main/webapp/resources/js/bower')
 buildscript {
     repositories {
         maven { url 'https://plugins.gradle.org/m2/' }
-//        maven { url 'http://dl.bintray.com/vermeulen-mp/gradle-plugins' }
     }
 
     dependencies {
         classpath 'com.moowork.gradle:gradle-node-plugin:0.13'
-//        classpath 'com.wiredforcode:gradle-heroku-plugin:1.0.0'
     }
 }
 
 apply plugin: 'com.moowork.node'
-//apply plugin: 'heroku'
 
 repositories {
     jcenter()
@@ -37,7 +34,7 @@ repositories {
     maven { url "http://repo.maven.apache.org/maven2" }
 }
 dependencies {
-    compile project(path: ':dzlier-collections', configuration: 'default')
+    compile project(':dzlier-collections')
     compile group: 'commons-io', name: 'commons-io', version: '2.2'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
     compile group: 'com.google.guava', name: 'guava', version: '18.0'
@@ -54,14 +51,6 @@ dependencies {
 }
 
 gretty.contextPath = '/'
-
-//heroku {
-//    //get this from heroku
-//    apiKey = '323f842e-9907-4f70-ad35-0edadcb28b2d'
-//
-//    //set this on first run if you don't want a generated name
-//    appName = 'rptools-2'
-//}
 
 node {
     version = '0.12.2'

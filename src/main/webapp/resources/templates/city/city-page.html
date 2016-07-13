@@ -1,6 +1,5 @@
 <link rel="import" href="city-card.html"/>
 <link rel="import" href="../dark-theme.html"/>
-<link rel="import" href="../util/dropdown-options.html"/>
 <link rel="import" href="../util/hover-icon.html"/>
 <link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
 <link rel="import" href="/bower/iron-collapse/iron-collapse.html"/>
@@ -53,13 +52,15 @@
     <iron-ajax id="generate" url="/city/generate"
                params="{{generateParams(diversity, size, race)}}"
                on-response="populateCity"></iron-ajax>
-    <iron-ajax id="refresh" url="/city/generate" params="{{generateParams(diversity, size, race)}}"></iron-ajax>
+    <iron-ajax id="refresh" url="/city/generate"
+               params="{{generateParams(diversity, size, race)}}"></iron-ajax>
     <div class="vertical layout">
       <paper-card class="city-menu">
         <div class$="card-content {{_layoutClass(columns)}} layout">
           <div class="flex">
             <div class="caption">Size <span id="sizecaption" class="caption"></span></div>
-            <paper-slider secondary id="size" value="50" min="1" on-value-change="updateSize"></paper-slider>
+            <paper-slider secondary id="size" value="50" min="1"
+                          on-value-change="updateSize"></paper-slider>
           </div>
           <div class="flex">
             <div class="caption">Diversity <span id="diversitycaption" class="caption"></span></div>
@@ -110,7 +111,6 @@
         cityVariables: Object,
         columns: Number,
         generatedCity: Object,
-        isSignedIn: Boolean,
         race: {
           type: String,
           value: "Random"

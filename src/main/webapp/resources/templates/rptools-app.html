@@ -64,6 +64,10 @@
             <iron-icon item-icon icon="social:location-city"></iron-icon>
             City Generator
           </paper-icon-item>
+          <paper-icon-item name="table" on-tap="closeDrawer">
+            <iron-icon item-icon icon="social:person"></iron-icon>
+            Table Tracker
+          </paper-icon-item>
         </paper-menu>
       </paper-header-panel>
       <paper-header-panel main mode="scroll">
@@ -80,6 +84,7 @@
                      is-signed-in="{{isSignedIn}}"
                      saved-cities="{{userSavedContent.cities}}"
                      columns="{{columns}}"></city-page>
+          <table-page name="table" saved-tables="{{userSavedContent.tables}}"></table-page>
         </iron-pages>
       </paper-header-panel>
     </paper-drawer-panel>

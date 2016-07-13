@@ -1,8 +1,15 @@
 <link rel="import" href="/bower/iron-icon/iron-icon.html"/>
 
 <dom-module id="hover-icon">
+  <style is="custom-style">
+    iron-icon.not-signed-in {
+      opacity: .25;
+    }
+  </style>
   <template>
+    <google-signin-aware scopes="{{scopes}}" signed-in="isSignedIn"></google-signin-aware>
     <iron-icon item-icon="{{itemIcon}}"
+               class$="{{signedInClass}}"
                icon="{{composite}}"
                on-mouseover="_onMouseover"
                on-mouseleave="_onMouseout">
@@ -29,6 +36,14 @@
         composite: {
           type: String,
           computed: 'getComposite(icon, hover, _hover)'
+        },
+        scopes: {
+          type: String,
+          value: "profile https://www.googleapis.com/auth/drive.appdata"
+        },
+        signedInClass: {
+          type: String,
+          computed: '_signedInClass(isSignedIn)'
         }
       },
       getComposite: function (icon, hover, _hover) {
@@ -42,6 +57,9 @@
       },
       _onMouseover: function (event) {
         this._hover = true;
+      },
+      _signedInClass: function (isSignedIn) {
+        return isSignedIn ? "" : "not-signed-in"
       }
     })
   </script>

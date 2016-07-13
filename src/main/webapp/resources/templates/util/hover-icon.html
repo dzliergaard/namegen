@@ -7,7 +7,7 @@
     }
   </style>
   <template>
-    <google-signin-aware scopes="{{scopes}}" signed-in="isSignedIn"></google-signin-aware>
+    <google-signin-aware scopes="{{scopes}}" signed-in="{{isSignedIn}}"></google-signin-aware>
     <iron-icon item-icon="{{itemIcon}}"
                class$="{{signedInClass}}"
                icon="{{composite}}"

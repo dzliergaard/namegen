@@ -23,13 +23,14 @@
       --secondary-text-color: var(--light-theme-secondary-color);
       --disabled-text-color: var(--light-theme-disabled-color);
       --divider-color: var(--light-theme-divider-color);
+      --accent-text-color: var(--paper-orange-a700);
 
       /* light theme */
       --light-theme-background-color: var(--light-primary-color);
       --light-theme-base-color: var(--dark-primary-color);
       --light-theme-text-color: var(--dark-primary-color);
       --light-theme-secondary-color: var(--paper-deep-purple-200);
-      --light-theme-disabled-color: var(--paper-deep-purple-300);
+      --light-theme-disabled-color: var(--paper-deep-purple-100);
       --light-theme-divider-color: var(--paper-deep-puple-200);
 
       /* dark theme */
@@ -39,6 +40,9 @@
       --dark-theme-secondary-color: var(--paper-deep-purple-100); /* for secondary text and icons */
       --dark-theme-disabled-color: var(--paper-deep-purple-200); /* disabled/hint text */
       --dark-theme-divider-color: var(--paper-deep-purple-100);
+
+      /* other global styles */
+      --paper-toolbar-color: var(--light-theme-text-color);
     }
 
     body {
@@ -50,6 +54,6 @@
 </head>
 
 <body class="fullbleed vertical layout">
-<rptools-app races='$races'></rptools-app>
+<rptools-app></rptools-app>
 </body>
 </html>

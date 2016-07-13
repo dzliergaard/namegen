@@ -19,10 +19,11 @@
 package com.rptools.controller;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.gson.Gson;
-import com.rptools.city.Species;
 import com.rptools.name.NameAttribute;
 import com.rptools.name.NameGen;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +31,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 /**
  * REST controller that manipulates Name strings
@@ -43,29 +40,25 @@ import java.util.Optional;
 @RequestMapping("name")
 public class NameController {
 
-    private final NameGen nameGen;
-    private final Gson gson;
+  private final NameGen nameGen;
 
-    @Autowired
-    public NameController(NameGen nameGen, Gson gson) {
-        this.nameGen = nameGen;
-        this.gson = gson;
-    }
+  @Autowired
+  public NameController(NameGen nameGen) {
+    this.nameGen = nameGen;
+  }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView get() {
-        ModelAndView model = new ModelAndView("main");
-        model.getModel().put("races", gson.toJson(Species.values()));
-        return model;
-    }
+  @RequestMapping(method = RequestMethod.GET)
+  public ModelAndView get() {
+    return new ModelAndView("main");
+  }
 
-    @RequestMapping(value = "generate", method = RequestMethod.GET)
-    public Map<String, List<String>> generate(@RequestParam(required = false) Integer num) {
-        return ImmutableMap.of("data", nameGen.generateNames(Optional.ofNullable(num).orElse(10)));
-    }
+  @RequestMapping(value = "generate", method = RequestMethod.GET)
+  public Map<String, List<String>> generate(@RequestParam(required = false) Integer num) {
+    return ImmutableMap.of("data", nameGen.generateNames(Optional.ofNullable(num).orElse(10)));
+  }
 
-    @RequestMapping(value = "nameAttributes", method = RequestMethod.GET)
-    public NameAttribute[] nameAttributes() {
-        return NameAttribute.values();
-    }
+  @RequestMapping(value = "nameAttributes", method = RequestMethod.GET)
+  public NameAttribute[] nameAttributes() {
+    return NameAttribute.values();
+  }
 }

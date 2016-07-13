@@ -1,5 +1,6 @@
 <link rel="import" href="./city/city-page.html">
 <link rel="import" href="./name/name-page.html">
+<link rel="import" href="./table/table-page.html">
 <link rel="import" href="./util/variable-layout.html">
 <link rel="import" href="/bower/app-route/app-location.html">
 <link rel="import" href="/bower/app-route/app-route.html">
@@ -42,8 +43,8 @@
         margin-bottom: 10px;
       }
 
-      :host {
-        --paper-toolbar-color: var(--light-theme-text-color);
+      :host iron-pages {
+        margin: 8px 8px;
       }
     </style>
     <app-location route="{{route}}"></app-location>
@@ -161,6 +162,8 @@
             return 'Name Generator';
           case 'city':
             return 'City Generator';
+          case 'table':
+            return 'Table Tracker';
         }
       },
       contentUpdated: function () {

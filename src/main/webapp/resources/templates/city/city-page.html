@@ -54,6 +54,7 @@
                on-response="populateCity"></iron-ajax>
     <iron-ajax id="refresh" url="/city/generate"
                params="{{generateParams(diversity, size, race)}}"></iron-ajax>
+    <iron-ajax auto id="racesAjax" url="/city/races" on-response="populateRaces"></iron-ajax>
     <div class="vertical layout">
       <paper-card class="city-menu">
         <div class$="card-content {{_layoutClass(columns)}} layout">
@@ -192,6 +193,9 @@
       },
       populateCity: function (err, request) {
         this.generatedCity = request.response;
+      },
+      populateRaces: function (err, request) {
+        this.races = request.response;
       },
       refreshCityPart: function (cityPart) {
         this.$.refresh.generateRequest().completes.then(function (request) {

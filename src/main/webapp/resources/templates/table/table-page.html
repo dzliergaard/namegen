@@ -1,13 +1,119 @@
-<dom-module id="table-page">
-  <template>
+<link rel="import" href="./table-card.html"/>
+<link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
+<link rel="import" href="/bower/iron-icons/iron-icons.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html"/>
+<link rel="import" href="/bower/paper-fab/paper-fab.html">
+<link rel="import" href="/bower/paper-button/paper-button.html">
+<link rel="import" href="/bower/paper-dialog/paper-dialog.html">
 
+<dom-module id="table-page">
+  <style is="custom-style" include="iron-flex">
+    :host {
+      --paper-button: {
+        color: var(--light-theme-text-color);
+        font-weight: bold;
+      };
+    }
+
+    :host ::content table-card.pending {
+      --paper-input-container-focus-color: var(--light-theme-text-color);
+      --iron-icon-fill-color: var(--light-theme-text-color);
+      color: var(--light-theme-text-color);
+    }
+
+    :host paper-button.dismiss {
+      background-color: var(--light-theme-secondary-color);
+    }
+
+    :host paper-button.secondary {
+      background-color: var(--light-accent-color);
+    }
+
+    :host paper-button.primary {
+      background-color: var(--dark-accent-color);
+    }
+  </style>
+  <template>
+    <iron-ajax auto id="inns" url="/city/generate" params="{{generateParams}}"
+               on-response="setTableNames"></iron-ajax>
+    <div class="vertical layout">
+      <paper-fab icon="add" on-tap="newTable"></paper-fab>
+      <template is="dom-if" if="{{pendingTable}}">
+        <table-card class="flex pending" table="{{pendingTable}}"></table-card>
+      </template>
+      <template is="dom-if" if="{{savedTables}}">
+        <template is="dom-repeat" items="{{savedTables}}">
+          <table-card class="flex" table="{{item}}"></table-card>
+        </template>
+      </template>
+    </div>
+    <paper-dialog id="createDialog">
+      <h2>Overwrite current table?</h2>
+      <div>
+        If you create a new table you will overwrite any unsaved changes to your current one.<br/>
+        To discard pending changes, click Create. To save changes first, click Save and Create.<br/>
+        <div class="buttons">
+          <paper-button raised dialog-dismiss class="dismiss">Cancel</paper-button>
+          <paper-button raised dialog-confirm class="secondary" on-tap="discardAndCreate">Create
+          </paper-button>
+          <paper-button raised dialog-confirm class="primary" on-tap="saveAndCreate">Save and Create
+          </paper-button>
+        </div>
+      </div>
+    </paper-dialog>
   </template>
 
   <script>
     Polymer({
       id: 'table-page',
       properties: {
-
+        pendingTable: {
+          type: Object
+        },
+        savedTables: {
+          type: Object,
+          notify: true
+        },
+        tableNames: Array,
+        generateParams: {
+          type: Object,
+          value: function () {
+            return {
+              size: 100
+            };
+          }
+        }
+      },
+      observers: [
+        '_refreshTableNamesOnEmpty(tableNames.splices)'
+      ],
+      _newTable: function () {
+        this.pendingTable = {
+          name: this.shift('tableNames')
+        };
+      },
+      newTable: function () {
+        if (this.pendingTable) {
+          this.$.createDialog.open();
+          return;
+        }
+        this._newTable();
+      },
+      discardAndCreate: function () {
+        this._newTable();
+      },
+      saveAndCreate: function () {
+        this.push('savedTables', this.pendingTable);
+        this._newTable();
+      },
+      setTableNames: function (err, request) {
+        this.tableNames = request.response.inns;
+      },
+      _refreshTableNamesOnEmpty: function (tableNames) {
+        if (this.tableNames.length == 0) {
+          this.$.inns.generateRequest();
+        }
       }
     })
   </script>

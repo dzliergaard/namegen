@@ -1,0 +1,51 @@
+<link rel="import" href="/bower/google-signin/google-signin-aware.html"/>
+<link rel="import" href="/bower/paper-card/paper-card.html">
+<link rel="import" href="/bower/paper-fab/paper-fab.html">
+
+<dom-module id="table-card">
+  <template>
+    <style is="custom-style">
+      :host ::content paper-input paper-input-container div.underline .unfocused-line {
+        display: none;
+      }
+
+      :host ::content .title-text paper-input .input-content.paper-input-container input {
+        font-size: 24px;
+        /*color: var(--primary-text-color);*/
+      }
+
+      :host paper-card {
+        width: calc(100% - 16px);
+      }
+    </style>
+    <google-signin-aware scopes="{{scopes}}" signed-in="{{isSignedIn}}"></google-signin-aware>
+    <paper-card>
+      <div class="header paper-card">
+        <div class="title-text paper-card layout horizontal">
+          <span class="flex">
+            <editing-item item="{{table.name}}"></editing-item>
+          </span>
+          <iron-icon class$="{{signedInClass}} self-center" icon="{{mainIcon}}"
+                     on-tap="primaryTap"></iron-icon>
+        </div>
+      </div>
+    </paper-card>
+  </template>
+  <script>
+    Polymer({
+      id: 'table-card',
+      properties: {
+        table: {
+          type: Object,
+          notify: true
+        }
+      },
+      primaryTap: function () {
+        if (!this.isSignedIn) {
+          return;
+        }
+        this.fire("primary-tap");
+      }
+    })
+  </script>
+</dom-module>

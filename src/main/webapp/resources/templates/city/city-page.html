@@ -31,7 +31,7 @@
       }
 
       :host ::content city-card.generated {
-        --paper-input-container-input-color: var(--light-theme-secondary-color);
+        /*--paper-input-container-input-color: var(--light-theme-secondary-color);*/
       }
 
       :host ::content paper-item [secondary] {
@@ -42,11 +42,6 @@
         --paper-slider-knob-color: var(--primary-text-color);
         --paper-slider-active-color: var(--primary-text-color);
         width: 100%;
-      }
-
-      :host paper-button.generate-button {
-        background-color: var(--accent-color);
-        color: var(--light-theme-text-color);
       }
     </style>
     <iron-ajax id="generate" url="/city/generate"

@@ -1,6 +1,7 @@
 <link rel="import" href="name-line.html"/>
 <link rel="import" href="../dark-theme.html"/>
 <link rel="import" href="../util/hover-icon.html"/>
+<link rel="import" href="../behavior/uuid-behavior.html"/>
 <link rel="import" href="/bower/paper-button/paper-button.html"/>
 <link rel="import" href="/bower/paper-card/paper-card.html"/>
 <link rel="import" href="/bower/paper-input/paper-input.html"/>
@@ -34,22 +35,13 @@
         color: var(--light-theme-text-color);
       }
 
-      :host paper-card {
-        margin-bottom: 10px
-      }
-
       :host paper-card.generated {
-        --paper-card-header-color: var(--light-theme-text-color);
-        color: var(--light-theme-text-color);
-        margin-bottom: 10px;
+        /*color: var(--light-theme-text-color);*/
+        /*margin-bottom: 10px;*/
       }
 
       :host paper-card.generated .card-content input {
         color: var(--light-theme-text-color);
-      }
-
-      :host paper-card.saved {
-        margin-bottom: 10px;
       }
     </style>
     <iron-ajax id="generate" url="/name/generate" params="{{generateParams(numNames)}}"
@@ -74,7 +66,8 @@
               <div class="card-content">
                 <template is="dom-repeat" items="{{generatedNames}}">
                   <paper-icon-item class="layout horizontal">
-                    <hover-icon item-icon icon="star-border" hover="star" on-tap="addName"></hover-icon>
+                    <hover-icon item-icon icon="star-border" hover="star"
+                                on-tap="addName"></hover-icon>
                     <editing-item class="flex" item="{{item}}"></editing-item>
                   </paper-icon-item>
                 </template>
@@ -103,6 +96,7 @@
   <script>
     Polymer({
       is: 'name-page',
+      behaviors: [rptools.UUIDBehavior],
       properties: {
         columns: Number,
         isSignedIn: Boolean,
@@ -143,12 +137,6 @@
         if (event.model.item.id && index > -1) {
           this.splice('savedNames', index, 1);
         }
-      },
-      uuid: function () {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-          return v.toString(16);
-        });
       }
     });
   </script>

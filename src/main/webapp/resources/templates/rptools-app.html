@@ -2,6 +2,7 @@
 <link rel="import" href="./name/name-page.html">
 <link rel="import" href="./table/table-page.html">
 <link rel="import" href="./util/variable-layout.html">
+<link rel="import" href="./behavior/google-scope.html">
 <link rel="import" href="/bower/app-route/app-location.html">
 <link rel="import" href="/bower/app-route/app-route.html">
 <link rel="import" href="/bower/google-apis/google-client-loader.html">
@@ -23,13 +24,17 @@
 <dom-module id="rptools-app">
   <template>
     <style is="custom-style" include="iron-flex iron-flex-alignment">
-      :host ::content paper-menu,
-      :host ::content paper-card {
+      :host ::content paper-menu {
         margin: 8px 8px;
       }
 
       :host ::content [drawer] paper-menu {
         margin: 0;
+      }
+
+      :host ::content paper-button {
+        background-color: var(--accent-color);
+        color: var(--light-theme-text-color);
       }
 
       @media (max-width: 480px) {
@@ -49,8 +54,12 @@
     </style>
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="/:page" data="{{location}}"></app-route>
+    <google-client-loader id="drive"
+                          name="drive"
+                          version="v3"
+                          on-google-api-load="downloadAppDataFile"></google-client-loader>
     <google-js-api id="gapi"></google-js-api>
-    <google-client-loader id="drive" name="drive" version="v3"></google-client-loader>
+    <!--<google-client-loader id="drive" name="drive" version="v3"></google-client-loader>-->
     <paper-drawer-panel id="drawer" responsive-width="840px">
       <paper-header-panel drawer mode="seamed">
         <paper-toolbar>
@@ -96,6 +105,7 @@
   <script>
     Polymer({
       is: 'rptools-app',
+      behaviors: [rptools.GoogleScopeBehavior],
       properties: {
         columns: Number,
         races: Array,
@@ -121,7 +131,7 @@
         },
         scopes: {
           type: String,
-          value: "profile https://www.googleapis.com/auth/drive.appdata"
+          value: "https://www.googleapis.com/auth/drive.appdata"
         }
       },
       listeners: {
@@ -132,11 +142,13 @@
         'contentUpdated(userSavedContent.names.*)',
         'contentUpdated(userSavedContent.cities.*)',
         'contentUpdated(userSavedContent.names.splices)',
-        'contentUpdated(userSavedContent.cities.splices)'
+        'contentUpdated(userSavedContent.cities.splices)',
+        'contentUpdated(userSavedContent.tables.splices)'
       ],
       ready: function () {
-        this.gapi = document.querySelector('google-js-api');
-        this.drive = document.querySelector('google-client-loader');
+        if (this.$.gapi.api && !this.$.drive.api) {
+          this.$.drive._loadClient();
+        }
       },
       get updateRequestParams() {
         return {
@@ -170,15 +182,13 @@
         if (!this.listening || !this.isSignedIn) {
           return;
         }
-        this.gapi.api.client.request(this.updateRequestParams).execute();
+        this.$.gapi.api.client.request(this.updateRequestParams).execute();
         this.$.savesuccess.open();
       },
       userSignedIn: function () {
         this.isSignedIn = true;
-        if (this.drive.api) {
+        if (this.$.drive.api) {
           this.downloadAppDataFile();
-        } else {
-          this.drive.addEventListener('google-api-load', this.downloadAppDataFile.bind(this));
         }
       },
       userSignedOut: function (e) {
@@ -188,8 +198,12 @@
 
       // google drive interaction functions/callbacks
       downloadAppDataFile: function () {
+        if (!this.isSignedIn) {
+          return;
+        }
+        console.log('downloading app data');
         if (!this.files) {
-          this.files = this.drive.api.files;
+          this.files = this.$.drive.api.files;
         }
         this.files.list({
           spaces: "appDataFolder",
@@ -203,7 +217,7 @@
         if (response.result.files.length == 0) {
           this.files.create({
             resource: this.appDataFileMetadata,
-            fields: "files(id)"
+            fields: "id"
           }, "{}").then(this.createAppDataFileCallback.bind(this));
         } else {
           this.appDataFileMetadata.id = response.result.files[0].id;
@@ -213,14 +227,28 @@
           }).then(this.getAppDataFileCallback.bind(this));
         }
       },
-      createAppDataFileCallback: function (err, response) {
-        this.appDataFileMetadata.id = response.result;
-        this.userSavedContent = {};
+      createAppDataFileCallback: function (response) {
+        this.appDataFileMetadata.id = response.result.id;
+        this.userSavedContent = {
+          names: [],
+          cities: [],
+          tables: []
+        };
         this.listening = true;
       },
       getAppDataFileCallback: function (response) {
-        this.userSavedContent = response.result;
-        this.listening = true;
+        if (response.status == 200) {
+          if (response.result) {
+            this.userSavedContent = response.result;
+          } else {
+            this.userSavedContent = {
+              names: [],
+              cities: [],
+              tables: []
+            };
+          }
+          this.listening = true;
+        }
       }
     });
   </script>

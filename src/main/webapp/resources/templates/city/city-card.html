@@ -14,12 +14,12 @@
   <template>
     <style is="custom-style" include="dark-theme iron-flex iron-flex-alignment">
       :host ::content paper-input.city-name .input-content.paper-input-container input {
-        font-size: 24px;
+        /*font-size: 24px;*/
       }
 
       :host ::content editing-item.city-name paper-input .input-content.paper-input-container input {
-        font-size: 24px;
-        color: var(--primary-text-color);
+        /*font-size: 24px;*/
+        /*color: var(--primary-text-color);*/
       }
 
       :host ::content editing-item paper-input paper-input-container div.underline .unfocused-line {
@@ -159,7 +159,7 @@
         },
         scopes: {
           type: String,
-          value: "profile https://www.googleapis.com/auth/drive.appdata"
+          value: "https://www.googleapis.com/auth/drive.appdata"
         },
         signedInClass: {
           type: String,

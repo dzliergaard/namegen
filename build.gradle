@@ -92,9 +92,11 @@ task bowerInstall(type: NodeTask) {
 task bowerPackages(type: Sync) {
     from 'bower_components'
     into "src/main/webapp/resources/js/bower"
-    exclude '**/test/*'
-    exclude '**/demo/*'
+    exclude '**/test'
+    exclude '**/demo'
     include '**/*.html'
+    include '**/*.js'
+    include '**/*.css'
     dependsOn bowerInstall
     mustRunAfter clean
 }

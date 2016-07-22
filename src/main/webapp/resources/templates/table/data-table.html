@@ -1,0 +1,215 @@
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="/bower/iron-icon/iron-icon.html">
+<link rel="import" href="/bower/iron-icons/iron-icons.html">
+<link rel="import" href="/bower/paper-dialog/paper-dialog.html">
+<link rel="import" href="/bower/paper-item/paper-item.html">
+
+<dom-module id="data-table">
+  <style is="custom-style" import="iron-flex">
+    :host div.table {
+      display: table;
+      width: calc(100% - 16px);
+    }
+
+    :host div.table div.group {
+      display: table-row-group;
+    }
+
+    :host div.table > div.group.header {
+      display: table-header-group;
+    }
+
+    :host div.table paper-item.row {
+      display: table-row;
+      line-height: 48px;
+    }
+
+    :host div.table paper-item.row:hover {
+      background-color: var(--light-theme-secondary-color);
+      color: var(--primary-text-color);
+    }
+
+    :host div.table div.group.header paper-item.row div.sorted {
+      color: var(--primary-text-color);
+    }
+
+    :host div.table paper-item.row iron-icon {
+      fill: var(--secondary-text-color);
+    }
+
+    :host div.table paper-item.row:hover iron-icon {
+      fill: var(--primary-text-color);
+    }
+
+    :host div.table paper-item.row > div {
+      color: var(--primary-text-color);
+      fill: var(--primary-text-color);
+    }
+
+    :host div.table div.group.header paper-item.row > div {
+      color: var(--secondary-text-color);
+    }
+
+    :host div.table div.group.header paper-item.row:hover > div {
+      color: var(--primary-text-color);
+    }
+
+    :host div.table paper-item.row > div {
+      padding-left: 28px;
+      padding-right: 28px;
+      display: table-cell;
+    }
+
+    :host #columnsDialog {
+      background-color: var(--light-theme-background-color);
+      color: var(--light-theme-text-color);
+    }
+
+    :host #columnsDialog paper-checkbox {
+      @apply(--paper-font-caption);
+      --paper-checkbox-checked-color: var(--light-theme-text-color);
+      --paper-checkbox-checkmark-color: var(--light-theme-text-color);
+      --paper-checkbox-label-color: var(--light-theme-text-color);
+      --paper-checkbox-unchecked-color: var(--light-theme-text-color);
+    }
+  </style>
+  <template>
+    <div class="table">
+      <div class="group header">
+        <paper-item class="row">
+          <template is="dom-repeat" items="{{columns}}" as="column" filter="_showingColumn"
+                    observe="showing">
+            <div on-tap="_sortByColumn">
+              {{column.label}}
+              <template is="dom-if" if="{{_isSortingColumn(column)}}">
+                <iron-icon icon="{{_columnSortIcon(column)}}" on-click="_reverseSort"></iron-icon>
+              </template>
+            </div>
+          </template>
+          <div>
+            <iron-icon icon="menu" on-tap="_chooseColumns"></iron-icon>
+          </div>
+        </paper-item>
+      </div>
+      <div class="group">
+        <template is="dom-repeat" items="{{rows}}" sort="_sortRows" as="row">
+          <paper-item class="row">
+            <template is="dom-repeat" items="{{columns}}" as="column">
+              <paper-input value="{{_getRowData(row, column.id)}}"
+                           on-change="_setRowData"></paper-input>
+            </template>
+          </paper-item>
+        </template>
+      </div>
+    </div>
+    <paper-dialog id="columnsDialog">
+      <h2>Select Table Columns</h2>
+      <div>
+        <template is="dom-repeat" items="{{columns}}">
+          <paper-item>
+            <paper-checkbox id="{{item.id}}" checked="{{item.showing}}">
+              {{item.label}}
+            </paper-checkbox>
+          </paper-item>
+        </template>
+        <paper-button raised dialog-confirm>OK</paper-button>
+      </div>
+    </paper-dialog>
+  </template>
+
+  <script>
+    Polymer({
+      id: 'data-table',
+      properties: {
+        columns: {
+          type: Array,
+          observer: '_setInitialSort'
+        },
+        rows: {
+          type: Array,
+          notify: true,
+          value: function () {
+            return [];
+          }
+        },
+        sortBy: {
+          type: Array,
+          value: function () {
+            return [];
+          }
+        }
+      },
+
+      // column related functions
+      _chooseColumns: function () {
+        this.$.columnsDialog.open();
+      },
+
+      _columnSortIcon: function (column) {
+        return !this._isSortingColumn(column) ? '' : (this.sortBy[0].reverse ? this.up : this.down);
+      },
+
+      _isSortingColumn: function (column) {
+        return this.sortBy && this.sortBy[0] && this.sortBy[0].id == column.id;
+      },
+
+      _setInitialSort: function (columns) {
+        this.sortBy = [
+          {id: columns[0].id, reverse: false}
+        ];
+      },
+
+      _showingColumn: function (column) {
+        return column.showing;
+      },
+
+      _sortByColumn: function (event) {
+        if (this._isSortingColumn(event.model.column)) {
+          this.sortBy[0].reverse = !this.sortBy[0].reverse;
+          return;
+        }
+        for (var i = 0; i < this.sortBy.length; i++) {
+          if (this.sortBy[i].id == event.model.column.id) {
+            this.sortBy.splice(i, 1);
+            break;
+          }
+        }
+        this.unshift('sortBy', {
+          id: event.model.column.id,
+          reverse: false
+        });
+      },
+
+      _compareRows: function (rowA, rowB, sortBy) {
+        if (rowA[sortBy.id] == rowB[sortBy.id]) {
+          return;
+        } else if (rowB[sortBy.id] > rowA[sortBy.id]) {
+          return sortBy.reverse ? 1 : -1;
+        } else {
+          return sortBy.reverse ? -1 : 1;
+        }
+      },
+
+      _sortRows: function (rowA, rowB) {
+        if (this.sortBy.length = 0) {
+          return 0;
+        }
+        for (var i = 0; i < this.sortBy.length; i++) {
+          var sort = this._compareRows(rowA, rowB, this.sortBy[i]);
+          if (sort) {
+            return sort;
+          }
+        }
+        return 0;
+      },
+
+      _getRowData: function (row, columnId) {
+        return row && row[columnId] ? row[columnId] : '';
+      },
+
+      _setRowData: function (event) {
+        event.model.row[event.model.column] = event.model.value;
+      }
+    })
+  </script>
+</dom-module>

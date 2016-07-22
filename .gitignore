@@ -1,6 +1,7 @@
 *.iml
 .gradle
 .idea
+bower_components
 build
 gradle
 node_modules

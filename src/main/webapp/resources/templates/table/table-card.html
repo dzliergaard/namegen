@@ -1,50 +1,132 @@
-<link rel="import" href="/bower/google-signin/google-signin-aware.html"/>
+<link rel="import" href="./character.html">
+<link rel="import" href="./data-table.html">
+<link rel="import" href="../behavior/google-scope.html"/>
+<link rel="import" href="/bower/google-signin/google-signin-aware.html">
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="/bower/paper-card/paper-card.html">
 <link rel="import" href="/bower/paper-fab/paper-fab.html">
 
 <dom-module id="table-card">
   <template>
-    <style is="custom-style">
-      :host ::content paper-input paper-input-container div.underline .unfocused-line {
+    <style is="custom-style" include="iron-flex">
+      :host ::content .title-text paper-input paper-input-container div.underline .unfocused-line {
         display: none;
       }
 
       :host ::content .title-text paper-input .input-content.paper-input-container input {
         font-size: 24px;
-        /*color: var(--primary-text-color);*/
       }
 
       :host paper-card {
         width: calc(100% - 16px);
       }
+
+      :host paper-button.secondary {
+        background-color: var(--light-accent-color);
+      }
+
+      :host paper-button {
+        background-color: var(--dark-accent-color);
+      }
     </style>
     <google-signin-aware scopes="{{scopes}}" signed-in="{{isSignedIn}}"></google-signin-aware>
     <paper-card>
       <div class="header paper-card">
-        <div class="title-text paper-card layout horizontal">
-          <span class="flex">
-            <editing-item item="{{table.name}}"></editing-item>
+        <div class="title-text paper-card">
+          <span class="layout horizontal">
+            <template is="dom-if" if="{{editing}}">
+              <editing-item class="flex" item="{{table.name}}"></editing-item>
+            </template>
+            <template is="dom-if" if="{{!editing}}">
+              <span>{{table.name}}</span>
+            </template>
           </span>
-          <iron-icon class$="{{signedInClass}} self-center" icon="{{mainIcon}}"
-                     on-tap="primaryTap"></iron-icon>
         </div>
+      </div>
+      <div class="card-content">
+        <data-table columns="[[columns]]" rows="{{table.characters}}"></data-table>
+      </div>
+      <div class="card-actions">
+        <template is="dom-if" if="{{editing}}">
+          <paper-button raised on-tap="addCharacter">Add Character</paper-button>
+          <paper-button raised on-tap="saveTable" disabled="{{!canSave}}">Save</paper-button>
+        </template>
+        <template is="dom-if" if="{{!editing}}">
+          <paper-button raised on-tap="editTable">Use Table</paper-button>
+          <paper-button raised class="secondary" on-tap="deleteTable">Delete Table</paper-button>
+        </template>
       </div>
     </paper-card>
   </template>
   <script>
     Polymer({
       id: 'table-card',
+      behaviors: [rptools.GoogleScopeBehavior],
       properties: {
+        columns: {
+          type: Array,
+          value: function () {
+            return [
+              {label: 'Name', id: 'name', type: 'text', showing: true},
+              {label: 'AC', id: 'armorClass', type: 'number', showing: true},
+              {label: 'Initiative', id: 'initiative', type: 'number', showing: true},
+              {label: 'Current HP', id: 'currentHitPoints', type: 'number', showing: true},
+              {label: 'Max HP', id: 'maxHitPoints', type: 'number', showing: true},
+              {label: 'Passive Insight', id: 'passiveInsight', type: 'number', showing: true},
+              {label: 'Passive Perception', id: 'passivePerception', type: 'number', showing: true}
+            ];
+          }
+        },
+        canSave: {
+          type: Boolean,
+          computed: '_canSave(unsaved, table.id)'
+        },
+        editing: {
+          type: Boolean,
+          value: false
+        },
         table: {
           type: Object,
           notify: true
+        },
+        unsaved: {
+          type: Boolean,
+          notify: true,
+          value: false
         }
+      },
+      observers: [
+        '_tableChanged(table.*)'
+      ],
+      _canSave: function (unsaved, id) {
+        return unsaved || !id;
+      },
+      _showColumn: function (column) {
+        return column.showing;
+      },
+      _tableChanged(change) {
+        if (change.path != 'table') {
+          this.unsaved = true;
+        }
+      },
+      addCharacter: function () {
+        this.push('table.characters', {});
+      },
+      deleteTable: function () {
+        this.fire('delete-table');
+      },
+      editTable: function () {
+        this.fire('edit-table');
       },
       primaryTap: function () {
         if (!this.isSignedIn) {
           return;
         }
-        this.fire("primary-tap");
+        this.fire('primary-tap');
+      },
+      saveTable: function () {
+        this.fire('save-table');
+        this.unsaved = false;
       }
     })
   </script>

@@ -12,6 +12,7 @@
     :root {
       /* Main colors */
       --primary-color: var(--paper-deep-purple-50);
+      --primary-text-color: var(--light-theme-text-color);
       --dark-primary-color: var(--paper-deep-purple-700);
       --light-primary-color: var(--primary-color);
       --accent-color: var(--paper-orange-a200);
@@ -41,8 +42,16 @@
       --dark-theme-disabled-color: var(--paper-deep-purple-200); /* disabled/hint text */
       --dark-theme-divider-color: var(--paper-deep-purple-100);
 
-      /* other global styles */
+      /* other element styles */
+      --iron-icon-fill-color: var(--light-theme-secondary-color);
       --paper-toolbar-color: var(--light-theme-text-color);
+      --paper-card-header-color: var(--light-theme-text-color);
+      --paper-input-container-color: var(--light-theme-secondary-color);
+      --paper-input-container-focus-color: var(--light-theme-text-color);
+      --paper-input-container-input-color: var(--light-theme-text-color);
+      --paper-card: {
+        margin: 8px 8px;
+      };
     }
 
     body {
@@ -52,7 +61,6 @@
     }
   </style>
 </head>
-
 <body class="fullbleed vertical layout">
 <rptools-app></rptools-app>
 </body>

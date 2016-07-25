@@ -2,6 +2,7 @@
 <link rel="import" href="/bower/iron-icon/iron-icon.html">
 <link rel="import" href="/bower/iron-icons/iron-icons.html">
 <link rel="import" href="/bower/paper-dialog/paper-dialog.html">
+<link rel="import" href="/bower/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="/bower/paper-item/paper-item.html">
 
 <dom-module id="data-table">
@@ -19,42 +20,47 @@
       display: table-header-group;
     }
 
-    :host div.table paper-item.row {
+    :host div.table .row {
       display: table-row;
       line-height: 48px;
     }
 
-    :host div.table paper-item.row:hover {
+    :host div.table .row:hover {
+      --paper-input-container-color: var(--primary-text-color);
+    }
+
+    :host div.table .row:hover {
       background-color: var(--light-theme-secondary-color);
       color: var(--primary-text-color);
+      --paper-input-container-color: var(--primary-text-color);
     }
 
-    :host div.table div.group.header paper-item.row div.sorted {
+    :host div.table div.group.header .row div.sorted {
       color: var(--primary-text-color);
     }
 
-    :host div.table paper-item.row iron-icon {
+    :host div.table .row iron-icon {
       fill: var(--secondary-text-color);
     }
 
-    :host div.table paper-item.row:hover iron-icon {
+    :host div.table .row:hover iron-icon {
       fill: var(--primary-text-color);
     }
 
-    :host div.table paper-item.row > div {
+    :host div.table .row > div {
       color: var(--primary-text-color);
       fill: var(--primary-text-color);
     }
 
-    :host div.table div.group.header paper-item.row > div {
+    :host div.table div.group.header .row > div {
       color: var(--secondary-text-color);
     }
 
-    :host div.table div.group.header paper-item.row:hover > div {
+    :host div.table div.group.header .row:hover > div {
       color: var(--primary-text-color);
     }
 
-    :host div.table paper-item.row > div {
+    :host div.table .row > :not(template) {
       padding-left: 28px;
       padding-right: 28px;
       display: table-cell;
@@ -93,18 +99,21 @@
       </div>
       <div class="group">
         <template is="dom-repeat" items="{{rows}}" sort="_sortRows" as="row">
-          <paper-item class="row">
+          <div class="row">
             <template is="dom-repeat" items="{{columns}}" as="column">
-              <paper-input value="{{_getRowData(row, column.id)}}"
+              <paper-input no-label-float
+                           label="{{column.label}}"
+                           value="{{_getRowData(row, column.id)}}"
                            on-change="_setRowData"></paper-input>
             </template>
-          </paper-item>
+            <iron-icon icon="delete" on-tap="_deleteRow"></iron-icon>
+          </div>
         </template>
       </div>
     </div>
     <paper-dialog id="columnsDialog">
       <h2>Select Table Columns</h2>
-      <div>
+      <paper-dialog-scrollable>
         <template is="dom-repeat" items="{{columns}}">
           <paper-item>
             <paper-checkbox id="{{item.id}}" checked="{{item.showing}}">
@@ -113,7 +122,7 @@
           </paper-item>
         </template>
         <paper-button raised dialog-confirm>OK</paper-button>
-      </div>
+      </paper-dialog-scrollable>
     </paper-dialog>
   </template>
 
@@ -121,6 +130,14 @@
     Polymer({
       id: 'data-table',
       properties: {
+        down: {
+          type: String,
+          value: "arrow-drop-down"
+        },
+        up: {
+          type: String,
+          value: "arrow-drop-up"
+        },
         columns: {
           type: Array,
           observer: '_setInitialSort'
@@ -153,6 +170,10 @@
         return this.sortBy && this.sortBy[0] && this.sortBy[0].id == column.id;
       },
 
+      _reverseSort: function () {
+        this.sortBy[0].reverse = !this.sortBy[0].reverse;
+      },
+
       _setInitialSort: function (columns) {
         this.sortBy = [
           {id: columns[0].id, reverse: false}
@@ -165,7 +186,7 @@
 
       _sortByColumn: function (event) {
         if (this._isSortingColumn(event.model.column)) {
-          this.sortBy[0].reverse = !this.sortBy[0].reverse;
+          this._reverseSort();
           return;
         }
         for (var i = 0; i < this.sortBy.length; i++) {

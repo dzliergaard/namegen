@@ -3,7 +3,7 @@
 <dom-module id="dark-theme">
   <template>
     <style>
-      :host .dark {
+      :host ::content .dark {
         --primary-color: var(--dark-primary-color);
         --primary-text-color: var(--dark-theme-text-color);
         --primary-background-color: var(--dark-theme-background-color);
@@ -12,34 +12,22 @@
 
         --iron-icon-fill-color: var(--dark-theme-secondary-color);
         --paper-item-body-secondary-color: var(--dark-theme-secondary-color);
-
-        /*color: var(--dark-theme-text-color);*/
-        --paper-input-container-color: var(--dark-theme-secondary-color);
-        --paper-input-container-focus-color: var(--dark-theme-text-color);
-        --paper-input-container-input-color: var(--dark-theme-text-color);
       }
 
-      .dark paper-input-container input {
-        color: red;
-        --primary-text-color: var(--dark-theme-text-color);
-        --paper-input-container-color: yellow;
-        --paper-input-container-focus-color: yellow;
-        --paper-input-container-input-color: yellow;
-        --paper-input-container: {
-          color: green;
-          --paper-input-container-color: green;
-          --paper-input-container-focus-color: green;
-          --paper-input-container-input-color: green;
-        };
+      :host ::content .dark .input-content.paper-input-container input {
+        color: var(--dark-theme-text-color);
+      }
+
+      :host ::content .dark .paper-input-container .input-content.paper-input-container label,
+      :host ::content .dark .underline.paper-input-container .focused-line.paper-input-container {
+        color: var(--dark-theme-secondary-color);
+        background: var(--dark-theme-secondary-color);
       }
 
       :host .dark paper-card,
       :host paper-card.dark {
         --paper-card-header-color: var(--dark-theme-text-color);
       }
-
-      /*:host ::content .dark paper-input paper-input-container .input-content.paper-input-container input {*/
-      /*}*/
 
       ::content .dark [secondary] paper-input paper-input-container .input-content.paper-input-container input {
         color: var(--dark-theme-secondary-color);

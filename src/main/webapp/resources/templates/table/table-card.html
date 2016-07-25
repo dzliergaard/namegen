@@ -1,4 +1,3 @@
-<link rel="import" href="./character.html">
 <link rel="import" href="./data-table.html">
 <link rel="import" href="../behavior/google-scope.html"/>
 <link rel="import" href="/bower/google-signin/google-signin-aware.html">
@@ -19,14 +18,6 @@
 
       :host paper-card {
         width: calc(100% - 16px);
-      }
-
-      :host paper-button.secondary {
-        background-color: var(--light-accent-color);
-      }
-
-      :host paper-button {
-        background-color: var(--dark-accent-color);
       }
     </style>
     <google-signin-aware scopes="{{scopes}}" signed-in="{{isSignedIn}}"></google-signin-aware>
@@ -71,9 +62,7 @@
               {label: 'AC', id: 'armorClass', type: 'number', showing: true},
               {label: 'Initiative', id: 'initiative', type: 'number', showing: true},
               {label: 'Current HP', id: 'currentHitPoints', type: 'number', showing: true},
-              {label: 'Max HP', id: 'maxHitPoints', type: 'number', showing: true},
-              {label: 'Passive Insight', id: 'passiveInsight', type: 'number', showing: true},
-              {label: 'Passive Perception', id: 'passivePerception', type: 'number', showing: true}
+              {label: 'Max HP', id: 'maxHitPoints', type: 'number', showing: true}
             ];
           }
         },

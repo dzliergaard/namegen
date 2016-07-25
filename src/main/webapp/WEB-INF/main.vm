@@ -9,7 +9,7 @@
   <link rel="import" href="/templates/rptools-app.html"></link>
 
   <style is="custom-style">
-    :root {
+    :root :not(.dark) {
       /* Main colors */
       --primary-color: var(--paper-deep-purple-50);
       --primary-text-color: var(--light-theme-text-color);
@@ -51,6 +51,28 @@
       --paper-input-container-input-color: var(--light-theme-text-color);
       --paper-card: {
         margin: 8px 8px;
+      };
+      --paper-button: {
+        background-color: var(--dark-accent-color);
+        color: var(--primary-text-color);
+        font-weight: bold;
+      }
+      --paper-button-disabled: {
+        background-color: var(--light-accent-color);
+        color: var(--secondary-text-color);
+        font-weight: bold;
+      };
+    }
+
+    :root paper-button.secondary {
+      --paper-button: {
+        background-color: var(--accent-color);
+        font-weight: bold;
+      };
+      --paper-button-disabled: {
+        background-color: var(--light-accent-color);
+        color: var(--secondary-text-color);
+        font-weight: bold;
       };
     }
 

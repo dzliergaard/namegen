@@ -43,17 +43,13 @@
         --paper-slider-active-color: var(--primary-text-color);
         width: 100%;
       }
-
-      :host paper-button.generate-button {
-        background-color: var(--accent-color);
-        color: var(--light-theme-text-color);
-      }
     </style>
     <iron-ajax id="generate" url="/city/generate"
                params="{{generateParams(diversity, size, race)}}"
                on-response="populateCity"></iron-ajax>
     <iron-ajax id="refresh" url="/city/generate"
                params="{{generateParams(diversity, size, race)}}"></iron-ajax>
+    <iron-ajax auto id="racesAjax" url="/city/races" on-response="populateRaces"></iron-ajax>
     <div class="vertical layout">
       <paper-card class="city-menu">
         <div class$="card-content {{_layoutClass(columns)}} layout">
@@ -193,6 +189,9 @@
       populateCity: function (err, request) {
         this.generatedCity = request.response;
       },
+      populateRaces: function (err, request) {
+        this.races = request.response;
+      },
       refreshCityPart: function (cityPart) {
         this.$.refresh.generateRequest().completes.then(function (request) {
           this.set('generatedCity.' + cityPart, request.response[cityPart]);
@@ -221,7 +220,7 @@
       },
       saveCity: function () {
         this.unshift('savedCities', this.generatedCity);
-        this.generatedCity = undefined;
+        this.set('generatedCity', null);
       }
     });
   </script>

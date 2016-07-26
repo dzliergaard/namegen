@@ -1,3 +1,4 @@
+<link rel="import" href="../behavior/google-scope.html"/>
 <link rel="import" href="/bower/iron-icon/iron-icon.html"/>
 
 <dom-module id="hover-icon">
@@ -7,7 +8,7 @@
     }
   </style>
   <template>
-    <google-signin-aware scopes="{{scopes}}" signed-in="isSignedIn"></google-signin-aware>
+    <google-signin-aware scopes="{{scopes}}" signed-in="{{isSignedIn}}"></google-signin-aware>
     <iron-icon item-icon="{{itemIcon}}"
                class$="{{signedInClass}}"
                icon="{{composite}}"
@@ -19,6 +20,7 @@
   <script>
     Polymer({
       is: 'hover-icon',
+      behaviors: [rptools.GoogleScopeBehavior],
       properties: {
         itemIcon: Boolean,
         _hover: {
@@ -36,10 +38,6 @@
         composite: {
           type: String,
           computed: 'getComposite(icon, hover, _hover)'
-        },
-        scopes: {
-          type: String,
-          value: "profile https://www.googleapis.com/auth/drive.appdata"
         },
         signedInClass: {
           type: String,

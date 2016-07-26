@@ -9,28 +9,24 @@
   <link rel="import" href="/templates/rptools-app.html"></link>
 
   <style is="custom-style">
-    :root {
+    :root :not(.dark) {
       /* Main colors */
       --primary-color: var(--paper-deep-purple-50);
       --dark-primary-color: var(--paper-deep-purple-700);
       --light-primary-color: var(--primary-color);
+      --primary-text-color: var(--dark-primary-color);
       --accent-color: var(--paper-orange-a200);
       --dark-accent-color: var(--paper-orange-a400);
       --light-accent-color: var(--paper-orange-a100);
-
-      /* Main theme */
-      --primary-background-color: var(--light-theme-background-color);
-      --secondary-text-color: var(--light-theme-secondary-color);
-      --disabled-text-color: var(--light-theme-disabled-color);
-      --divider-color: var(--light-theme-divider-color);
+      --accent-text-color: var(--paper-orange-a700);
 
       /* light theme */
       --light-theme-background-color: var(--light-primary-color);
       --light-theme-base-color: var(--dark-primary-color);
       --light-theme-text-color: var(--dark-primary-color);
       --light-theme-secondary-color: var(--paper-deep-purple-200);
-      --light-theme-disabled-color: var(--paper-deep-purple-300);
-      --light-theme-divider-color: var(--paper-deep-puple-200);
+      --light-theme-disabled-color: var(--paper-deep-purple-100);
+      --light-theme-divider-color: var(--paper-deep-puple-50);
 
       /* dark theme */
       --dark-theme-background-color: var(--paper-deep-purple-400);
@@ -38,7 +34,57 @@
       --dark-theme-text-color: var(--light-primary-color);
       --dark-theme-secondary-color: var(--paper-deep-purple-100); /* for secondary text and icons */
       --dark-theme-disabled-color: var(--paper-deep-purple-200); /* disabled/hint text */
-      --dark-theme-divider-color: var(--paper-deep-purple-100);
+      --dark-theme-divider-color: var(--paper-deep-purple-300);
+
+      /* Main theme */
+      --primary-background-color: var(--light-theme-background-color);
+      --highlight-background-color: var(--);
+      --secondary-text-color: var(--light-theme-secondary-color);
+      --disabled-text-color: var(--light-theme-disabled-color);
+      --divider-color: var(--light-theme-disabled-color);
+
+      /* other element styles */
+      --iron-icon-fill-color: var(--light-theme-secondary-color);
+      --paper-toolbar-color: var(--light-theme-text-color);
+      --paper-card-header-color: var(--light-theme-text-color);
+      --paper-input-container-color: var(--light-theme-secondary-color);
+      --paper-input-container-focus-color: var(--light-theme-text-color);
+      --paper-input-container-input-color: var(--light-theme-text-color);
+      --paper-card: {
+        margin: 8px 8px;
+      };
+      --paper-button: {
+        background-color: var(--dark-accent-color);
+        color: var(--primary-text-color);
+        font-weight: bold;
+      };
+      --paper-button-disabled: {
+        background-color: var(--light-accent-color);
+        color: var(--secondary-text-color);
+        font-weight: bold;
+      };
+    }
+
+    :root paper-card .header paper-input paper-input-container input {
+      @apply(--paper-font-headline);
+    }
+
+    :root paper-button.secondary {
+      --paper-button: {
+        background-color: var(--accent-color);
+        font-weight: bold;
+      };
+      --paper-button-disabled: {
+        background-color: var(--light-accent-color);
+        color: var(--secondary-text-color);
+        font-weight: bold;
+      };
+    }
+
+    :root .caption *,
+    :root [secondary] * {
+      @apply(--paper-font-caption);
+      color: var(--secondary-text-color);
     }
 
     body {
@@ -48,8 +94,7 @@
     }
   </style>
 </head>
-
 <body class="fullbleed vertical layout">
-<rptools-app races='$races'></rptools-app>
+<rptools-app></rptools-app>
 </body>
 </html>

@@ -18,14 +18,19 @@
 
 package com.rptools.controller;
 
-import com.google.gson.Gson;
-import com.rptools.city.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
+import com.rptools.city.City;
+import com.rptools.city.CityGen;
+import com.rptools.city.Species;
 import java.util.Optional;
 import java.util.Random;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * REST controller that manipulates {@link City} objects
@@ -33,50 +38,50 @@ import java.util.Random;
 @RestController
 @RequestMapping(value = "city")
 public class CityController {
-    private static final Random rand = new Random();
 
-    private final CityGen cityGen;
-    private final Gson gson;
+  private static final Random rand = new Random();
 
-    @Autowired
-    public CityController(CityGen cityGen, Gson gson) {
-        this.cityGen = cityGen;
-        this.gson = gson;
-    }
+  private final CityGen cityGen;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView get() {
-        ModelAndView model = new ModelAndView("main");
-        model.getModel().put("races", gson.toJson(Species.values()));
-        return model;
-    }
+  @Autowired
+  public CityController(CityGen cityGen) {
+    this.cityGen = cityGen;
+  }
 
-    @RequestMapping(value = "generate", method = RequestMethod.GET, headers = "Accept=application/json")
-    public @ResponseBody City generate(
-            @RequestParam(required = false) Double size,
-            @RequestParam(required = false) Double diversity,
-            @RequestParam(required = false) Species race) {
-        size = Math.pow(size * size, 1.1);
+  @RequestMapping(method = RequestMethod.GET)
+  public ModelAndView get() {
+    ModelAndView model = new ModelAndView("main");
+    return model;
+  }
 
-        diversity = Optional.ofNullable(diversity).orElse(rand.nextInt(99) + 1.0);
-        diversity = .1 + (.3 / 100) * diversity;
+  @RequestMapping(value = "generate", method = RequestMethod.GET, headers = "Accept=application/json")
+  public
+  @ResponseBody
+  City generate(
+      @RequestParam(required = false) Double size,
+      @RequestParam(required = false) Double diversity,
+      @RequestParam(required = false) Species race) {
+    size = Math.pow(size * size, 1.1);
 
-        return cityGen.generateCity(size, diversity, Optional.ofNullable(race).orElse(Species.rand()));
-    }
+    diversity = Optional.ofNullable(diversity).orElse(rand.nextInt(99) + 1.0);
+    diversity = .1 + (.3 / 100) * diversity;
 
-    @RequestMapping(value = "races", method = RequestMethod.GET)
-    public Species[] getRaces() {
-        return Species.values();
-    }
+    return cityGen.generateCity(size, diversity, Optional.ofNullable(race).orElse(Species.rand()));
+  }
 
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public void delete(@RequestBody City city) {
-    }
+  @RequestMapping(value = "races", method = RequestMethod.GET)
+  public Species[] getRaces() {
+    return Species.values();
+  }
 
-    @RequestMapping(value = "save", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    City save(@RequestBody(required = false) City city) {
-        return null;
-    }
+  @RequestMapping(value = "delete", method = RequestMethod.POST)
+  public void delete(@RequestBody City city) {
+  }
+
+  @RequestMapping(value = "save", method = RequestMethod.POST)
+  public
+  @ResponseBody
+  City save(@RequestBody(required = false) City city) {
+    return null;
+  }
 }

@@ -1,7 +1,9 @@
+<link rel="import" href="/bower/paper-input/paper-input.html">
+<link rel="import" href="/bower/paper-input/paper-input-container.html">
 <dom-module id="dark-theme">
   <template>
-    <style is="custom-style">
-      :host .dark {
+    <style>
+      :host ::content .dark {
         --primary-color: var(--dark-primary-color);
         --primary-text-color: var(--dark-theme-text-color);
         --primary-background-color: var(--dark-theme-background-color);
@@ -10,19 +12,25 @@
 
         --iron-icon-fill-color: var(--dark-theme-secondary-color);
         --paper-card-header-color: var(--dark-theme-text-color);
-        --paper-input-container-color: var(--dark-theme-text-color);
-        --paper-input-container-focus-color: var(--dark-theme-secondary-color);
         --paper-item-body-secondary-color: var(--dark-theme-secondary-color);
+        --paper-item: {
+          color: var(--dark-theme-text-color);
+        };
+      }
 
+      :host ::content .dark .input-content.paper-input-container input {
         color: var(--dark-theme-text-color);
       }
 
-      :host ::content .dark paper-input paper-input-container .input-content.paper-input-container input {
-        color: var(--dark-theme-text-color);
-      }
-
-      :host ::content .dark [secondary] paper-input paper-input-container .input-content.paper-input-container input {
+      :host ::content .dark .paper-input-container .input-content.paper-input-container label,
+      :host ::content .dark .underline.paper-input-container .focused-line.paper-input-container {
         color: var(--dark-theme-secondary-color);
+        background: var(--dark-theme-secondary-color);
+      }
+
+      :host ::content .dark paper-card,
+      :host ::content paper-card.dark {
+        --paper-card-header-color: var(--dark-theme-text-color);
       }
     </style>
   </template>

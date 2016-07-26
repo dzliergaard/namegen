@@ -1,0 +1,78 @@
+<link rel="import" href="/bower/iron-collapse/iron-collapse.html">
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="/bower/iron-icon/iron-icon.html">
+<link rel="import" href="/bower/iron-icons/iron-icons.html">
+
+<dom-module id="toggle-collapse">
+  <style include="iron-flex">
+    :host paper-item-body {
+      width: 100%;
+    }
+  </style>
+  <template>
+    <paper-item>
+      <paper-item-body>
+        <div class="layout horizontal">
+          <iron-icon class="self-start" icon="{{icon}}" on-tap="toggle"></iron-icon>
+          <span class="flex" on-tap="toggle">{{header}}</span>
+          <iron-icon class="self-end" icon="refresh" on-tap="iconTap"></iron-icon>
+        </div>
+        <iron-collapse secondary id="collapse" class="layout vertical" opened="{{opened}}">
+          <template is="dom-if" if="{{_isContentArray(content)}}">
+            <template is="dom-repeat" items="{{content}}">
+              <paper-item class="flex">
+                {{item}}
+              </paper-item>
+            </template>
+          </template>
+          <template is="dom-if" if="{{_isContentString}}">
+            <paper-item>
+              {{content}}
+            </paper-item>
+          </template>
+          <template is="dom-if" if="{{!content}}">
+            <paper-item>
+              <content></content>
+            </paper-item>
+          </template>
+        </iron-collapse>
+      </paper-item-body>
+    </paper-item>
+  </template>
+
+  <script>
+    Polymer({
+      id: 'toggle-collapse',
+      properties: {
+        header: String,
+        content: {
+          value: null
+        },
+        icon: {
+          type: String,
+          computed: '_icon(opened)'
+        },
+        opened: {
+          type: Boolean,
+          value: false
+        }
+      },
+      _icon: function (opened) {
+        return opened ? 'hardware:keyboard-arrow-up' : 'hardware:keyboard-arrow-down';
+      },
+      iconTap: function () {
+        this.fire('icon-tap');
+      },
+      _isContentArray: function (content) {
+        return Array.isArray(content);
+      },
+      _isContentString: function (content) {
+        return typeof content != 'undefined' && !Array.isArray(content);
+      },
+      toggle: function () {
+        this.$.collapse.toggle();
+      }
+    })
+  </script>
+</dom-module>

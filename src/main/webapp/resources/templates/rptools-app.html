@@ -118,7 +118,7 @@
         },
         clientId: {
           type: String,
-          value: "455791253437-tbh3r1rc5lg720tnfrlfbi5cm7n5rvm4.apps.googleusercontent.com"
+          value: '455791253437-tbh3r1rc5lg720tnfrlfbi5cm7n5rvm4.apps.googleusercontent.com'
         },
         isSignedIn: {
           type: Boolean,
@@ -130,7 +130,7 @@
         },
         scopes: {
           type: String,
-          value: "https://www.googleapis.com/auth/drive.appdata"
+          value: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata'
         }
       },
       listeners: {
@@ -203,10 +203,16 @@
         if (!this.files) {
           this.files = this.$.drive.api.files;
         }
+
+        this.files.get({
+          fileId: '0B5pAnuW8wKfSYUZ2UVJLM0tUcW8',
+          alt: 'media'
+        }).then(function (response) {
+          console.log('Sheet contents: ' + response.result);
+        }.bind(this));
         this.files.list({
-          spaces: "appDataFolder",
-          fields: "files(id,modifiedTime,name,properties)",
-          body: JSON.stringify(this.userSavedContent)
+          spaces: 'appDataFolder',
+          fields: 'files(id,modifiedTime,name,properties)'
         }).then(this.listAppDataFilesCallback.bind(this));
       },
 
@@ -215,13 +221,13 @@
         if (response.result.files.length == 0) {
           this.files.create({
             resource: this.appDataFileMetadata,
-            fields: "id"
-          }, "{}").then(this.createAppDataFileCallback.bind(this));
+            fields: 'id'
+          }, '{}').then(this.createAppDataFileCallback.bind(this));
         } else {
           this.appDataFileMetadata.id = response.result.files[0].id;
           this.files.get({
             fileId: this.appDataFileMetadata.id,
-            alt: "media"
+            alt: 'media'
           }).then(this.getAppDataFileCallback.bind(this));
         }
       },

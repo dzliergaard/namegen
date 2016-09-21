@@ -31,7 +31,6 @@
       @apply(--layout-horizontal);
       @apply(--layout-justified);
       border-color: var(--divider-color);
-      border-bottom: 1px solid var(--divider-color);
       height: 48px;
     }
 
@@ -41,8 +40,8 @@
       color: var(--dark-primary-color);
     }
 
-    :host ::content div.table .row paper-input paper-input-container .underline > * {
-      display: none;
+    :host div.table paper-input {
+      padding-right: 10px;
     }
 
     :host div.table div.group.header .row .sorted {

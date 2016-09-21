@@ -1,0 +1,48 @@
+		Event
+01-02	Anniversary of a monarch's reign
+03-04	Anniversary of an important event
+05-06	Arena event
+07-08	Arrival of a caravan or ship
+09-10	Arrival of a circus
+11-12	Arrival of an important NPC
+13-14	Arrival of marching modrons
+15-16	Artistic performance
+17-18	Athletic event
+19-20	Birth of a child
+21-22	Birthday of an important NPC
+23-24	Civic festival
+25-26	Comet appearance
+27-28	Commemoration of a past tragedy
+29-30	Consecration of a new temple
+31-32	Coronation
+33-34	Council meeting
+35-36	Equinox or solstice 37-38
+39-40	Execution
+41-42	Fertility festival
+43-44	Full moon
+45-46	Funeral
+47-48	Graduation of cadets or wizards
+49-50	Harvest festival
+51-52	Holy day
+53-54	Investiture of a knight or other noble
+55-58	Lunar eclipse
+59-60	Midsummer festival
+61-62	Midwinter festival
+63-64	Migration of monsters
+65-66	Monarch's ball
+67-68	New moon
+69-70	New year
+71-72	Pardoning of a prisoner
+73-74	Planar conjunction
+75-76	Planetary alignment
+77-78	Priestly investiture
+79-80	Procession of ghosts
+81-82	Remembrance for soldiers lost in war
+83-84	Royal address or proclamation
+85-86	Royal audience day
+87-88	Signing of a treaty
+89-91	Tournament
+92-94	Trial
+95-96	Violent uprising
+97-98	Wedding or wedding anniversary
+99-00	Concurrence of two events (roll twice, ignoring results of 99 or 100)

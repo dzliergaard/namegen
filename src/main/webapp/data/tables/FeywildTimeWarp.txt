@@ -1,0 +1,7 @@
+		Time Distortion
+1-2		Days become minutes
+3-6		Days become hours months
+7-13	No change
+14-17	Days become weeks
+18-19	Days become
+20		Days become years

@@ -44,6 +44,10 @@
     :host paper-fab {
       margin: 8px 8px;
     }
+
+    :host ::content paper-fab iron-icon {
+      fill: var(--primary-text-color);
+    }
   </style>
   <template>
     <iron-ajax auto id="inns" url="/city/generate" params="{{generateParams}}"

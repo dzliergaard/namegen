@@ -2,6 +2,8 @@
 <link rel="import" href="../behavior/google-scope.html"/>
 <link rel="import" href="/bower/google-signin/google-signin-aware.html">
 <link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="/bower/iron-icons/iron-icons.html">
+<link rel="import" href="/bower/iron-icons/social-icons.html">
 <link rel="import" href="/bower/paper-card/paper-card.html">
 <link rel="import" href="/bower/paper-fab/paper-fab.html">
 
@@ -16,6 +18,11 @@
         font-size: 24px;
       }
 
+      :host paper-card .save-icon {
+        float: right;
+        margin: auto 0 auto auto;
+      }
+
       :host paper-card {
         width: calc(100% - 16px);
       }
@@ -26,7 +33,8 @@
         <div class="title-text paper-card">
           <span class="layout horizontal">
             <template is="dom-if" if="{{editing}}">
-              <editing-item class="flex" item="{{party.name}}"></editing-item>
+              <editing-item item="{{party.name}}"></editing-item>
+              <iron-icon class="save-icon" icon="icons:save" on-tap="saveParty"></iron-icon>
             </template>
             <template is="dom-if" if="{{!editing}}">
               <span>{{party.name}}</span>
@@ -41,8 +49,7 @@
       </div>
       <div class="card-actions">
         <template is="dom-if" if="{{editing}}">
-          <paper-button raised on-tap="addCharacter">Add Character</paper-button>
-          <paper-button raised on-tap="saveParty" disabled="{{!canSave}}">Save</paper-button>
+          <paper-fab icon="social:person-add" on-tap="addCharacter"></paper-fab>
         </template>
         <template is="dom-if" if="{{!editing}}">
           <paper-button raised on-tap="editParty">Use Party</paper-button>

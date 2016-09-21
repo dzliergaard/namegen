@@ -1,0 +1,13 @@
+Goal
+Seize control of a fortified location such as a fortress, town, or ship.
+Defend a location from attackers.
+Retrieve an object from inside a secure location in a settlement.
+Retrieve an object from a caravan.
+Salvage an object or goods from a lost vessel or caravan.
+Break a prisoner out of a jail or prison camp.
+Escape from a jail or prison camp.
+Successfully travel through an obstacle course to gain recognition or reward.
+Infiltrate a fortified location.
+Find the source of strange occurrences in a haunted house or other location.
+Interfere with the operation of a business.
+Rescue a character, monster, or object from a natural or unnatural disaster.

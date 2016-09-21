@@ -1,6 +1,6 @@
 <link rel="import" href="./city/city-page.html">
 <link rel="import" href="./name/name-page.html">
-<link rel="import" href="./table/table-page.html">
+<link rel="import" href="./party/party-page.html">
 <link rel="import" href="./util/variable-layout.html">
 <link rel="import" href="./behavior/google-scope.html">
 <link rel="import" href="/bower/app-route/app-location.html">
@@ -8,6 +8,7 @@
 <link rel="import" href="/bower/google-apis/google-client-loader.html">
 <link rel="import" href="/bower/google-apis/google-js-api.html">
 <link rel="import" href="/bower/google-signin/google-signin.html">
+<link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
 <link rel="import" href="/bower/iron-icon/iron-icon.html">
 <link rel="import" href="/bower/iron-icons/iron-icons.html">
 <link rel="import" href="/bower/iron-icons/social-icons.html">
@@ -30,6 +31,10 @@
 
       :host ::content [drawer] paper-menu {
         margin: 0;
+      }
+
+      :host ::content [drawer] paper-menu paper-icon-item {
+        cursor: pointer;
       }
 
       :host ::content paper-button {
@@ -59,6 +64,7 @@
                           version="v3"
                           on-google-api-load="downloadAppDataFile"></google-client-loader>
     <google-js-api id="gapi"></google-js-api>
+    <iron-ajax auto id="tables" url="/data/tables/" on-response="listTables" handle-as="document"></iron-ajax>
     <paper-drawer-panel id="drawer" responsive-width="840px">
       <paper-header-panel drawer mode="seamed">
         <paper-toolbar>
@@ -73,9 +79,9 @@
             <iron-icon item-icon icon="social:location-city"></iron-icon>
             City Generator
           </paper-icon-item>
-          <paper-icon-item name="table" on-tap="closeDrawer">
-            <iron-icon item-icon icon="social:person"></iron-icon>
-            Table Tracker
+          <paper-icon-item name="party" on-tap="closeDrawer">
+            <iron-icon item-icon icon="social:group"></iron-icon>
+            Party Tracker
           </paper-icon-item>
         </paper-menu>
       </paper-header-panel>
@@ -93,7 +99,7 @@
                      is-signed-in="{{isSignedIn}}"
                      saved-cities="{{userSavedContent.cities}}"
                      columns="{{columns}}"></city-page>
-          <table-page name="table" saved-tables="{{userSavedContent.tables}}"></table-page>
+          <party-page name="party" saved-parties="{{userSavedContent.parties}}"></party-page>
         </iron-pages>
       </paper-header-panel>
     </paper-drawer-panel>
@@ -142,7 +148,7 @@
         'contentUpdated(userSavedContent.cities.*)',
         'contentUpdated(userSavedContent.names.splices)',
         'contentUpdated(userSavedContent.cities.splices)',
-        'contentUpdated(userSavedContent.tables.splices)'
+        'contentUpdated(userSavedContent.parties.splices)'
       ],
       ready: function () {
         if (this.$.gapi.api && !this.$.drive.api) {
@@ -173,8 +179,8 @@
             return 'Name Generator';
           case 'city':
             return 'City Generator';
-          case 'table':
-            return 'Table Tracker';
+          case 'party':
+            return 'Party Tracker';
         }
       },
       contentUpdated: function () {
@@ -204,12 +210,6 @@
           this.files = this.$.drive.api.files;
         }
 
-        this.files.get({
-          fileId: '0B5pAnuW8wKfSYUZ2UVJLM0tUcW8',
-          alt: 'media'
-        }).then(function (response) {
-          console.log('Sheet contents: ' + response.result);
-        }.bind(this));
         this.files.list({
           spaces: 'appDataFolder',
           fields: 'files(id,modifiedTime,name,properties)'
@@ -236,7 +236,7 @@
         this.userSavedContent = {
           names: [],
           cities: [],
-          tables: []
+          parties: []
         };
         this.listening = true;
       },
@@ -244,15 +244,23 @@
         if (response.status == 200) {
           if (response.result) {
             this.userSavedContent = response.result;
+            ['names', 'cities', 'parties'].forEach(function(attr){
+              this.userSavedContent[attr] = this.userSavedContent[attr] || [];
+            }.bind(this));
           } else {
             this.userSavedContent = {
               names: [],
               cities: [],
-              tables: []
+              parties: []
             };
           }
           this.listening = true;
         }
+      },
+
+      // DMG tables stuff
+      listTables: function (event) {
+
       }
     });
   </script>

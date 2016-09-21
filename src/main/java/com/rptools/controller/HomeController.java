@@ -39,7 +39,7 @@ public class HomeController {
     response.sendRedirect("name");
   }
 
-  @RequestMapping(value = "table", method = RequestMethod.GET)
+  @RequestMapping(value = "party", method = RequestMethod.GET)
   public ModelAndView table() {
     return new ModelAndView("main");
   }

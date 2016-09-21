@@ -5,7 +5,7 @@
 <link rel="import" href="/bower/paper-card/paper-card.html">
 <link rel="import" href="/bower/paper-fab/paper-fab.html">
 
-<dom-module id="table-card">
+<dom-module id="party-card">
   <template>
     <style is="custom-style" include="iron-flex">
       :host ::content .title-text paper-input paper-input-container div.underline .unfocused-line {
@@ -26,34 +26,34 @@
         <div class="title-text paper-card">
           <span class="layout horizontal">
             <template is="dom-if" if="{{editing}}">
-              <editing-item class="flex" item="{{table.name}}"></editing-item>
+              <editing-item class="flex" item="{{party.name}}"></editing-item>
             </template>
             <template is="dom-if" if="{{!editing}}">
-              <span>{{table.name}}</span>
+              <span>{{party.name}}</span>
             </template>
           </span>
         </div>
       </div>
       <div class="card-content">
         <data-table columns="[[columns]]"
-                    rows="{{table.characters}}"
+                    rows="{{party.characters}}"
                     editable="{{editing}}"></data-table>
       </div>
       <div class="card-actions">
         <template is="dom-if" if="{{editing}}">
           <paper-button raised on-tap="addCharacter">Add Character</paper-button>
-          <paper-button raised on-tap="saveTable" disabled="{{!canSave}}">Save</paper-button>
+          <paper-button raised on-tap="saveParty" disabled="{{!canSave}}">Save</paper-button>
         </template>
         <template is="dom-if" if="{{!editing}}">
-          <paper-button raised on-tap="editTable">Use Table</paper-button>
-          <paper-button raised class="secondary" on-tap="deleteTable">Delete Table</paper-button>
+          <paper-button raised on-tap="editParty">Use Party</paper-button>
+          <paper-button raised class="secondary" on-tap="deleteParty">Delete Party</paper-button>
         </template>
       </div>
     </paper-card>
   </template>
   <script>
     Polymer({
-      id: 'table-card',
+      id: 'party-card',
       behaviors: [rptools.GoogleScopeBehavior],
       properties: {
         columns: {
@@ -70,13 +70,13 @@
         },
         canSave: {
           type: Boolean,
-          computed: '_canSave(unsaved, table.id)'
+          computed: '_canSave(unsaved, party.id)'
         },
         editing: {
           type: Boolean,
           value: false
         },
-        table: {
+        party: {
           type: Object,
           notify: true
         },
@@ -87,8 +87,8 @@
         }
       },
       observers: [
-        '_tableChanged(table.*)',
-        '_rowsChanged(table.characters.*)'
+        '_partyChanged(party.*)',
+        '_rowsChanged(party.characters.*)'
       ],
       _canSave: function (unsaved, id) {
         return unsaved || !id;
@@ -96,8 +96,8 @@
       _showColumn: function (column) {
         return column.showing;
       },
-      _tableChanged(change) {
-        if (change.path != 'table') {
+      _partyChanged(change) {
+        if (change.path != 'party') {
           this.unsaved = true;
         }
       },
@@ -107,13 +107,13 @@
         }
       },
       addCharacter: function () {
-        this.push('table.characters', {});
+        this.push('party.characters', {});
       },
-      deleteTable: function () {
-        this.fire('delete-table');
+      deleteParty: function () {
+        this.fire('delete-party');
       },
-      editTable: function () {
-        this.fire('edit-table');
+      editParty: function () {
+        this.fire('edit-party');
       },
       primaryTap: function () {
         if (!this.isSignedIn) {
@@ -121,8 +121,8 @@
         }
         this.fire('primary-tap');
       },
-      saveTable: function () {
-        this.fire('save-table');
+      saveParty: function () {
+        this.fire('save-party');
         this.unsaved = false;
       }
     })

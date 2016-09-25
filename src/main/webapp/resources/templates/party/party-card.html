@@ -1,4 +1,4 @@
-<link rel="import" href="./data-table.html">
+<link rel="import" href="../util/data-table.html">
 <link rel="import" href="../behavior/google-scope.html"/>
 <link rel="import" href="/bower/google-signin/google-signin-aware.html">
 <link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
@@ -49,7 +49,7 @@
       </div>
       <div class="card-actions">
         <template is="dom-if" if="{{editing}}">
-          <paper-fab icon="social:person-add" on-tap="addCharacter"></paper-fab>
+          <paper-fab mini icon="social:person-add" on-tap="addCharacter"></paper-fab>
         </template>
         <template is="dom-if" if="{{!editing}}">
           <paper-button raised on-tap="editParty">Use Party</paper-button>
@@ -103,12 +103,12 @@
       _showColumn: function (column) {
         return column.showing;
       },
-      _partyChanged(change) {
+      _partyChanged: function(change) {
         if (change.path != 'party') {
           this.unsaved = true;
         }
       },
-      _rowsChanged(change) {
+      _rowsChanged: function(change) {
         if (change.base != change.value) {
           this.unsaved = true;
         }

@@ -64,7 +64,8 @@
                           version="v3"
                           on-google-api-load="downloadAppDataFile"></google-client-loader>
     <google-js-api id="gapi"></google-js-api>
-    <iron-ajax auto id="tables" url="/data/tables/" on-response="listTables" handle-as="document"></iron-ajax>
+    <iron-ajax auto id="tables" url="/data/tables/" on-response="listTables"
+               handle-as="document"></iron-ajax>
     <paper-drawer-panel id="drawer" responsive-width="840px">
       <paper-header-panel drawer mode="seamed">
         <paper-toolbar>
@@ -134,9 +135,24 @@
           type: Boolean,
           value: false
         },
+        nameFormatRegex: {
+          type: RegExp,
+          value: new RegExp("[a-z]([A-Z])", "g")
+        },
         scopes: {
           type: String,
           value: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata'
+        },
+        tables: {
+          type: Object,
+          value: {
+            path: '',
+            files: []
+          }
+        },
+        tableSubdirectories: {
+          type: Array,
+          value: []
         }
       },
       listeners: {
@@ -244,7 +260,7 @@
         if (response.status == 200) {
           if (response.result) {
             this.userSavedContent = response.result;
-            ['names', 'cities', 'parties'].forEach(function(attr){
+            ['names', 'cities', 'parties'].forEach(function (attr) {
               this.userSavedContent[attr] = this.userSavedContent[attr] || [];
             }.bind(this));
           } else {
@@ -260,7 +276,54 @@
 
       // DMG tables stuff
       listTables: function (event) {
+        var hrefs = Polymer.dom(event.detail.response).querySelectorAll('a[href^="/data/tables/"]').map(function (el) {
+          return el.href;
+        });
 
+        var tables = this.tables;
+        var tablesPath = 'tables';
+        // go to the sub table set that matches this call
+        if (this.$.tables.tablesPath) {
+          tablesPath += '.' + this.$.tables.tablesPath;
+          if (!this.get(tablesPath)) {
+            this.set(tablesPath, {
+              path: this.$.tables.tablesPath,
+              files: []
+            })
+          }
+        }
+        tablesPath += '.files';
+
+        // record each file as a table with parsed name, recursively add each subdirectory
+        hrefs.forEach(function (href) {
+          var matches = href.match(/\/data\/tables\/(?:(.*)\/)?(?:([A-Za-z0-9]+)\.txt)?$/);
+          var path = matches[1];
+          var name = matches[2];
+          if (name) {
+            var wordBreaks = this.nameFormatRegex.exec(name);
+            if (wordBreaks) {
+              for (var i = 1; i < wordBreaks.length; i++) {
+                name = name.replace(wordBreaks[i], wordBreaks[i].replace(/([A-Z])/, " $1"));
+              }
+            }
+
+            this.push(tablesPath, {
+              name: name,
+              href: href
+            });
+          } else if (path) {
+            this.tableSubdirectories.push({
+              path: path.replace(/\//g, '.'),
+              href: href
+            });
+          }
+        }.bind(this));
+
+        if (this.tableSubdirectories.length > 0) {
+          var table = this.tableSubdirectories.pop();
+          this.$.tables.tablesPath = table.path;
+          this.$.tables.url = table.href;
+        }
       }
     });
   </script>

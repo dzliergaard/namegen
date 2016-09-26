@@ -1,6 +1,7 @@
 <link rel="import" href="./city/city-page.html">
 <link rel="import" href="./name/name-page.html">
 <link rel="import" href="./party/party-page.html">
+<link rel="import" href="./tables/tables-page.html">
 <link rel="import" href="./util/variable-layout.html">
 <link rel="import" href="./behavior/google-scope.html">
 <link rel="import" href="/bower/app-route/app-location.html">
@@ -84,6 +85,10 @@
             <iron-icon item-icon icon="social:group"></iron-icon>
             Party Tracker
           </paper-icon-item>
+          <paper-icon-item name="tables" on-tap="closeDrawer">
+            <iron-icon item-icon icon="icons:list"></iron-icon>
+            Tables
+          </paper-icon-item>
         </paper-menu>
       </paper-header-panel>
       <paper-header-panel main mode="scroll">
@@ -101,6 +106,7 @@
                      saved-cities="{{userSavedContent.cities}}"
                      columns="{{columns}}"></city-page>
           <party-page name="party" saved-parties="{{userSavedContent.parties}}"></party-page>
+          <tables-page id="tables-page" name="tables"></tables-page>
         </iron-pages>
       </paper-header-panel>
     </paper-drawer-panel>
@@ -144,11 +150,8 @@
           value: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata'
         },
         tables: {
-          type: Object,
-          value: {
-            path: '',
-            files: []
-          }
+          type: Array,
+          value: []
         },
         tableSubdirectories: {
           type: Array,
@@ -197,6 +200,8 @@
             return 'City Generator';
           case 'party':
             return 'Party Tracker';
+          case 'tables':
+            return 'DMG Tables'
         }
       },
       contentUpdated: function () {
@@ -274,6 +279,14 @@
         }
       },
 
+      _formatName: function(name) {
+        var wordBreaks;
+        while ((wordBreaks = this.nameFormatRegex.exec(name))) {
+          name = name.replace(wordBreaks[0], wordBreaks[0].replace(/([A-Z])/, " $1"));
+        }
+        return name;
+      },
+
       // DMG tables stuff
       listTables: function (event) {
         var hrefs = Polymer.dom(event.detail.response).querySelectorAll('a[href^="/data/tables/"]').map(function (el) {
@@ -281,18 +294,16 @@
         });
 
         var tables = this.tables;
-        var tablesPath = 'tables';
-        // go to the sub table set that matches this call
-        if (this.$.tables.tablesPath) {
-          tablesPath += '.' + this.$.tables.tablesPath;
-          if (!this.get(tablesPath)) {
-            this.set(tablesPath, {
-              path: this.$.tables.tablesPath,
-              files: []
-            })
-          }
+        var tablesPath = this.$.tables.tablesPath;
+        if (tablesPath) {
+          var newGroup = {
+            name: this._formatName(tablesPath),
+            isParent: true,
+            tables: []
+          };
+          tables.push(newGroup);
+          tables = newGroup.tables;
         }
-        tablesPath += '.files';
 
         // record each file as a table with parsed name, recursively add each subdirectory
         hrefs.forEach(function (href) {
@@ -300,14 +311,9 @@
           var path = matches[1];
           var name = matches[2];
           if (name) {
-            var wordBreaks = this.nameFormatRegex.exec(name);
-            if (wordBreaks) {
-              for (var i = 1; i < wordBreaks.length; i++) {
-                name = name.replace(wordBreaks[i], wordBreaks[i].replace(/([A-Z])/, " $1"));
-              }
-            }
+            name = this._formatName(name);
 
-            this.push(tablesPath, {
+            tables.push({
               name: name,
               href: href
             });
@@ -318,16 +324,15 @@
             });
           }
         }.bind(this));
-
         if (this.tableSubdirectories.length > 0) {
           var table = this.tableSubdirectories.pop();
           this.$.tables.tablesPath = table.path;
           this.$.tables.url = table.href;
+        } else {
+          this.$['tables-page'].set('tables', this.tables);
         }
       }
     });
   </script>
 
 </dom-module>
-
-

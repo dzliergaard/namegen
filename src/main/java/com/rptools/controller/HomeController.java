@@ -18,13 +18,14 @@
 
 package com.rptools.controller;
 
-import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Forwards to NameController
@@ -39,8 +40,8 @@ public class HomeController {
     response.sendRedirect("name");
   }
 
-  @RequestMapping(value = "party", method = RequestMethod.GET)
-  public ModelAndView table() {
+  @RequestMapping(value = {"tables", "party"}, method = RequestMethod.GET)
+  public ModelAndView party() {
     return new ModelAndView("main");
   }
 }

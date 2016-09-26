@@ -1,0 +1,59 @@
+<link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu-light.html">
+<link rel="import" href="/bower/iron-icon/iron-icon.html">
+<link rel="import" href="/bower/iron-icons/iron-icons.html">
+<link rel="import" href="/bower/paper-item/paper-item.html">
+<link rel="import" href="/bower/paper-menu/paper-menu.html">
+<link rel="import" href="/bower/paper-menu/paper-submenu.html">
+
+<dom-module id="tables-page">
+  <style is="custom-style" include="iron-flex iron-flex-alignment">
+  </style>
+  <template>
+    <paper-dropdown-menu label="Choose Table" allow-outside-scroll>
+      <paper-menu class="dropdown-content">
+        <template is="dom-repeat" items="{{tables}}" as="table">
+          <template is="dom-if" if="{{table.isParent}}">
+            <paper-submenu opened="{{opened}}">
+              <paper-item class="menu-trigger" on-tap="_doNotClose">
+                <span class="flex">{{table.name}}</span>
+                <template is="dom-if" if="{{opened}}">
+                  <iron-icon icon="icons:arrow-drop-up"></iron-icon>
+                </template>
+                <template is="dom-if" if="{{!opened}}">
+                  <iron-icon icon="icons:arrow-drop-down"></iron-icon>
+                </template>
+              </paper-item>
+              <paper-menu class="menu-content">
+                <template is="dom-repeat" items="{{table.tables}}" as="subtable">
+                  <paper-item on-tap="_loadTableContent">{{subtable.name}}</paper-item>
+                </template>
+              </paper-menu>
+            </paper-submenu>
+          </template>
+          <template is="dom-if" if="{{!table.isParent}}">
+            <paper-item on-tap="_loadTableContent">{{table.name}}</paper-item>
+          </template>
+        </template>
+      </paper-menu>
+    </paper-dropdown-menu>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'tables-page',
+      properties: {
+        tables: {
+          type: Array,
+          value: []
+        },
+        tableContent: {
+          type: Object,
+          value: {}
+        }
+      },
+      _doNotClose: function(event) {
+        event.preventDefault();
+      }
+    });
+  </script>
+</dom-module>

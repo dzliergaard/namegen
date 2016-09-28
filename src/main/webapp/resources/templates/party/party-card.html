@@ -5,17 +5,18 @@
 <link rel="import" href="/bower/iron-icons/iron-icons.html">
 <link rel="import" href="/bower/iron-icons/social-icons.html">
 <link rel="import" href="/bower/paper-card/paper-card.html">
+<link rel="import" href="/bower/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="/bower/paper-fab/paper-fab.html">
 
 <dom-module id="party-card">
   <template>
-    <style is="custom-style" include="iron-flex">
-      :host ::content .title-text paper-input paper-input-container div.underline .unfocused-line {
-        display: none;
-      }
-
+    <style is="custom-style" include="iron-flex iron-flex-alignment">
       :host ::content .title-text paper-input .input-content.paper-input-container input {
         font-size: 24px;
+      }
+
+      :host editing-item {
+        margin-right: 5%;
       }
 
       :host paper-card .save-icon {
@@ -26,35 +27,28 @@
       :host paper-card {
         width: calc(100% - 16px);
       }
+
+      :host paper-checkbox {
+        --paper-checkbox-checked-color: var(--light-theme-text-color);
+        --paper-checkbox-label-color: var(--light-theme-text-color);
+      }
     </style>
     <google-signin-aware scopes="{{scopes}}" signed-in="{{isSignedIn}}"></google-signin-aware>
     <paper-card>
       <div class="header paper-card">
         <div class="title-text paper-card">
           <span class="layout horizontal">
-            <template is="dom-if" if="{{editing}}">
-              <editing-item item="{{party.name}}"></editing-item>
-              <iron-icon class="save-icon" icon="icons:save" on-tap="saveParty"></iron-icon>
-            </template>
-            <template is="dom-if" if="{{!editing}}">
-              <span>{{party.name}}</span>
-            </template>
+            <editing-item class="flex" item="{{party.name}}"></editing-item>
+            <iron-icon class="save-icon" icon="icons:save" on-tap="saveParty"></iron-icon>
           </span>
         </div>
       </div>
       <div class="card-content">
-        <data-table columns="[[columns]]"
-                    rows="{{party.characters}}"
-                    editable="{{editing}}"></data-table>
+        <data-table editable columns="[[columns]]" rows="{{party.characters}}"></data-table>
       </div>
-      <div class="card-actions">
-        <template is="dom-if" if="{{editing}}">
-          <paper-fab mini icon="social:person-add" on-tap="addCharacter"></paper-fab>
-        </template>
-        <template is="dom-if" if="{{!editing}}">
-          <paper-button raised on-tap="editParty">Use Party</paper-button>
-          <paper-button raised class="secondary" on-tap="deleteParty">Delete Party</paper-button>
-        </template>
+      <div class="card-actions layout horizontal justified">
+        <paper-fab mini icon="social:person-add" on-tap="addCharacter"></paper-fab>
+        <paper-checkbox class="self-center" checked="{{autosave}}">autosave changes</paper-checkbox>
       </div>
     </paper-card>
   </template>
@@ -63,6 +57,10 @@
       id: 'party-card',
       behaviors: [rptools.GoogleScopeBehavior],
       properties: {
+        autosave: {
+          type: Boolean,
+          value: false
+        },
         columns: {
           type: Array,
           value: function () {
@@ -78,10 +76,6 @@
         canSave: {
           type: Boolean,
           computed: '_canSave(unsaved, party.id)'
-        },
-        editing: {
-          type: Boolean,
-          value: false
         },
         party: {
           type: Object,
@@ -103,14 +97,18 @@
       _showColumn: function (column) {
         return column.showing;
       },
-      _partyChanged: function(change) {
+      _partyChanged: function (change) {
         if (change.path != 'party') {
           this.unsaved = true;
         }
       },
-      _rowsChanged: function(change) {
+      _rowsChanged: function (change) {
         if (change.base != change.value) {
-          this.unsaved = true;
+          if (this.autosave) {
+            this.fire('save-party');
+          } else {
+            this.unsaved = true;
+          }
         }
       },
       addCharacter: function () {

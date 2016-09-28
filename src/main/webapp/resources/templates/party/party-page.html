@@ -11,6 +11,9 @@
 <link rel="import" href="/bower/paper-button/paper-button.html">
 <link rel="import" href="/bower/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="/bower/paper-dialog/paper-dialog.html">
+<link rel="import" href="/bower/paper-item/paper-item.html">
+<link rel="import" href="/bower/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="/bower/paper-card/paper-card.html">
 <link rel="import" href="/bower/paper-tooltip/paper-tooltip.html">
 
@@ -41,7 +44,7 @@
       background-color: var(--dark-accent-color);
     }
 
-    :host paper-fab {
+    :host paper-fab, :host paper-dropdown-menu {
       margin: 8px 8px;
     }
 
@@ -54,8 +57,17 @@
                on-response="setPartyNames"></iron-ajax>
     <div class="vertical layout">
       <div class="horizontal layout">
-        <paper-fab id="new-table-fab" icon="add" on-tap="newParty"></paper-fab>
+        <paper-fab mini id="new-table-fab" icon="add" on-tap="newParty"></paper-fab>
         <paper-tooltip for="new-table-fab">New party</paper-tooltip>
+        <paper-dropdown-menu no-label-float class="center" label="Saved parties">
+          <paper-listbox class="dropdown-content">
+            <template is="dom-repeat" items="{{savedParties}}" as="party">
+              <paper-item on-tap="editParty">
+                {{party.name}}
+              </paper-item>
+            </template>
+          </paper-listbox>
+        </paper-dropdown-menu>
       </div>
 
       <template is="dom-if" if="{{pendingParty.name}}">
@@ -64,16 +76,6 @@
                     party="{{pendingParty}}"
                     unsaved="{{pendingUnsaved}}"
                     on-save-party="saveParty"></party-card>
-      </template>
-      <template is="dom-if" if="{{savedParties}}">
-        <template is="dom-repeat" items="{{savedParties}}">
-          <template is="dom-if" if="{{notEditing(item, pendingParty)}}">
-            <party-card class="dark flex"
-                        party="{{item}}"
-                        on-delete-party="deleteParty"
-                        on-edit-party="editParty"></party-card>
-          </template>
-        </template>
       </template>
     </div>
     <paper-dialog id="createDialog" on-iron-overlay-canceled="clearPartyToEdit">
@@ -154,13 +156,13 @@
       },
       editParty: function (event) {
         if (this.pendingUnsaved) {
-          if (this.pendingParty.id == event.model.item.id) {
+          if (this.pendingParty.id == event.model.party.id) {
             return;
           }
           this.$.createDialog.open();
-          this.partyToEdit = event.model.item;
+          this.partyToEdit = event.model.party;
         } else {
-          this.set('pendingParty', event.model.item);
+          this.set('pendingParty', event.model.party);
         }
       },
       newParty: function () {

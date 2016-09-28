@@ -89,9 +89,7 @@
     :host #columnsDialog paper-checkbox {
       @apply(--paper-font-caption);
       --paper-checkbox-checked-color: var(--light-theme-text-color);
-      --paper-checkbox-checkmark-color: var(--light-theme-text-color);
       --paper-checkbox-label-color: var(--light-theme-text-color);
-      --paper-checkbox-unchecked-color: var(--light-theme-text-color);
     }
 
     :host div.table .row > ::before {
@@ -138,7 +136,7 @@
               </template>
             </template>
             <template is="dom-if" if="{{editable}}">
-              <iron-icon class="last" icon="delete" on-tap="_deleteRow"></iron-icon>
+              <iron-icon row="{{row}}" class="last" icon="delete" on-tap="_deleteRow"></iron-icon>
             </template>
             <template is="dom-if" if="{{!editable}}">
               <div class="last"></div>

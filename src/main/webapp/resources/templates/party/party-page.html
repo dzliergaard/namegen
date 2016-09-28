@@ -70,12 +70,13 @@
         </paper-dropdown-menu>
       </div>
 
-      <template is="dom-if" if="{{pendingParty.name}}">
+      <template is="dom-if" if="{{party.name}}">
         <party-card id="pending" class="flex pending"
                     editing="true"
-                    party="{{pendingParty}}"
+                    party="{{party}}"
                     unsaved="{{pendingUnsaved}}"
-                    on-save-party="saveParty"></party-card>
+                    on-save-party="saveParty"
+                    on-delete-party="deleteParty"></party-card>
       </template>
     </div>
     <paper-dialog id="createDialog" on-iron-overlay-canceled="clearPartyToEdit">
@@ -110,7 +111,7 @@
           type: String,
           value: "hardware:keyboard-arrow-up"
         },
-        pendingParty: {
+        party: {
           type: Object,
           value: function () {
             return {};
@@ -136,7 +137,7 @@
         '_refreshPartyNamesOnEmpty(partyNames.splices)'
       ],
       _newParty: function () {
-        this.set('pendingParty', {
+        this.set('party', {
           name: this.shift('partyNames'),
           id: null,
           characters: []
@@ -152,17 +153,18 @@
         delete this.partyToEdit;
       },
       deleteParty: function (event) {
-        this.splice('savedParties', this.savedParties.indexOf(event.model.item), 1);
+        this.splice('savedParties', this.savedParties.indexOf(event.model.party), 1);
+        this.set('party', null);
       },
       editParty: function (event) {
         if (this.pendingUnsaved) {
-          if (this.pendingParty.id == event.model.party.id) {
+          if (this.party.id == event.model.party.id) {
             return;
           }
           this.$.createDialog.open();
           this.partyToEdit = event.model.party;
         } else {
-          this.set('pendingParty', event.model.party);
+          this.set('party', event.model.party);
         }
       },
       newParty: function () {
@@ -172,12 +174,9 @@
         }
         this._newParty();
       },
-      notEditing: function (party, pendingParty) {
-        return party != pendingParty;
-      },
       discardAndEdit: function () {
         if (this.partyToEdit) {
-          this.set('pendingParty', this.partyToEdit);
+          this.set('party', this.partyToEdit);
           this.clearPartyToEdit();
         } else {
           this._newParty();
@@ -185,12 +184,12 @@
       },
       saveParty: function () {
         var partyToSave;
-        if (this.pendingParty.id) {
+        if (this.party.id) {
           partyToSave = this.splice('savedParties',
-              this.savedParties.indexOf(this.pendingParty), 1)[0];
+              this.savedParties.indexOf(this.party), 1)[0];
         } else {
-          this.pendingParty.id = this.uuid();
-          partyToSave = this.pendingParty;
+          this.party.id = this.uuid();
+          partyToSave = this.party;
         }
         this.unshift('savedParties', partyToSave);
       },
@@ -200,14 +199,6 @@
       },
       setPartyNames: function (err, request) {
         this.partyNames = request.response.inns;
-      },
-      toggleMenu: function () {
-        this.$.menu.toggle();
-        if (this.$.menu.opened) {
-          this.$['menu-icon'].icon = this.up;
-        } else {
-          this.$['menu-icon'].icon = this.down;
-        }
       }
     })
   </script>

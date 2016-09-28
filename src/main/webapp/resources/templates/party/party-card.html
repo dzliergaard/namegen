@@ -19,7 +19,12 @@
         margin-right: 5%;
       }
 
-      :host paper-card .save-icon {
+      :host paper-card .header.party-card {
+        overflow: visible;
+      }
+
+      :host paper-card .save-icon,
+      :host paper-card .delete-icon {
         float: right;
         margin: auto 0 auto auto;
       }
@@ -37,9 +42,14 @@
     <paper-card>
       <div class="header paper-card">
         <div class="title-text paper-card">
-          <span class="layout horizontal">
+          <span class="layout horizontal justified">
             <editing-item class="flex" item="{{party.name}}"></editing-item>
-            <iron-icon class="save-icon" icon="icons:save" on-tap="saveParty"></iron-icon>
+            <iron-icon id="save-icon" class="save-icon" icon="icons:save"
+                       on-tap="saveParty"></iron-icon>
+            <paper-tooltip for="save-icon">Save party</paper-tooltip>
+            <iron-icon id="delete-icon" class="delete-icon" icon="icons:delete"
+                       on-tap="deleteParty"></iron-icon>
+            <paper-tooltip for="delete-icon">Delete party</paper-tooltip>
           </span>
         </div>
       </div>
@@ -48,7 +58,9 @@
       </div>
       <div class="card-actions layout horizontal justified">
         <paper-fab mini icon="social:person-add" on-tap="addCharacter"></paper-fab>
-        <paper-checkbox class="self-center" checked="{{autosave}}">autosave changes</paper-checkbox>
+        <paper-checkbox class="self-center" checked="{{autosave}}" on-change="saveParty">
+          autosave changes
+        </paper-checkbox>
       </div>
     </paper-card>
   </template>

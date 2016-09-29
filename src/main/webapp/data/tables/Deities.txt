@@ -12,7 +12,7 @@ Lolth		spiders and lies				CE	Trickery			Eight pointed star with a web motif
 Melora		wilderness and the sea			N	Nature, Tempest		Wavelike swirl
 Moradin		creation						LG	Knowledge, War		Flaming anvil
 Pelor		the sun and agriculture			NG	Life, Light			Circle with six outwardly radiating points
-Raven 		of death						LN	Life, Death			Raven's head, in profile, facing left
+Raven		death						LN	Life, Death			Raven's head, in profile, facing left
 Sehanine	the moon						CG	Trickery			Crescent moon
 Tharizdun	madness							CE	Trickery			Jagged counter-clockwise spiral
 Tiamat		wealth, greed, and vengeance	LE	Trickery, War		Five-pointed star with curved points

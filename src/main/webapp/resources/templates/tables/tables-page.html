@@ -1,8 +1,12 @@
+<link rel="import" href="table-lister.html">
 <link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu-light.html">
 <link rel="import" href="/bower/iron-ajax/iron-ajax.html">
 <link rel="import" href="/bower/iron-icon/iron-icon.html">
 <link rel="import" href="/bower/iron-icons/iron-icons.html">
 <link rel="import" href="/bower/paper-card/paper-card.html">
+<link rel="import" href="/bower/paper-datatable/paper-datatable.html">
+<link rel="import" href="/bower/paper-datatable/paper-datatable-card.html">
+<link rel="import" href="/bower/paper-datatable/paper-datatable-column.html">
 <link rel="import" href="/bower/paper-item/paper-item.html">
 <link rel="import" href="/bower/paper-menu/paper-menu.html">
 <link rel="import" href="/bower/paper-menu/paper-submenu.html">
@@ -11,14 +15,15 @@
   <style is="custom-style" include="iron-flex iron-flex-alignment iron-flex-factors">
   </style>
   <template>
-    <iron-ajax id="table-load" on-response="displayTableContent" handle-as="text"></iron-ajax>
+    <iron-ajax id="table-load" on-response="parseTableContent" handle-as="text"></iron-ajax>
+    <table-retriever tables="{{tables}}" url="/data/tables/"></table-retriever>
     <div class="layout horizontal">
       <paper-menu class="flex-1" label="Choose Table" allow-outside-scroll>
         <template is="dom-repeat" items="{{tables}}" as="table">
           <template is="dom-if" if="{{table.isParent}}">
             <paper-submenu>
               <paper-item class="menu-trigger">
-                <span class="flex" on-tap="toggleMenu_">
+                <span class="flex">
                   {{table.name}}
                   <iron-icon icon="icons:arrow-drop-down"></iron-icon>
                 </span>
@@ -35,9 +40,21 @@
           </template>
         </template>
       </paper-menu>
-      <paper-card id="table-content" class="flex-3">
-        {{tableContent}}
-      </paper-card>
+      <div class="flex-3">
+        <template is="dom-if" if="{{loadingTable.name}}">
+          <paper-card heading="{{loadingTable.name}}">
+            <div class="card-content">
+              <paper-datatable data="{{tableContent.entries}}">
+                <paper-datatable-column header="Roll" property="rollText"></paper-datatable-column>
+                <template is="dom-repeat" items="{{tableContent.columns}}">
+                  <paper-datatable-column header="{{item.header}}"
+                                          property="{{item.property}}"></paper-datatable-column>
+                </template>
+              </paper-datatable>
+            </div>
+          </paper-card>
+        </template>
+      </div>
     </div>
   </template>
 
@@ -45,8 +62,8 @@
     Polymer({
       is: 'tables-page',
       properties: {
-        loadingTable: String,
-        tableContent: String,
+        loadingTable: Object,
+        tableContent: Object,
         entryRegexp: {
           type: RegExp,
           value: new RegExp("(?:([0-9\-]*)\t+)?(.*)"),
@@ -65,38 +82,77 @@
           value: []
         }
       },
-      loadTableContent: function(event) {
+      createElement: function (tag, properties) {
+        var el = document.createElement(tag);
+        if (!properties) {
+          return el;
+        }
+        for (var property in properties) {
+          if (properties.hasOwnProperty(property)) {
+            el.setAttribute(property, properties[property]);
+          }
+        }
+        return el;
+      },
+      updateTable: function (tableContent) {
+        var datatable = this.$.datatable;
+        datatable.querySelectorAll('paper-datatable-column').forEach(
+            function (column) {
+              column.remove();
+            }.bind(this));
+
+        if (!tableContent) {
+          return;
+        }
+        datatable.appendChild(this.createElement('paper-datatable-column', {
+          header: 'Roll',
+          property: 'rollText',
+          type: 'string',
+          align: 'left'
+        }));
+        tableContent.columns.forEach(function (column) {
+          datatable.appendChild(this.createElement('paper-datatable-column', {
+            header: column.header,
+            property: column.property,
+            type: 'string',
+            align: 'left'
+          }));
+        }.bind(this));
+        datatable.set('data', tableContent.entries);
+      },
+      loadTableContent: function (event) {
         var table = event.model.subtable || event.model.table;
-        if (this.parsedTables[table.href]) {
-          this.tableContent = this.parsedTables[table.href];
+        if (this.parsedTables[table.url]) {
+          this.set('tableContent', this.parsedTables[table.url]);
           return;
         }
         var tableLoader = this.$['table-load'];
-        this.loadingTable = table.href;
-        this.$['table-load'].url = table.href;
+        this.loadingTable = table;
+        this.$['table-load'].url = table.url;
         tableLoader.generateRequest();
       },
-      displayTableContent: function(event) {
-        var tableContent = this.parseTableContent(event.detail.response);
-        this.parsedTables[this.loadingTable] = tableContent;
-        this.tableContent = tableContent;
-      },
-      parseTableContent: function(tableText) {
+      parseTableContent: function (event) {
         var table = {
           columns: [],
           entries: [],
           maxRoll: 0
         };
-        var lines = tableText.split(/\n/);
+        var lines = event.detail.response.split(/\n/);
         var headersLine = lines.shift();
         var headers = headersLine.split(/\t+/);
-        headers.forEach(function(header){
+        headers.forEach(function (header) {
           if (header) {
-            table.columns.push(header);
+            table.columns.push({
+              header: header,
+              property: header
+            });
           }
         });
         var roll = 1;
-        lines.forEach(function(entryLine){
+        lines.forEach(function (entryLine) {
+          if (entryLine.length == 0) {
+            return;
+          }
           // entryLine format:
           // (#-#)?\tval1\tval2\t\t...
           // entries may start with a number range indicating how likely they
@@ -111,9 +167,7 @@
           if (!entry) {
             return;
           }
-          var row = {
-            values: {}
-          };
+          var row = {};
           var range = entry[1];
           var entries = entry[2].split(/\t+/);
           if (range) {
@@ -131,13 +185,14 @@
           }
 
           var i = 0;
-          table.columns.forEach(function(column){
-            row.values[column] = entries[i++];
+          table.columns.forEach(function (column) {
+            row[column.property] = entries[i++];
           }.bind(this));
 
           table.entries.push(row);
         }.bind(this));
-        return table;
+        this.parsedTables[this.loadingTable.url] = table;
+        this.set('tableContent', table);
       }
     });
   </script>

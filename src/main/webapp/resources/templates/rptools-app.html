@@ -65,8 +65,6 @@
                           version="v3"
                           on-google-api-load="downloadAppDataFile"></google-client-loader>
     <google-js-api id="gapi"></google-js-api>
-    <iron-ajax auto id="tables" url="/data/tables/" on-response="listTables"
-               handle-as="document"></iron-ajax>
     <paper-drawer-panel id="drawer" responsive-width="840px">
       <paper-header-panel drawer mode="seamed">
         <paper-toolbar>
@@ -141,21 +139,9 @@
           type: Boolean,
           value: false
         },
-        nameFormatRegex: {
-          type: RegExp,
-          value: new RegExp("[a-z]([A-Z])", "g")
-        },
         scopes: {
           type: String,
           value: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata'
-        },
-        tables: {
-          type: Array,
-          value: []
-        },
-        tableSubdirectories: {
-          type: Array,
-          value: []
         }
       },
       listeners: {
@@ -276,60 +262,6 @@
             };
           }
           this.listening = true;
-        }
-      },
-
-      _formatName: function(name) {
-        var wordBreaks;
-        while ((wordBreaks = this.nameFormatRegex.exec(name))) {
-          name = name.replace(wordBreaks[0], wordBreaks[0].replace(/([A-Z])/, " $1"));
-        }
-        return name;
-      },
-
-      // DMG tables stuff
-      listTables: function (event) {
-        var hrefs = Polymer.dom(event.detail.response).querySelectorAll('a[href^="/data/tables/"]').map(function (el) {
-          return el.href;
-        });
-
-        var tables = this.tables;
-        var tablesPath = this.$.tables.tablesPath;
-        if (tablesPath) {
-          var newGroup = {
-            name: this._formatName(tablesPath),
-            isParent: true,
-            tables: []
-          };
-          tables.push(newGroup);
-          tables = newGroup.tables;
-        }
-
-        // record each file as a table with parsed name, recursively add each subdirectory
-        hrefs.forEach(function (href) {
-          var matches = href.match(/\/data\/tables\/(?:(.*)\/)?(?:([A-Za-z0-9]+)\.txt)?$/);
-          var path = matches[1];
-          var name = matches[2];
-          if (name) {
-            name = this._formatName(name);
-
-            tables.push({
-              name: name,
-              href: href
-            });
-          } else if (path) {
-            this.tableSubdirectories.push({
-              path: path.replace(/\//g, '.'),
-              href: href
-            });
-          }
-        }.bind(this));
-        if (this.tableSubdirectories.length > 0) {
-          var table = this.tableSubdirectories.pop();
-          this.$.tables.tablesPath = table.path;
-          this.$.tables.url = table.href;
-        } else {
-          this.$['tables-page'].set('tables', this.tables);
         }
       }
     });

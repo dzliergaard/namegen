@@ -3,6 +3,7 @@
 <link rel="import" href="/bower/iron-ajax/iron-ajax.html">
 <link rel="import" href="/bower/iron-icon/iron-icon.html">
 <link rel="import" href="/bower/iron-icons/iron-icons.html">
+<link rel="import" href="/bower/iron-icons/places-icons.html">
 <link rel="import" href="/bower/paper-card/paper-card.html">
 <link rel="import" href="/bower/paper-datatable/paper-datatable.html">
 <link rel="import" href="/bower/paper-datatable/paper-datatable-card.html">
@@ -10,6 +11,8 @@
 <link rel="import" href="/bower/paper-item/paper-item.html">
 <link rel="import" href="/bower/paper-menu/paper-menu.html">
 <link rel="import" href="/bower/paper-menu/paper-submenu.html">
+<link rel="import" href="/bower/paper-ripple/paper-ripple.html">
+<link rel="import" href="/bower/paper-tooltip/paper-tooltip.html">
 
 <dom-module id="tables-page">
   <style is="custom-style" include="iron-flex iron-flex-alignment iron-flex-factors">
@@ -41,19 +44,24 @@
         </template>
       </paper-menu>
       <div class="flex-3">
-        <template is="dom-if" if="{{loadingTable.name}}">
-          <paper-card heading="{{loadingTable.name}}">
-            <div class="card-content">
-              <paper-datatable data="{{tableContent.entries}}">
-                <paper-datatable-column header="Roll" property="rollText"></paper-datatable-column>
-                <template is="dom-repeat" items="{{tableContent.columns}}">
-                  <paper-datatable-column header="{{item.header}}"
-                                          property="{{item.property}}"></paper-datatable-column>
-                </template>
-              </paper-datatable>
+        <paper-card hidden$="{{!loadingTable.name}}">
+          <div class="header paper-card">
+            <div class="title-text paper-card layout horizontal justified">
+              <span>{{loadingTable.name}}</span>
+              <paper-fab mini id="roll-button" icon="places:casino" on-tap="selectRandom"></paper-fab>
+              <paper-tooltip for="roll-button" position="left">Select random</paper-tooltip>
             </div>
-          </paper-card>
-        </template>
+          </div>
+          <div class="card-content">
+            <paper-datatable id="datatable" data="{{tableContent.entries}}">
+              <paper-datatable-column header="Roll" property="rollText"></paper-datatable-column>
+              <!--<template is="dom-repeat" items="{{tableContent.columns}}" as="column">-->
+                <!--<paper-datatable-column header="{{column.header}}"-->
+                                        <!--property="{{column.property}}"></paper-datatable-column>-->
+              <!--</template>-->
+            </paper-datatable>
+          </div>
+        </paper-card>
       </div>
     </div>
   </template>
@@ -82,6 +90,9 @@
           value: []
         }
       },
+      observers: [
+        'updateTable(tableContent)'
+      ],
       createElement: function (tag, properties) {
         var el = document.createElement(tag);
         if (!properties) {
@@ -94,12 +105,16 @@
         }
         return el;
       },
+      selectRandom: function (event) {
+        var random = Math.floor(Math.random() * this.tableContent.maxRoll + 1);
+        this.$.datatable.select(this.tableContent.entries[random]);
+      },
       updateTable: function (tableContent) {
         var datatable = this.$.datatable;
         datatable.querySelectorAll('paper-datatable-column').forEach(
-            function (column) {
-              column.remove();
-            }.bind(this));
+                function (column) {
+                  column.remove();
+                }.bind(this));
 
         if (!tableContent) {
           return;
@@ -118,7 +133,7 @@
             align: 'left'
           }));
         }.bind(this));
-        datatable.set('data', tableContent.entries);
+        datatable._queryAndSetColumns();
       },
       loadTableContent: function (event) {
         var table = event.model.subtable || event.model.table;
@@ -148,7 +163,7 @@
             });
           }
         });
-        var roll = 1;
+        var roll = 0;
         lines.forEach(function (entryLine) {
           if (entryLine.length == 0) {
             return;
@@ -176,12 +191,15 @@
             if (fromTo[1]) {
               var from = parseInt(fromTo[0], 10);
               var to = parseInt(fromTo[1], 10);
-              row['roll'] = to - from;
-              roll += to - from;
+              row['roll'] = to - from + 1;
+              roll += to - from + 1;
+            } else {
+              row['roll'] = 1;
+              row['rollText'] = "" + ++roll;
             }
           } else {
-            row['roll'] = roll;
-            row['rollText'] = "" + roll++;
+            row['roll'] = 1;
+            row['rollText'] = "" + ++roll;
           }
 
           var i = 0;
@@ -191,6 +209,7 @@
 
           table.entries.push(row);
         }.bind(this));
+        table.maxRoll = roll;
         this.parsedTables[this.loadingTable.url] = table;
         this.set('tableContent', table);
       }

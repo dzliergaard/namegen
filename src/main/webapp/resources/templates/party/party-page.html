@@ -140,7 +140,7 @@
         this.set('party', {
           name: this.shift('partyNames'),
           id: null,
-          characters: []
+          characters: [{}]
         });
         this.pendingUnsaved = true;
       },
@@ -154,7 +154,7 @@
       },
       deleteParty: function (event) {
         this.splice('savedParties', this.savedParties.indexOf(event.model.party), 1);
-        this.set('party', null);
+        this.set('party', {});
       },
       editParty: function (event) {
         if (this.pendingUnsaved) {
@@ -185,13 +185,11 @@
       saveParty: function () {
         var partyToSave;
         if (this.party.id) {
-          partyToSave = this.splice('savedParties',
-              this.savedParties.indexOf(this.party), 1)[0];
+          this.fire('save');
         } else {
           this.party.id = this.uuid();
-          partyToSave = this.party;
+          this.unshift('savedParties', this.party);
         }
-        this.unshift('savedParties', partyToSave);
       },
       saveAndEdit: function () {
         this.saveParty();

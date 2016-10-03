@@ -31,6 +31,7 @@
       @apply(--layout-horizontal);
       @apply(--layout-justified);
       border-color: var(--divider-color);
+      display: table-row;
       height: 48px;
     }
 
@@ -38,6 +39,10 @@
     :host ::content div.table .row:hover paper-input paper-input-container label {
       background-color: var(--secondary-text-color);
       color: var(--dark-primary-color);
+    }
+
+    :host div.table .row > :not(template) {
+      display: table-cell;
     }
 
     :host div.table paper-input {
@@ -107,7 +112,7 @@
                     as="column"
                     filter="_showingColumn"
                     observe="showing">
-              <span class="flex self-center" class$="{{_sortingRowClass(column, sortColumn)}}"
+              <span class$="{{_sortingRowClass(column, sortColumn)}}"
                     on-tap="_sortByColumn">
                 {{column.label}}
                 <template is="dom-if" if="{{_isSortingColumn(column, sortColumn)}}">
@@ -126,7 +131,7 @@
           <div class="row">
             <template is="dom-repeat" items="{{columns}}" as="column">
               <template is="dom-if" if="{{editable}}">
-                <paper-input no-label-float
+                <paper-input no-label-float class="flex"
                              label="{{column.label}}"
                              value="{{_getRowData(row, column.id)}}"
                              on-change="_setRowData"></paper-input>
@@ -179,7 +184,7 @@
         },
         editable: {
           type: Boolean,
-          value: true
+          value: false
         },
         rows: {
           type: Array,
@@ -253,8 +258,9 @@
 
       _sortingRowClass: function (column, sortColumn) {
         if (this._isSortingColumn(column, sortColumn)) {
-          return 'sorted';
+          return 'sorted flex self-center';
         }
+        return 'flex self-center';
       },
 
       // sorting related functions

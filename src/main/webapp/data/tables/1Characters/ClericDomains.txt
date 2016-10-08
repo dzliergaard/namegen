@@ -1,0 +1,8 @@
+Domain		1st										3rd										5th									7th								9th
+Knowledge	command, identify						augury, suggestion						nondetection, speak with dead		arcane eye, confusion			legend lore, scrying
+Life		bless, cure wounds						lesser restoration, spiritual weapon	beacon of hope, revivify			death ward, guardian of faith	mass cure wounds, raise dead
+Light		burning hands, faerie fire				flaming sphere, scorching ray			daylight, fireball					guardian of faith, wall of fire	flame strike, scrying
+Nature		animal friendship, speak with animals	barkskin, spike growth					plant growth, wind wall				dominate beast, grasping vine	insect plague, tree stride
+Tempest		fog cloud, thunderwave					gust of wind, shatter					call lightning, sleet storm			control water, ice storm		destructive wave, insect plague
+Trickery	charm person, disguise self				mirror image, pass without trace		blink, dispel magic					dimension door, polymorph		dominate person, modify memory
+War			divine favor, shield of faith			magic weapon, spiritual weapon			crusader's mantle, spirit guardians	freedom of movement, stoneskin	flame strike, hold monster

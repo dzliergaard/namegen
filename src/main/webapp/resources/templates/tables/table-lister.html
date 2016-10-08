@@ -40,6 +40,8 @@
 
       formatName: function (name) {
         var wordBreaks;
+        // replace numerals at beginning of table name, used for ordering entries
+        name = name.replace("^[0-9]*", "");
         while ((wordBreaks = this.nameFormatRegex.exec(name))) {
           name = name.replace(wordBreaks[0], wordBreaks[0].replace(/([A-Z])/, " $1"));
         }
@@ -71,6 +73,9 @@
         // record each file as a table with parsed name, recursively add each subdirectory
         links.forEach(function (url) {
           var matches = this.hrefRegex.exec(url);
+          if (!matches) {
+            return;
+          }
           var path = matches[1];
           var name = matches[2];
           if (name) {
@@ -93,7 +98,7 @@
           }
         }.bind(this));
         if (this.tableSubdirectories.length > 0) {
-          var table = this.tableSubdirectories.pop();
+          var table = this.tableSubdirectories.shift();
           this.set('tablePath', table.path);
           this.set('url', table.url);
         }

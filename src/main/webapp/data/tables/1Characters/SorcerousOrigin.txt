@@ -1,0 +1,11 @@
+Dragon Type	Damage Type
+Black		Acid
+Blue		Lightning
+Brass		Fire
+Bronze		Lightning
+Copper		Acid
+Cold		Fire
+Green		Poison
+Red			Fire
+Silver		Cold
+White		Cold

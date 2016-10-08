@@ -1,0 +1,9 @@
+Circle		3rd									5th												7th										9th
+Arctic		hold person, spike growth			sleet storm, slow								freedom of movement, ice storm			commune with nature, cone of cold
+Coast		mirror image, misty step			water breathing, water walk						control water, freedom of movement		conjure elemental, scrying
+Desert		blur, silence						create food and water, protection from energy	blight, hallucinatory terrain			insect plague, wall of stone
+Forest		barkskin, spider climb				call lightning, plant growth					divination, freedom of movement			commune with nature, tree stride
+Grassland	invisibility, pass without trace	daylight, haste									divination, freedom of movement			dream, insect plague
+Mountain	spider climb, spike growth			lightning bolt, meld into stone					stone shape, stoneskin					passwall, wall of stone
+Swamp		darkness, Melf’s acid arrow			water walk, stinking cloud						freedom of movement, locate creature	insect plague, scrying
+Underdark	spider climb, web					gaseous form, stinking cloud					greater invisibility, stone shape		cloudkill, insect plague

@@ -1,0 +1,46 @@
+{
+  "columns": ["Twist"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Twist": "The adventurers are racing against other creatures with the same or opposite goal."
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Twist": "The adventurers become responsible for the safety of a noncombatant NPC."
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Twist": "The adventurers are prohibited from killing the villain, but the villain has no compunctions about killing them."
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Twist": "The adventurers have a time limit."
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Twist": "The adventurers have received false or extraneous information."
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Twist": "Completing an adventure goal fulfills a prophecy or prevents the fulfillment of a prophecy."
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Twist": "The adventurers have two different goals, but they can complete only one."
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Twist": "Completing the goal secretly helps the villain."
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Twist": "The adventurers must cooperate with a known enemy to achieve the goal."
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Twist": "The adventurers are under magical compulsion (such as a geas spell) to complete their goal."
+  }],
+  "maxRoll": 10,
+  "name": "Twists"
+}

@@ -1,0 +1,74 @@
+{
+  "columns": ["Appearance"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Appearance": "Distinctive jewelry: earrings, necklace, circlet, bracelets"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Appearance": "Piercings"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Appearance": "Flamboyand or outlandish clothes"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Appearance": "Formal, clean clothes"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Appearance": "Ragged, dirty clothes"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Appearance": "Pronounced scar"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Appearance": "Missing teeth"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Appearance": "Missing fingers"
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Appearance": "Unusual eye color (or two different colors)"
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Appearance": "Tattoos"
+  }, {
+    "Roll": 11.0,
+    "weight": 1.0,
+    "Appearance": "Birthmark"
+  }, {
+    "Roll": 12.0,
+    "weight": 1.0,
+    "Appearance": "Unusual skin color"
+  }, {
+    "Roll": 13.0,
+    "weight": 1.0,
+    "Appearance": "Nervous eye twitch"
+  }, {
+    "Roll": 14.0,
+    "weight": 1.0,
+    "Appearance": "Distinctive Nose"
+  }, {
+    "Roll": 15.0,
+    "weight": 1.0,
+    "Appearance": "Distinctive posture (crooked or rigid)"
+  }, {
+    "Roll": 16.0,
+    "weight": 1.0,
+    "Appearance": "Exceptionally beautiful"
+  }, {
+    "Roll": 17.0,
+    "weight": 1.0,
+    "Appearance": "Exceptionally ugly"
+  }],
+  "maxRoll": 17,
+  "name": "Appearance"
+}

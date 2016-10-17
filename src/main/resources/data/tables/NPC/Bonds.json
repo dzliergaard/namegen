@@ -1,0 +1,38 @@
+{
+  "columns": ["Bond"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Bond": "Dedicated to fulfilling personal life goal"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Bond": "Protective of close family members"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Bond": "Protective of colleagues of compatriots"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Bond": "Loyal to a benefactor, patron, or employer"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Bond": "Captivated by a romantic interest"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Bond": "Drawn to a special place"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Bond": "Protective of a sentimental possession"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Bond": "Out for revenge"
+  }],
+  "maxRoll": 8,
+  "name": "Bonds"
+}

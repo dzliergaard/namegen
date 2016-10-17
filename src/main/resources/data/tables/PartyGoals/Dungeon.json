@@ -1,0 +1,86 @@
+{
+  "columns": ["Goal"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Goal": "Stop the dungeon's monstrous inhabitants from raiding the surface world."
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Goal": "Foil a villain's evil scheme."
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Goal": "Destroy a magical threat inside the dungeon."
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Goal": "Acquire treasure."
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Goal": "Find a particular item for a specific purpose."
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Goal": "Retrieve a stolen item hidden in the dungeon."
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Goal": "Find information needed for a special purpose."
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Goal": "Rescue a captive."
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Goal": "Discover the fate of a previous adventuring party."
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Goal": "Find an N PC who disappeared in the area."
+  }, {
+    "Roll": 11.0,
+    "weight": 1.0,
+    "Goal": "Slay a dragon or some other challenging monster."
+  }, {
+    "Roll": 12.0,
+    "weight": 1.0,
+    "Goal": "Discover the nature and origin of a strange location or phenomenon."
+  }, {
+    "Roll": 13.0,
+    "weight": 1.0,
+    "Goal": "Pursue fleeing foes taking refuge in the dungeon."
+  }, {
+    "Roll": 14.0,
+    "weight": 1.0,
+    "Goal": "Escape from captivity in the dungeon."
+  }, {
+    "Roll": 15.0,
+    "weight": 1.0,
+    "Goal": "Clear a ruin so it can be rebuilt and reoccupied."
+  }, {
+    "Roll": 16.0,
+    "weight": 1.0,
+    "Goal": "Discover why a villain is interested in the dungeon."
+  }, {
+    "Roll": 17.0,
+    "weight": 1.0,
+    "Goal": "Win a bet or complete a rite of passage by surviving in the dungeon for a certain amount of time."
+  }, {
+    "Roll": 18.0,
+    "weight": 1.0,
+    "Goal": "Parley with a villain in the dungeon."
+  }, {
+    "Roll": 19.0,
+    "weight": 1.0,
+    "Goal": "Hide from a threat outside the dungeon."
+  }, {
+    "Roll": 20.0,
+    "weight": 1.0,
+    "Goal": "Roll twice, ignoring results of 20."
+  }],
+  "maxRoll": 20,
+  "name": "Dungeon"
+}

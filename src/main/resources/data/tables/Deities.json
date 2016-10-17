@@ -1,0 +1,166 @@
+{
+  "columns": ["Deity", "Realm", "Alignment", "Domains", "Symbol"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Deity": "Asmodeus",
+    "Realm": "tyranny",
+    "Alignment": "LE",
+    "Domains": "Trickery",
+    "Symbol": "Three triangles in tight formation"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Deity": "Avandra",
+    "Realm": "change and luck",
+    "Alignment": "CG",
+    "Domains": "Trickery",
+    "Symbol": "Three stacked wavy lines"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Deity": "Bahamut",
+    "Realm": "justice and nobility",
+    "Alignment": "LG",
+    "Domains": "Life, War",
+    "Symbol": "Dragon's head, in profile, facing left"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Deity": "Bane",
+    "Realm": "war and conquest",
+    "Alignment": "LE",
+    "Domains": "War",
+    "Symbol": "Claw with three talons pointing down"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Deity": "Corellon",
+    "Realm": "magic and the arts",
+    "Alignment": "CG",
+    "Domains": "Light",
+    "Symbol": "Eight-pointed star"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Deity": "Erathis",
+    "Realm": "civilization and invention",
+    "Alignment": "LN",
+    "Domains": "Knowledge",
+    "Symbol": "Upper half of a clockwork gear"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Deity": "Gruumsh",
+    "Realm": "destruction",
+    "Alignment": "CE",
+    "Domains": "Tempest, War",
+    "Symbol": "Triangular eye with bony protrusions"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Deity": "loun",
+    "Realm": "knowledge",
+    "Alignment": "N",
+    "Domains": "Knowledge",
+    "Symbol": "Crook shaped like a stylized eye"
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Deity": "Kord",
+    "Realm": "strength and storms",
+    "Alignment": "CN",
+    "Domains": "Tempest",
+    "Symbol": "Sword with a lightning bolt cross guard"
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Deity": "Lolth",
+    "Realm": "spiders and lies",
+    "Alignment": "CE",
+    "Domains": "Trickery",
+    "Symbol": "Eight pointed star with a web motif"
+  }, {
+    "Roll": 11.0,
+    "weight": 1.0,
+    "Deity": "Melora",
+    "Realm": "wilderness and the sea",
+    "Alignment": "N",
+    "Domains": "Nature, Tempest",
+    "Symbol": "Wavelike swirl"
+  }, {
+    "Roll": 12.0,
+    "weight": 1.0,
+    "Deity": "Moradin",
+    "Realm": "creation",
+    "Alignment": "LG",
+    "Domains": "Knowledge, War",
+    "Symbol": "Flaming anvil"
+  }, {
+    "Roll": 13.0,
+    "weight": 1.0,
+    "Deity": "Pelor",
+    "Realm": "the sun and agriculture",
+    "Alignment": "NG",
+    "Domains": "Life, Light",
+    "Symbol": "Circle with six outwardly radiating points"
+  }, {
+    "Roll": 14.0,
+    "weight": 1.0,
+    "Deity": "Raven",
+    "Realm": "death",
+    "Alignment": "LN",
+    "Domains": "Life, Death",
+    "Symbol": "Raven's head, in profile, facing left"
+  }, {
+    "Roll": 15.0,
+    "weight": 1.0,
+    "Deity": "Sehanine",
+    "Realm": "the moon",
+    "Alignment": "CG",
+    "Domains": "Trickery",
+    "Symbol": "Crescent moon"
+  }, {
+    "Roll": 16.0,
+    "weight": 1.0,
+    "Deity": "Tharizdun",
+    "Realm": "madness",
+    "Alignment": "CE",
+    "Domains": "Trickery",
+    "Symbol": "Jagged counter-clockwise spiral"
+  }, {
+    "Roll": 17.0,
+    "weight": 1.0,
+    "Deity": "Tiamat",
+    "Realm": "wealth, greed, and vengeance",
+    "Alignment": "LE",
+    "Domains": "Trickery, War",
+    "Symbol": "Five-pointed star with curved points"
+  }, {
+    "Roll": 18.0,
+    "weight": 1.0,
+    "Deity": "Torog",
+    "Realm": "the Underdark",
+    "Alignment": "NE",
+    "Domains": "Death",
+    "Symbol": "T attached to a circular shackle"
+  }, {
+    "Roll": 19.0,
+    "weight": 1.0,
+    "Deity": "Vecna",
+    "Realm": "evil secrets",
+    "Alignment": "NE",
+    "Domains": "Death, Knowledge",
+    "Symbol": "Partially shattered one-eyed skull"
+  }, {
+    "Roll": 20.0,
+    "weight": 1.0,
+    "Deity": "Zehir",
+    "Realm": "darkness and poison",
+    "Alignment": "CE",
+    "Domains": "Trickery, Death",
+    "Symbol": "Snake in the shape of a dagger"
+  }],
+  "maxRoll": 20,
+  "name": "Deities"
+}

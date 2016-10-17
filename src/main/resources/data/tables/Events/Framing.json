@@ -1,0 +1,198 @@
+{
+  "columns": ["Event"],
+  "entries": [{
+    "Roll": "01-02",
+    "weight": 2.0,
+    "Event": "Anniversary of a monarch's reign"
+  }, {
+    "Roll": "03-04",
+    "weight": 2.0,
+    "Event": "Anniversary of an important event"
+  }, {
+    "Roll": "05-06",
+    "weight": 2.0,
+    "Event": "Arena event"
+  }, {
+    "Roll": "07-08",
+    "weight": 2.0,
+    "Event": "Arrival of a caravan or ship"
+  }, {
+    "Roll": "09-10",
+    "weight": 2.0,
+    "Event": "Arrival of a circus"
+  }, {
+    "Roll": "11-12",
+    "weight": 2.0,
+    "Event": "Arrival of an important NPC"
+  }, {
+    "Roll": "13-14",
+    "weight": 2.0,
+    "Event": "Arrival of marching modrons"
+  }, {
+    "Roll": "15-16",
+    "weight": 2.0,
+    "Event": "Artistic performance"
+  }, {
+    "Roll": "17-18",
+    "weight": 2.0,
+    "Event": "Athletic event"
+  }, {
+    "Roll": "19-20",
+    "weight": 2.0,
+    "Event": "Birth of a child"
+  }, {
+    "Roll": "21-22",
+    "weight": 2.0,
+    "Event": "Birthday of an important NPC"
+  }, {
+    "Roll": "23-24",
+    "weight": 2.0,
+    "Event": "Civic festival"
+  }, {
+    "Roll": "25-26",
+    "weight": 2.0,
+    "Event": "Comet appearance"
+  }, {
+    "Roll": "27-28",
+    "weight": 2.0,
+    "Event": "Commemoration of a past tragedy"
+  }, {
+    "Roll": "29-30",
+    "weight": 2.0,
+    "Event": "Consecration of a new temple"
+  }, {
+    "Roll": "31-32",
+    "weight": 2.0,
+    "Event": "Coronation"
+  }, {
+    "Roll": "33-34",
+    "weight": 2.0,
+    "Event": "Council meeting"
+  }, {
+    "Roll": "35-36",
+    "weight": 2.0,
+    "Event": "Equinox or solstice"
+  }, {
+    "Roll": "37-38",
+    "weight": 2.0,
+    "Event": "Execution"
+  }, {
+    "Roll": "39-40",
+    "weight": 2.0,
+    "Event": "Fertility festival"
+  }, {
+    "Roll": "41-42",
+    "weight": 2.0,
+    "Event": "Full moon"
+  }, {
+    "Roll": "43-44",
+    "weight": 2.0,
+    "Event": "Funeral"
+  }, {
+    "Roll": "45-46",
+    "weight": 2.0,
+    "Event": "Graduation of cadets or wizards"
+  }, {
+    "Roll": "47-48",
+    "weight": 2.0,
+    "Event": "Harvest festival"
+  }, {
+    "Roll": "49-50",
+    "weight": 2.0,
+    "Event": "Holy day"
+  }, {
+    "Roll": "51-52",
+    "weight": 2.0,
+    "Event": "Investiture of a knight or other noble"
+  }, {
+    "Roll": "53-54",
+    "weight": 2.0,
+    "Event": "Lunar eclipse"
+  }, {
+    "Roll": "55-58",
+    "weight": 4.0,
+    "Event": "Midsummer festival"
+  }, {
+    "Roll": "59-60",
+    "weight": 2.0,
+    "Event": "Midwinter festival"
+  }, {
+    "Roll": "61-62",
+    "weight": 2.0,
+    "Event": "Migration of monsters"
+  }, {
+    "Roll": "63-64",
+    "weight": 2.0,
+    "Event": "Monarch's ball"
+  }, {
+    "Roll": "65-66",
+    "weight": 2.0,
+    "Event": "New moon"
+  }, {
+    "Roll": "67-68",
+    "weight": 2.0,
+    "Event": "New year"
+  }, {
+    "Roll": "69-70",
+    "weight": 2.0,
+    "Event": "Pardoning of a prisoner"
+  }, {
+    "Roll": "71-72",
+    "weight": 2.0,
+    "Event": "Planar conjunction"
+  }, {
+    "Roll": "73-74",
+    "weight": 2.0,
+    "Event": "Planetary alignment"
+  }, {
+    "Roll": "75-76",
+    "weight": 2.0,
+    "Event": "Priestly investiture"
+  }, {
+    "Roll": "77-78",
+    "weight": 2.0,
+    "Event": "Procession of ghosts"
+  }, {
+    "Roll": "79-80",
+    "weight": 2.0,
+    "Event": "Remembrance for soldiers lost in war"
+  }, {
+    "Roll": "81-82",
+    "weight": 2.0,
+    "Event": "Royal address or proclamation"
+  }, {
+    "Roll": "83-84",
+    "weight": 2.0,
+    "Event": "Royal audience day"
+  }, {
+    "Roll": "85-86",
+    "weight": 2.0,
+    "Event": "Signing of a treaty"
+  }, {
+    "Roll": "87-88",
+    "weight": 2.0,
+    "Event": "Solar eclipse"
+  }, {
+    "Roll": "89-91",
+    "weight": 3.0,
+    "Event": "Tournament"
+  }, {
+    "Roll": "92-94",
+    "weight": 3.0,
+    "Event": "Trial"
+  }, {
+    "Roll": "95-96",
+    "weight": 2.0,
+    "Event": "Violent uprising"
+  }, {
+    "Roll": "97-98",
+    "weight": 2.0,
+    "Event": "Wedding or wedding anniversary"
+  }, {
+    "Roll": "99-100",
+    "weight": 2.0,
+    "Event": "Concurrence of two events (roll twice, ignoring results of 99 or 100)"
+  }],
+  "maxRoll": 100,
+  "name": "Framing"
+}

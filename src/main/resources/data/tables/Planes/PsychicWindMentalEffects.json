@@ -1,0 +1,30 @@
+{
+  "columns": ["Mental Effect"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Mental Effect": "1-8 "
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Mental Effect": "9-10 "
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Mental Effect": "11-12 "
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Mental Effect": "13-16 "
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Mental Effect": "17-18 "
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Mental Effect": "19-20 "
+  }],
+  "maxRoll": 6,
+  "name": "Psychic Wind Mental Effects"
+}

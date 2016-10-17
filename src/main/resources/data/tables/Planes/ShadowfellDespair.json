@@ -1,0 +1,18 @@
+{
+  "columns": ["Effect"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Effect": "l-3"
+  }, {
+    "Roll": "4-5",
+    "weight": 2.0,
+    "Effect": "Dread. The character has disadvantage on all saving throws and gains the following flaw: \"I am convinced that this place is going to kill me.\""
+  }, {
+    "Roll": "6",
+    "weight": 1.0,
+    "Effect": "Madness. The character has disadvantage on ability checks and saving throws that use Intelligence, Wisdom, or Charisma, and gains the following flaw: \"I can't tell what's real anymore.\""
+  }],
+  "maxRoll": 4,
+  "name": "Shadowfell Despair"
+}

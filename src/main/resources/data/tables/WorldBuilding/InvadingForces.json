@@ -1,0 +1,38 @@
+{
+  "columns": ["Invading Force"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Invading Force": "A criminal enterprise"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Invading Force": "Monsters or a unique monster"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Invading Force": "A planar threat"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Invading Force": "A past adversary reawakened, reborn, or resurgent"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Invading Force": "A splinter faction"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Invading Force": "A savage tribe"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Invading Force": "A secret society"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Invading Force": "A traitorous ally"
+  }],
+  "maxRoll": 8,
+  "name": "Invading Forces"
+}

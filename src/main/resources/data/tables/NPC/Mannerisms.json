@@ -1,0 +1,82 @@
+{
+  "columns": ["Mannerism"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Mannerism": "Prone to singing, whistling, or humming quietly"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Mannerism": "Speaks in rhyme or some other peculiar way"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Mannerism": "Particularly low or high voice"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Mannerism": "Slurs words, lisps, or stutters"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Mannerism": "Speaks loudly"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Mannerism": "Whispers"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Mannerism": "Uses flowery speech or long words"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Mannerism": "Frequently uses the wrong word"
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Mannerism": "Uses colorful oaths and exlamations"
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Mannerism": "Makes constant jokes or puns"
+  }, {
+    "Roll": 11.0,
+    "weight": 1.0,
+    "Mannerism": "Prone to predictions of doom"
+  }, {
+    "Roll": 12.0,
+    "weight": 1.0,
+    "Mannerism": "Fidgets"
+  }, {
+    "Roll": 13.0,
+    "weight": 1.0,
+    "Mannerism": "Squints"
+  }, {
+    "Roll": 14.0,
+    "weight": 1.0,
+    "Mannerism": "Stares into the distance"
+  }, {
+    "Roll": 15.0,
+    "weight": 1.0,
+    "Mannerism": "Chews something"
+  }, {
+    "Roll": 16.0,
+    "weight": 1.0,
+    "Mannerism": "Paces"
+  }, {
+    "Roll": 17.0,
+    "weight": 1.0,
+    "Mannerism": "Taps fingers"
+  }, {
+    "Roll": 18.0,
+    "weight": 1.0,
+    "Mannerism": "Bites fingernails"
+  }, {
+    "Roll": 19.0,
+    "weight": 1.0,
+    "Mannerism": "Twirls hair or tugs beard"
+  }],
+  "maxRoll": 19,
+  "name": "Mannerisms"
+}

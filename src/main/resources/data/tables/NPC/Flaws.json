@@ -1,0 +1,54 @@
+{
+  "columns": ["Flaw"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Flaw": "Forbidden love or susceptibility to romance"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Flaw": "Enjoys decadent pleasures"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Flaw": "Arrogance"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Flaw": "Envies another creature's possessions or station"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Flaw": "Overpowering greed"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Flaw": "Prone to rage"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Flaw": "Has a powerful enemy"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Flaw": "Specific phobia"
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Flaw": "Shameful or scandalous history"
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Flaw": "Secret crime or misdeed"
+  }, {
+    "Roll": 11.0,
+    "weight": 1.0,
+    "Flaw": "Possession of forbidden lore"
+  }, {
+    "Roll": 12.0,
+    "weight": 1.0,
+    "Flaw": "Foolhardy bravery"
+  }],
+  "maxRoll": 12,
+  "name": "Flaws"
+}

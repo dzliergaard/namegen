@@ -1,0 +1,22 @@
+{
+  "columns": ["Location Effect"],
+  "entries": [{
+    "Roll": "1-8",
+    "weight": 8.0,
+    "Location Effect": "Diverted; add 1d6 hours to travel time"
+  }, {
+    "Roll": "9-12",
+    "weight": 4.0,
+    "Location Effect": "Blown off course; add 3d10 hours to travel time"
+  }, {
+    "Roll": "13-16",
+    "weight": 4.0,
+    "Location Effect": "Lost; at the end of the travel time, characters arrive at a location other than the intended destination"
+  }, {
+    "Roll": "17-20",
+    "weight": 4.0,
+    "Location Effect": "Sent through color pool to a random plane (roll on the Astral Color Pools table)"
+  }],
+  "maxRoll": 20,
+  "name": "Psychic Wind Physical Effects"
+}

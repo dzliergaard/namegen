@@ -1,0 +1,86 @@
+{
+  "columns": ["Goal"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Goal": "Locate a dungeon or other site of interest (roll on the Dungeon Goals table to find out why)."
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Goal": "Assess the scope of a natural or unnatural disaster."
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Goal": "Escort an NPC to a destination."
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Goal": "Arrive at a destination without being seen by the villain's forces."
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Goal": "Stop monsters from raiding caravans and farms."
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Goal": "Establish trade with a distant town."
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Goal": "Protect a caravan traveling to a distant town."
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Goal": "Map a new land."
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Goal": "Find a place to establish a colony."
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Goal": "Find a natural resource."
+  }, {
+    "Roll": 11.0,
+    "weight": 1.0,
+    "Goal": "Hunt a specific monster."
+  }, {
+    "Roll": 12.0,
+    "weight": 1.0,
+    "Goal": "Return home from a distant place."
+  }, {
+    "Roll": 13.0,
+    "weight": 1.0,
+    "Goal": "Obtain information from a reclusive hermit."
+  }, {
+    "Roll": 14.0,
+    "weight": 1.0,
+    "Goal": "Find an object that was lost in the wilds."
+  }, {
+    "Roll": 15.0,
+    "weight": 1.0,
+    "Goal": "Discover the fate of a missing group of explorers."
+  }, {
+    "Roll": 16.0,
+    "weight": 1.0,
+    "Goal": "Pursue fleeing foes."
+  }, {
+    "Roll": 17.0,
+    "weight": 1.0,
+    "Goal": "Assess the size of an approaching army."
+  }, {
+    "Roll": 18.0,
+    "weight": 1.0,
+    "Goal": "Escape the reign of a tyrant."
+  }, {
+    "Roll": 19.0,
+    "weight": 1.0,
+    "Goal": "Protect a wilderness site from attackers."
+  }, {
+    "Roll": 20.0,
+    "weight": 1.0,
+    "Goal": "Roll twice, ignoring results of 20."
+  }],
+  "maxRoll": 20,
+  "name": "Wilderness"
+}

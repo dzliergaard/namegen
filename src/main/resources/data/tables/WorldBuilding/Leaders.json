@@ -1,0 +1,30 @@
+{
+  "columns": ["Type"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Type": "Political"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Type": "Religious"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Type": "Military"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Type": "Crime/underworld"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Type": "Art/culture"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Type": "Philosophy/learning/magic"
+  }],
+  "maxRoll": 6,
+  "name": "Leaders"
+}

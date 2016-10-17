@@ -1,0 +1,86 @@
+{
+  "columns": ["Outer Plane", "Alignment"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Outer Plane": "Mount Celestia, the Seven Heavens of",
+    "Alignment": "LG"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Outer Plane": "Bytopia, the Twin Paradises of",
+    "Alignment": "NG, LG"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Outer Plane": "Elysium, the Blessed Fields of",
+    "Alignment": "NG"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Outer Plane": "The Beastlands, the Wilderness of",
+    "Alignment": "NG, CG"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Outer Plane": "Arborea, the Olympian Glades of",
+    "Alignment": "CG"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Outer Plane": "Ysgard, the Heroic Domains of",
+    "Alignment": "CN, CG"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Outer Plane": "Limbo, the Ever-Changing Chaos of",
+    "Alignment": "CN"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Outer Plane": "Pandemonium, the Windswept Depths of",
+    "Alignment": "CN, CE"
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Outer Plane": "The Abyss, the Infinite Layers of",
+    "Alignment": "CE"
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Outer Plane": "Carceri, the Tarterian Depths of",
+    "Alignment": "NE, CE"
+  }, {
+    "Roll": 11.0,
+    "weight": 1.0,
+    "Outer Plane": "Hades, the Gray Waste of",
+    "Alignment": "NE"
+  }, {
+    "Roll": 12.0,
+    "weight": 1.0,
+    "Outer Plane": "Gehenna, the Bleak Eternity of",
+    "Alignment": "NE, LE"
+  }, {
+    "Roll": 13.0,
+    "weight": 1.0,
+    "Outer Plane": "The Nine Hells of Baator",
+    "Alignment": "LE"
+  }, {
+    "Roll": 14.0,
+    "weight": 1.0,
+    "Outer Plane": "Acheron, the Infinite Battlefield of",
+    "Alignment": "LN, LE"
+  }, {
+    "Roll": 15.0,
+    "weight": 1.0,
+    "Outer Plane": "Mechanus, the Clockwork Nirvana of",
+    "Alignment": "LN"
+  }, {
+    "Roll": 16.0,
+    "weight": 1.0,
+    "Outer Plane": "Arcadia, the Peaceable Kingdoms of",
+    "Alignment": "LN, LG"
+  }],
+  "maxRoll": 16,
+  "name": "Outer Planes"
+}

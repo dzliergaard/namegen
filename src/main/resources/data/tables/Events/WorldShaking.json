@@ -1,0 +1,46 @@
+{
+  "columns": ["Event"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Event": "Rise of a leader or an era"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Event": "Fall of a leader or an era"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Event": "Cataclysmic disaster"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Event": "Assault or invasion"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Event": "Rebellion, revolution, overthrow"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Event": "Extinction or depletion"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Event": "New organization"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Event": "Discovery, expansion, invention"
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Event": "Prediction, omen, prophecy"
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Event": "Myth and legend"
+  }],
+  "maxRoll": 10,
+  "name": "World Shaking"
+}

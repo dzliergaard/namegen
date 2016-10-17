@@ -1,0 +1,82 @@
+{
+  "columns": ["Goal"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Goal": "Bring the villain to justice."
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Goal": "Clear the name of an innocent N PC."
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Goal": "Protect or hide an N PC."
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Goal": "Protect an object."
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Goal": "Discover the nature and origin of a strange phenomenon that might be the villain's doing."
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Goal": "Find a wanted fugitive."
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Goal": "Overthrow a tyrant. 8 Uncover a conspiracy to overthrow a ruler."
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Goal": "Negotiate peace between enemy nations or feuding families."
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Goal": "Secure aid from a ruler or council."
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Goal": "Help a villain find redemption."
+  }, {
+    "Roll": 11.0,
+    "weight": 1.0,
+    "Goal": "Parley with a villain."
+  }, {
+    "Roll": 12.0,
+    "weight": 1.0,
+    "Goal": "Smuggle weapons to rebel forces."
+  }, {
+    "Roll": 13.0,
+    "weight": 1.0,
+    "Goal": "Stop a band of smugglers."
+  }, {
+    "Roll": 14.0,
+    "weight": 1.0,
+    "Goal": "Gather intelligence on an enemy force."
+  }, {
+    "Roll": 15.0,
+    "weight": 1.0,
+    "Goal": "Win a tournament."
+  }, {
+    "Roll": 16.0,
+    "weight": 1.0,
+    "Goal": "Determine the villain's identity."
+  }, {
+    "Roll": 17.0,
+    "weight": 1.0,
+    "Goal": "Locate a stolen item."
+  }, {
+    "Roll": 18.0,
+    "weight": 1.0,
+    "Goal": "Make sure a wedding goes off without a hitch."
+  }, {
+    "Roll": 19.0,
+    "weight": 1.0,
+    "Goal": "Roll twice, ignoring results of 20."
+  }],
+  "maxRoll": 19,
+  "name": "Event Based"
+}

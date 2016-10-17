@@ -1,0 +1,70 @@
+{
+  "columns": ["Circle", "3rd", "5th", "7th", "9th"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Circle": "Arctic",
+    "3rd": "hold person, spike growth",
+    "5th": "sleet storm, slow",
+    "7th": "freedom of movement, ice storm",
+    "9th": "commune with nature, cone of cold"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Circle": "Coast",
+    "3rd": "mirror image, misty step",
+    "5th": "water breathing, water walk",
+    "7th": "control water, freedom of movement",
+    "9th": "conjure elemental, scrying"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Circle": "Desert",
+    "3rd": "blur, silence",
+    "5th": "create food and water, protection from energy",
+    "7th": "blight, hallucinatory terrain",
+    "9th": "insect plague, wall of stone"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Circle": "Forest",
+    "3rd": "barkskin, spider climb",
+    "5th": "call lightning, plant growth",
+    "7th": "divination, freedom of movement",
+    "9th": "commune with nature, tree stride"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Circle": "Grassland",
+    "3rd": "invisibility, pass without trace",
+    "5th": "daylight, haste",
+    "7th": "divination, freedom of movement",
+    "9th": "dream, insect plague"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Circle": "Mountain",
+    "3rd": "spider climb, spike growth",
+    "5th": "lightning bolt, meld into stone",
+    "7th": "stone shape, stoneskin",
+    "9th": "passwall, wall of stone"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Circle": "Swamp",
+    "3rd": "darkness, Melf’s acid arrow",
+    "5th": "water walk, stinking cloud",
+    "7th": "freedom of movement, locate creature",
+    "9th": "insect plague, scrying"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Circle": "Underdark",
+    "3rd": "spider climb, web",
+    "5th": "gaseous form, stinking cloud",
+    "7th": "greater invisibility, stone shape",
+    "9th": "cloudkill, insect plague"
+  }],
+  "maxRoll": 8,
+  "name": "Druid Circle Spells"
+}

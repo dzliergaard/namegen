@@ -1,0 +1,46 @@
+{
+  "columns": ["Cataclysmic Disaster"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Cataclysmic Disaster": "Earthquake"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Cataclysmic Disaster": "Famine/drought"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Cataclysmic Disaster": "Fire"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Cataclysmic Disaster": "Flood"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Cataclysmic Disaster": "Plague/disease"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Cataclysmic Disaster": "Rain of fire (meteoric impact)"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Cataclysmic Disaster": "Storm (hurricane, tornado, tsunami)"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Cataclysmic Disaster": "Volcanic eruption"
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Cataclysmic Disaster": "Magic gone awry or a planar warp"
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Cataclysmic Disaster": "Divine judgment"
+  }],
+  "maxRoll": 10,
+  "name": "Disasters"
+}

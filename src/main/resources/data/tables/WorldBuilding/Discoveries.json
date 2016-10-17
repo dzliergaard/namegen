@@ -1,0 +1,46 @@
+{
+  "columns": ["Discovery"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Discovery": "Ancient ruin/lost city of a legendary race"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Discovery": "Animal/monster/magical mutation"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Discovery": "Invention/technology/magic (helpful, destructive)"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Discovery": "New (or forgotten) god or planar entity"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Discovery": "New (or rediscovered) artifact or religious relic"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Discovery": "New land (island, continent, lost world, demiplane)"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Discovery": "Otherworldly object (planar portal, alien spacecraft)"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Discovery": "People (race, tribe, lost civilization, colony)"
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Discovery": "Plant (miracle herb, fungal parasite, sentient plant)"
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Discovery": "Resource or wealth (gold, gems, mithral)"
+  }],
+  "maxRoll": 10,
+  "name": "Discoveries"
+}

@@ -1,0 +1,36 @@
+{
+  "columns": ["Ability", "Description"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Ability": "Strength",
+    "Description": "Powerful, brawny, strong as an ox"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Ability": "Dexterity",
+    "Description": "Lithe, agile, graceful"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Ability": "Constitution",
+    "Description": "Hard, hale, healthy"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Ability": "Intelligence",
+    "Description": "Studious, learned, inquisitive"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Ability": "Wisdom",
+    "Description": "Perceptive, spiritual, insightful"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Ability": "Charisma",
+    "Description": "Persuasive, forceful, born leader"
+  }],
+  "maxRoll": 6,
+  "name": "High"
+}

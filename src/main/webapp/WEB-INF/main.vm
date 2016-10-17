@@ -44,7 +44,7 @@
       --divider-color: var(--light-theme-disabled-color);
 
       /* other element styles */
-      --iron-icon-fill-color: var(--light-theme-secondary-color);
+      --iron-icon-fill-color: var(--light-theme-text-color);
       --paper-toolbar-color: var(--light-theme-text-color);
       --paper-card-header-color: var(--light-theme-text-color);
       --paper-input-container-color: var(--light-theme-secondary-color);

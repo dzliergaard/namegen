@@ -31,7 +31,7 @@
       @apply(--layout-horizontal);
       @apply(--layout-justified);
       border-color: var(--divider-color);
-      border-bottom: 1px solid var(--divider-color);
+      display: table-row;
       height: 48px;
     }
 
@@ -41,8 +41,12 @@
       color: var(--dark-primary-color);
     }
 
-    :host ::content div.table .row paper-input paper-input-container .underline > * {
-      display: none;
+    :host div.table .row > :not(template) {
+      display: table-cell;
+    }
+
+    :host div.table paper-input {
+      padding-right: 10px;
     }
 
     :host div.table div.group.header .row .sorted {
@@ -64,7 +68,7 @@
 
     :host div.table div.group.header .row > * {
       line-height: 24px;
-      color: var(--secondary-text-color);
+      color: var(--primary-text-color);
     }
 
     :host div.table .row:hover > *,
@@ -90,9 +94,7 @@
     :host #columnsDialog paper-checkbox {
       @apply(--paper-font-caption);
       --paper-checkbox-checked-color: var(--light-theme-text-color);
-      --paper-checkbox-checkmark-color: var(--light-theme-text-color);
       --paper-checkbox-label-color: var(--light-theme-text-color);
-      --paper-checkbox-unchecked-color: var(--light-theme-text-color);
     }
 
     :host div.table .row > ::before {
@@ -110,7 +112,7 @@
                     as="column"
                     filter="_showingColumn"
                     observe="showing">
-              <span class="flex self-center" class$="{{_sortingRowClass(column, sortColumn)}}"
+              <span class$="{{_sortingRowClass(column, sortColumn)}}"
                     on-tap="_sortByColumn">
                 {{column.label}}
                 <template is="dom-if" if="{{_isSortingColumn(column, sortColumn)}}">
@@ -129,7 +131,7 @@
           <div class="row">
             <template is="dom-repeat" items="{{columns}}" as="column">
               <template is="dom-if" if="{{editable}}">
-                <paper-input no-label-float
+                <paper-input no-label-float class="flex"
                              label="{{column.label}}"
                              value="{{_getRowData(row, column.id)}}"
                              on-change="_setRowData"></paper-input>
@@ -139,7 +141,7 @@
               </template>
             </template>
             <template is="dom-if" if="{{editable}}">
-              <iron-icon class="last" icon="delete" on-tap="_deleteRow"></iron-icon>
+              <iron-icon row="{{row}}" class="last" icon="delete" on-tap="_deleteRow"></iron-icon>
             </template>
             <template is="dom-if" if="{{!editable}}">
               <div class="last"></div>
@@ -182,7 +184,7 @@
         },
         editable: {
           type: Boolean,
-          value: true
+          value: false
         },
         rows: {
           type: Array,
@@ -256,8 +258,9 @@
 
       _sortingRowClass: function (column, sortColumn) {
         if (this._isSortingColumn(column, sortColumn)) {
-          return 'sorted';
+          return 'sorted flex self-center';
         }
+        return 'flex self-center';
       },
 
       // sorting related functions

@@ -1,0 +1,139 @@
+<link rel="import" href="./datatable.html">
+<link rel="import" href="/bower/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower/iron-icon/iron-icon.html">
+<link rel="import" href="/bower/iron-icons/iron-icons.html">
+<link rel="import" href="/bower/iron-icons/places-icons.html">
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="/bower/paper-card/paper-card.html">
+<link rel="import" href="/bower/paper-item/paper-item.html">
+<link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="/bower/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower/paper-menu/paper-menu.html">
+<link rel="import" href="/bower/paper-menu/paper-submenu.html">
+<link rel="import" href="/bower/paper-ripple/paper-ripple.html">
+<link rel="import" href="/bower/paper-tooltip/paper-tooltip.html">
+
+<dom-module id="tables-page">
+  <style include="iron-flex iron-flex-alignment iron-flex-factors">
+    paper-dropdown-menu::shadow iron-dropdown {
+      @apply(--flex);
+    }
+
+    paper-dropdown-menu::shadow paper-menu-button div#trigger {
+      @apply(--flex);
+    }
+
+    :host paper-item {
+      white-space: nowrap;
+    }
+  </style>
+  <template>
+    <iron-ajax auto id="tables" url="/tables/list" on-response="processTablesResponse" handle-as="json"></iron-ajax>
+    <div class="layout horizontal start">
+      <paper-dropdown-menu allow-outside-scroll class="flex" label="Choose Table" horizontal-align="left">
+        <paper-menu class="dropdown-content">
+          <template is="dom-repeat" items="{{tables}}">
+            <template is="dom-if" if="{{!item.isParent}}">
+              <paper-item on-tap="selectTable">{{item.name}}</paper-item>
+            </template>
+            <template is="dom-if" if="{{item.isParent}}">
+              <paper-submenu>
+                <paper-item class="menu-trigger" on-tap="keepDropdownOpen">
+                  <span class="horizontal layout justified">
+                    {{item.name}}
+                    <iron-icon icon="icons:arrow-drop-down"></iron-icon>
+                  </span>
+                </paper-item>
+                <paper-menu class="menu-content">
+                  <template is="dom-repeat" items="{{item.tables}}">
+                    <template is="dom-if" if="{{!item.isParent}}">
+                      <paper-item on-tap="selectTable">{{item.name}}</paper-item>
+                    </template>
+                    <template is="dom-if" if="{{item.isParent}}">
+                      <paper-submenu>
+                        <paper-item class="menu-trigger" on-tap="keepDropdownOpen">
+                          <span class="horizontal layout justified">
+                            {{item.name}}
+                            <iron-icon icon="icons:arrow-drop-down"></iron-icon>
+                          </span>
+                        </paper-item>
+                        <paper-menu class="menu-content">
+                          <template is="dom-repeat" items="{{item.tables}}">
+                            <paper-item on-tap="selectTable">{{item.name}}</paper-item>
+                          </template>
+                        </paper-menu>
+                      </paper-submenu>
+                    </template>
+                  </template>
+                </paper-menu>
+              </paper-submenu>
+            </template>
+          </template>
+        </paper-menu>
+      </paper-dropdown-menu>
+      <div class="flex-3 layout horizontal">
+        <paper-card hidden id="table-card" class="flex">
+          <div class="header paper-card">
+            <div class="title-text paper-card layout horizontal justified">
+              <span>{{table.name}}</span>
+              <paper-fab mini id="roll-button" icon="places:casino" on-tap="selectRandom"></paper-fab>
+              <paper-tooltip for="roll-button" position="left">Select random</paper-tooltip>
+            </div>
+          </div>
+          <div id="card-content" class="card-content">
+            <template is="dom-repeat" items="{{tables}}">
+              <rptools-table table="{{item}}" roll="{{roll}}"></rptools-table>
+            </template>
+          </div>
+        </paper-card>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'tables-page',
+      properties: {
+        table: {
+          type: Object
+        },
+        columns: {
+          type: Array,
+          value: []
+        },
+        tables: {
+          type: Array,
+          value: []
+        }
+      },
+      // when selecting a subcategory, toggle the submenu but keep the dropdown open
+      keepDropdownOpen: function (event) {
+        // find the paper-item from the path
+        var submenu = event.path.find(function (el) {
+          return el.is == 'paper-submenu';
+        });
+
+        submenu.toggle();
+        event.stopPropagation();
+      },
+      processTablesResponse: function (event) {
+        this.set('tables', JSON.parse(event.detail.response.data).tables);
+      },
+      selectRandom: function (event) {
+        this.table.datatable.selectRandom(true);
+      },
+      getTable: function (index, tables) {
+        return this.tables[index];
+      },
+      selectTable: function (event) {
+        if (this.table) {
+          this.table.datatable.show(false);
+        }
+        this.$['table-card'].hidden = false;
+        this.set('table', event.model.subtable || event.model.table || event.model.item);
+        this.set('roll', null);
+        this.table.datatable.show(true);
+      }
+    });
+  </script>
+</dom-module>

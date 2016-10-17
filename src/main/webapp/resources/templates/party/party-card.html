@@ -1,0 +1,185 @@
+<link rel="import" href="../behavior/google-scope.html"/>
+<link rel="import" href="/bower/google-signin/google-signin-aware.html">
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="/bower/iron-icons/iron-icons.html">
+<link rel="import" href="/bower/iron-icons/social-icons.html">
+<link rel="import" href="/bower/paper-card/paper-card.html">
+<link rel="import" href="/bower/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="/bower/paper-datatable/paper-datatable-column.html">
+<link rel="import" href="/bower/paper-datatable/paper-datatable.html">
+<link rel="import" href="/bower/paper-fab/paper-fab.html">
+
+<dom-module id="party-card">
+  <template>
+    <style is="custom-style" include="iron-flex iron-flex-alignment">
+      :host ::content .title-text paper-input .input-content.paper-input-container input {
+        font-size: 24px;
+      }
+
+      :host editing-item {
+        margin-right: 5%;
+      }
+
+      :host paper-card .header.party-card {
+        overflow: visible;
+      }
+
+      :host paper-card .save-icon,
+      :host paper-card .delete-icon {
+        float: right;
+        margin: auto 0 auto auto;
+      }
+
+      :host paper-card {
+        width: calc(100% - 16px);
+      }
+
+      :host paper-checkbox {
+        --paper-checkbox-checked-color: var(--light-theme-text-color);
+        --paper-checkbox-label-color: var(--light-theme-text-color);
+      }
+    </style>
+    <google-signin-aware scopes="{{scopes}}" signed-in="{{isSignedIn}}"></google-signin-aware>
+    <paper-card>
+      <div class="header paper-card">
+        <div class="title-text paper-card">
+          <span class="layout horizontal justified">
+            <editing-item class="flex" item="{{party.name}}"></editing-item>
+            <iron-icon id="save-icon" class="save-icon" icon="icons:save"
+                       on-tap="saveParty"></iron-icon>
+            <paper-tooltip for="save-icon">Save party</paper-tooltip>
+            <iron-icon id="delete-icon" class="delete-icon" icon="icons:delete"
+                       on-tap="deleteParty"></iron-icon>
+            <paper-tooltip for="delete-icon">Delete party</paper-tooltip>
+          </span>
+        </div>
+      </div>
+      <div class="card-content">
+        <paper-datatable id="datatable" data="{{party.characters}}">
+          <template is="dom-repeat" items="{{columns}}">
+            <paper-datatable-column header="{{item.label}}" property="{{item.id}}">
+              <template>
+                <paper-input no-label-float class="flex" value="{{value}}"></paper-input>
+              </template>
+            </paper-datatable-column>
+          </template>
+        </paper-datatable>
+      </div>
+      <div class="card-actions layout horizontal justified">
+        <paper-fab mini icon="social:person-add" on-tap="addCharacter"></paper-fab>
+        <paper-checkbox class="self-center" checked="{{autosave}}" on-change="saveParty">
+          autosave changes
+        </paper-checkbox>
+      </div>
+    </paper-card>
+  </template>
+  <script>
+    Polymer({
+      id: 'party-card',
+      behaviors: [rptools.GoogleScopeBehavior],
+      properties: {
+        autosave: {
+          type: Boolean,
+          value: false
+        },
+        columns: {
+          type: Array,
+          value: function () {
+            return [
+              {label: 'Name', id: 'name', type: 'text', showing: true},
+              {label: 'AC', id: 'armorClass', type: 'number', showing: true},
+              {label: 'Initiative', id: 'initiative', type: 'number', showing: true},
+              {label: 'Current HP', id: 'currentHitPoints', type: 'number', showing: true},
+              {label: 'Max HP', id: 'maxHitPoints', type: 'number', showing: true}
+            ];
+          }
+        },
+        canSave: {
+          type: Boolean,
+          computed: '_canSave(unsaved, party.id)'
+        },
+        party: {
+          type: Object,
+          notify: true
+        },
+        unsaved: {
+          type: Boolean,
+          notify: true,
+          value: false
+        }
+      },
+      observers: [
+        '_partyChanged(party.*)',
+        '_rowsChanged(party.characters.*)',
+        '_columnsChanged(columns)'
+      ],
+      _createElement: function(tag, attributes) {
+        var el = document.createElement(tag);
+        if (!attributes) {
+          return el;
+        }
+        for (var property in attributes) {
+          if (attributes.hasOwnProperty(property)) {
+            el[property] = attributes[property];
+          }
+        }
+        return el;
+      },
+      _columnsChanged: function(columns) {
+        var datatable = this.$.datatable;
+        // remove current columns
+        Polymer.dom(datatable).queryDistributedElements('paper-datatable-column').forEach(function(column){
+          column.remove();
+        });
+        if (!columns) {
+          return;
+        }
+        columns.forEach(function(column){
+          datatable.appendChild(this._createElement('paper-datatable-column', {
+            header: column.label,
+            property: column.id,
+            editable: '',
+            sortable: ''
+          }));
+        }.bind(this));
+      },
+      _canSave: function (unsaved, id) {
+        return unsaved || !id;
+      },
+      _partyChanged: function (change) {
+        if (change.path != 'party') {
+          this.unsaved = true;
+        }
+      },
+      _rowsChanged: function (change) {
+        if (change.base != change.value) {
+          if (this.autosave) {
+            this.fire('save-party');
+          } else {
+            this.unsaved = true;
+          }
+        }
+      },
+      addCharacter: function () {
+        this.push('party.characters', {});
+      },
+      deleteParty: function () {
+        this.fire('delete-party');
+        this.set('columns', null);
+      },
+      editParty: function () {
+        this.fire('edit-party');
+      },
+      primaryTap: function () {
+        if (!this.isSignedIn) {
+          return;
+        }
+        this.fire('primary-tap');
+      },
+      saveParty: function () {
+        this.fire('save-party');
+        this.unsaved = false;
+      }
+    })
+  </script>
+</dom-module>

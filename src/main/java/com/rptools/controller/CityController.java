@@ -20,7 +20,7 @@ package com.rptools.controller;
 
 import com.rptools.city.City;
 import com.rptools.city.CityGen;
-import com.rptools.city.Species;
+import com.rptools.city.City.Species;
 import java.util.Optional;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +66,7 @@ public class CityController {
     diversity = Optional.ofNullable(diversity).orElse(rand.nextInt(99) + 1.0);
     diversity = .1 + (.3 / 100) * diversity;
 
-    return cityGen.generateCity(size, diversity, Optional.ofNullable(race).orElse(Species.rand()));
+    return cityGen.generateCity(size, diversity, Optional.ofNullable(race).orElse(randSpecies()));
   }
 
   @RequestMapping(value = "races", method = RequestMethod.GET)
@@ -79,9 +79,12 @@ public class CityController {
   }
 
   @RequestMapping(value = "save", method = RequestMethod.POST)
-  public
-  @ResponseBody
-  City save(@RequestBody(required = false) City city) {
+  public @ResponseBody City save(@RequestBody(required = false) City city) {
     return null;
+  }
+
+  private Species randSpecies() {
+    int ind = rand.nextInt(Species.values().length);
+    return Species.values()[ind];
   }
 }

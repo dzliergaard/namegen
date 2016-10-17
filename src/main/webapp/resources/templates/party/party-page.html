@@ -1,4 +1,4 @@
-<link rel="import" href="./table-card.html"/>
+<link rel="import" href="party-card.html"/>
 <link rel="import" href="../dark-theme.html"/>
 <link rel="import" href="../behavior/uuid-behavior.html"/>
 <link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
@@ -11,23 +11,22 @@
 <link rel="import" href="/bower/paper-button/paper-button.html">
 <link rel="import" href="/bower/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="/bower/paper-dialog/paper-dialog.html">
+<link rel="import" href="/bower/paper-item/paper-item.html">
+<link rel="import" href="/bower/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="/bower/paper-card/paper-card.html">
 <link rel="import" href="/bower/paper-tooltip/paper-tooltip.html">
 
-<dom-module id="table-page">
+<dom-module id="party-page">
   <style is="custom-style" include="iron-flex dark-theme">
     :host {
       --paper-button: {
         color: var(--light-theme-text-color);
         font-weight: bold;
       };
-
-      --paper-button-disabled {
-
-      }
     }
 
-    :host ::content table-card.pending {
+    :host ::content party-card.pending {
       --paper-input-container-focus-color: var(--light-theme-text-color);
       --iron-icon-fill-color: var(--light-theme-text-color);
       color: var(--light-theme-text-color);
@@ -45,41 +44,45 @@
       background-color: var(--dark-accent-color);
     }
 
-    :host paper-fab {
+    :host paper-fab, :host paper-dropdown-menu {
       margin: 8px 8px;
+    }
+
+    :host ::content paper-fab iron-icon {
+      fill: var(--primary-text-color);
     }
   </style>
   <template>
-    <iron-ajax auto id="inns" url="/city/generate" params="{{generateParams}}"
-               on-response="setTableNames"></iron-ajax>
+    <iron-ajax id="inns" url="/city/generate" params="{{generateParams}}"
+               on-response="setPartyNames"></iron-ajax>
     <div class="vertical layout">
       <div class="horizontal layout">
-        <paper-fab id="new-table-fab" icon="add" on-tap="newTable"></paper-fab>
-        <paper-tooltip for="new-table-fab">New table</paper-tooltip>
+        <paper-fab mini id="new-table-fab" icon="add" on-tap="newParty"></paper-fab>
+        <paper-tooltip for="new-table-fab">New party</paper-tooltip>
+        <paper-dropdown-menu no-label-float class="center" label="Saved parties">
+          <paper-listbox class="dropdown-content">
+            <template is="dom-repeat" items="{{savedParties}}" as="party">
+              <paper-item on-tap="editParty">
+                {{party.name}}
+              </paper-item>
+            </template>
+          </paper-listbox>
+        </paper-dropdown-menu>
       </div>
 
-      <template is="dom-if" if="{{pendingTable.name}}">
-        <table-card id="pending" class="flex pending"
+      <template is="dom-if" if="{{party.name}}">
+        <party-card id="pending" class="flex pending"
                     editing="true"
-                    table="{{pendingTable}}"
+                    party="{{party}}"
                     unsaved="{{pendingUnsaved}}"
-                    on-save-table="saveTable"></table-card>
-      </template>
-      <template is="dom-if" if="{{savedTables}}">
-        <template is="dom-repeat" items="{{savedTables}}">
-          <template is="dom-if" if="{{notEditing(item, pendingTable)}}">
-            <table-card class="dark flex"
-                        table="{{item}}"
-                        on-delete-table="deleteTable"
-                        on-edit-table="editTable"></table-card>
-          </template>
-        </template>
+                    on-save-party="saveParty"
+                    on-delete-party="deleteParty"></party-card>
       </template>
     </div>
-    <paper-dialog id="createDialog" on-iron-overlay-canceled="clearTableToEdit">
-      <h2>Overwrite current table?</h2>
+    <paper-dialog id="createDialog" on-iron-overlay-canceled="clearPartyToEdit">
+      <h2>Overwrite current party?</h2>
       <div>
-        Your current table has unsaved changes.<br/>
+        Your current party has unsaved changes.<br/>
         To discard pending changes, click Discard.<br/>
         To save changes first, click Save.<br/>
         <div class="buttons">
@@ -95,11 +98,11 @@
 
   <script>
     Polymer({
-      id: 'table-page',
+      id: 'party-page',
       behaviors: [rptools.UUIDBehavior],
       properties: {
         pendingUnsaved: Boolean,
-        tableNames: Array,
+        partyNames: Array,
         down: {
           type: String,
           value: "hardware:keyboard-arrow-down"
@@ -108,13 +111,13 @@
           type: String,
           value: "hardware:keyboard-arrow-up"
         },
-        pendingTable: {
+        party: {
           type: Object,
           value: function () {
             return {};
           }
         },
-        savedTables: {
+        savedParties: {
           type: Object,
           notify: true,
           value: function () {
@@ -131,81 +134,69 @@
         }
       },
       observers: [
-        '_refreshTableNamesOnEmpty(tableNames.splices)'
+        '_refreshPartyNamesOnEmpty(partyNames.splices)'
       ],
-      _newTable: function () {
-        this.set('pendingTable', {
-          name: this.shift('tableNames'),
+      _newParty: function () {
+        this.set('party', {
+          name: this.shift('partyNames'),
           id: null,
-          characters: []
+          characters: [{}]
         });
         this.pendingUnsaved = true;
       },
-      _refreshTableNamesOnEmpty: function () {
-        if (this.tableNames.length == 0) {
+      _refreshPartyNamesOnEmpty: function () {
+        if (this.partyNames.length == 0) {
           this.$.inns.generateRequest();
         }
       },
-      clearTableToEdit: function () {
-        delete this.tableToEdit;
+      clearPartyToEdit: function () {
+        delete this.partyToEdit;
       },
-      deleteTable: function (event) {
-        this.splice('savedTables', this.savedTables.indexOf(event.model.item), 1);
+      deleteParty: function (event) {
+        this.splice('savedParties', this.savedParties.indexOf(event.model.party), 1);
+        this.set('party', {});
       },
-      editTable: function (event) {
+      editParty: function (event) {
         if (this.pendingUnsaved) {
-          if (this.pendingTable.id == event.model.item.id) {
+          if (this.party.id == event.model.party.id) {
             return;
           }
           this.$.createDialog.open();
-          this.tableToEdit = event.model.item;
+          this.partyToEdit = event.model.party;
         } else {
-          this.set('pendingTable', event.model.item);
+          this.set('party', event.model.party);
         }
       },
-      newTable: function () {
+      newParty: function () {
         if (this.pendingUnsaved) {
           this.$.createDialog.open();
           return;
         }
-        this._newTable();
-      },
-      notEditing: function (table, pendingTable) {
-        return table != pendingTable;
+        this._newParty();
       },
       discardAndEdit: function () {
-        if (this.tableToEdit) {
-          this.set('pendingTable', this.tableToEdit);
-          this.clearTableToEdit();
+        if (this.partyToEdit) {
+          this.set('party', this.partyToEdit);
+          this.clearPartyToEdit();
         } else {
-          this._newTable();
+          this._newParty();
         }
       },
-      saveTable: function () {
-        var tableToSave;
-        if (this.pendingTable.id) {
-          tableToSave = this.splice('savedTables',
-              this.savedTables.indexOf(this.pendingTable), 1)[0];
+      saveParty: function () {
+        var partyToSave;
+        if (this.party.id) {
+          this.fire('save');
         } else {
-          this.pendingTable.id = this.uuid();
-          tableToSave = this.pendingTable;
+          this.party.id = this.uuid();
+          this.unshift('savedParties', this.party);
         }
-        this.unshift('savedTables', tableToSave);
       },
       saveAndEdit: function () {
-        this.saveTable();
+        this.saveParty();
         this.discardAndEdit();
       },
-      setTableNames: function (err, request) {
-        this.tableNames = request.response.inns;
-      },
-      toggleMenu: function () {
-        this.$.menu.toggle();
-        if (this.$.menu.opened) {
-          this.$['menu-icon'].icon = this.up;
-        } else {
-          this.$['menu-icon'].icon = this.down;
-        }
+      setPartyNames: function (err, request) {
+        this.partyNames = request.response.inns;
       }
     })
   </script>

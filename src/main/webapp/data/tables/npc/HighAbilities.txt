@@ -1,7 +1,0 @@
-Ability			Description
-Strength		Powerful, brawny, strong as an ox
-Dexterity		Lithe, agile, graceful
-Constitution	Hard, hale, healthy
-Intelligence	Studious, learned, inquisitive
-Wisdom			Perceptive, spiritual, insightful
-Charisma		Persuasive, forceful, born leader

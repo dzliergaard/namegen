@@ -1,65 +1,89 @@
-<link rel="import" href="table-lister.html">
-<link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu-light.html">
+<link rel="import" href="./datatable.html">
 <link rel="import" href="/bower/iron-ajax/iron-ajax.html">
 <link rel="import" href="/bower/iron-icon/iron-icon.html">
 <link rel="import" href="/bower/iron-icons/iron-icons.html">
 <link rel="import" href="/bower/iron-icons/places-icons.html">
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="/bower/paper-card/paper-card.html">
-<link rel="import" href="/bower/paper-datatable/paper-datatable.html">
-<link rel="import" href="/bower/paper-datatable/paper-datatable-card.html">
-<link rel="import" href="/bower/paper-datatable/paper-datatable-column.html">
 <link rel="import" href="/bower/paper-item/paper-item.html">
+<link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="/bower/paper-listbox/paper-listbox.html">
 <link rel="import" href="/bower/paper-menu/paper-menu.html">
 <link rel="import" href="/bower/paper-menu/paper-submenu.html">
 <link rel="import" href="/bower/paper-ripple/paper-ripple.html">
 <link rel="import" href="/bower/paper-tooltip/paper-tooltip.html">
 
 <dom-module id="tables-page">
-  <style is="custom-style" include="iron-flex iron-flex-alignment iron-flex-factors">
+  <style include="iron-flex iron-flex-alignment iron-flex-factors">
+    paper-dropdown-menu::shadow iron-dropdown {
+      @apply(--flex);
+    }
+
+    paper-dropdown-menu::shadow paper-menu-button div#trigger {
+      @apply(--flex);
+    }
+
+    :host paper-item {
+      white-space: nowrap;
+    }
   </style>
   <template>
-    <iron-ajax id="table-load" on-response="parseTableContent" handle-as="text"></iron-ajax>
-    <table-retriever tables="{{tables}}" url="/data/tables/"></table-retriever>
-    <div class="layout horizontal">
-      <paper-menu class="flex-1" label="Choose Table" allow-outside-scroll>
-        <template is="dom-repeat" items="{{tables}}" as="table">
-          <template is="dom-if" if="{{table.isParent}}">
-            <paper-submenu>
-              <paper-item class="menu-trigger">
-                <span class="flex">
-                  {{table.name}}
-                  <iron-icon icon="icons:arrow-drop-down"></iron-icon>
-                </span>
-              </paper-item>
-              <paper-menu class="menu-content">
-                <template is="dom-repeat" items="{{table.tables}}" as="subtable">
-                  <paper-item on-tap="loadTableContent">{{subtable.name}}</paper-item>
-                </template>
-              </paper-menu>
-            </paper-submenu>
+    <iron-ajax auto id="tables" url="/tables/list" on-response="processTablesResponse" handle-as="json"></iron-ajax>
+    <div class="layout horizontal start">
+      <paper-dropdown-menu allow-outside-scroll class="flex" label="Choose Table" horizontal-align="left">
+        <paper-menu class="dropdown-content">
+          <template is="dom-repeat" items="{{tables}}">
+            <template is="dom-if" if="{{!item.isParent}}">
+              <paper-item on-tap="selectTable">{{item.name}}</paper-item>
+            </template>
+            <template is="dom-if" if="{{item.isParent}}">
+              <paper-submenu>
+                <paper-item class="menu-trigger" on-tap="keepDropdownOpen">
+                  <span class="horizontal layout justified">
+                    {{item.name}}
+                    <iron-icon icon="icons:arrow-drop-down"></iron-icon>
+                  </span>
+                </paper-item>
+                <paper-menu class="menu-content">
+                  <template is="dom-repeat" items="{{item.tables}}">
+                    <template is="dom-if" if="{{!item.isParent}}">
+                      <paper-item on-tap="selectTable">{{item.name}}</paper-item>
+                    </template>
+                    <template is="dom-if" if="{{item.isParent}}">
+                      <paper-submenu>
+                        <paper-item class="menu-trigger" on-tap="keepDropdownOpen">
+                          <span class="horizontal layout justified">
+                            {{item.name}}
+                            <iron-icon icon="icons:arrow-drop-down"></iron-icon>
+                          </span>
+                        </paper-item>
+                        <paper-menu class="menu-content">
+                          <template is="dom-repeat" items="{{item.tables}}">
+                            <paper-item on-tap="selectTable">{{item.name}}</paper-item>
+                          </template>
+                        </paper-menu>
+                      </paper-submenu>
+                    </template>
+                  </template>
+                </paper-menu>
+              </paper-submenu>
+            </template>
           </template>
-          <template is="dom-if" if="{{!table.isParent}}">
-            <paper-item on-tap="loadTableContent">{{table.name}}</paper-item>
-          </template>
-        </template>
-      </paper-menu>
-      <div class="flex-3">
-        <paper-card hidden$="{{!loadingTable.name}}">
+        </paper-menu>
+      </paper-dropdown-menu>
+      <div class="flex-3 layout horizontal">
+        <paper-card hidden id="table-card" class="flex">
           <div class="header paper-card">
             <div class="title-text paper-card layout horizontal justified">
-              <span>{{loadingTable.name}}</span>
+              <span>{{table.name}}</span>
               <paper-fab mini id="roll-button" icon="places:casino" on-tap="selectRandom"></paper-fab>
               <paper-tooltip for="roll-button" position="left">Select random</paper-tooltip>
             </div>
           </div>
-          <div class="card-content">
-            <paper-datatable id="datatable" data="{{tableContent.entries}}">
-              <paper-datatable-column header="Roll" property="rollText"></paper-datatable-column>
-              <!--<template is="dom-repeat" items="{{tableContent.columns}}" as="column">-->
-                <!--<paper-datatable-column header="{{column.header}}"-->
-                                        <!--property="{{column.property}}"></paper-datatable-column>-->
-              <!--</template>-->
-            </paper-datatable>
+          <div id="card-content" class="card-content">
+            <template is="dom-repeat" items="{{tables}}">
+              <rptools-table table="{{item}}" roll="{{roll}}"></rptools-table>
+            </template>
           </div>
         </paper-card>
       </div>
@@ -70,148 +94,45 @@
     Polymer({
       is: 'tables-page',
       properties: {
-        loadingTable: Object,
-        tableContent: Object,
-        entryRegexp: {
-          type: RegExp,
-          value: new RegExp("(?:([0-9\-]*)\t+)?(.*)"),
-          value2: new RegExp("(\d+)?(?:-(\d+))\t+?(.*)")
+        table: {
+          type: Object
         },
-        opened: {
-          type: Object,
-          value: {}
-        },
-        parsedTables: {
-          type: Object,
-          value: {}
+        columns: {
+          type: Array,
+          value: []
         },
         tables: {
           type: Array,
           value: []
         }
       },
-      observers: [
-        'updateTable(tableContent)'
-      ],
-      createElement: function (tag, properties) {
-        var el = document.createElement(tag);
-        if (!properties) {
-          return el;
-        }
-        for (var property in properties) {
-          if (properties.hasOwnProperty(property)) {
-            el.setAttribute(property, properties[property]);
-          }
-        }
-        return el;
+      // when selecting a subcategory, toggle the submenu but keep the dropdown open
+      keepDropdownOpen: function (event) {
+        // find the paper-item from the path
+        var submenu = event.path.find(function (el) {
+          return el.is == 'paper-submenu';
+        });
+
+        submenu.toggle();
+        event.stopPropagation();
+      },
+      processTablesResponse: function (event) {
+        this.set('tables', JSON.parse(event.detail.response.data).tables);
       },
       selectRandom: function (event) {
-        var random = Math.floor(Math.random() * this.tableContent.maxRoll + 1);
-        this.$.datatable.select(this.tableContent.entries[random]);
+        this.table.datatable.selectRandom(true);
       },
-      updateTable: function (tableContent) {
-        var datatable = this.$.datatable;
-        datatable.querySelectorAll('paper-datatable-column').forEach(
-                function (column) {
-                  column.remove();
-                }.bind(this));
-
-        if (!tableContent) {
-          return;
+      getTable: function (index, tables) {
+        return this.tables[index];
+      },
+      selectTable: function (event) {
+        if (this.table) {
+          this.table.datatable.show(false);
         }
-        datatable.appendChild(this.createElement('paper-datatable-column', {
-          header: 'Roll',
-          property: 'rollText',
-          type: 'string',
-          align: 'left'
-        }));
-        tableContent.columns.forEach(function (column) {
-          datatable.appendChild(this.createElement('paper-datatable-column', {
-            header: column.header,
-            property: column.property,
-            type: 'string',
-            align: 'left'
-          }));
-        }.bind(this));
-        datatable._queryAndSetColumns();
-      },
-      loadTableContent: function (event) {
-        var table = event.model.subtable || event.model.table;
-        if (this.parsedTables[table.url]) {
-          this.set('tableContent', this.parsedTables[table.url]);
-          return;
-        }
-        var tableLoader = this.$['table-load'];
-        this.loadingTable = table;
-        this.$['table-load'].url = table.url;
-        tableLoader.generateRequest();
-      },
-      parseTableContent: function (event) {
-        var table = {
-          columns: [],
-          entries: [],
-          maxRoll: 0
-        };
-        var lines = event.detail.response.split(/\n/);
-        var headersLine = lines.shift();
-        var headers = headersLine.split(/\t+/);
-        headers.forEach(function (header) {
-          if (header) {
-            table.columns.push({
-              header: header,
-              property: header
-            });
-          }
-        });
-        var roll = 0;
-        lines.forEach(function (entryLine) {
-          if (entryLine.length == 0) {
-            return;
-          }
-          // entryLine format:
-          // (#-#)?\tval1\tval2\t\t...
-          // entries may start with a number range indicating how likely they
-          // are to appear when choosing a random value from the list
-          //
-          // matches:
-          //   0: whole entry
-          //   1: first number, if any
-          //   2: second number, if any
-          //   3: rest of entry
-          var entry = this.entryRegexp.exec(entryLine);
-          if (!entry) {
-            return;
-          }
-          var row = {};
-          var range = entry[1];
-          var entries = entry[2].split(/\t+/);
-          if (range) {
-            row['rollText'] = range;
-            var fromTo = range.split('-');
-            if (fromTo[1]) {
-              var from = parseInt(fromTo[0], 10);
-              var to = parseInt(fromTo[1], 10);
-              row['roll'] = to - from + 1;
-              roll += to - from + 1;
-            } else {
-              row['roll'] = 1;
-              row['rollText'] = "" + ++roll;
-            }
-          } else {
-            row['roll'] = 1;
-            row['rollText'] = "" + ++roll;
-          }
-
-          var i = 0;
-          table.columns.forEach(function (column) {
-            row[column.property] = entries[i++];
-          }.bind(this));
-
-          table.entries.push(row);
-        }.bind(this));
-        table.maxRoll = roll;
-        this.parsedTables[this.loadingTable.url] = table;
-        this.set('tableContent', table);
+        this.$['table-card'].hidden = false;
+        this.set('table', event.model.subtable || event.model.table || event.model.item);
+        this.set('roll', null);
+        this.table.datatable.show(true);
       }
     });
   </script>

@@ -1,7 +1,0 @@
-Ability			Description
-Strength		Feeble, scrawny
-Dexterity		Clumsy, fumbling
-Constitution	Sickly, pale
-Intelligence	Dim-witted, slow
-Wisdom			Oblivious, absentminded
-Charisma		Dull, boring

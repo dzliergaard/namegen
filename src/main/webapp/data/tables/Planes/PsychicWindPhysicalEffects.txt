@@ -1,5 +1,0 @@
-		Location Effect
-1-8		Diverted; add 1d6 hours to travel time
-9-12	Blown off course; add 3d10 hours to travel time
-13-16	Lost; at the end of the travel time, characters arrive at a location other than the intended destination
-17-20	Sent through color pool to a random plane (roll on the Astral Color Pools table)

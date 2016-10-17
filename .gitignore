@@ -1,7 +1,10 @@
 *.iml
+.gradle
 .idea
 bower_components
 build
 node_modules
 out
+gradle.properties
+gradlew.bat
 src/main/webapp/resources/js/bower

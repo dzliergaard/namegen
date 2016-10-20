@@ -1,6 +1,5 @@
 package com.rptools.controller;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.util.JsonFormat;
 import com.rptools.table.RPTable;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Map;
 
 @CommonsLog
 @RestController("TablesController")
@@ -29,8 +26,8 @@ public class TablesController {
   }
 
   @RequestMapping(value = "list", method = RequestMethod.GET)
-  public Map<String, String> list() {
-    return ImmutableMap.of("data", serializeTable(tableReader.getTables()));
+  public String list() {
+    return serializeTable(tableReader.getTables());
   }
 
   private String serializeTable(RPTable table) {

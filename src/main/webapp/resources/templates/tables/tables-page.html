@@ -29,7 +29,7 @@
   </style>
   <template>
     <iron-ajax auto id="tables" url="/tables/list" on-response="processTablesResponse" handle-as="json"></iron-ajax>
-    <div class="layout horizontal start">
+    <div class$="card-content {{layoutClass(pageColumns)}} layout">
       <paper-dropdown-menu allow-outside-scroll class="flex" label="Choose Table" horizontal-align="left">
         <paper-menu class="dropdown-content">
           <template is="dom-repeat" items="{{tables}}">
@@ -97,7 +97,7 @@
         table: {
           type: Object
         },
-        columns: {
+        pageColumns: {
           type: Array,
           value: []
         },
@@ -115,6 +115,9 @@
 
         submenu.toggle();
         event.stopPropagation();
+      },
+      layoutClass: function (columns) {
+        return columns == 12 ? 'horizontal start' : 'vertical';
       },
       processTablesResponse: function (event) {
         this.set('tables', event.detail.response.tables);

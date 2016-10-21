@@ -32,7 +32,7 @@ public class TablesController {
 
   private String serializeTable(RPTable table) {
     try {
-      return JsonFormat.printer().omittingInsignificantWhitespace().print(table);
+      return JsonFormat.printer().print(table);
     } catch (InvalidProtocolBufferException e) {
       log.error("Exception serializing RPTable object " + table.getName(), e);
       return "";

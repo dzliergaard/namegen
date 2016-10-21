@@ -103,8 +103,8 @@
                      is-signed-in="{{isSignedIn}}"
                      saved-cities="{{userSavedContent.cities}}"
                      columns="{{columns}}"></city-page>
-          <party-page name="party" saved-parties="{{userSavedContent.parties}}"></party-page>
-          <tables-page id="tables-page" name="tables"></tables-page>
+          <party-page name="party" saved-parties="{{userSavedContent.parties}}" on-save="contentUpdated"></party-page>
+          <tables-page id="tables-page" name="tables" page-columns="{{columns}}"></tables-page>
         </iron-pages>
       </paper-header-panel>
     </paper-drawer-panel>

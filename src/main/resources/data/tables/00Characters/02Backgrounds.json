@@ -23,7 +23,7 @@
     "Skills": "Deception, Stealth",
     "Languages": "-",
     "Tools Proficiencies": "One type of gaming set, thieves' tools",
-    "Equipment": "A crowbar, a set of dark com m on clothes including a hood, and a belt pouch containing 15 gp."
+    "Equipment": "A crowbar, a set of dark common clothes including a hood, and a belt pouch containing 15 gp."
   }, {
     "Roll": 4.0,
     "weight": 1.0,
@@ -39,7 +39,7 @@
     "Skills": "Animal Handling, Survival",
     "Languages": "-",
     "Tools Proficiencies": "One type of artisan’s tools, vehicles (land)",
-    "Equipment": "A set of artisan’s tools (one of your choice), a shovel, an iron pot, a set of com m on clothes, and a belt pouch containing 10 gp."
+    "Equipment": "A set of artisan’s tools (one of your choice), a shovel, an iron pot, a set of common clothes, and a belt pouch containing 10 gp."
   }, {
     "Roll": 6.0,
     "weight": 1.0,
@@ -55,7 +55,7 @@
     "Skills": "Medicine, Religion",
     "Languages": "One of choice",
     "Tools Proficiencies": "Herbalism kit",
-    "Equipment": "A scroll case stuffed full of notes from your studies or prayers, a winter blanket, a set of com m on clothes, an herbalism kit, and 5 gp."
+    "Equipment": "A scroll case stuffed full of notes from your studies or prayers, a winter blanket, a set of common clothes, an herbalism kit, and 5 gp."
   }, {
     "Roll": 8.0,
     "weight": 1.0,
@@ -79,7 +79,7 @@
     "Skills": "Arcana, History",
     "Languages": "Two of choice",
     "Tools Proficiencies": "-",
-    "Equipment": "A bottle of black ink, a quill, a small knife, a letter from a dead colleague posing a question you have not yet been able to answer, a set of com m on clothes, and a belt pouch containing 10 gp."
+    "Equipment": "A bottle of black ink, a quill, a small knife, a letter from a dead colleague posing a question you have not yet been able to answer, a set of common clothes, and a belt pouch containing 10 gp."
   }, {
     "Roll": 11.0,
     "weight": 1.0,
@@ -87,7 +87,7 @@
     "Skills": "Athletics, Perception",
     "Languages": "-",
     "Tools Proficiencies": "Navigator’s tools, vehicles (water)",
-    "Equipment": "A belaying pin (club), 50 feet of silk rope, a lucky charm such as a rabbit foot or a small stone with a hole in the center (or you may roll for a random trinket on the Trinkets table in chapter 5), a set of com m on clothes, and a belt pouch containing 10 gp."
+    "Equipment": "A belaying pin (club), 50 feet of silk rope, a lucky charm such as a rabbit foot or a small stone with a hole in the center (or you may roll for a random trinket on the Trinkets table in chapter 5), a set of common clothes, and a belt pouch containing 10 gp."
   }, {
     "Roll": 12.0,
     "weight": 1.0,
@@ -95,7 +95,7 @@
     "Skills": "Athletics, Intimidation",
     "Languages": "-",
     "Tools Proficiencies": "One type of gaming set, vehicles (land)",
-    "Equipment": "An insignia of rank, a trophy taken from a fallen enemy (a dagger, broken blade, or piece of a banner), a set of bone dice or deck of cards, a set of com m on clothes, and a belt pouch containing 10 gp."
+    "Equipment": "An insignia of rank, a trophy taken from a fallen enemy (a dagger, broken blade, or piece of a banner), a set of bone dice or deck of cards, a set of common clothes, and a belt pouch containing 10 gp."
   }, {
     "Roll": 13.0,
     "weight": 1.0,
@@ -103,7 +103,7 @@
     "Skills": "Sleight of Hand, Stealth",
     "Languages": "-",
     "Tools Proficiencies": "Disguise kit, thieves’ tools",
-    "Equipment": "A small knife, a map of the city you grew up in, a pet mouse, a token to remember your parents by, a set of com m on clothes, and a belt pouch containing 10 gp."
+    "Equipment": "A small knife, a map of the city you grew up in, a pet mouse, a token to remember your parents by, a set of common clothes, and a belt pouch containing 10 gp."
   }],
   "maxRoll": 13,
   "name": "Backgrounds"

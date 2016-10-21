@@ -21,6 +21,7 @@
   <script>
     Polymer({
       is: 'rptools-table',
+      behaviors: [rptools.TableRollBehavior],
       properties: {
         roll: Number,
         table: {
@@ -31,15 +32,8 @@
       ready: function () {
         this.table.datatable = this;
       },
-      selectRandom: function (event) {
-        this.roll = Math.floor(Math.random() * this.table.maxRoll);
-        var ind = this.roll;
-        var i = 0;
-        var entry;
-        while(ind >= 0) {
-          entry = this.table.entries[i++];
-          ind -= entry.weight;
-        }
+      selectRandom: function () {
+        var entry = this.getRandomEntry(this.table);
         this.$.table.select(entry);
       },
       show: function (show) {

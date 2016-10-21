@@ -12,6 +12,7 @@
 <link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
 <link rel="import" href="/bower/iron-icon/iron-icon.html">
 <link rel="import" href="/bower/iron-icons/iron-icons.html">
+<link rel="import" href="/bower/iron-icons/places-icons.html">
 <link rel="import" href="/bower/iron-icons/social-icons.html">
 <link rel="import" href="/bower/iron-media-query/iron-media-query.html">
 <link rel="import" href="/bower/iron-pages/iron-pages.html">
@@ -20,6 +21,7 @@
 <link rel="import" href="/bower/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="/bower/paper-item/paper-icon-item.html">
 <link rel="import" href="/bower/paper-menu/paper-menu.html"/>
+<link rel="import" href="/bower/paper-menu/paper-submenu.html"/>
 <link rel="import" href="/bower/paper-toast/paper-toast.html">
 <link rel="import" href="/bower/paper-toolbar/paper-toolbar.html">
 
@@ -71,20 +73,33 @@
           <google-signin client-id="{{clientId}}" scopes="{{scopes}}"></google-signin>
         </paper-toolbar>
         <paper-menu selected="{{location.page}}" attr-for-selected="name">
-          <paper-icon-item name="name" on-tap="closeDrawer">
-            <iron-icon item-icon icon="social:person"></iron-icon>
-            Name Generator
-          </paper-icon-item>
-          <paper-icon-item name="city" on-tap="closeDrawer">
-            <iron-icon item-icon icon="social:location-city"></iron-icon>
-            City Generator
-          </paper-icon-item>
+
+          <paper-submenu>
+            <paper-icon-item class="menu-trigger">
+              <iron-icon item-icon icon="icons:add-circle-outline"></iron-icon>
+              Generators
+            </paper-icon-item>
+            <paper-menu class="menu-content" selected="{{location.page}}" attr-for-selected="name">
+              <paper-icon-item name="name">
+                <iron-icon item-icon icon="social:person"></iron-icon>
+                Name
+              </paper-icon-item>
+              <paper-icon-item name="city" on-tap="closeDrawer">
+                <iron-icon item-icon icon="social:location-city"></iron-icon>
+                City
+              </paper-icon-item>
+              <!--<paper-icon-item name="dungeon" on-tap="closeDrawer">-->
+                <!--<iron-icon item-icon icon="icons:dashboard"></iron-icon>-->
+                <!--Dungeon-->
+              <!--</paper-icon-item>-->
+            </paper-menu>
+          </paper-submenu>
           <paper-icon-item name="party" on-tap="closeDrawer">
             <iron-icon item-icon icon="social:group"></iron-icon>
             Party Tracker
           </paper-icon-item>
           <paper-icon-item name="tables" on-tap="closeDrawer">
-            <iron-icon item-icon icon="icons:list"></iron-icon>
+            <iron-icon item-icon icon="places:casino"></iron-icon>
             Tables
           </paper-icon-item>
         </paper-menu>
@@ -103,8 +118,12 @@
                      is-signed-in="{{isSignedIn}}"
                      saved-cities="{{userSavedContent.cities}}"
                      columns="{{columns}}"></city-page>
-          <party-page name="party" saved-parties="{{userSavedContent.parties}}" on-save="contentUpdated"></party-page>
-          <tables-page id="tables-page" name="tables" page-columns="{{columns}}"></tables-page>
+          <dungeon-page name="dungeon" is-signed-in="{{isSignedIn}}"
+                        tables="{{tables}}"></dungeon-page>
+          <party-page name="party" saved-parties="{{userSavedContent.parties}}"
+                      on-save="contentUpdated"></party-page>
+          <tables-page id="tables-page" name="tables" page-columns="{{columns}}"
+                       tables="{{tables}}"></tables-page>
         </iron-pages>
       </paper-header-panel>
     </paper-drawer-panel>
@@ -142,6 +161,10 @@
         scopes: {
           type: String,
           value: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata'
+        },
+        tables: {
+          type: Array,
+          value: []
         }
       },
       listeners: {
@@ -159,6 +182,7 @@
         if (this.$.gapi.api && !this.$.drive.api) {
           this.$.drive._loadClient();
         }
+
       },
       get updateRequestParams() {
         return {
@@ -184,6 +208,8 @@
             return 'Name Generator';
           case 'city':
             return 'City Generator';
+          case 'dungeon':
+            return 'Dungeon Generator';
           case 'party':
             return 'Party Tracker';
           case 'tables':

@@ -1,0 +1,16 @@
+<script>
+  window.rptools = window.rptools || {};
+  rptools.TableRollBehavior = {
+    getRandomEntry: function (table) {
+      this.roll = Math.floor(Math.random() * table.maxRoll);
+      var ind = this.roll;
+      var i = 0;
+      var entry;
+      while(ind >= 0) {
+        entry = table.entries[i++];
+        ind -= entry.weight;
+      }
+      return entry;
+    }
+  };
+</script>

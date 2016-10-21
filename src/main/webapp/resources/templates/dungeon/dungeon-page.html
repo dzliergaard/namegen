@@ -1,0 +1,52 @@
+<link rel="import" href="/bower/paper-button/paper-button.html">
+
+
+<dom-module id="dungeon-page">
+  <template>
+    <paper-button on-tap="generateDungeon"></paper-button>
+    <paper-card>
+
+    </paper-card>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'dungeon-page',
+      behaviors: [rptools.TableRollBehavior],
+      properties: {
+        dungeonTables: {
+          type: Object,
+          value: {}
+        },
+        isSignedIn: {
+          type: Boolean,
+          value: false
+        },
+        tables: {
+          type: Array,
+          value: [],
+          observer: 'getDungeonTables'
+        }
+      },
+      generateDungeon: function(event) {
+
+      },
+      getDungeonTables: function(tables) {
+        for (var i = 0; i < tables.length; i++) {
+          var table = tables[i];
+          if (table.name == 'Dungeons') {
+            for (var j = 0; j < table.tables.length; j++) {
+              var dungeonTable = table.tables[j];
+              this.dungeonTables[dungeonTable.name] = dungeonTable;
+            }
+            return true;
+          }
+          if (table.isParent) {
+            return this.getDungeonTables(table.tables);
+          }
+        }
+        return false;
+      }
+    })
+  </script>
+</dom-module>

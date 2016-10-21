@@ -152,6 +152,7 @@
         if (change.base != change.value) {
           if (this.autosave) {
             this.fire('save-party');
+            this.unsaved = false;
           } else {
             this.unsaved = true;
           }

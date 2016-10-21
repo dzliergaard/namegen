@@ -18,13 +18,14 @@
 
 package com.rptools.controller;
 
+import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.util.JsonFormat;
 import com.rptools.city.City;
-import com.rptools.city.CityGen;
 import com.rptools.city.City.Species;
+import com.rptools.city.CityGen;
 import java.util.Optional;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,36 +56,21 @@ public class CityController {
   }
 
   @RequestMapping(value = "generate", method = RequestMethod.GET, headers = "Accept=application/json")
-  public
-  @ResponseBody
-  City generate(
+  public @ResponseBody String generate(
       @RequestParam(required = false) Double size,
       @RequestParam(required = false) Double diversity,
-      @RequestParam(required = false) Species race) {
+      @RequestParam(required = false) Species race) throws InvalidProtocolBufferException {
     size = Math.pow(size * size, 1.1);
 
     diversity = Optional.ofNullable(diversity).orElse(rand.nextInt(99) + 1.0);
     diversity = .1 + (.3 / 100) * diversity;
 
-    return cityGen.generateCity(size, diversity, Optional.ofNullable(race).orElse(randSpecies()));
+    return JsonFormat.printer().omittingInsignificantWhitespace()
+        .print(cityGen.generateCity(size, diversity, race));
   }
 
   @RequestMapping(value = "races", method = RequestMethod.GET)
   public Species[] getRaces() {
     return Species.values();
-  }
-
-  @RequestMapping(value = "delete", method = RequestMethod.POST)
-  public void delete(@RequestBody City city) {
-  }
-
-  @RequestMapping(value = "save", method = RequestMethod.POST)
-  public @ResponseBody City save(@RequestBody(required = false) City city) {
-    return null;
-  }
-
-  private Species randSpecies() {
-    int ind = rand.nextInt(Species.values().length);
-    return Species.values()[ind];
   }
 }

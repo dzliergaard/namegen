@@ -32,7 +32,7 @@
     <div class="layout horizontal start">
       <paper-dropdown-menu allow-outside-scroll class="flex" label="Choose Table" horizontal-align="left">
         <paper-menu class="dropdown-content">
-          <template is="dom-repeat" items="{{tables}}" sort="sortTables">
+          <template is="dom-repeat" items="{{tables}}">
             <template is="dom-if" if="{{!item.isParent}}">
               <paper-item on-tap="selectTable">{{item.name}}</paper-item>
             </template>
@@ -45,7 +45,7 @@
                   </span>
                 </paper-item>
                 <paper-menu class="menu-content">
-                  <template is="dom-repeat" items="{{item.tables}}" sort="sortTables">
+                  <template is="dom-repeat" items="{{item.tables}}">
                     <template is="dom-if" if="{{!item.isParent}}">
                       <paper-item on-tap="selectTable">{{item.name}}</paper-item>
                     </template>
@@ -58,7 +58,7 @@
                           </span>
                         </paper-item>
                         <paper-menu class="menu-content">
-                          <template is="dom-repeat" items="{{item.tables}}" sort="sortTables">
+                          <template is="dom-repeat" items="{{item.tables}}">
                             <paper-item on-tap="selectTable">{{item.name}}</paper-item>
                           </template>
                         </paper-menu>
@@ -133,21 +133,6 @@
         this.set('table', event.model.subtable || event.model.table || event.model.item);
         this.set('roll', null);
         this.table.datatable.show(true);
-      },
-      sortTables: function(tableA, tableB) {
-        if (tableA.isParent && !tableB.isParent) {
-          return 1;
-        }
-        if (tableB.isParent && !tableA.isParent) {
-          return -1;
-        }
-        if (tableA.name > tableB.name) {
-          return 1;
-        }
-        if (tableB.name > tableA.name) {
-          return -1;
-        }
-        return 0;
       }
     });
   </script>

@@ -1,0 +1,54 @@
+{
+  "columns": ["History"],
+  "entries": [{
+    "Roll": "1-3",
+    "weight": 3.0,
+    "History": "Abandoned by creators"
+  }, {
+    "Roll": "4",
+    "weight": 1.0,
+    "History": "Abandoned due to plague"
+  }, {
+    "Roll": "5-8",
+    "weight": 4.0,
+    "History": "Conquered by invaders"
+  }, {
+    "Roll": "9-10",
+    "weight": 2.0,
+    "History": "Creators destroyed by attacking raiders"
+  }, {
+    "Roll": "11",
+    "weight": 1.0,
+    "History": "Creators destroyed by discovery made within the site"
+  }, {
+    "Roll": "12",
+    "weight": 1.0,
+    "History": "Creators destroyed by internal conflict"
+  }, {
+    "Roll": "13",
+    "weight": 1.0,
+    "History": "Creators destroyed by magical catastrophe"
+  }, {
+    "Roll": "14-15",
+    "weight": 2.0,
+    "History": "Creators destroyed by natural disaster"
+  }, {
+    "Roll": "16",
+    "weight": 1.0,
+    "History": "Location cursed by the gods and shunned"
+  }, {
+    "Roll": "17-18",
+    "weight": 2.0,
+    "History": "Original creator still in control"
+  }, {
+    "Roll": "19",
+    "weight": 1.0,
+    "History": "Overrun by planar creatures"
+  }, {
+    "Roll": "20",
+    "weight": 1.0,
+    "History": "Site of a great miracle"
+  }],
+  "maxRoll": 20,
+  "name": "History"
+}

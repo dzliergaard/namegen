@@ -1,5 +1,0 @@
-Hazard		Saving throw		Effect
-Brown Mold	Constitution DC 12	22 (4d10) cold damage on failed save, half on success.
-Green Slime	Dexterity DC 10		5 (1d10) acid damage on failed save.
-Webs		Dexterity DC 12		Restrained.
-Yellow Mold	Constitution DC 15	11 (2d10) poison damage and poisoned for 1 minute, taking 5 (1d10) damage each turn.

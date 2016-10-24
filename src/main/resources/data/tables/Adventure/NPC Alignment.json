@@ -1,0 +1,42 @@
+{
+  "columns": ["Alignment"],
+  "entries": [{
+    "Roll": "1-2",
+    "weight": 2.0,
+    "Alignment": "Lawful good"
+  }, {
+    "Roll": "3-4",
+    "weight": 2.0,
+    "Alignment": "Neutral good"
+  }, {
+    "Roll": "5-6",
+    "weight": 2.0,
+    "Alignment": "Chaotic good"
+  }, {
+    "Roll": "7-9",
+    "weight": 3.0,
+    "Alignment": "Lawful neutral"
+  }, {
+    "Roll": "10-11",
+    "weight": 2.0,
+    "Alignment": "Neutral"
+  }, {
+    "Roll": "12",
+    "weight": 1.0,
+    "Alignment": "Chaotic neutral"
+  }, {
+    "Roll": "13-15",
+    "weight": 3.0,
+    "Alignment": "Lawful evil"
+  }, {
+    "Roll": "16-18",
+    "weight": 3.0,
+    "Alignment": "Neutral evil"
+  }, {
+    "Roll": "19-20",
+    "weight": 2.0,
+    "Alignment": "Chaotic evil"
+  }],
+  "maxRoll": 20,
+  "name": "NPC Alignment"
+}

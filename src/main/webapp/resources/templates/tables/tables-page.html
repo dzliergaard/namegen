@@ -28,7 +28,6 @@
     }
   </style>
   <template>
-    <iron-ajax auto id="tables" url="/tables/list" on-response="processTablesResponse" handle-as="json"></iron-ajax>
     <div class$="card-content {{layoutClass(pageColumns)}} layout">
       <paper-dropdown-menu allow-outside-scroll class="flex" label="Choose Table" horizontal-align="left">
         <paper-menu class="dropdown-content">
@@ -101,10 +100,7 @@
           type: Array,
           value: []
         },
-        tables: {
-          type: Array,
-          value: []
-        }
+        tables: Array
       },
       // when selecting a subcategory, toggle the submenu but keep the dropdown open
       keepDropdownOpen: function (event) {
@@ -118,9 +114,6 @@
       },
       layoutClass: function (columns) {
         return columns == 12 ? 'horizontal start' : 'vertical';
-      },
-      processTablesResponse: function (event) {
-        this.set('tables', event.detail.response.tables);
       },
       selectRandom: function (event) {
         this.table.datatable.selectRandom(true);

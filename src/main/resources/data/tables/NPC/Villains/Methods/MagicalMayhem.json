@@ -1,0 +1,38 @@
+{
+  "columns": ["Method"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Method": "Hauntings"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Method": "Illusions"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Method": "Infernal Barbains"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Method": "Mind control"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Method": "Petrification"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Method": "Raising or animating the dead"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Method": "Summoning monsters"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Method": "Weather control"
+  }],
+  "maxRoll": 8,
+  "name": "Magical Mayhem"
+}

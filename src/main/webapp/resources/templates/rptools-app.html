@@ -1,9 +1,10 @@
+<link rel="import" href="./behavior/google-scope.html">
 <link rel="import" href="./city/city-page.html">
+<link rel="import" href="./dungeon/dungeon-page.html">
 <link rel="import" href="./name/name-page.html">
 <link rel="import" href="./party/party-page.html">
 <link rel="import" href="./tables/tables-page.html">
 <link rel="import" href="./util/variable-layout.html">
-<link rel="import" href="./behavior/google-scope.html">
 <link rel="import" href="/bower/app-route/app-location.html">
 <link rel="import" href="/bower/app-route/app-route.html">
 <link rel="import" href="/bower/google-apis/google-client-loader.html">
@@ -67,6 +68,8 @@
                           version="v3"
                           on-google-api-load="downloadAppDataFile"></google-client-loader>
     <google-js-api id="gapi"></google-js-api>
+    <iron-ajax auto id="tables" url="/tables/list" on-response="processTablesResponse"
+               handle-as="json"></iron-ajax>
     <paper-drawer-panel id="drawer" responsive-width="840px">
       <paper-header-panel drawer mode="seamed">
         <paper-toolbar>
@@ -88,10 +91,10 @@
                 <iron-icon item-icon icon="social:location-city"></iron-icon>
                 City
               </paper-icon-item>
-              <!--<paper-icon-item name="dungeon" on-tap="closeDrawer">-->
-                <!--<iron-icon item-icon icon="icons:dashboard"></iron-icon>-->
-                <!--Dungeon-->
-              <!--</paper-icon-item>-->
+              <paper-icon-item name="dungeon" on-tap="closeDrawer">
+                <iron-icon item-icon icon="icons:dashboard"></iron-icon>
+                Dungeon
+              </paper-icon-item>
             </paper-menu>
           </paper-submenu>
           <paper-icon-item name="party" on-tap="closeDrawer">
@@ -119,7 +122,7 @@
                      saved-cities="{{userSavedContent.cities}}"
                      columns="{{columns}}"></city-page>
           <dungeon-page name="dungeon" is-signed-in="{{isSignedIn}}"
-                        tables="{{tables}}"></dungeon-page>
+                        tables="{{tables}}" columns="{{columns}}"></dungeon-page>
           <party-page name="party" saved-parties="{{userSavedContent.parties}}"
                       on-save="contentUpdated"></party-page>
           <tables-page id="tables-page" name="tables" page-columns="{{columns}}"
@@ -289,6 +292,9 @@
           }
           this.listening = true;
         }
+      },
+      processTablesResponse: function (event) {
+        this.set('tables', event.detail.response.tables);
       }
     });
   </script>

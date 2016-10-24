@@ -1,0 +1,86 @@
+{
+  "columns": ["Location"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Location": "Among the branches of a tree"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Location": "Around a geyser"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Location": "Behind a waterfall"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Location": "Buried in an avalanche"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Location": "Buried in a sand storm"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Location": "Buried in volcanic ash"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Location": "Castle or structure sunken in a swamp"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Location": "Castle or structure at the bottom of a sinkhole"
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Location": "Floating on the sea"
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Location": "In a meteorite"
+  }, {
+    "Roll": 11.0,
+    "weight": 1.0,
+    "Location": "On a demiplane or in a pocket dimension"
+  }, {
+    "Roll": 12.0,
+    "weight": 1.0,
+    "Location": "In an area devastated by a magical catastrophe"
+  }, {
+    "Roll": 13.0,
+    "weight": 1.0,
+    "Location": "On a cloud"
+  }, {
+    "Roll": 14.0,
+    "weight": 1.0,
+    "Location": "In the Feywild"
+  }, {
+    "Roll": 15.0,
+    "weight": 1.0,
+    "Location": "In the Shadowfel1"
+  }, {
+    "Roll": 16.0,
+    "weight": 1.0,
+    "Location": "On an island in an underground sea"
+  }, {
+    "Roll": 17.0,
+    "weight": 1.0,
+    "Location": "In a volcano"
+  }, {
+    "Roll": 18.0,
+    "weight": 1.0,
+    "Location": "On the back of a Gargantuan living creature"
+  }, {
+    "Roll": 19.0,
+    "weight": 1.0,
+    "Location": "Sealed inside a magical dome of force"
+  }, {
+    "Roll": 20.0,
+    "weight": 1.0,
+    "Location": "Inside a Mordenkainen's magnificent mansion"
+  }],
+  "maxRoll": 20,
+  "name": "Exotic Locations"
+}

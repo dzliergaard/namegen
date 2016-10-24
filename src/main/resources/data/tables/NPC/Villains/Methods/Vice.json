@@ -1,0 +1,22 @@
+{
+  "columns": ["Method"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Method": "Adultery"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Method": "Drugs or alcohol"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Method": "Gambling"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Method": "Seduction"
+  }],
+  "maxRoll": 4,
+  "name": "Vice"
+}

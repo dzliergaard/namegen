@@ -73,7 +73,7 @@
           value: false
         },
         tables: {
-          type: Array,
+          type: Object,
           observer: 'getDungeonTables'
         }
       },
@@ -97,14 +97,14 @@
         if (!tables) {
           return false;
         }
-        for (var i = 0; i < tables.length; i++) {
-          var table = tables[i];
+        for (var i = 0; i < tables.tablesArray.length; i++) {
+          var table = tables.tablesArray[i];
           if (table.name == 'Dungeons') {
-            this.set('dungeonTables', table.tables);
+            this.set('dungeonTables', table.tablesArray);
             return true;
           }
-          if (table.tables) {
-            if (this.getDungeonTables(table.tables)) {
+          if (table.tablesArray) {
+            if (this.getDungeonTables(table)) {
               return true;
             }
           }
@@ -121,7 +121,7 @@
         if (!item) {
           this.set('formValues.' + table.name, null);
         }
-        this.set('formValues.' + table.name, item[table.columns[0]]);
+        this.set(['formValues', table.name], item[table.columns[0]]);
       },
       selectedIndex: function (table, dungeon) {
         var column = table.columns[0];

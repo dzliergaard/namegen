@@ -4,15 +4,21 @@
 <dom-module is="rptools-table">
   <template>
     <div class="flex">
-      <template is="dom-if" if="{{table.isParent}}">
-        <template is="dom-repeat" items="{{table.tables}}" index-as="subindex">
+      <template is="dom-if" if="{{table.tablesArray}}">
+        <template is="dom-repeat" items="{{table.tablesArray}}"
+                  index-as="subindex">
           <rptools-table table="{{item}}" roll="{{roll}}"></rptools-table>
         </template>
       </template>
       <paper-datatable hidden id="table" data="{{table.entries}}">
-        <paper-datatable-column id="roll-column" header="Roll" property="Roll"></paper-datatable-column>
+        <paper-datatable-column id="roll-column" header="Roll"
+                                property="Roll"></paper-datatable-column>
         <template is="dom-repeat" items="{{table.columns}}" as="column">
-          <paper-datatable-column header="{{column}}" property="{{column}}"></paper-datatable-column>
+          <paper-datatable-column header="{{column}}" property="{{column}}">
+            <template>
+              {{parseValue(value)}}
+            </template>
+          </paper-datatable-column>
         </template>
       </paper-datatable>
     </div>
@@ -28,6 +34,19 @@
           type: Object,
           value: {}
         }
+      },
+      parseValue: function (value) {
+        if (typeof value == 'string') {
+          return value;
+        }
+        var rolls = value.num_rolls || 1;
+        var rollText = rolls == 1 ? 'Roll' : 'Roll ' + rolls + ' times';
+        if (value.table_path == 'this') {
+          return rollText + ', ignoring further rerolls.';
+        }
+        var table_path = value.table_path.substring(
+            value.table_path.lastIndexOf('/') + 1);
+        return rollText + ' on ' + table_path + ' table.';
       },
       ready: function () {
         this.table.datatable = this;

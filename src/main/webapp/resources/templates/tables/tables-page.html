@@ -31,11 +31,11 @@
     <div class$="card-content {{layoutClass(pageColumns)}} layout">
       <paper-dropdown-menu allow-outside-scroll class="flex" label="Choose Table" horizontal-align="left">
         <paper-menu class="dropdown-content">
-          <template is="dom-repeat" items="{{tables}}">
-            <template is="dom-if" if="{{!item.isParent}}">
+          <template is="dom-repeat" items="{{tables.tablesArray}}">
+            <template is="dom-if" if="{{!item.tablesArray}}">
               <paper-item on-tap="selectTable">{{item.name}}</paper-item>
             </template>
-            <template is="dom-if" if="{{item.isParent}}">
+            <template is="dom-if" if="{{item.tablesArray}}">
               <paper-submenu>
                 <paper-item class="menu-trigger" on-tap="keepDropdownOpen">
                   <span class="horizontal layout justified">
@@ -44,11 +44,11 @@
                   </span>
                 </paper-item>
                 <paper-menu class="menu-content">
-                  <template is="dom-repeat" items="{{item.tables}}">
-                    <template is="dom-if" if="{{!item.isParent}}">
+                  <template is="dom-repeat" items="{{item.tablesArray}}">
+                    <template is="dom-if" if="{{!item.tablesArray}}">
                       <paper-item on-tap="selectTable">{{item.name}}</paper-item>
                     </template>
-                    <template is="dom-if" if="{{item.isParent}}">
+                    <template is="dom-if" if="{{item.tablesArray}}">
                       <paper-submenu>
                         <paper-item class="menu-trigger" on-tap="keepDropdownOpen">
                           <span class="horizontal layout justified">
@@ -57,7 +57,7 @@
                           </span>
                         </paper-item>
                         <paper-menu class="menu-content">
-                          <template is="dom-repeat" items="{{item.tables}}">
+                          <template is="dom-repeat" items="{{item.tablesArray}}">
                             <paper-item on-tap="selectTable">{{item.name}}</paper-item>
                           </template>
                         </paper-menu>
@@ -80,7 +80,7 @@
             </div>
           </div>
           <div id="card-content" class="card-content">
-            <template is="dom-repeat" items="{{tables}}">
+            <template is="dom-repeat" items="{{tables.tablesArray}}">
               <rptools-table table="{{item}}" roll="{{roll}}"></rptools-table>
             </template>
           </div>
@@ -117,9 +117,6 @@
       },
       selectRandom: function (event) {
         this.table.datatable.selectRandom(true);
-      },
-      getTable: function (index, tables) {
-        return this.tables[index];
       },
       selectTable: function (event) {
         if (this.table) {

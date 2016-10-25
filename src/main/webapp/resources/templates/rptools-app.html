@@ -91,10 +91,10 @@
                 <iron-icon item-icon icon="social:location-city"></iron-icon>
                 City
               </paper-icon-item>
-              <paper-icon-item name="dungeon" on-tap="closeDrawer">
-                <iron-icon item-icon icon="icons:dashboard"></iron-icon>
-                Dungeon
-              </paper-icon-item>
+              <!--<paper-icon-item name="dungeon" on-tap="closeDrawer">-->
+                <!--<iron-icon item-icon icon="icons:dashboard"></iron-icon>-->
+                <!--Dungeon-->
+              <!--</paper-icon-item>-->
             </paper-menu>
           </paper-submenu>
           <paper-icon-item name="party" on-tap="closeDrawer">
@@ -166,8 +166,7 @@
           value: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata'
         },
         tables: {
-          type: Array,
-          value: []
+          type: Object
         }
       },
       listeners: {
@@ -293,8 +292,18 @@
           this.listening = true;
         }
       },
+      tablesToArray: function(tables) {
+        if (!tables.tables) {
+          return tables;
+        }
+        tables.tablesArray = Object.keys(tables.tables).map(function(key){
+          this.tablesToArray(tables.tables[key]);
+          return tables.tables[key];
+        }.bind(this));
+      },
       processTablesResponse: function (event) {
-        this.set('tables', event.detail.response.tables);
+        this.tablesToArray(event.detail.response);
+        this.set('tables', event.detail.response);
       }
     });
   </script>

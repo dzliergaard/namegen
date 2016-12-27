@@ -1,3 +1,3 @@
 [submodule "rptools"]
 	path = rptools
-	url = https://github.com/dzliergaard/rptools.git
+	url = git://github.com/dzliergaard/rptools.git

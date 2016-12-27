@@ -111,6 +111,9 @@
 
         submenu.toggle();
         event.stopPropagation();
+        if (event.model.item.entries) {
+          this.selectTable(event);
+        }
       },
       layoutClass: function (columns) {
         return columns == 12 ? 'horizontal start' : 'vertical';
@@ -123,7 +126,7 @@
           this.table.datatable.show(false);
         }
         this.$['table-card'].hidden = false;
-        this.set('table', event.model.subtable || event.model.table || event.model.item);
+        this.set('table', event.model.item);
         this.set('roll', null);
         this.table.datatable.show(true);
       }

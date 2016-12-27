@@ -1,0 +1,136 @@
+<link rel="import" href="../behavior/table-roll-behavior.html">
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="/bower/paper-button/paper-button.html">
+<link rel="import" href="/bower/paper-card/paper-card.html">
+<link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="/bower/paper-item/paper-item.html">
+<link rel="import" href="/bower/paper-listbox/paper-listbox.html">
+
+<dom-module id="dungeon-page">
+  <style include="iron-flex iron-flex-alignment">
+    :host ::content .title-text {
+      --paper-input-container-input: {
+        font-size: 24px;
+      };
+    }
+  </style>
+  <template>
+    <div class$="{{layoutClass(columns)}} layout start">
+      <paper-card class="vertical layout start" heading="Options">
+        <paper-button on-tap="generateDungeon">Generate</paper-button>
+        <template is="dom-repeat" items="{{dungeonTables}}" as="table">
+          <paper-dropdown-menu label="{{table.name}}" selected="0">
+            <paper-listbox class="dropdown-content">
+              <paper-item>Random</paper-item>
+              <template is="dom-repeat" items="{{table.entries}}">
+                <paper-item on-tap="select(table, item)">{{getItemLabel(table, item)}}
+                </paper-item>
+              </template>
+            </paper-listbox>
+          </paper-dropdown-menu>
+        </template>
+      </paper-card>
+      <paper-card id="dungeon" hidden class="layout vertical start">
+        <div class="header paper-card">
+          <div class="title-text paper-card">
+            <editing-item class="flex" item="{{dungeon.name}}"></editing-item>
+          </div>
+          <div class="card-content vertical layout">
+            <template is="dom-repeat" items="{{dungeonTables}}" as="table">
+              <paper-dropdown-menu label="{{table.name}}">
+                <paper-listbox class="dropdown-content">
+                  <paper-item>Random</paper-item>
+                  <template is="dom-repeat" items="{{table.entries}}"
+                            selected="{{selectedIndex(table, dungeon)}}">
+                    <paper-item>{{getItemLabel(table, item)}}</paper-item>
+                  </template>
+                </paper-listbox>
+              </paper-dropdown-menu>
+            </template>
+          </div>
+        </div>
+      </paper-card>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'dungeon-page',
+      behaviors: [rptools.TableRollBehavior],
+      properties: {
+        dungeon: Object,
+        columns: Number,
+        dungeonTables: {
+          type: Array,
+          value: []
+        },
+        formValues: {
+          type: Object,
+          value: {}
+        },
+        isSignedIn: {
+          type: Boolean,
+          value: false
+        },
+        tables: {
+          type: Object,
+          observer: 'getDungeonTables'
+        }
+      },
+      generateDungeon: function (event) {
+        var dungeon = {
+          name: "Generated Dungeon"
+        };
+        this.$.dungeon.hidden = false;
+        this.dungeonTables.forEach(function (table) {
+          var column = table.columns[0];
+          var value = this.formValues[column];
+          if (!value) {
+            var entry = this.getRandomEntry(table);
+            value = entry[column];
+          }
+          dungeon[column] = value;
+        }.bind(this));
+        this.set('dungeon', dungeon);
+      },
+      getDungeonTables: function (tables) {
+        if (!tables) {
+          return false;
+        }
+        for (var i = 0; i < tables.tablesArray.length; i++) {
+          var table = tables.tablesArray[i];
+          if (table.name == 'Dungeons') {
+            this.set('dungeonTables', table.tablesArray);
+            return true;
+          }
+          if (table.tablesArray) {
+            if (this.getDungeonTables(table)) {
+              return true;
+            }
+          }
+        }
+        return false;
+      },
+      getItemLabel: function (table, item) {
+        return item[table.columns[0]];
+      },
+      layoutClass: function (columns) {
+        return columns == 12 ? 'horizontal' : 'vertical';
+      },
+      select: function (table, item) {
+        if (!item) {
+          this.set('formValues.' + table.name, null);
+        }
+        this.set(['formValues', table.name], item[table.columns[0]]);
+      },
+      selectedIndex: function (table, dungeon) {
+        var column = table.columns[0];
+        for (var i = 0; i < table.entries.length; i++) {
+          if (table.entries[i][column] == dungeon[column]) {
+            return i;
+          }
+        }
+      }
+    })
+  </script>
+</dom-module>

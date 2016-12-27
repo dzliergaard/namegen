@@ -1,0 +1,66 @@
+{
+  "columns": ["Monument"],
+  "entries": [{
+    "Roll": "1",
+    "weight": 1.0,
+    "Monument": "Sealed burial mound or pyramid"
+  }, {
+    "Roll": "2",
+    "weight": 1.0,
+    "Monument": "Plundered burial mound or pyramid"
+  }, {
+    "Roll": "3",
+    "weight": 1.0,
+    "Monument": "Faces carved into a mountainside or cliff"
+  }, {
+    "Roll": "4",
+    "weight": 1.0,
+    "Monument": "Giant statues carved out of a mountainside or cliff"
+  }, {
+    "Roll": "5-6",
+    "weight": 2.0,
+    "Monument": "Intact obelisk etched with a warning, historical lore, dedication, or religious iconography"
+  }, {
+    "Roll": "7-8",
+    "weight": 2.0,
+    "Monument": "Ruined or toppled obelisk"
+  }, {
+    "Roll": "9-10",
+    "weight": 2.0,
+    "Monument": "Intact statue of a person or deity"
+  }, {
+    "Roll": "11-13",
+    "weight": 3.0,
+    "Monument": "Ruined or toppled statue of a person or deity"
+  }, {
+    "Roll": "14",
+    "weight": 1.0,
+    "Monument": "Great stone wall, intact, with tower fortifications"
+  }, {
+    "Roll": "15",
+    "weight": 1.0,
+    "Monument": "Great stone wall in ruins"
+  }, {
+    "Roll": "16",
+    "weight": 1.0,
+    "Monument": "Great stone arch spaced at one-mile intervals"
+  }, {
+    "Roll": "17",
+    "weight": 1.0,
+    "Monument": "Fountain"
+  }, {
+    "Roll": "18",
+    "weight": 1.0,
+    "Monument": "Intact circle of standing stones"
+  }, {
+    "Roll": "19",
+    "weight": 1.0,
+    "Monument": "Ruined or toppled circle of standing stones"
+  }, {
+    "Roll": "20",
+    "weight": 1.0,
+    "Monument": "Totem pole"
+  }],
+  "maxRoll": 20,
+  "name": "Monuments"
+}

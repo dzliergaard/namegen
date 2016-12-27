@@ -1,0 +1,54 @@
+{
+  "columns": ["Creator"],
+  "entries": [{
+    "Roll": "1",
+    "weight": 1.0,
+    "Creator": "Beholder"
+  }, {
+    "Roll": "2-4",
+    "weight": 3.0,
+    "Creator": "Cult or religious group (roll on the Cults and Religious Groups table to determine specifics)"
+  }, {
+    "Roll": "5-8",
+    "weight": 4.0,
+    "Creator": "Dwarves"
+  }, {
+    "Roll": "9",
+    "weight": 1.0,
+    "Creator": "Elves (including drow)"
+  }, {
+    "Roll": "10",
+    "weight": 1.0,
+    "Creator": "Giants"
+  }, {
+    "Roll": "11",
+    "weight": 1.0,
+    "Creator": "Hobgoblins"
+  }, {
+    "Roll": "12-15",
+    "weight": 4.0,
+    "Creator": "Humans (roll on the NPC Alignment and NPC Class tables to determine specifics)"
+  }, {
+    "Roll": "16",
+    "weight": 1.0,
+    "Creator": "Kuo-toa"
+  }, {
+    "Roll": "17",
+    "weight": 1.0,
+    "Creator": "Lich"
+  }, {
+    "Roll": "18",
+    "weight": 1.0,
+    "Creator": "Mindflayers"
+  }, {
+    "Roll": "19",
+    "weight": 1.0,
+    "Creator": "Yuan-ti"
+  }, {
+    "Roll": "20",
+    "weight": 1.0,
+    "Creator": "No creator (natural caverns)"
+  }],
+  "maxRoll": 20,
+  "name": "Creator"
+}

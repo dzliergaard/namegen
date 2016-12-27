@@ -57,10 +57,7 @@
       <div class="card-content">
         <paper-datatable id="datatable" data="{{party.characters}}">
           <template is="dom-repeat" items="{{columns}}">
-            <paper-datatable-column header="{{item.label}}" property="{{item.id}}">
-              <template>
-                <paper-input no-label-float class="flex" value="{{value}}"></paper-input>
-              </template>
+            <paper-datatable-column header="{{item.label}}" property="{{item.id}}" type="{{item.type}}" sortable editable>
             </paper-datatable-column>
           </template>
         </paper-datatable>
@@ -86,11 +83,11 @@
           type: Array,
           value: function () {
             return [
-              {label: 'Name', id: 'name', type: 'text', showing: true},
-              {label: 'AC', id: 'armorClass', type: 'number', showing: true},
-              {label: 'Initiative', id: 'initiative', type: 'number', showing: true},
-              {label: 'Current HP', id: 'currentHitPoints', type: 'number', showing: true},
-              {label: 'Max HP', id: 'maxHitPoints', type: 'number', showing: true}
+              {label: 'Name', id: 'name', type: 'String', showing: true},
+              {label: 'AC', id: 'armorClass', type: 'Number', showing: true},
+              {label: 'Initiative', id: 'initiative', type: 'Number', showing: true},
+              {label: 'Current HP', id: 'currentHitPoints', type: 'Number', showing: true},
+              {label: 'Max HP', id: 'maxHitPoints', type: 'Number', showing: true}
             ];
           }
         },
@@ -155,6 +152,7 @@
         if (change.base != change.value) {
           if (this.autosave) {
             this.fire('save-party');
+            this.unsaved = false;
           } else {
             this.unsaved = true;
           }

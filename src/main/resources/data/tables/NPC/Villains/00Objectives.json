@@ -1,0 +1,38 @@
+{
+  "columns": ["Objective"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Objective": "Immortality"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Objective": "Influence"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Objective": "Magic"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Objective": "Mayhem"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Objective": "Passion"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Objective": "Power"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Objective": "Revenge"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Objective": "Wealth"
+  }],
+  "maxRoll": 8,
+  "name": "Objectives"
+}

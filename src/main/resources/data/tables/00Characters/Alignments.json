@@ -1,0 +1,51 @@
+{
+  "columns": ["Alignment", "Description"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Alignment": "Lawful Good",
+    "Description": "Can be counted on to do the right thing as expected by society."
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Alignment": "Good",
+    "Description": "Do the best they can to help others according to their needs."
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Alignment": "Chaotic Good",
+    "Description": "Act as their conscience directs, with little regard for what others expect."
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Alignment": "Lawful",
+    "Description": "Act in accordance with law, tradition, or personal codes."
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Alignment": "Neutral",
+    "Description": "Prefer to steer clear of moral questions and don't take sides, doing what seems best at the time."
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Alignment": "Chaotic",
+    "Description": "Follow their whims, holding their personal freedom above all else."
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Alignment": "Lawful Evil",
+    "Description": "Methodically take what they want, within the limits of a code of tradition, loyalty, or order."
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Alignment": "Evil",
+    "Description": "Do whatever they can get away with, without compassion or qualms."
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Alignment": "Chaotic Evil",
+    "Description": "Act with arbitrary violence spurred by their greed hatred, or bloodlust."
+  }],
+  "maxRoll": 9,
+  "name": "Alignments"
+}

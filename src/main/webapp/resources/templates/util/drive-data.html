@@ -1,0 +1,117 @@
+<link rel="import" href="/bower/google-apis/google-client-loader.html">
+<link rel="import" href="/bower/google-apis/google-js-api.html">
+<link rel="import" href="/bower/paper-toast/paper-toast.html">
+
+<dom-module id="drive-data">
+  <template>
+    <google-client-loader id="drive"
+                          name="drive"
+                          version="v3"
+                          on-google-api-load="downloadAppDataFile"></google-client-loader>
+    <google-js-api id="gapi"></google-js-api>
+    <paper-toast id="savesuccess" text="User content saved!"></paper-toast>
+  </template>
+
+  <script>
+    Polymer({
+      id: 'drive-data',
+      properties: {
+        appDataFileMetadata: {
+          type: Object,
+          value: {
+            name: 'content.json',
+            parents: ['appDataFolder']
+          }
+        },
+        isSignedIn: {
+          type: Boolean,
+          value: false
+        },
+        listening: {
+          type: Boolean,
+          value: false
+        }
+      },
+      get updateRequestParams() {
+        return {
+          path: '/upload/drive/v3/files/' + this.appDataFileMetadata.id,
+          method: 'PATCH',
+          params: {
+            uploadType: 'media',
+            alt: 'json'
+          },
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.userSavedContent)
+        }
+      },
+      ready: function () {
+        if (this.$.gapi.api && !this.$.drive.api) {
+          this.$.drive._loadClient();
+        }
+      },
+      updateContent: function () {
+        if (!this.listening || !this.isSignedIn) {
+          return;
+        }
+        this.$.gapi.api.client.request(this.updateRequestParams).execute();
+        this.$.savesuccess.open();
+      },
+      // google drive interaction functions/callbacks
+      downloadAppDataFile: function () {
+        if (!this.isSignedIn || !this.$.drive.api) {
+          return;
+        }
+        if (!this.files) {
+          this.files = this.$.drive.api.files;
+        }
+
+        this.files.list({
+          spaces: 'appDataFolder',
+          fields: 'files(id,modifiedTime,name,properties)'
+        }).then(this.listAppDataFilesCallback.bind(this));
+      },
+      listAppDataFilesCallback: function (response) {
+        if (response.result.files.length == 0) {
+          this.files.create({
+            resource: this.appDataFileMetadata,
+            fields: 'id'
+          }, '{}').then(this.createAppDataFileCallback.bind(this));
+        } else {
+          this.appDataFileMetadata.id = response.result.files[0].id;
+          this.files.get({
+            fileId: this.appDataFileMetadata.id,
+            alt: 'media'
+          }).then(this.getAppDataFileCallback.bind(this));
+        }
+      },
+      createAppDataFileCallback: function (response) {
+        this.appDataFileMetadata.id = response.result.id;
+        this.set('userSavedContent', {
+          names: [],
+          cities: [],
+          parties: []
+        });
+        this.listening = true;
+      },
+      getAppDataFileCallback: function (response) {
+        if (response.status == 200) {
+          if (response.result) {
+            this.set('userSavedContent', response.result);
+            ['names', 'cities', 'parties'].forEach(function (attr) {
+              this.set('userSavedContent.' + attr, this.userSavedContent[attr] || []);
+            }.bind(this));
+          } else {
+            this.set('userSavedContent', {
+              names: [],
+              cities: [],
+              parties: []
+            });
+          }
+          this.listening = true;
+        }
+      }
+    });
+  </script>
+</dom-module>

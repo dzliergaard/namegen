@@ -79,8 +79,11 @@
   }, {
     "Roll": 20.0,
     "weight": 1.0,
-    "Goal": "Roll twice, ignoring results of 20."
+    "Goal": {
+      "table_path": "this",
+      "num_rolls": 2.0
+    }
   }],
-  "maxRoll": 20,
+  "maxRoll": 21,
   "name": "Dungeon"
 }

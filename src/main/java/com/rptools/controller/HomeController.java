@@ -40,7 +40,7 @@ public class HomeController {
     response.sendRedirect("name");
   }
 
-  @RequestMapping(value = "party", method = RequestMethod.GET)
+  @RequestMapping(value = {"dungeon", "party"}, method = RequestMethod.GET)
   public ModelAndView party() {
     return new ModelAndView("main");
   }

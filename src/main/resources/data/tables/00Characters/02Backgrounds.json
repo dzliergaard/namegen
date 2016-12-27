@@ -1,0 +1,110 @@
+{
+  "columns": ["Background", "Skills", "Languages", "Tools Proficiencies", "Equipment"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Background": "Acolyte",
+    "Skills": "Insight, Religion",
+    "Languages": "Two of choice",
+    "Tools Proficiencies": "-",
+    "Equipment": "A holy symbol (a gift to you when you entered the priesthood), a prayer book or prayer wheel, 5 sticks of incense, vestments, a set of common clothes, and a belt pouch containing 15 gp."
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Background": "Charlatan",
+    "Skills": "Deception, Sleight of Hand",
+    "Languages": "-",
+    "Tools Proficiencies": "Disguise kit, forgery kit",
+    "Equipment": "A set of fine clothes, a disguise kit, tools of the con of your choice (ten stoppered bottles filled with colored liquid, a set of weighted dice, a deck of marked cards, or a signet ring of an imaginary duke), and a belt pouch containing 15 gp."
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Background": "Criminal",
+    "Skills": "Deception, Stealth",
+    "Languages": "-",
+    "Tools Proficiencies": "One type of gaming set, thieves' tools",
+    "Equipment": "A crowbar, a set of dark common clothes including a hood, and a belt pouch containing 15 gp."
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Background": "Entertainer",
+    "Skills": "Acrobatics, Performance",
+    "Languages": "-",
+    "Tools Proficiencies": "Disguise kit, one type of musical instrument",
+    "Equipment": "A musical instrument (one of your choice), the favor of an admirer (love letter, lock of hair, or trinket), a costume, and a belt pouch containing 15 gp."
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Background": "Folk Hero",
+    "Skills": "Animal Handling, Survival",
+    "Languages": "-",
+    "Tools Proficiencies": "One type of artisan’s tools, vehicles (land)",
+    "Equipment": "A set of artisan’s tools (one of your choice), a shovel, an iron pot, a set of common clothes, and a belt pouch containing 10 gp."
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Background": "Guild Artisan",
+    "Skills": "Insight, Persuasion",
+    "Languages": "One of choice",
+    "Tools Proficiencies": "One type of artisan’s tools",
+    "Equipment": "A set of artisan’s tools (one of your choice), a letter of introduction from your guild, a set of traveler’s clothes, and a belt pouch containing 15 gp."
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Background": "Hermit",
+    "Skills": "Medicine, Religion",
+    "Languages": "One of choice",
+    "Tools Proficiencies": "Herbalism kit",
+    "Equipment": "A scroll case stuffed full of notes from your studies or prayers, a winter blanket, a set of common clothes, an herbalism kit, and 5 gp."
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Background": "Noble",
+    "Skills": "History, Persuasion",
+    "Languages": "One of choice",
+    "Tools Proficiencies": "One type of gaming set",
+    "Equipment": "A set of fine clothes, a signet ring, a scroll of pedigree, and a purse containing 25 gp."
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Background": "Outlander",
+    "Skills": "Athletics, Survival",
+    "Languages": "One of choice",
+    "Tools Proficiencies": "One type of musical instrument",
+    "Equipment": "A staff, a hunting trap, a trophy from an animal you killed, a set of traveler’s clothes, and a belt pouch containing 10 gp."
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Background": "Sage",
+    "Skills": "Arcana, History",
+    "Languages": "Two of choice",
+    "Tools Proficiencies": "-",
+    "Equipment": "A bottle of black ink, a quill, a small knife, a letter from a dead colleague posing a question you have not yet been able to answer, a set of common clothes, and a belt pouch containing 10 gp."
+  }, {
+    "Roll": 11.0,
+    "weight": 1.0,
+    "Background": "Sailor",
+    "Skills": "Athletics, Perception",
+    "Languages": "-",
+    "Tools Proficiencies": "Navigator’s tools, vehicles (water)",
+    "Equipment": "A belaying pin (club), 50 feet of silk rope, a lucky charm such as a rabbit foot or a small stone with a hole in the center (or you may roll for a random trinket on the Trinkets table in chapter 5), a set of common clothes, and a belt pouch containing 10 gp."
+  }, {
+    "Roll": 12.0,
+    "weight": 1.0,
+    "Background": "Soldier",
+    "Skills": "Athletics, Intimidation",
+    "Languages": "-",
+    "Tools Proficiencies": "One type of gaming set, vehicles (land)",
+    "Equipment": "An insignia of rank, a trophy taken from a fallen enemy (a dagger, broken blade, or piece of a banner), a set of bone dice or deck of cards, a set of common clothes, and a belt pouch containing 10 gp."
+  }, {
+    "Roll": 13.0,
+    "weight": 1.0,
+    "Background": "Urchin",
+    "Skills": "Sleight of Hand, Stealth",
+    "Languages": "-",
+    "Tools Proficiencies": "Disguise kit, thieves’ tools",
+    "Equipment": "A small knife, a map of the city you grew up in, a pet mouse, a token to remember your parents by, a set of common clothes, and a belt pouch containing 10 gp."
+  }],
+  "maxRoll": 13,
+  "name": "Backgrounds"
+}

@@ -1,0 +1,104 @@
+{
+  "columns": ["Location"],
+  "entries": [{
+    "Roll": "01-04",
+    "weight": 4.0,
+    "Location": "A building in a city"
+  }, {
+    "Roll": "05-08",
+    "weight": 4.0,
+    "Location": "Catacombs or sewers beneath a city"
+  }, {
+    "Roll": "09-12",
+    "weight": 4.0,
+    "Location": "Beneath a farmhouse"
+  }, {
+    "Roll": "13-16",
+    "weight": 4.0,
+    "Location": "Beneath a graveyard"
+  }, {
+    "Roll": "17-22",
+    "weight": 6.0,
+    "Location": "Beneath a ruined castle"
+  }, {
+    "Roll": "23-26",
+    "weight": 4.0,
+    "Location": "Beneath a ruined city"
+  }, {
+    "Roll": "27-30",
+    "weight": 4.0,
+    "Location": "Beneath a temple"
+  }, {
+    "Roll": "31-34",
+    "weight": 4.0,
+    "Location": "In a chasm"
+  }, {
+    "Roll": "35-38",
+    "weight": 4.0,
+    "Location": "In a cliff face"
+  }, {
+    "Roll": "39-42",
+    "weight": 4.0,
+    "Location": "In a desert"
+  }, {
+    "Roll": "43-46",
+    "weight": 4.0,
+    "Location": "In a forest"
+  }, {
+    "Roll": "47-50",
+    "weight": 4.0,
+    "Location": "In a glacier"
+  }, {
+    "Roll": "51-54",
+    "weight": 4.0,
+    "Location": "In a gorge"
+  }, {
+    "Roll": "55-58",
+    "weight": 4.0,
+    "Location": "In a jungle"
+  }, {
+    "Roll": "59-62",
+    "weight": 4.0,
+    "Location": "In a mountain pass"
+  }, {
+    "Roll": "63-66",
+    "weight": 4.0,
+    "Location": "In a swamp"
+  }, {
+    "Roll": "67-70",
+    "weight": 4.0,
+    "Location": "Beneath or on top of a mesa"
+  }, {
+    "Roll": "71-74",
+    "weight": 4.0,
+    "Location": "In sea caves"
+  }, {
+    "Roll": "75-78",
+    "weight": 4.0,
+    "Location": "In several connected mesas"
+  }, {
+    "Roll": "79-82",
+    "weight": 4.0,
+    "Location": "On a mountain peak"
+  }, {
+    "Roll": "83-86",
+    "weight": 4.0,
+    "Location": "On a promontory"
+  }, {
+    "Roll": "87-90",
+    "weight": 4.0,
+    "Location": "On an island"
+  }, {
+    "Roll": "91-95",
+    "weight": 5.0,
+    "Location": "Underwater"
+  }, {
+    "Roll": "96-100",
+    "weight": 5.0,
+    "Location": {
+      "table_path": "Adventure/Dungeons/Exotic Locations"
+    }
+  }],
+  "maxRoll": 101,
+  "name": "Locations"
+}

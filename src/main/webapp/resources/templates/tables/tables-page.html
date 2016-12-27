@@ -28,15 +28,14 @@
     }
   </style>
   <template>
-    <iron-ajax auto id="tables" url="/tables/list" on-response="processTablesResponse" handle-as="json"></iron-ajax>
-    <div class="layout horizontal start">
+    <div class$="card-content {{layoutClass(pageColumns)}} layout">
       <paper-dropdown-menu allow-outside-scroll class="flex" label="Choose Table" horizontal-align="left">
         <paper-menu class="dropdown-content">
-          <template is="dom-repeat" items="{{tables}}">
-            <template is="dom-if" if="{{!item.isParent}}">
+          <template is="dom-repeat" items="{{tables.tablesArray}}">
+            <template is="dom-if" if="{{!item.tablesArray}}">
               <paper-item on-tap="selectTable">{{item.name}}</paper-item>
             </template>
-            <template is="dom-if" if="{{item.isParent}}">
+            <template is="dom-if" if="{{item.tablesArray}}">
               <paper-submenu>
                 <paper-item class="menu-trigger" on-tap="keepDropdownOpen">
                   <span class="horizontal layout justified">
@@ -45,11 +44,11 @@
                   </span>
                 </paper-item>
                 <paper-menu class="menu-content">
-                  <template is="dom-repeat" items="{{item.tables}}">
-                    <template is="dom-if" if="{{!item.isParent}}">
+                  <template is="dom-repeat" items="{{item.tablesArray}}">
+                    <template is="dom-if" if="{{!item.tablesArray}}">
                       <paper-item on-tap="selectTable">{{item.name}}</paper-item>
                     </template>
-                    <template is="dom-if" if="{{item.isParent}}">
+                    <template is="dom-if" if="{{item.tablesArray}}">
                       <paper-submenu>
                         <paper-item class="menu-trigger" on-tap="keepDropdownOpen">
                           <span class="horizontal layout justified">
@@ -58,7 +57,7 @@
                           </span>
                         </paper-item>
                         <paper-menu class="menu-content">
-                          <template is="dom-repeat" items="{{item.tables}}">
+                          <template is="dom-repeat" items="{{item.tablesArray}}">
                             <paper-item on-tap="selectTable">{{item.name}}</paper-item>
                           </template>
                         </paper-menu>
@@ -81,7 +80,7 @@
             </div>
           </div>
           <div id="card-content" class="card-content">
-            <template is="dom-repeat" items="{{tables}}">
+            <template is="dom-repeat" items="{{tables.tablesArray}}">
               <rptools-table table="{{item}}" roll="{{roll}}"></rptools-table>
             </template>
           </div>
@@ -97,14 +96,11 @@
         table: {
           type: Object
         },
-        columns: {
+        pageColumns: {
           type: Array,
           value: []
         },
-        tables: {
-          type: Array,
-          value: []
-        }
+        tables: Array
       },
       // when selecting a subcategory, toggle the submenu but keep the dropdown open
       keepDropdownOpen: function (event) {
@@ -115,22 +111,22 @@
 
         submenu.toggle();
         event.stopPropagation();
+        if (event.model.item.entries) {
+          this.selectTable(event);
+        }
       },
-      processTablesResponse: function (event) {
-        this.set('tables', JSON.parse(event.detail.response.data).tables);
+      layoutClass: function (columns) {
+        return columns == 12 ? 'horizontal start' : 'vertical';
       },
       selectRandom: function (event) {
         this.table.datatable.selectRandom(true);
-      },
-      getTable: function (index, tables) {
-        return this.tables[index];
       },
       selectTable: function (event) {
         if (this.table) {
           this.table.datatable.show(false);
         }
         this.$['table-card'].hidden = false;
-        this.set('table', event.model.subtable || event.model.table || event.model.item);
+        this.set('table', event.model.item);
         this.set('roll', null);
         this.table.datatable.show(true);
       }

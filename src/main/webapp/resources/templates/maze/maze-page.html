@@ -1,0 +1,78 @@
+<link rel="import" href="/bower/paper-button/paper-button.html">
+
+<dom-module id="maze-page">
+  <template>
+    <style include="iron-flex iron-flex-alignment">
+      #canvas {
+        border: 1px solid black;
+      }
+    </style>
+    <div class="horizontal layout start">
+      <paper-button on-tap="generateMaze">Generate</paper-button>
+      <canvas id="canvas" width="[[dimension]]" height="[[dimension]]"
+              on-tap="getCursorPosition"></canvas>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'maze-page',
+      properties: {
+        dimension: {
+          type: Number,
+          value: 1000
+        },
+        unit: {
+          type: Number,
+          value: 20
+        }
+      },
+      ready: function() {
+        this.ctx = this.$.canvas.getContext('2d');
+      },
+      // Generates a maze by creating a grid of 100x100, 20x20 pieces, each of which is one
+      // of two designs: two parallel bars connecting top-left and bottom-right, or two
+      // parallel bars connecting top-right and bottom-left.
+      generateMaze: function (event) {
+        var canvas = document.getElementById('canvas');
+        this.ctx.beginPath();
+        this.ctx.clearRect(0, 0, this.dimension, this.dimension);
+        for (var x = 0; x < this.dimension; x += this.unit) {
+          for (var y = 0; y < this.dimension; y += this.unit) {
+            var rand = Math.floor(Math.random() * 2);
+            var diff = 10;
+            if (rand == 0) {
+              diff = -10;
+            }
+            // Move to top of unit, draw line to either right or left center.
+            this.ctx.moveTo(x, y + 10);
+            this.ctx.lineTo(x + 10, y + 10 + diff);
+            this.ctx.stroke();
+            // Move to bottom of unit, draw line to opposite of first choice.
+            this.ctx.moveTo(x + 20, y + 10);
+            this.ctx.lineTo(x + 10, y + 10 - diff);
+            this.ctx.stroke();
+          }
+        }
+      },
+      getCursorPosition: function (event) {
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext("2d");
+        var rect = canvas.getBoundingClientRect();
+        var x = event.detail.x - rect.left - this.unit / 2;
+        var y = event.detail.y - rect.top - this.unit / 2;
+        console.log("actual x: " + x + " y: " + y);
+        x = Math.round(x / this.unit) * this.unit;
+        y = Math.round(y / this.unit) * this.unit;
+        console.log("x: " + x + " y: " + y);
+        ctx.moveTo(x + 10, y);
+        ctx.beginPath();
+        ctx.lineTo(x + 20, y + 10);
+        ctx.lineTo(x + 10, y + 20);
+        ctx.lineTo(x, y + 10);
+        ctx.lineTo(x + 10, y);
+        ctx.fill();
+        ctx.closePath();
+      }
+    });
+  </script>
+</dom-module>

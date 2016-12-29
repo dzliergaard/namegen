@@ -19,40 +19,155 @@
       properties: {
         dimension: {
           type: Number,
-          value: 1000
+          value: 600
         },
         unit: {
           type: Number,
-          value: 20
+          value: 60
+        },
+        baseColor: {
+          type: String,
+          value: 'black'
+        },
+        doorColor: {
+          type: String,
+          value: 'green'
+        },
+        hiddenDoorColor: {
+          type: String,
+          value: 'red'
         }
       },
       ready: function() {
         this.ctx = this.$.canvas.getContext('2d');
       },
-      // Generates a maze by creating a grid of 100x100, 20x20 pieces, each of which is one
-      // of two designs: two parallel bars connecting top-left and bottom-right, or two
-      // parallel bars connecting top-right and bottom-left.
+      randomInt: function(exclusiveMax){
+        return Math.floor(Math.random() * exclusiveMax);
+      },
+      setBarrierColor: function() {
+        var barrier = this.randomInt(9);
+        switch(barrier) {
+          case 6:
+          case 7:
+            this.ctx.strokeStyle = this.doorColor;
+            break;
+          case 8:
+            this.ctx.strokeStyle = this.hiddenDoorColor;
+            break;
+        }
+      },
+      drawSquare: function(square, grid, x, y){
+        var unit = this.unit;
+        var third = unit / 3;
+        var twoThird = third * 2;
+        // Transform to account for orientation of square.
+        // First move to appropriate starting corner.
+        this.ctx.save();
+        var x = 0, y = 0, angle = (Math.PI * 2 * .25) * square.orientation;
+        if (square.orientation > 0 && square.orientation < 3) {
+          x = unit;
+        }
+        if (square.orientation > 1) {
+          y = unit;
+        }
+        this.ctx.translate(x, y);
+        // Now rotate.
+        this.ctx.rotate(angle);
+
+        // Now draw the appropriate square.
+        this.ctx.beginPath();
+        switch(square.type) {
+          case 0:
+            // Type 0 is an open square.
+            break;
+          case 1:
+            // Type 1 is a T intersection, with the 4th path blocked by a wall (66%)/door (33%).
+            // One in three doors is hidden.
+            this.setBarrierColor();
+            this.ctx.moveTo(twoThird, third);
+            this.ctx.lineTo(twoThird, twoThird);
+            this.ctx.stroke();
+            this.ctx.closePath();
+            this.ctx.beginPath();
+            this.ctx.strokeStyle = this.baseColor;
+            this.ctx.rect(0, 0, third, third);
+            this.ctx.rect(twoThird, 0, third, third);
+            this.ctx.rect(0, twoThird, third, third);
+            this.ctx.rect(twoThird, twoThird, third, third);
+            this.ctx.fill();
+            break;
+          case 2:
+            // Type 2 has two diagonal paths, connecting the two and bottom to one side each.
+            this.ctx.lineTo(third, 0);
+            this.ctx.lineTo(0, third);
+            this.ctx.lineTo(0, 0);
+            this.ctx.moveTo(twoThird, 0);
+            this.ctx.lineTo(unit, 0);
+            this.ctx.lineTo(unit, third);
+            this.ctx.lineTo(third, unit);
+            this.ctx.lineTo(0, unit);
+            this.ctx.lineTo(0, twoThird);
+            this.ctx.moveTo(twoThird, unit);
+            this.ctx.lineTo(unit, twoThird);
+            this.ctx.lineTo(unit, unit);
+            this.ctx.fill();
+            break;
+          case 3:
+            // Type 3 is like Type 4, but one path blocks (or goes over/under) the other.
+            this.setBarrierColor();
+            this.ctx.moveTo(third, third);
+            this.ctx.lineTo(third, twoThird);
+            this.ctx.stroke();
+            this.ctx.closePath();
+            this.ctx.beginPath();
+            this.setBarrierColor();
+            this.ctx.moveTo(twoThird, third);
+            this.ctx.lineTo(twoThird, twoThird);
+            this.ctx.stroke();
+            this.ctx.closePath();
+            this.ctx.beginPath();
+          case 4:
+            // Type 4 is a + intersection.
+            this.ctx.rect(0, 0, third, third);
+            this.ctx.rect(twoThird, 0, third, third);
+            this.ctx.rect(0, twoThird, third, third);
+            this.ctx.rect(twoThird, twoThird, third, third);
+            this.ctx.fill();
+            break;
+        }
+        this.ctx.closePath();
+
+        // Reset the transformation/fill style when done.
+        this.ctx.restore();
+      },
+      // Generates a maze by creating a grid of 30x30 pieces, of 5 different types, at 4 different orientations.
+      // Blacks out the background first to simulate walls/solid space.
       generateMaze: function (event) {
         var canvas = document.getElementById('canvas');
-        this.ctx.beginPath();
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
         this.ctx.clearRect(0, 0, this.dimension, this.dimension);
+        var grid = [];
         for (var x = 0; x < this.dimension; x += this.unit) {
+          var row = [];
+          grid.push(row);
           for (var y = 0; y < this.dimension; y += this.unit) {
-            var rand = Math.floor(Math.random() * 2);
-            var diff = 10;
-            if (rand == 0) {
-              diff = -10;
-            }
-            // Move to top of unit, draw line to either right or left center.
-            this.ctx.moveTo(x, y + 10);
-            this.ctx.lineTo(x + 10, y + 10 + diff);
-            this.ctx.stroke();
-            // Move to bottom of unit, draw line to opposite of first choice.
-            this.ctx.moveTo(x + 20, y + 10);
-            this.ctx.lineTo(x + 10, y + 10 - diff);
-            this.ctx.stroke();
+            var boxType = Math.floor(Math.random() * 5);
+            var orientation = Math.floor(Math.random() * 4);
+            row.push({type: boxType, orientation: orientation});
           }
         }
+
+        grid.forEach(function(row, x){
+          this.ctx.save();
+          row.forEach(function(square, y){
+            this.drawSquare(square, grid, x, y);
+            // Move to next position.
+            this.ctx.translate(this.unit * 1, 0);
+          }, this);
+          // Move to next row.
+          this.ctx.restore();
+          this.ctx.translate(0, this.unit);
+        }, this);
       },
       getCursorPosition: function (event) {
         var canvas = document.getElementById('canvas');

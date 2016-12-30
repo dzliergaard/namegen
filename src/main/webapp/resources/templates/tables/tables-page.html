@@ -14,20 +14,20 @@
 <link rel="import" href="/bower/paper-tooltip/paper-tooltip.html">
 
 <dom-module id="tables-page">
-  <style include="iron-flex iron-flex-alignment iron-flex-factors">
-    paper-dropdown-menu::shadow iron-dropdown {
-      @apply(--flex);
-    }
-
-    paper-dropdown-menu::shadow paper-menu-button div#trigger {
-      @apply(--flex);
-    }
-
-    :host paper-item {
-      white-space: nowrap;
-    }
-  </style>
   <template>
+    <style include="iron-flex iron-flex-alignment iron-flex-factors">
+      paper-dropdown-menu::shadow iron-dropdown {
+        @apply(--flex);
+      }
+
+      paper-dropdown-menu::shadow paper-menu-button div#trigger {
+        @apply(--flex);
+      }
+
+      :host paper-item {
+        white-space: nowrap;
+      }
+    </style>
     <div class$="card-content {{layoutClass(pageColumns)}} layout">
       <paper-dropdown-menu allow-outside-scroll class="flex" label="Choose Table" horizontal-align="left">
         <paper-menu class="dropdown-content">

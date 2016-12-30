@@ -92,8 +92,8 @@
                      is-signed-in="[[isSignedIn]]"
                      saved-cities="{{userSavedContent.cities}}"
                      columns="[[columns]]"></city-page>
-          <!--<dungeon-page name="dungeon" is-signed-in="[[isSignedIn]]"-->
-                        <!--tables="{{tables}}" columns="[[columns]]"></dungeon-page>-->
+          <dungeon-page name="dungeon" is-signed-in="[[isSignedIn]]"
+                        tables="{{tables}}" page-columns="[[columns]]"></dungeon-page>
           <party-page name="party" saved-parties="{{userSavedContent.parties}}"
                       on-save="contentUpdated"></party-page>
           <tables-page id="tables-page" name="tables" page-columns="[[columns]]"
@@ -133,7 +133,7 @@
           value: [
             {location: 'name', text: 'Name Generator', icon: 'social:person'},
             {location: 'city', text: 'City Generator', icon: 'social:location-city'},
-//            {location: 'dungeon', text: 'Dungeon Generator', icon: 'icons:dashboard'},
+            {location: 'dungeon', text: 'Dungeon Generator', icon: 'icons:dashboard'},
             {location: 'party', text: 'Party Tracker', icon: 'social:group'},
             {location: 'tables', text: 'DMG Tables', icon: 'places:casino'}
           ]

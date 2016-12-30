@@ -1,55 +1,48 @@
 <link rel="import" href="../behavior/table-roll-behavior.html">
+<link rel="import" href="../maze/maze-page.html">
 <link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="/bower/paper-button/paper-button.html">
 <link rel="import" href="/bower/paper-card/paper-card.html">
 <link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="/bower/paper-item/paper-item.html">
+<link rel="import" href="/bower/paper-item/paper-item-body.html">
 <link rel="import" href="/bower/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower/paper-material/paper-material.html">
 
 <dom-module id="dungeon-page">
-  <style include="iron-flex iron-flex-alignment">
-    :host ::content .title-text {
-      --paper-input-container-input: {
-        font-size: 24px;
-      };
-    }
-  </style>
   <template>
-    <div class$="{{layoutClass(columns)}} layout start">
-      <paper-card class="vertical layout start" heading="Options">
-        <paper-button on-tap="generateDungeon">Generate</paper-button>
-        <template is="dom-repeat" items="{{dungeonTables}}" as="table">
-          <paper-dropdown-menu label="{{table.name}}" selected="0">
-            <paper-listbox class="dropdown-content">
-              <paper-item>Random</paper-item>
-              <template is="dom-repeat" items="{{table.entries}}">
-                <paper-item on-tap="select(table, item)">{{getItemLabel(table, item)}}
+    <style include="iron-flex iron-flex-alignment">
+      :host ::content .title-text {
+        --paper-input-container-input: {
+          font-size: 24px;
+        };
+      }
+    </style>
+    <div class="vertical layout start">
+      <paper-button on-tap="generateDungeon">Generate</paper-button>
+      <div class$="{{layoutClass(pageColumns)}} layout start">
+        <paper-material>
+          <canvas id="canvas" width="[[dimension]]" height="[[dimension]]"
+                  on-tap="getCursorPosition"></canvas>
+        </paper-material>
+        <paper-card id="dungeon" hidden class="layout vertical start">
+          <div class="header paper-card">
+            <div class="title-text paper-card">
+              <editing-item class="flex" item="{{dungeon.name}}"></editing-item>
+            </div>
+            <div class="card-content vertical layout">
+              <template is="dom-repeat" items="[[dungeon.attributes]]">
+                <paper-item>
+                  <paper-item-body two-line>
+                    <div>[[item.value]]</div>
+                    <div secondary>[[item.name]]</div>
+                  </paper-item-body>
                 </paper-item>
               </template>
-            </paper-listbox>
-          </paper-dropdown-menu>
-        </template>
-      </paper-card>
-      <paper-card id="dungeon" hidden class="layout vertical start">
-        <div class="header paper-card">
-          <div class="title-text paper-card">
-            <editing-item class="flex" item="{{dungeon.name}}"></editing-item>
+            </div>
           </div>
-          <div class="card-content vertical layout">
-            <template is="dom-repeat" items="{{dungeonTables}}" as="table">
-              <paper-dropdown-menu label="{{table.name}}">
-                <paper-listbox class="dropdown-content">
-                  <paper-item>Random</paper-item>
-                  <template is="dom-repeat" items="{{table.entries}}"
-                            selected="{{selectedIndex(table, dungeon)}}">
-                    <paper-item>{{getItemLabel(table, item)}}</paper-item>
-                  </template>
-                </paper-listbox>
-              </paper-dropdown-menu>
-            </template>
-          </div>
-        </div>
-      </paper-card>
+        </paper-card>
+      </div>
     </div>
   </template>
 
@@ -59,10 +52,19 @@
       behaviors: [rptools.TableRollBehavior],
       properties: {
         dungeon: Object,
-        columns: Number,
+        pageColumns: Number,
+        tables:  Object,
+        colors: {
+          type: Object,
+          value: {
+            base: 'black',
+            door: 'green',
+            hiddenDoor: 'red'
+          }
+        },
         dungeonTables: {
-          type: Array,
-          value: []
+          type: Object,
+          computed: 'getDungeonTables(tables)'
         },
         formValues: {
           type: Object,
@@ -72,26 +74,67 @@
           type: Boolean,
           value: false
         },
-        tables: {
-          type: Object,
-          observer: 'getDungeonTables'
+        dimension: {
+          type: Number,
+          value: 600
+        },
+        unit: {
+          type: Number,
+          value: 60
         }
       },
+      ready: function() {
+        this.ctx = this.$.canvas.getContext('2d');
+      },
+      /** Generates a maze by creating a grid of 30x30 pieces, of 5 different types,
+       * at 4 different orientations.
+       * Also picks some random details like location type, creator, inhabitants, purpose, hazards, etc.
+       * Thoughts on where this could go:
+       * 1) Choosing a starting point on the edge, start at a square and determine which directions
+       * the square has connections to, then generate a room accordingly. Use this to fill out the maze
+       * until there are no open paths.
+       * 2) Use the dungeon details to inform the appearance of the maze (i.e. natural caverns are not
+       * perfectly geometric).
+       */
       generateDungeon: function (event) {
         var dungeon = {
-          name: "Generated Dungeon"
+          name: "Generated Dungeon",
+          attributes: []
         };
         this.$.dungeon.hidden = false;
         this.dungeonTables.forEach(function (table) {
           var column = table.columns[0];
-          var value = this.formValues[column];
-          if (!value) {
-            var entry = this.getRandomEntry(table);
-            value = entry[column];
-          }
-          dungeon[column] = value;
+          var entry = this.getRandomEntry(table)[column];
+          // TODO: Add re-roll to redirect entries with table_path
+          dungeon.attributes.push({name: column, value: entry});
         }.bind(this));
         this.set('dungeon', dungeon);
+
+        var canvas = document.getElementById('canvas');
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.clearRect(0, 0, this.dimension, this.dimension);
+        var grid = [];
+        for (var x = 0; x < this.dimension; x += this.unit) {
+          var row = [];
+          grid.push(row);
+          for (var y = 0; y < this.dimension; y += this.unit) {
+            var boxType = Math.floor(Math.random() * 5);
+            var orientation = Math.floor(Math.random() * 4);
+            row.push({type: boxType, orientation: orientation});
+          }
+        }
+
+        grid.forEach(function(row, x){
+          this.ctx.save();
+          row.forEach(function(square, y){
+            this.drawSquare(square, grid, x, y);
+            // Move to next position.
+            this.ctx.translate(this.unit * 1, 0);
+          }, this);
+          // Move to next row.
+          this.ctx.restore();
+          this.ctx.translate(0, this.unit);
+        }, this);
       },
       getDungeonTables: function (tables) {
         if (!tables) {
@@ -100,36 +143,122 @@
         for (var i = 0; i < tables.tablesArray.length; i++) {
           var table = tables.tablesArray[i];
           if (table.name == 'Dungeons') {
-            this.set('dungeonTables', table.tablesArray);
-            return true;
+            return table.tablesArray;
           }
           if (table.tablesArray) {
-            if (this.getDungeonTables(table)) {
-              return true;
+            var dTables = this.getDungeonTables(table);
+            if (dTables) {
+              return dTables;
             }
           }
         }
-        return false;
-      },
-      getItemLabel: function (table, item) {
-        return item[table.columns[0]];
+        return null;
       },
       layoutClass: function (columns) {
         return columns == 12 ? 'horizontal' : 'vertical';
       },
-      select: function (table, item) {
-        if (!item) {
-          this.set('formValues.' + table.name, null);
-        }
-        this.set(['formValues', table.name], item[table.columns[0]]);
+      randomInt: function(exclusiveMax){
+        return Math.floor(Math.random() * exclusiveMax);
       },
-      selectedIndex: function (table, dungeon) {
-        var column = table.columns[0];
-        for (var i = 0; i < table.entries.length; i++) {
-          if (table.entries[i][column] == dungeon[column]) {
-            return i;
-          }
+      drawBarrier: function(drawFn) {
+        var barrier = this.randomInt(9);
+        switch(barrier) {
+          case 6:
+          case 7:
+            this.ctx.strokeStyle = this.colors.door;
+            break;
+          case 8:
+            this.ctx.strokeStyle = this.colors.hiddenDoor;
+            break;
         }
+        drawFn();
+        this.ctx.strokeStyle = this.colors.base;
+      },
+      drawSquare: function(square, grid, x, y){
+        var unit = this.unit;
+        var third = unit / 3;
+        var twoThird = third * 2;
+        // Transform to account for orientation of square.
+        // First move to appropriate starting corner.
+        this.ctx.save();
+        var x = 0, y = 0, angle = (Math.PI * 2 * .25) * square.orientation;
+        if (square.orientation > 0 && square.orientation < 3) {
+          x = unit;
+        }
+        if (square.orientation > 1) {
+          y = unit;
+        }
+        this.ctx.translate(x, y);
+        // Now rotate.
+        this.ctx.rotate(angle);
+
+        // Now draw the appropriate square.
+        this.ctx.beginPath();
+        switch(square.type) {
+          case 0:
+            // Type 0 is an open square.
+            break;
+          case 1:
+            // Type 1 is a T intersection, with the 4th path blocked by a wall (66%)/door (33%).
+            // One in three doors is hidden.
+            this.drawBarrier(function(){
+              this.ctx.moveTo(twoThird, third);
+              this.ctx.lineTo(twoThird, twoThird);
+              this.ctx.stroke();
+              this.ctx.closePath();
+              this.ctx.beginPath();
+            }.bind(this));
+            this.ctx.rect(0, 0, third, third);
+            this.ctx.rect(twoThird, 0, third, third);
+            this.ctx.rect(0, twoThird, third, third);
+            this.ctx.rect(twoThird, twoThird, third, third);
+            this.ctx.fill();
+            break;
+          case 2:
+            // Type 2 has two diagonal paths, connecting the two and bottom to one side each.
+            this.ctx.lineTo(third, 0);
+            this.ctx.lineTo(0, third);
+            this.ctx.lineTo(0, 0);
+            this.ctx.moveTo(twoThird, 0);
+            this.ctx.lineTo(unit, 0);
+            this.ctx.lineTo(unit, third);
+            this.ctx.lineTo(third, unit);
+            this.ctx.lineTo(0, unit);
+            this.ctx.lineTo(0, twoThird);
+            this.ctx.moveTo(twoThird, unit);
+            this.ctx.lineTo(unit, twoThird);
+            this.ctx.lineTo(unit, unit);
+            this.ctx.fill();
+            break;
+          case 3:
+            // Type 3 is like Type 4, but one path blocks (or goes over/under) the other.
+            this.drawBarrier(function(){
+              this.ctx.moveTo(third, third);
+              this.ctx.lineTo(third, twoThird);
+              this.ctx.stroke();
+              this.ctx.closePath();
+              this.ctx.beginPath();
+            }.bind(this));
+            this.drawBarrier(function() {
+              this.ctx.moveTo(twoThird, third);
+              this.ctx.lineTo(twoThird, twoThird);
+              this.ctx.stroke();
+              this.ctx.closePath();
+              this.ctx.beginPath();
+            }.bind(this));
+          case 4:
+            // Type 4 is a + intersection.
+            this.ctx.rect(0, 0, third, third);
+            this.ctx.rect(twoThird, 0, third, third);
+            this.ctx.rect(0, twoThird, third, third);
+            this.ctx.rect(twoThird, twoThird, third, third);
+            this.ctx.fill();
+            break;
+        }
+        this.ctx.closePath();
+
+        // Reset the transformation/fill style when done.
+        this.ctx.restore();
       }
     })
   </script>

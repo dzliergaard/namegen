@@ -1,0 +1,30 @@
+{
+  "columns": ["Good Ideal"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Good Ideal": "Beauty"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Good Ideal": "Charity"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Good Ideal": "Greater good"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Good Ideal": "Life"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Good Ideal": "Respect"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Good Ideal": "Self-sacrifice"
+  }],
+  "maxRoll": 6,
+  "name": "Good"
+}

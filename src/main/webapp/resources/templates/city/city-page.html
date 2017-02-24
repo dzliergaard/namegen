@@ -2,7 +2,6 @@
 <link rel="import" href="../dark-theme.html"/>
 <link rel="import" href="../util/hover-icon.html"/>
 <link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
-<link rel="import" href="/bower/iron-collapse/iron-collapse.html"/>
 <link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html"/>
 <link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="/bower/paper-button/paper-button.html"/>
@@ -91,6 +90,7 @@
                      generate-params="{{generateParams(diversity, size, race)}}"
                      main-icon="star-border"
                      opened="true"
+                     scopes="[[scopes]]"
                      on-primary-tap="saveCity"></city-card>
         </template>
         <template is="dom-repeat" items="{{savedCities}}">
@@ -98,6 +98,7 @@
                      city="{{item}}"
                      races="{{races}}"
                      generate-params="{{generateParams(diversity, size, race)}}"
+                     scopes="[[scopes]]"
                      on-primary-tap="removeCity"></city-card>
         </template>
       </div>
@@ -111,6 +112,7 @@
         races: Array,
         cityVariables: Object,
         columns: Number,
+        scopes: String,
         generatedCity: Object,
         race: {
           type: String,

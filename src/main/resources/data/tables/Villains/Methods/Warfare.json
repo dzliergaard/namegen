@@ -1,0 +1,30 @@
+{
+  "columns": ["Method"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Method": "Ambush"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Method": "Invasion"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Method": "Massacre"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Method": "Mercenaries"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Method": "Rebellion"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Method": "Terrorism"
+  }],
+  "maxRoll": 6,
+  "name": "Warfare"
+}

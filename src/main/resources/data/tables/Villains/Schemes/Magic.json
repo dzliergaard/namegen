@@ -1,0 +1,30 @@
+{
+  "columns": ["Scheme"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Scheme": "Obtain an ancient artifact"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Scheme": "Build a construct or magical device"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Scheme": "Carry out a deity's wishes"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Scheme": "Offer sacrifices to a deity"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Scheme": "Contact a lost deity or power"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Scheme": "Open a gate to another world"
+  }],
+  "maxRoll": 6,
+  "name": "Magic"
+}

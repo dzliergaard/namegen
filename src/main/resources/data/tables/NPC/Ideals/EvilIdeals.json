@@ -1,0 +1,30 @@
+{
+  "columns": ["Evil Ideal"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Evil Ideal": "Domination"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Evil Ideal": "Greed"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Evil Ideal": "Might"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Evil Ideal": "Pain"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Evil Ideal": "Retribution"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Evil Ideal": "Slaughter"
+  }],
+  "maxRoll": 6,
+  "name": "Evil"
+}

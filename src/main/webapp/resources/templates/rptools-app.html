@@ -1,10 +1,11 @@
 <link rel="import" href="./behavior/google-scope.html">
 <link rel="import" href="./city/city-page.html">
+<link rel="import" href="./drive/drive-data.html">
 <link rel="import" href="./dungeon/dungeon-page.html">
 <link rel="import" href="./name/name-page.html">
+<link rel="import" href="./npc/npc-page.html">
 <link rel="import" href="./party/party-page.html">
 <link rel="import" href="./tables/tables-page.html">
-<link rel="import" href="./util/drive-data.html">
 <link rel="import" href="./util/variable-layout.html">
 <link rel="import" href="/bower/app-route/app-location.html">
 <link rel="import" href="/bower/app-route/app-route.html">
@@ -61,7 +62,8 @@
     </style>
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="/:page" data="{{location}}"></app-route>
-    <drive-data id="drivedata" user-saved-content="{{userSavedContent}}" is-signed-in="{{isSignedIn}}"></drive-data>
+    <drive-data id="drivedata" user-saved-content="{{userSavedContent}}"
+                is-signed-in="{{isSignedIn}}"></drive-data>
     <iron-ajax auto id="tables" url="/tables/list" on-response="processTablesResponse"
                handle-as="json"></iron-ajax>
     <paper-drawer-panel id="drawer" responsive-width="840px">
@@ -89,11 +91,13 @@
                      saved-names="{{userSavedContent.names}}"
                      columns="[[columns]]"></name-page>
           <city-page name="city" races="[[races]]"
-                     is-signed-in="[[isSignedIn]]"
                      saved-cities="{{userSavedContent.cities}}"
-                     columns="[[columns]]"></city-page>
+                     columns="[[columns]]"
+                     scopes="[[scopes]]"></city-page>
           <dungeon-page name="dungeon" is-signed-in="[[isSignedIn]]"
                         tables="{{tables}}" page-columns="[[columns]]"></dungeon-page>
+          <npc-page name="npc" tables="{{tables}}" scopes="[[scopes]]"
+                    page-columns="[[columns]]" npcs="{{userSavedContent.npcs}}"></npc-page>
           <party-page name="party" saved-parties="{{userSavedContent.parties}}"
                       on-save="contentUpdated"></party-page>
           <tables-page id="tables-page" name="tables" page-columns="[[columns]]"
@@ -134,6 +138,7 @@
             {location: 'name', text: 'Name Generator', icon: 'social:person'},
             {location: 'city', text: 'City Generator', icon: 'social:location-city'},
             {location: 'dungeon', text: 'Dungeon Generator', icon: 'icons:dashboard'},
+            {location: 'npc', text: 'NPC Generator', icon: 'social:person'},
             {location: 'party', text: 'Party Tracker', icon: 'social:group'},
             {location: 'tables', text: 'DMG Tables', icon: 'places:casino'}
           ]
@@ -153,15 +158,17 @@
       observers: [
         'contentUpdated(userSavedContent.names.*)',
         'contentUpdated(userSavedContent.cities.*)',
+        'contentUpdated(userSavedContent.npcs.*)',
         'contentUpdated(userSavedContent.names.splices)',
         'contentUpdated(userSavedContent.cities.splices)',
+        'contentUpdated(userSavedContent.npcs.splices)',
         'contentUpdated(userSavedContent.parties.splices)'
       ],
       closeDrawer: function () {
         this.$.drawer.closeDrawer();
       },
       getPageName: function (locationName) {
-        return this.pages.find(function(page){
+        return this.pages.find(function (page) {
           return page.location == locationName;
         }).text;
       },
@@ -176,11 +183,11 @@
         this.isSignedIn = false;
         this.set('userSavedContent', {});
       },
-      tablesToArray: function(tables) {
+      tablesToArray: function (tables) {
         if (!tables.tables) {
           return tables;
         }
-        tables.tablesArray = Object.keys(tables.tables).map(function(key){
+        tables.tablesArray = Object.keys(tables.tables).map(function (key) {
           this.tablesToArray(tables.tables[key]);
           return tables.tables[key];
         }.bind(this));

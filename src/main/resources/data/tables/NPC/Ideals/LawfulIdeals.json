@@ -1,0 +1,30 @@
+{
+  "columns": ["Lawful Ideal"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Lawful Ideal": "Community"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Lawful Ideal": "Fairness"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Lawful Ideal": "Honor"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Lawful Ideal": "Logic"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Lawful Ideal": "Responsibility"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Lawful Ideal": "Tradition"
+  }],
+  "maxRoll": 6,
+  "name": "Lawful"
+}

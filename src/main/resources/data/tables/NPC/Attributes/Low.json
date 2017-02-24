@@ -1,34 +1,34 @@
 {
-  "columns": ["Ability", "Description"],
+  "columns": ["Low Ability", "Description"],
   "entries": [{
     "Roll": 1.0,
     "weight": 1.0,
-    "Ability": "Strength",
+    "Low Ability": "Strength",
     "Description": "Feeble, scrawny"
   }, {
     "Roll": 2.0,
     "weight": 1.0,
-    "Ability": "Dexterity",
+    "Low Ability": "Dexterity",
     "Description": "Clumsy, fumbling"
   }, {
     "Roll": 3.0,
     "weight": 1.0,
-    "Ability": "Constitution",
+    "Low Ability": "Constitution",
     "Description": "Sickly, pale"
   }, {
     "Roll": 4.0,
     "weight": 1.0,
-    "Ability": "Intelligence",
+    "Low Ability": "Intelligence",
     "Description": "Dim-witted, slow"
   }, {
     "Roll": 5.0,
     "weight": 1.0,
-    "Ability": "Wisdom",
+    "Low Ability": "Wisdom",
     "Description": "Oblivious, absentminded"
   }, {
     "Roll": 6.0,
     "weight": 1.0,
-    "Ability": "Charisma",
+    "Low Ability": "Charisma",
     "Description": "Dull, boring"
   }],
   "maxRoll": 6,

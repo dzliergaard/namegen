@@ -1,0 +1,30 @@
+{
+  "columns": ["Chaotic Ideal"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Chaotic Ideal": "Change"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Chaotic Ideal": "Creativity"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Chaotic Ideal": "Freedom"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Chaotic Ideal": "Independence"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Chaotic Ideal": "No limits"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Chaotic Ideal": "Whimsy"
+  }],
+  "maxRoll": 6,
+  "name": "Chaotic"
+}

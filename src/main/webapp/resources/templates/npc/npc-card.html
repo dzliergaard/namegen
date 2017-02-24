@@ -1,0 +1,211 @@
+<link rel="import" href="../behavior/table-roll-behavior.html">
+<link rel="import" href="../dark-theme.html">
+<link rel="import" href="../util/editing-item.html">
+<link rel="import" href="../util/toggle-collapse.html">
+<link rel="import" href="/bower/google-signin/google-signin-aware.html">
+<link rel="import" href="/bower/iron-collapse/iron-collapse.html">
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="/bower/iron-icon/iron-icon.html">
+<link rel="import" href="/bower/iron-icons/hardware-icons.html">
+<link rel="import" href="/bower/paper-card/paper-card.html">
+<link rel="import" href="/bower/paper-item/paper-item.html">
+<link rel="import" href="/bower/paper-item/paper-icon-item.html">
+
+<dom-module id="npc-card">
+  <template>
+    <style is="custom-style" include="dark-theme iron-flex iron-flex-alignment">
+      :host ::content iron-icon {
+        padding-left: -16px;
+        margin-right: 16px;
+      }
+
+      :host iron-icon.not-signed-in {
+        opacity: .25;
+      }
+    </style>
+
+    <google-signin-aware scopes="[[scopes]]" signed-in="{{isSignedIn}}"></google-signin-aware>
+    <paper-card class="npc flex">
+      <div class="header paper-card">
+        <div class="title-text paper-card">
+          <span class="layout horizontal">
+            <iron-icon class="self-center" icon="[[openedIcon]]" on-tap="openClose"></iron-icon>
+            <editing-item class="flex npc" item="{{npc.name}}"></editing-item>
+            <iron-icon class="self-center" icon="refresh" on-tap="setNPCName"></iron-icon>
+            <iron-icon class$="[[signedInClass]] self-center" icon="[[mainIcon]]"
+                       on-tap="primaryTap"></iron-icon>
+          </span>
+        </div>
+      </div>
+      <div class="card-content">
+        <iron-collapse id="collapse" class="layout vertical" opened="{{opened}}">
+          <template is="dom-repeat" items="[[npc.attributes]]">
+            <paper-item>
+              <paper-item-body two-line>
+                <div class="layout horizontal">
+                  <span class="flex">[[item.value]]</span>
+                  <iron-icon class="self-end" icon="refresh" on-tap="refreshAttribute"></iron-icon>
+                </div>
+                <div secondary>[[item.name]]</div>
+              </paper-item-body>
+            </paper-item>
+          </template>
+        </iron-collapse>
+      </div>
+    </paper-card>
+  </template>
+
+  <script>
+    Polymer({
+      id: 'npc-card',
+      behaviors: [rptools.TableRollBehavior],
+      properties: {
+        scopes: String,
+        tables: {
+          type: Object,
+          observer: 'mapAttributeToTable'
+        },
+        attributeToTable: {
+          type: Object,
+          value: {}
+        },
+        names: {
+          type: Array,
+          notify: true
+        },
+        npc: {
+          type: Object,
+          value: {
+            attributes: []
+          },
+          notify: true
+        },
+        openedIcon: {
+          type: String,
+          computed: '_openedIcon(opened)'
+        },
+        mainIcon: {
+          type: String,
+          value: 'delete'
+        },
+        opened: {
+          type: Boolean,
+          value: true
+        },
+        down: {
+          type: String,
+          value: "hardware:keyboard-arrow-down"
+        },
+        up: {
+          type: String,
+          value: "hardware:keyboard-arrow-up"
+        },
+        isSignedIn: {
+          type: Boolean,
+          value: false
+        },
+        signedInClass: {
+          type: String,
+          computed: '_signedInClass(isSignedIn)'
+        }
+      },
+      _openedIcon: function (opened) {
+        return opened ? 'hardware:keyboard-arrow-up' : 'hardware:keyboard-arrow-down';
+      },
+      _signedInClass: function (isSignedIn) {
+        return isSignedIn ? "" : "not-signed-in"
+      },
+      mapAttributeToTable: function(tables) {
+        if (tables.columns) {
+          this.attributeToTable[tables.columns[0]] = tables;
+        }
+        if (tables.tablesArray) {
+          tables.tablesArray.forEach(function(subtable){
+            this.mapAttributeToTable(subtable);
+          }.bind(this));
+        }
+      },
+      openClose: function () {
+        this.set('opened', !this.opened);
+      },
+      primaryTap: function () {
+        if (!this.isSignedIn) {
+          return;
+        }
+        this.fire("primary-tap");
+      },
+      getEntry: function (table) {
+        var column = table.columns[0];
+        return this.getRandomEntry(table)[column];
+      },
+      generate: function () {
+        this.set('npc', {attributes: []});
+        this.setNPCName();
+        this.tables.tablesArray.forEach(function (table) {
+          this.generateAttribute(table);
+        }.bind(this));
+      },
+      getEntry: function(table) {
+        var column = table.columns[0];
+        return this.getRandomEntry(table)[column];
+      },
+      generateAttribute: function (table) {
+        if (table.noGen) {
+          return;
+        }
+        if (table.columns) {
+          var entry = this.getEntry(table);
+          var name = table.columns[0];
+          if (!this.attributeToTable[name]) {
+            this.attributeToTable[name] = table
+          }
+          this.push('npc.attributes', {name: name, value: entry});
+          // Once an alignment is chosen, choose an ideal.
+          if (table.name == 'Alignments') {
+            this.push('npc.attributes', this.generateIdeal(entry));
+          }
+        } else {
+          table.tablesArray.forEach(function (subtable) {
+            this.generateAttribute(subtable);
+          }.bind(this));
+        }
+      },
+      generateIdeal: function (alignment) {
+        var idealTable;
+        if (alignment.indexOf(' ') < 0) {
+          idealTable = this.tables.tables['Ideals'].tables[alignment];
+        } else {
+          var alignments = alignment.split(' ');
+          idealTable = this.tables.tables['Ideals'].tables[alignments[Math.floor(
+              Math.random() * alignments.length)]];
+        }
+        if (!this.attributeToTable[idealTable.columns[0]]) {
+          this.attributeToTable[idealTable.columns[0]] = idealTable;
+        }
+        return {name: idealTable.columns[0], value: this.getEntry(idealTable)};
+      },
+      setNPCName: function (event) {
+        if (this.names.length > 0) {
+          this.set('npc.name', this.pop('names'));
+        } else {
+          // Trigger refresh of names
+          this.set('names', [0]);
+          this.set('names', []);
+        }
+      },
+      refreshAttribute: function (event) {
+        var table = this.attributeToTable[event.model.item.name];
+        var entry = this.getEntry(table);
+        while (entry == event.model.item.value) {
+          entry = this.getEntry(table);
+        }
+        this.set('npc.attributes.' + event.model.index + '.value', entry);
+        if (table.name == 'Alignments') {
+          var ideal = this.generateIdeal(entry);
+          this.set('npc.attributes.' + (event.model.index + 1), ideal);
+        }
+      }
+    })
+  </script>
+</dom-module>

@@ -8,8 +8,6 @@
 <link rel="import" href="/bower/iron-icon/iron-icon.html">
 <link rel="import" href="/bower/iron-icons/hardware-icons.html">
 <link rel="import" href="/bower/paper-card/paper-card.html">
-<link rel="import" href="/bower/paper-item/paper-item.html">
-<link rel="import" href="/bower/paper-item/paper-icon-item.html">
 
 <dom-module id="city-card">
   <template>
@@ -24,36 +22,36 @@
       }
     </style>
 
-    <google-signin-aware scopes="{{scopes}}" signed-in="{{isSignedIn}}"></google-signin-aware>
-    <iron-ajax id="refresh" url="/city/generate" params="{{generateParams}}"></iron-ajax>
+    <google-signin-aware scopes="[[scopes]]" signed-in="{{isSignedIn}}"></google-signin-aware>
+    <iron-ajax id="refresh" url="/city/generate" params="[[generateParams]]"></iron-ajax>
     <paper-card class="city flex">
       <div class="header paper-card">
         <div class="title-text paper-card layout horizontal">
           <span class="flex">
             <editing-item class="city-name" item="{{city.name}}"></editing-item>
           </span>
-          <iron-icon class$="{{signedInClass}} self-center" icon="{{mainIcon}}"
+          <iron-icon class$="[[signedInClass]] self-center" icon="[[mainIcon]]"
                      on-tap="primaryTap"></iron-icon>
         </div>
       </div>
       <div class="card-content">
         <toggle-collapse header="Ruler" opened="[[opened]]" on-icon-tap="refreshRuler">
-          <paper-input no-label-float value="{{city.ruler.name}}" on-keydown="_keyCheck">
-            <span suffix class="flex self-end">{{city.ruler.species}}</span>
+          <paper-input no-label-float value="[[city.ruler.name]]" on-keydown="_keyCheck">
+            <span suffix class="flex self-end">[[city.ruler.species]]</span>
           </paper-input>
         </toggle-collapse>
-        <toggle-collapse header="Population: {{city.population.tot}}"
-                         content="{{_popContent(city.population.people)}}"
+        <toggle-collapse header="Population: [[city.population.tot]]"
+                         content="[[_popContent(city.population.people)]]"
                          opened="[[opened]]"
                          on-icon-tap="refreshPopulation">
         </toggle-collapse>
         <toggle-collapse header="Inns/Shoppes"
-                         content="{{city.inns}}"
+                         content="[[city.inns]]"
                          opened="[[opened]]"
                          on-icon-tap="refreshInns">
         </toggle-collapse>
         <toggle-collapse header="Guilds"
-                         content="{{city.guilds}}"
+                         content="[[city.guilds]]"
                          opened="[[opened]]"
                          on-icon-tap="refreshGuilds">
         </toggle-collapse>
@@ -67,6 +65,7 @@
       properties: {
         generateParams: Object,
         races: Array,
+        scopes: String,
         city: {
           type: Object,
           notify: true
@@ -86,10 +85,6 @@
         up: {
           type: String,
           value: "hardware:keyboard-arrow-up"
-        },
-        scopes: {
-          type: String,
-          value: "https://www.googleapis.com/auth/drive.appdata"
         },
         signedInClass: {
           type: String,

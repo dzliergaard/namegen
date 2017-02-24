@@ -14,24 +14,24 @@
     <paper-item>
       <paper-item-body>
         <div class="layout horizontal">
-          <iron-icon class="self-start" icon="{{icon}}" on-tap="toggle"></iron-icon>
+          <iron-icon class="self-start" icon="[[icon]]" on-tap="toggle"></iron-icon>
           <span class="flex" on-tap="toggle">{{header}}</span>
           <iron-icon class="self-end" icon="refresh" on-tap="iconTap"></iron-icon>
         </div>
-        <iron-collapse secondary id="collapse" class="layout vertical" opened="{{opened}}">
-          <template is="dom-if" if="{{_isContentArray(content)}}">
-            <template is="dom-repeat" items="{{content}}">
+        <iron-collapse secondary id="collapse" class="layout vertical" opened="[[opened]]">
+          <template is="dom-if" if="[[_isContentArray(content)]]">
+            <template is="dom-repeat" items="[[content]]">
               <paper-item class="flex">
                 {{item}}
               </paper-item>
             </template>
           </template>
-          <template is="dom-if" if="{{_isContentString}}">
+          <template is="dom-if" if="[[_isContentString]]">
             <paper-item>
               {{content}}
             </paper-item>
           </template>
-          <template is="dom-if" if="{{!content}}">
+          <template is="dom-if" if="[[!content]]">
             <paper-item>
               <content></content>
             </paper-item>

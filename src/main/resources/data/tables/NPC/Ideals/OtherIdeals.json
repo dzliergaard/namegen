@@ -1,0 +1,30 @@
+{
+  "columns": ["Other Ideal"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Other Ideal": "Aspiration"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Other Ideal": "Discovery"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Other Ideal": "Glory"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Other Ideal": "Nation"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Other Ideal": "Redemption"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Other Ideal": "Self-knowledge"
+  }],
+  "maxRoll": 6,
+  "name": "Other"
+}

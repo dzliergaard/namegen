@@ -1,0 +1,46 @@
+{
+  "columns": ["Method"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Method": "Bribery"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Method": "Enticement"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Method": "Eviction"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Method": "Imprisonment"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Method": "Kidnapping"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Method": "Legal intimidation"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Method": "Press gangs"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Method": "Shackling"
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Method": "Slavery"
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Method": "Threats or harassment"
+  }],
+  "maxRoll": 10,
+  "name": "Captivity Or Coercion"
+}

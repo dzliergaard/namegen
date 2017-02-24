@@ -1,0 +1,120 @@
+<link rel="import" href="npc-card.html">
+<link rel="import" href="../dark-theme.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="/bower/paper-button/paper-button.html">
+<link rel="import" href="/bower/paper-card/paper-card.html">
+<link rel="import" href="/bower/paper-item/paper-item.html">
+<link rel="import" href="/bower/paper-item/paper-item-body.html">
+<link rel="import" href="/bower/paper-listbox/paper-listbox.html">
+
+<dom-module id="npc-page">
+  <template>
+    <style include="dark-theme iron-flex iron-flex-alignment">
+      :host ::content .title-text {
+        --paper-input-container-input: {
+          font-size: 24px;
+        };
+      }
+    </style>
+    <iron-ajax id="getnames" url="/name/generate" params="{{getNamesParams}}"
+               on-response="setNPCNames"></iron-ajax>
+    <div class="vertical layout start">
+      <paper-button on-tap="generateNPC">Generate</paper-button>
+      <div class$="[[layoutClass(pageColumns)]] layout wrap">
+        <npc-card id="generated" hidden
+                  npc="{{generatedNPC}}"
+                  main-icon="star-border"
+                  names="{{names}}"
+                  scopes="[[scopes]]"
+                  tables="[[npcTables]]"
+                  on-primary-tap="saveNPC"></npc-card>
+        <template is="dom-repeat" items="{{npcs}}">
+          <npc-card class="dark"
+                    npc="{{item}}"
+                    names="{{names}}"
+                    tables="[[npcTables]]"
+                    scopes="[[scopes]]"
+                    on-primary-tap="removeNPC"></npc-card>
+        </template>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'npc-page',
+      properties: {
+        pageColumns: Number,
+        scopes: String,
+        tables: Object,
+        generatedNPC: {
+          type: Object
+        },
+        getNamesParams: {
+          type: Object,
+          value: {num: 20}
+        },
+        names: {
+          type: Array,
+          value: []
+        },
+        npcs: {
+          type: Array,
+          value: [],
+          notify: true
+        },
+        npcTables: {
+          type: Object,
+          computed: 'getNPCTables(tables)'
+        }
+      },
+      observers: [
+        'refreshNamesOnEmpty(names.splices)'
+      ],
+      getNPCTables: function (tables) {
+        if (!tables) {
+          return false;
+        }
+        for (var i = 0; i < tables.tablesArray.length; i++) {
+          var table = tables.tablesArray[i];
+          if (table.name == 'NPC') {
+            return table;
+          }
+          if (table.tablesArray) {
+            var npcTables = this.getNPCTables(table);
+            if (npcTables) {
+              return npcTables;
+            }
+          }
+        }
+        return null;
+      },
+      setNPCNames: function (event, request) {
+        this.set('names', request.response.data);
+      },
+      refreshNamesOnEmpty: function () {
+        if (this.names.length == 0) {
+          this.$.getnames.generateRequest();
+        }
+      },
+      generateNPC: function (event) {
+        this.$.generated.generate();
+        this.$.generated.hidden = false;
+      },
+      layoutClass: function (columns) {
+        return columns == 12 ? 'horizontal' : 'vertical';
+      },
+      removeNPC: function (event) {
+        var index = this.npcs.indexOf(event.target.npc);
+        if (index >= 0) {
+          this.splice('npcs', index, 1);
+        }
+      },
+      saveNPC: function () {
+        this.unshift('npcs', this.$.generated.npc);
+        this.$.generated.set('npc', {});
+        this.$.generated.hidden = true;
+      }
+    })
+  </script>
+</dom-module>

@@ -1,0 +1,46 @@
+{
+  "columns": ["Method"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Method": "Arson"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Method": "Blackmail or extortion"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Method": "Burglary"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Method": "Counterfeiting"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Method": "Highway robbery"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Method": "Looting"
+  }, {
+    "Roll": 7.0,
+    "weight": 1.0,
+    "Method": "Mugging"
+  }, {
+    "Roll": 8.0,
+    "weight": 1.0,
+    "Method": "Poaching"
+  }, {
+    "Roll": 9.0,
+    "weight": 1.0,
+    "Method": "Seizing property"
+  }, {
+    "Roll": 10.0,
+    "weight": 1.0,
+    "Method": "Smuggling"
+  }],
+  "maxRoll": 10,
+  "name": "Theft Or Property Crime"
+}

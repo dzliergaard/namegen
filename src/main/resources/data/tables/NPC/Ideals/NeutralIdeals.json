@@ -1,0 +1,30 @@
+{
+  "columns": ["Neutral Ideal"],
+  "entries": [{
+    "Roll": 1.0,
+    "weight": 1.0,
+    "Neutral Ideal": "Balance"
+  }, {
+    "Roll": 2.0,
+    "weight": 1.0,
+    "Neutral Ideal": "Knowledge"
+  }, {
+    "Roll": 3.0,
+    "weight": 1.0,
+    "Neutral Ideal": "Live and let live"
+  }, {
+    "Roll": 4.0,
+    "weight": 1.0,
+    "Neutral Ideal": "Moderation"
+  }, {
+    "Roll": 5.0,
+    "weight": 1.0,
+    "Neutral Ideal": "Neutrality"
+  }, {
+    "Roll": 6.0,
+    "weight": 1.0,
+    "Neutral Ideal": "People"
+  }],
+  "maxRoll": 6,
+  "name": "Neutral"
+}

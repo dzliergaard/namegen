@@ -1,23 +1,19 @@
-<link rel="import" href="name-line.html"/>
 <link rel="import" href="../dark-theme.html"/>
 <link rel="import" href="../util/hover-icon.html"/>
 <link rel="import" href="../behavior/uuid-behavior.html"/>
+<link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html"/>
+<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="/bower/paper-button/paper-button.html"/>
 <link rel="import" href="/bower/paper-card/paper-card.html"/>
 <link rel="import" href="/bower/paper-input/paper-input.html"/>
 <link rel="import" href="/bower/paper-item/paper-item.html"/>
 <link rel="import" href="/bower/paper-menu/paper-menu.html"/>
-<link rel="import" href="/bower/iron-ajax/iron-ajax.html"/>
-<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html"/>
-<link rel="import" href="/bower/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="/bower/paper-tooltip/paper-tooltip.html">
 
 <dom-module id="name-page">
   <template>
     <style is="custom-style" include="dark-theme iron-flex iron-flex-alignment">
-      :host ::content .generated name-line {
-        --paper-input-container-focus-color: var(--light-theme-text-color);
-      }
-
       :host ::content iron-icon {
         opacity: .5;
       }
@@ -72,6 +68,9 @@
                 <template is="dom-repeat" items="{{savedNames}}">
                   <paper-icon-item class="layout horizontal">
                     <hover-icon item-icon icon="delete" on-tap="removeName"></hover-icon>
+                    <hover-icon item-icon id="create-npc" icon="social:person"
+                                on-tap="createNPC"></hover-icon>
+                    <paper-tooltip for="create-npc">Create NPC with this name.</paper-tooltip>
                     <editing-item class="flex" item="{{item.text}}"></editing-item>
                   </paper-icon-item>
                 </template>
@@ -127,6 +126,9 @@
         if (event.model.item.id && index > -1) {
           this.splice('savedNames', index, 1);
         }
+      },
+      createNPC: function (event) {
+        this.fire('create-npc', {npcName: event.model.item.text});
       }
     });
   </script>

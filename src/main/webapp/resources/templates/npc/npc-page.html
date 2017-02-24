@@ -99,6 +99,9 @@
       },
       generateNPC: function (event) {
         this.$.generated.generate();
+        if (event.detail.npcName) {
+          this.$.generated.set('npc.name', event.detail.npcName);
+        }
         this.$.generated.hidden = false;
       },
       layoutClass: function (columns) {

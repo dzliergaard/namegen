@@ -71,7 +71,7 @@
         <paper-toolbar>
           <google-signin client-id="[[clientId]]" scopes="[[scopes]]"></google-signin>
         </paper-toolbar>
-        <paper-menu selected="{{location.page}}" attr-for-selected="name">
+        <paper-menu id="pagemenu" selected="{{location.page}}" attr-for-selected="name">
           <template is="dom-repeat" items="[[pages]]" as="page">
             <paper-icon-item name="[[page.location]]" on-tap="closeDrawer">
               <iron-icon item-icon icon="[[page.icon]]"></iron-icon>
@@ -96,7 +96,7 @@
                      scopes="[[scopes]]"></city-page>
           <dungeon-page name="dungeon" is-signed-in="[[isSignedIn]]"
                         tables="{{tables}}" page-columns="[[columns]]"></dungeon-page>
-          <npc-page name="npc" tables="{{tables}}" scopes="[[scopes]]"
+          <npc-page id="npcpage" name="npc" tables="{{tables}}" scopes="[[scopes]]"
                     page-columns="[[columns]]" npcs="{{userSavedContent.npcs}}"></npc-page>
           <party-page name="party" saved-parties="{{userSavedContent.parties}}"
                       on-save="contentUpdated"></party-page>
@@ -153,7 +153,8 @@
       },
       listeners: {
         'google-signin-success': 'userSignedIn',
-        'google-signed-out': 'userSignedOut'
+        'google-signed-out': 'userSignedOut',
+        'create-npc': 'createNPC'
       },
       observers: [
         'contentUpdated(userSavedContent.names.*)',
@@ -179,9 +180,13 @@
         this.isSignedIn = true;
         this.$.drivedata.downloadAppDataFile();
       },
-      userSignedOut: function (e) {
+      userSignedOut: function () {
         this.isSignedIn = false;
         this.set('userSavedContent', {});
+      },
+      createNPC: function(event) {
+        this.$.pagemenu.select('npc');
+        this.$.npcpage.generateNPC(event);
       },
       tablesToArray: function (tables) {
         if (!tables.tables) {

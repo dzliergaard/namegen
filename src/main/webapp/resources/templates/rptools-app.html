@@ -115,7 +115,10 @@
       properties: {
         columns: Number,
         races: Array,
-        userSavedContent: Object,
+        userSavedContent: {
+          type: Object,
+          value: {}
+        },
         clientId: {
           type: String,
           value: '455791253437-tbh3r1rc5lg720tnfrlfbi5cm7n5rvm4.apps.googleusercontent.com'
@@ -156,15 +159,6 @@
         'google-signed-out': 'userSignedOut',
         'create-npc': 'createNPC'
       },
-      observers: [
-        'contentUpdated(userSavedContent.names.*)',
-        'contentUpdated(userSavedContent.cities.*)',
-        'contentUpdated(userSavedContent.npcs.*)',
-        'contentUpdated(userSavedContent.names.splices)',
-        'contentUpdated(userSavedContent.cities.splices)',
-        'contentUpdated(userSavedContent.npcs.splices)',
-        'contentUpdated(userSavedContent.parties.splices)'
-      ],
       closeDrawer: function () {
         this.$.drawer.closeDrawer();
       },
@@ -174,7 +168,7 @@
         }).text;
       },
       contentUpdated: function () {
-        this.$.drivedata.updateContent();
+        this.$.drivedata.contentUpdated();
       },
       userSignedIn: function () {
         this.isSignedIn = true;

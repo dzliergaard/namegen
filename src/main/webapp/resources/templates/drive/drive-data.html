@@ -32,6 +32,16 @@
           value: false
         }
       },
+      observers: [
+        'contentUpdated(userSavedContent.names.*)',
+        'contentUpdated(userSavedContent.cities.*)',
+        'contentUpdated(userSavedContent.npcs.*)',
+        'contentUpdated(userSavedContent.names.splices)',
+        'contentUpdated(userSavedContent.cities.splices)',
+        'contentUpdated(userSavedContent.npcs.splices)',
+        'contentUpdated(userSavedContent.parties.splices)',
+        'stopListening(isSignedIn)'
+      ],
       get updateRequestParams() {
         return {
           path: '/upload/drive/v3/files/' + this.appDataFileMetadata.id,
@@ -51,7 +61,13 @@
           this.$.drive._loadClient();
         }
       },
-      updateContent: function () {
+      stopListening: function(isSignedIn) {
+        if (!isSignedIn) {
+          this.listening = false;
+          delete this.appDataFileMetadata.id;
+        }
+      },
+      contentUpdated: function (userSavedContent) {
         if (!this.listening || !this.isSignedIn) {
           return;
         }
@@ -100,17 +116,10 @@
         if (response.status == 200) {
           if (response.result) {
             this.set('userSavedContent', response.result);
-            ['names', 'cities', 'parties', 'npcs'].forEach(function (attr) {
-              this.set('userSavedContent.' + attr, this.userSavedContent[attr] || []);
-            }.bind(this));
-          } else {
-            this.set('userSavedContent', {
-              names: [],
-              cities: [],
-              parties: [],
-              npcs: []
-            });
           }
+          ['names', 'cities', 'parties', 'npcs'].forEach(function (attr) {
+            this.set('userSavedContent.' + attr, this.userSavedContent[attr] || []);
+          }.bind(this));
           this.listening = true;
         }
       }

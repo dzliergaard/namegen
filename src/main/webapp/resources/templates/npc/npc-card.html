@@ -116,12 +116,12 @@
       _signedInClass: function (isSignedIn) {
         return isSignedIn ? "" : "not-signed-in"
       },
-      mapAttributeToTable: function(tables) {
+      mapAttributeToTable: function (tables) {
         if (tables.columns) {
           this.attributeToTable[tables.columns[0]] = tables;
         }
         if (tables.tablesArray) {
-          tables.tablesArray.forEach(function(subtable){
+          tables.tablesArray.forEach(function (subtable) {
             this.mapAttributeToTable(subtable);
           }.bind(this));
         }
@@ -146,7 +146,7 @@
           this.generateAttribute(table);
         }.bind(this));
       },
-      getEntry: function(table) {
+      getEntry: function (table) {
         var column = table.columns[0];
         return this.getRandomEntry(table)[column];
       },
@@ -195,6 +195,11 @@
         }
       },
       refreshAttribute: function (event) {
+        if (/Ideal$/.exec(event.model.item.name)) {
+          var ideal = this.generateIdeal(this.npc.attributes[event.model.index - 1].value);
+          this.set('npc.attributes.' + (event.model.index), ideal);
+          return;
+        }
         var table = this.attributeToTable[event.model.item.name];
         var entry = this.getEntry(table);
         while (entry == event.model.item.value) {
@@ -202,8 +207,7 @@
         }
         this.set('npc.attributes.' + event.model.index + '.value', entry);
         if (table.name == 'Alignments') {
-          var ideal = this.generateIdeal(entry);
-          this.set('npc.attributes.' + (event.model.index + 1), ideal);
+          this.set('npc.attributes.' + (event.model.index + 1), this.generateIdeal(entry));
         }
       }
     })

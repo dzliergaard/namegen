@@ -57,7 +57,8 @@
       <div class="card-content">
         <paper-datatable id="datatable" data="{{party.characters}}">
           <template is="dom-repeat" items="{{columns}}">
-            <paper-datatable-column header="{{item.label}}" property="{{item.id}}" type="{{item.type}}" sortable editable>
+            <paper-datatable-column header="{{item.label}}" property="{{item.id}}"
+                                    type="{{item.type}}" sortable editable>
             </paper-datatable-column>
           </template>
         </paper-datatable>
@@ -110,7 +111,7 @@
         '_rowsChanged(party.characters.*)',
         '_columnsChanged(columns)'
       ],
-      _createElement: function(tag, attributes) {
+      _createElement: function (tag, attributes) {
         var el = document.createElement(tag);
         if (!attributes) {
           return el;
@@ -122,16 +123,17 @@
         }
         return el;
       },
-      _columnsChanged: function(columns) {
+      _columnsChanged: function (columns) {
         var datatable = this.$.datatable;
         // remove current columns
-        Polymer.dom(datatable).queryDistributedElements('paper-datatable-column').forEach(function(column){
-          column.remove();
-        });
+        Polymer.dom(datatable).queryDistributedElements('paper-datatable-column').forEach(
+            function (column) {
+              column.remove();
+            });
         if (!columns) {
           return;
         }
-        columns.forEach(function(column){
+        columns.forEach(function (column) {
           datatable.appendChild(this._createElement('paper-datatable-column', {
             header: column.label,
             property: column.id,
@@ -164,9 +166,6 @@
       deleteParty: function () {
         this.fire('delete-party');
         this.set('columns', null);
-      },
-      editParty: function () {
-        this.fire('edit-party');
       },
       primaryTap: function () {
         if (!this.isSignedIn) {

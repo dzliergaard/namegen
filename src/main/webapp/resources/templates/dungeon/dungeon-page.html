@@ -52,7 +52,6 @@
       properties: {
         dungeon: Object,
         pageColumns: Number,
-        tables:  Object,
         colors: {
           type: Object,
           value: {
@@ -63,7 +62,7 @@
         },
         dungeonTables: {
           type: Object,
-          computed: 'getDungeonTables(tables)'
+          computed: 'getTableSet(tables, "Dungeons")'
         },
         formValues: {
           type: Object,
@@ -101,7 +100,7 @@
           attributes: []
         };
         this.$.dungeon.hidden = false;
-        this.dungeonTables.forEach(function (table) {
+        this.dungeonTables.tablesArray.forEach(function (table) {
           var column = table.columns[0];
           var entry = this.getRandomEntry(table)[column];
           // TODO: Add re-roll to redirect entries with table_path
@@ -134,24 +133,6 @@
           this.ctx.restore();
           this.ctx.translate(0, this.unit);
         }, this);
-      },
-      getDungeonTables: function (tables) {
-        if (!tables) {
-          return false;
-        }
-        for (var i = 0; i < tables.tablesArray.length; i++) {
-          var table = tables.tablesArray[i];
-          if (table.name == 'Dungeons') {
-            return table.tablesArray;
-          }
-          if (table.tablesArray) {
-            var dTables = this.getDungeonTables(table);
-            if (dTables) {
-              return dTables;
-            }
-          }
-        }
-        return null;
       },
       layoutClass: function (columns) {
         return columns == 12 ? 'horizontal' : 'vertical';

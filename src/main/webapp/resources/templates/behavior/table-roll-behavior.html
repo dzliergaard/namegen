@@ -1,6 +1,30 @@
 <script>
   window.rptools = window.rptools || {};
   rptools.TableRollBehavior = {
+    properties: {
+      tables: {
+        type: Object
+      }
+    },
+    // Scans through tables object to find the tableset with the specified name.
+    getTableSet: function(tables, tableSetName) {
+      if (!tables) {
+        return false;
+      }
+      for (var i = 0; i < tables.tablesArray.length; i++) {
+        var table = tables.tablesArray[i];
+        if (table.name == tableSetName) {
+          return table;
+        }
+        if (table.tablesArray) {
+          var tableSet = this.getTableSet(table, tableSetName);
+          if (tableSet) {
+            return tableSet;
+          }
+        }
+      }
+      return null;
+    },
     getRandomEntry: function (table) {
       this.roll = Math.floor(Math.random() * table.maxRoll);
       var ind = this.roll;

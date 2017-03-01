@@ -62,7 +62,15 @@
       behaviors: [rptools.TableRollBehavior],
       properties: {
         scopes: String,
-        tables: {
+        characterTables: {
+          type: Object,
+          observer: 'mapAttributeToTable'
+        },
+        idealsTables: {
+          type: Object,
+          observer: 'mapAttributeToTable'
+        },
+        npcTables: {
           type: Object,
           observer: 'mapAttributeToTable'
         },
@@ -142,13 +150,11 @@
       generate: function () {
         this.set('npc', {attributes: []});
         this.setNPCName();
-        this.tables.tablesArray.forEach(function (table) {
+        this.generateAttribute(this.characterTables.tables.Race);
+        this.generateAttribute(this.characterTables.tables.Class);
+        this.npcTables.tablesArray.forEach(function (table) {
           this.generateAttribute(table);
         }.bind(this));
-      },
-      getEntry: function (table) {
-        var column = table.columns[0];
-        return this.getRandomEntry(table)[column];
       },
       generateAttribute: function (table) {
         if (table.noGen) {
@@ -174,10 +180,10 @@
       generateIdeal: function (alignment) {
         var idealTable;
         if (alignment.indexOf(' ') < 0) {
-          idealTable = this.tables.tables['Ideals'].tables[alignment];
+          idealTable = this.idealsTables.tables[alignment];
         } else {
           var alignments = alignment.split(' ');
-          idealTable = this.tables.tables['Ideals'].tables[alignments[Math.floor(
+          idealTable = this.idealsTables.tables[alignments[Math.floor(
               Math.random() * alignments.length)]];
         }
         if (!this.attributeToTable[idealTable.columns[0]]) {

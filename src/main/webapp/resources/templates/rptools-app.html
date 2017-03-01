@@ -95,8 +95,8 @@
                      columns="[[columns]]"
                      scopes="[[scopes]]"></city-page>
           <dungeon-page name="dungeon" is-signed-in="[[isSignedIn]]"
-                        tables="{{tables}}" page-columns="[[columns]]"></dungeon-page>
-          <npc-page id="npcpage" name="npc" tables="{{tables}}" scopes="[[scopes]]"
+                        tables="[[tables]]" page-columns="[[columns]]"></dungeon-page>
+          <npc-page id="npcpage" name="npc" tables="[[tables]]" scopes="[[scopes]]"
                     page-columns="[[columns]]" npcs="{{userSavedContent.npcs}}"></npc-page>
           <party-page name="party" saved-parties="{{userSavedContent.parties}}"
                       on-save="contentUpdated"></party-page>
@@ -115,6 +115,7 @@
       properties: {
         columns: Number,
         races: Array,
+        tables: Object,
         userSavedContent: {
           type: Object,
           value: {}
@@ -149,9 +150,6 @@
         scopes: {
           type: String,
           value: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata'
-        },
-        tables: {
-          type: Object
         }
       },
       listeners: {

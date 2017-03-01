@@ -26,13 +26,17 @@
                   main-icon="star-border"
                   names="{{names}}"
                   scopes="[[scopes]]"
-                  tables="[[npcTables]]"
+                  character-tables="[[characterTables]]"
+                  ideals-tables="[[idealsTables]]"
+                  npc-tables="[[npcTables]]"
                   on-primary-tap="saveNPC"></npc-card>
         <template is="dom-repeat" items="{{npcs}}">
           <npc-card class="dark"
                     npc="{{item}}"
                     names="{{names}}"
-                    tables="[[npcTables]]"
+                    character-tables="[[characterTables]]"
+                    ideals-tables="[[idealsTables]]"
+                    npc-tables="[[npcTables]]"
                     scopes="[[scopes]]"
                     on-primary-tap="removeNPC"></npc-card>
         </template>
@@ -43,16 +47,16 @@
   <script>
     Polymer({
       is: 'npc-page',
+      behaviors: [rptools.TableRollBehavior],
       properties: {
         pageColumns: Number,
         scopes: String,
-        tables: Object,
         generatedNPC: {
           type: Object
         },
         getNamesParams: {
           type: Object,
-          value: {num: 20}
+          value: {num: 100}
         },
         names: {
           type: Array,
@@ -63,32 +67,22 @@
           value: [],
           notify: true
         },
+        characterTables: {
+          type: Object,
+          computed: 'getTableSet(tables, "Characters")'
+        },
+        idealsTables: {
+          type: Object,
+          computed: 'getTableSet(tables, "Ideals")'
+        },
         npcTables: {
           type: Object,
-          computed: 'getNPCTables(tables)'
+          computed: 'getTableSet(tables, "NPC")'
         }
       },
       observers: [
         'refreshNamesOnEmpty(names.splices)'
       ],
-      getNPCTables: function (tables) {
-        if (!tables) {
-          return false;
-        }
-        for (var i = 0; i < tables.tablesArray.length; i++) {
-          var table = tables.tablesArray[i];
-          if (table.name == 'NPC') {
-            return table;
-          }
-          if (table.tablesArray) {
-            var npcTables = this.getNPCTables(table);
-            if (npcTables) {
-              return npcTables;
-            }
-          }
-        }
-        return null;
-      },
       setNPCNames: function (event, request) {
         this.set('names', request.response.data);
       },

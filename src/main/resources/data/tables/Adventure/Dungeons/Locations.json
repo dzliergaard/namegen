@@ -96,7 +96,7 @@
     "Roll": "96-100",
     "weight": 5.0,
     "Location": {
-      "table_path": "Adventure/Dungeons/Locations/Exotic"
+      "table_path": "Adventure.Dungeons.Locations.Exotic"
     }
   }],
   "maxRoll": 100,

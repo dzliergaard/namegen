@@ -1,0 +1,57 @@
+<link rel="import" href="../behavior/table-roll-behavior.html">
+<link rel="import" href="/bower/paper-datatable/paper-datatable.html">
+<link rel="import" href="/bower/paper-datatable/paper-datatable-column.html">
+
+<dom-module is="rptools-table">
+  <template>
+    <div class="flex">
+      <template is="dom-if" if="[[table.tablesArray]]">
+        <template is="dom-repeat" items="[[table.tablesArray]]"
+                  index-as="subindex">
+          <rptools-table table="[[item]]" tables="[[tables]]" roll="{{roll}}"></rptools-table>
+        </template>
+      </template>
+      <paper-datatable hidden id="table" data="[[table.entries]]">
+        <paper-datatable-column id="roll-column" header="Roll"
+                                property="Roll"></paper-datatable-column>
+        <template is="dom-repeat" items="[[table.columns]]" as="column">
+          <paper-datatable-column header="[[column]]" property="[[column]]">
+            <template>
+              [[parseValue(value)]]
+            </template>
+          </paper-datatable-column>
+        </template>
+      </paper-datatable>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'rptools-table',
+      behaviors: [rptools.TableRollBehavior],
+      properties: {
+        roll: Number,
+        table: {
+          type: Object,
+          value: {}
+        }
+      },
+      parseValue: function (value) {
+        if (typeof value == 'string') {
+          return value;
+        }
+        return this.redirectEntryText(value);
+      },
+      ready: function () {
+        this.table.datatable = this;
+      },
+      selectRandom: function () {
+        var entry = this.getRandomEntry(this.table);
+        this.$.table.select(entry.entry);
+      },
+      show: function (show) {
+        this.$.table.hidden = !show;
+      }
+    });
+  </script>
+</dom-module>

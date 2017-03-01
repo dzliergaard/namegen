@@ -59,7 +59,7 @@
   }, {
     "Roll": 15.0,
     "weight": 1.0,
-    "Location": "In the Shadowfel1"
+    "Location": "In the Shadowfell"
   }, {
     "Roll": 16.0,
     "weight": 1.0,
@@ -82,5 +82,5 @@
     "Location": "Inside a Mordenkainen's magnificent mansion"
   }],
   "maxRoll": 20,
-  "name": "Exotic Locations"
+  "name": "Exotic"
 }

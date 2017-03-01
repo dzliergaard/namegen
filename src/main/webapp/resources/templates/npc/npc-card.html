@@ -145,7 +145,7 @@
       },
       getEntry: function (table) {
         var column = table.columns[0];
-        return this.getRandomEntry(table)[column];
+        return this.getRandomEntry(table).entry[column];
       },
       generate: function () {
         this.set('npc', {attributes: []});

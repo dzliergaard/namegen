@@ -1,4 +1,5 @@
-<link rel="import" href="./datatable.html">
+<link rel="import" href="../behavior/table-roll-behavior.html">
+<link rel="import" href="rptools-table.html">
 <link rel="import" href="/bower/iron-ajax/iron-ajax.html">
 <link rel="import" href="/bower/iron-icon/iron-icon.html">
 <link rel="import" href="/bower/iron-icons/iron-icons.html">
@@ -28,37 +29,37 @@
         white-space: nowrap;
       }
     </style>
-    <div class$="card-content {{layoutClass(pageColumns)}} layout">
+    <div class$="card-content [[layoutClass(pageColumns)]] layout">
       <paper-dropdown-menu allow-outside-scroll class="flex" label="Choose Table" horizontal-align="left">
         <paper-menu class="dropdown-content">
-          <template is="dom-repeat" items="{{tables.tablesArray}}">
-            <template is="dom-if" if="{{!item.tablesArray}}">
-              <paper-item on-tap="selectTable">{{item.name}}</paper-item>
+          <template is="dom-repeat" items="[[tables.tablesArray]]">
+            <template is="dom-if" if="[[!item.tablesArray]]">
+              <paper-item on-tap="selectTable">[[item.name]]</paper-item>
             </template>
-            <template is="dom-if" if="{{item.tablesArray}}">
+            <template is="dom-if" if="[[item.tablesArray]]">
               <paper-submenu>
                 <paper-item class="menu-trigger" on-tap="keepDropdownOpen">
                   <span class="horizontal layout justified">
-                    {{item.name}}
+                    [[item.name]]
                     <iron-icon icon="icons:arrow-drop-down"></iron-icon>
                   </span>
                 </paper-item>
                 <paper-menu class="menu-content">
-                  <template is="dom-repeat" items="{{item.tablesArray}}">
-                    <template is="dom-if" if="{{!item.tablesArray}}">
-                      <paper-item on-tap="selectTable">{{item.name}}</paper-item>
+                  <template is="dom-repeat" items="[[item.tablesArray]]">
+                    <template is="dom-if" if="[[!item.tablesArray]]">
+                      <paper-item on-tap="selectTable">[[item.name]]</paper-item>
                     </template>
-                    <template is="dom-if" if="{{item.tablesArray}}">
+                    <template is="dom-if" if="[[item.tablesArray]]">
                       <paper-submenu>
                         <paper-item class="menu-trigger" on-tap="keepDropdownOpen">
                           <span class="horizontal layout justified">
-                            {{item.name}}
+                            [[item.name]]
                             <iron-icon icon="icons:arrow-drop-down"></iron-icon>
                           </span>
                         </paper-item>
                         <paper-menu class="menu-content">
-                          <template is="dom-repeat" items="{{item.tablesArray}}">
-                            <paper-item on-tap="selectTable">{{item.name}}</paper-item>
+                          <template is="dom-repeat" items="[[item.tablesArray]]">
+                            <paper-item on-tap="selectTable">[[item.name]]</paper-item>
                           </template>
                         </paper-menu>
                       </paper-submenu>
@@ -74,14 +75,14 @@
         <paper-card hidden id="table-card" class="flex">
           <div class="header paper-card">
             <div class="title-text paper-card layout horizontal justified">
-              <span>{{table.name}}</span>
+              <span>[[table.name]]</span>
               <paper-fab mini id="roll-button" icon="places:casino" on-tap="selectRandom"></paper-fab>
               <paper-tooltip for="roll-button" position="left">Select random</paper-tooltip>
             </div>
           </div>
           <div id="card-content" class="card-content">
-            <template is="dom-repeat" items="{{tables.tablesArray}}">
-              <rptools-table table="{{item}}" roll="{{roll}}"></rptools-table>
+            <template is="dom-repeat" items="[[tables.tablesArray]]">
+              <rptools-table table="[[item]]" tables="[[tables]]" roll="{{roll}}"></rptools-table>
             </template>
           </div>
         </paper-card>
@@ -92,6 +93,7 @@
   <script>
     Polymer({
       is: 'tables-page',
+      behaviors: [rptools.TableRollBehavior],
       properties: {
         table: {
           type: Object

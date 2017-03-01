@@ -26,6 +26,7 @@
       return null;
     },
     getRandomEntry: function (table) {
+      var mainColumn = table.columns[0];
       this.roll = Math.floor(Math.random() * table.maxRoll);
       var ind = this.roll;
       var i = 0;
@@ -34,7 +35,33 @@
         entry = table.entries[i++];
         ind -= entry.weight;
       }
-      return entry;
+      if (typeof entry[mainColumn] == 'object') {
+        var tablePath = entry[mainColumn].table_path;
+        if (tablePath) {
+          // TODO: Address results that call for multiple rolls on current table.
+          if (tablePath != 'this') {
+            tablePath = tablePath.replace(/\./g, '.tables.');
+            var redirectTable = this.get('tables.tables.' + tablePath);
+            return {
+              entry: entry,
+              redirectTable: redirectTable,
+              redirectEntry: this.getRandomEntry(redirectTable).entry
+            }
+          }
+        }
+      }
+      return {
+        entry: entry
+      };
+    },
+    redirectEntryText: function(value) {
+      var rolls = value.num_rolls || 1;
+      var rollText = rolls == 1 ? 'Roll' : 'Roll ' + rolls + ' times';
+      if (value.table_path == 'this') {
+        return rollText + ', ignoring further rerolls.';
+      }
+      var table_path = value.table_path.replace(/\./g, '->');
+      return rollText + ' on ' + table_path + ' table.';
     }
   };
 </script>

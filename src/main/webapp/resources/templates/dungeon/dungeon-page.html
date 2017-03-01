@@ -81,7 +81,7 @@
           value: 60
         }
       },
-      ready: function() {
+      ready: function () {
         this.ctx = this.$.canvas.getContext('2d');
       },
       /** Generates a maze by creating a grid of 30x30 pieces, of 5 different types,
@@ -102,9 +102,19 @@
         this.$.dungeon.hidden = false;
         this.dungeonTables.tablesArray.forEach(function (table) {
           var column = table.columns[0];
-          var entry = this.getRandomEntry(table)[column];
-          // TODO: Add re-roll to redirect entries with table_path
-          dungeon.attributes.push({name: column, value: entry});
+          var entry = this.getRandomEntry(table);
+          var value = entry.entry[column];
+          if (!entry.redirectEntry) {
+            dungeon.attributes.push({name: column, value: value});
+          } else {
+            dungeon.attributes.push({name: column, value: this.redirectEntryText(value)});
+            var redirectColumn = entry.redirectTable.columns[0];
+            dungeon.attributes.push(
+                {
+                  name: value.table_path.replace(/\./g, '->'),
+                  value: entry.redirectEntry[redirectColumn]
+                });
+          }
         }.bind(this));
         this.set('dungeon', dungeon);
 
@@ -122,9 +132,9 @@
           }
         }
 
-        grid.forEach(function(row, x){
+        grid.forEach(function (row, x) {
           this.ctx.save();
-          row.forEach(function(square, y){
+          row.forEach(function (square, y) {
             this.drawSquare(square, grid, x, y);
             // Move to next position.
             this.ctx.translate(this.unit * 1, 0);
@@ -137,12 +147,12 @@
       layoutClass: function (columns) {
         return columns == 12 ? 'horizontal' : 'vertical';
       },
-      randomInt: function(exclusiveMax){
+      randomInt: function (exclusiveMax) {
         return Math.floor(Math.random() * exclusiveMax);
       },
-      drawBarrier: function(drawFn) {
+      drawBarrier: function (drawFn) {
         var barrier = this.randomInt(9);
-        switch(barrier) {
+        switch (barrier) {
           case 6:
           case 7:
             this.ctx.strokeStyle = this.colors.door;
@@ -154,7 +164,7 @@
         drawFn();
         this.ctx.strokeStyle = this.colors.base;
       },
-      drawSquare: function(square, grid, x, y){
+      drawSquare: function (square, grid, x, y) {
         var unit = this.unit;
         var third = unit / 3;
         var twoThird = third * 2;
@@ -174,14 +184,14 @@
 
         // Now draw the appropriate square.
         this.ctx.beginPath();
-        switch(square.type) {
+        switch (square.type) {
           case 0:
             // Type 0 is an open square.
             break;
           case 1:
             // Type 1 is a T intersection, with the 4th path blocked by a wall (66%)/door (33%).
             // One in three doors is hidden.
-            this.drawBarrier(function(){
+            this.drawBarrier(function () {
               this.ctx.moveTo(twoThird, third);
               this.ctx.lineTo(twoThird, twoThird);
               this.ctx.stroke();
@@ -212,14 +222,14 @@
             break;
           case 3:
             // Type 3 is like Type 4, but one path blocks (or goes over/under) the other.
-            this.drawBarrier(function(){
+            this.drawBarrier(function () {
               this.ctx.moveTo(third, third);
               this.ctx.lineTo(third, twoThird);
               this.ctx.stroke();
               this.ctx.closePath();
               this.ctx.beginPath();
             }.bind(this));
-            this.drawBarrier(function() {
+            this.drawBarrier(function () {
               this.ctx.moveTo(twoThird, third);
               this.ctx.lineTo(twoThird, twoThird);
               this.ctx.stroke();

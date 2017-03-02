@@ -151,7 +151,7 @@
         this.set('npc', {attributes: []});
         this.setNPCName();
         this.generateAttribute(this.characterTables.tables.Race);
-        this.generateAttribute(this.characterTables.tables.Class);
+        this.generateAttribute(this.characterTables.tables.Classes);
         this.npcTables.tablesArray.forEach(function (table) {
           this.generateAttribute(table);
         }.bind(this));

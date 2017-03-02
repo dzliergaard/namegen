@@ -1,84 +1,81 @@
 {
   "columns": ["Goal"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Goal": "Bring the villain to justice."
+    "weight": 1,
+    "roll": "1",
+    "values": ["Bring the villain to justice."]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Goal": "Clear the name of an innocent N PC."
+    "weight": 1,
+    "roll": "2",
+    "values": ["Clear the name of an innocent N PC."]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Goal": "Protect or hide an N PC."
+    "weight": 1,
+    "roll": "3",
+    "values": ["Protect or hide an N PC."]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Goal": "Protect an object."
+    "weight": 1,
+    "roll": "4",
+    "values": ["Protect an object."]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Goal": "Discover the nature and origin of a strange phenomenon that might be the villain's doing."
+    "weight": 1,
+    "roll": "5",
+    "values": ["Discover the nature and origin of a strange phenomenon that might be the villain's doing."]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Goal": "Find a wanted fugitive."
+    "weight": 1,
+    "roll": "6",
+    "values": ["Find a wanted fugitive."]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Goal": "Overthrow a tyrant. 8 Uncover a conspiracy to overthrow a ruler."
+    "weight": 1,
+    "roll": "7",
+    "values": ["Overthrow a tyrant. 8 Uncover a conspiracy to overthrow a ruler."]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Goal": "Negotiate peace between enemy nations or feuding families."
+    "weight": 1,
+    "roll": "8",
+    "values": ["Negotiate peace between enemy nations or feuding families."]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Goal": "Secure aid from a ruler or council."
+    "weight": 1,
+    "roll": "9",
+    "values": ["Secure aid from a ruler or council."]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Goal": "Help a villain find redemption."
+    "weight": 1,
+    "roll": "10",
+    "values": ["Help a villain find redemption."]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Goal": "Parley with a villain."
+    "weight": 1,
+    "roll": "11",
+    "values": ["Parley with a villain."]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Goal": "Smuggle weapons to rebel forces."
+    "weight": 1,
+    "roll": "12",
+    "values": ["Smuggle weapons to rebel forces."]
   }, {
-    "Roll": 13.0,
-    "weight": 1.0,
-    "Goal": "Stop a band of smugglers."
+    "weight": 1,
+    "roll": "13",
+    "values": ["Stop a band of smugglers."]
   }, {
-    "Roll": 14.0,
-    "weight": 1.0,
-    "Goal": "Gather intelligence on an enemy force."
+    "weight": 1,
+    "roll": "14",
+    "values": ["Gather intelligence on an enemy force."]
   }, {
-    "Roll": 15.0,
-    "weight": 1.0,
-    "Goal": "Win a tournament."
+    "weight": 1,
+    "roll": "15",
+    "values": ["Win a tournament."]
   }, {
-    "Roll": 16.0,
-    "weight": 1.0,
-    "Goal": "Determine the villain's identity."
+    "weight": 1,
+    "roll": "16",
+    "values": ["Determine the villain's identity."]
   }, {
-    "Roll": 17.0,
-    "weight": 1.0,
-    "Goal": "Locate a stolen item."
+    "weight": 1,
+    "roll": "17",
+    "values": ["Locate a stolen item."]
   }, {
-    "Roll": 18.0,
-    "weight": 1.0,
-    "Goal": "Make sure a wedding goes off without a hitch."
+    "weight": 1,
+    "roll": "18",
+    "values": ["Make sure a wedding goes off without a hitch."]
   }, {
-    "Roll": 19.0,
-    "weight": 1.0,
-    "Goal": {
-      "table_path": "this",
-      "num_rolls": 2.0
-    }
+    "weight": 1,
+    "roll": "19",
+    "values": [""]
   }],
   "maxRoll": 19,
   "name": "Event Based"

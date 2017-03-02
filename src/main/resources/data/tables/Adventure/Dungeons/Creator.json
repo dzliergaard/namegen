@@ -1,53 +1,53 @@
 {
   "columns": ["Creator"],
   "entries": [{
-    "Roll": "1",
-    "weight": 1.0,
-    "Creator": "Beholder"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Beholder"]
   }, {
-    "Roll": "2-4",
-    "weight": 3.0,
-    "Creator": "Cult or religious group (roll on the Cults and Religious Groups table to determine specifics)"
+    "weight": 3,
+    "roll": "2-4",
+    "values": ["Cult or religious group (roll on the Cults and Religious Groups table to determine specifics)"]
   }, {
-    "Roll": "5-8",
-    "weight": 4.0,
-    "Creator": "Dwarves"
+    "weight": 4,
+    "roll": "5-8",
+    "values": ["Dwarves"]
   }, {
-    "Roll": "9",
-    "weight": 1.0,
-    "Creator": "Elves (including drow)"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Elves (including drow)"]
   }, {
-    "Roll": "10",
-    "weight": 1.0,
-    "Creator": "Giants"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Giants"]
   }, {
-    "Roll": "11",
-    "weight": 1.0,
-    "Creator": "Hobgoblins"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Hobgoblins"]
   }, {
-    "Roll": "12-15",
-    "weight": 4.0,
-    "Creator": "Humans (roll on the NPC Alignment and NPC Class tables to determine specifics)"
+    "weight": 4,
+    "roll": "12-15",
+    "values": ["Humans (roll on the NPC Alignment and NPC Class tables to determine specifics)"]
   }, {
-    "Roll": "16",
-    "weight": 1.0,
-    "Creator": "Kuo-toa"
+    "weight": 1,
+    "roll": "16",
+    "values": ["Kuo-toa"]
   }, {
-    "Roll": "17",
-    "weight": 1.0,
-    "Creator": "Lich"
+    "weight": 1,
+    "roll": "17",
+    "values": ["Lich"]
   }, {
-    "Roll": "18",
-    "weight": 1.0,
-    "Creator": "Mindflayers"
+    "weight": 1,
+    "roll": "18",
+    "values": ["Mindflayers"]
   }, {
-    "Roll": "19",
-    "weight": 1.0,
-    "Creator": "Yuan-ti"
+    "weight": 1,
+    "roll": "19",
+    "values": ["Yuan-ti"]
   }, {
-    "Roll": "20",
-    "weight": 1.0,
-    "Creator": "No creator (natural caverns)"
+    "weight": 1,
+    "roll": "20",
+    "values": ["No creator (natural caverns)"]
   }],
   "maxRoll": 20,
   "name": "Creator"

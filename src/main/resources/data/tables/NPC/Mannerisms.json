@@ -1,81 +1,81 @@
 {
   "columns": ["Mannerism"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Mannerism": "Prone to singing, whistling, or humming quietly"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Prone to singing, whistling, or humming quietly"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Mannerism": "Speaks in rhyme or some other peculiar way"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Speaks in rhyme or some other peculiar way"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Mannerism": "Particularly low or high voice"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Particularly low or high voice"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Mannerism": "Slurs words, lisps, or stutters"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Slurs words, lisps, or stutters"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Mannerism": "Speaks loudly"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Speaks loudly"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Mannerism": "Whispers"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Whispers"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Mannerism": "Uses flowery speech or long words"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Uses flowery speech or long words"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Mannerism": "Frequently uses the wrong word"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Frequently uses the wrong word"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Mannerism": "Uses colorful oaths and exlamations"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Uses colorful oaths and exlamations"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Mannerism": "Makes constant jokes or puns"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Makes constant jokes or puns"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Mannerism": "Prone to predictions of doom"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Prone to predictions of doom"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Mannerism": "Fidgets"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Fidgets"]
   }, {
-    "Roll": 13.0,
-    "weight": 1.0,
-    "Mannerism": "Squints"
+    "weight": 1,
+    "roll": "13",
+    "values": ["Squints"]
   }, {
-    "Roll": 14.0,
-    "weight": 1.0,
-    "Mannerism": "Stares into the distance"
+    "weight": 1,
+    "roll": "14",
+    "values": ["Stares into the distance"]
   }, {
-    "Roll": 15.0,
-    "weight": 1.0,
-    "Mannerism": "Chews something"
+    "weight": 1,
+    "roll": "15",
+    "values": ["Chews something"]
   }, {
-    "Roll": 16.0,
-    "weight": 1.0,
-    "Mannerism": "Paces"
+    "weight": 1,
+    "roll": "16",
+    "values": ["Paces"]
   }, {
-    "Roll": 17.0,
-    "weight": 1.0,
-    "Mannerism": "Taps fingers"
+    "weight": 1,
+    "roll": "17",
+    "values": ["Taps fingers"]
   }, {
-    "Roll": 18.0,
-    "weight": 1.0,
-    "Mannerism": "Bites fingernails"
+    "weight": 1,
+    "roll": "18",
+    "values": ["Bites fingernails"]
   }, {
-    "Roll": 19.0,
-    "weight": 1.0,
-    "Mannerism": "Twirls hair or tugs beard"
+    "weight": 1,
+    "roll": "19",
+    "values": ["Twirls hair or tugs beard"]
   }],
   "maxRoll": 19,
   "name": "Mannerisms"

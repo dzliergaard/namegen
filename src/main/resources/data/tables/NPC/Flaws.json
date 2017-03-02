@@ -1,53 +1,53 @@
 {
   "columns": ["Flaw"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Flaw": "Forbidden love or susceptibility to romance"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Forbidden love or susceptibility to romance"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Flaw": "Enjoys decadent pleasures"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Enjoys decadent pleasures"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Flaw": "Arrogance"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Arrogance"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Flaw": "Envies another creature's possessions or station"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Envies another creature's possessions or station"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Flaw": "Overpowering greed"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Overpowering greed"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Flaw": "Prone to rage"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Prone to rage"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Flaw": "Has a powerful enemy"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Has a powerful enemy"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Flaw": "Specific phobia"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Specific phobia"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Flaw": "Shameful or scandalous history"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Shameful or scandalous history"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Flaw": "Secret crime or misdeed"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Secret crime or misdeed"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Flaw": "Possession of forbidden lore"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Possession of forbidden lore"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Flaw": "Foolhardy bravery"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Foolhardy bravery"]
   }],
   "maxRoll": 12,
   "name": "Flaws"

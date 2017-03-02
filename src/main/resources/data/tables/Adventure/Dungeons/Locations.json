@@ -1,103 +1,101 @@
 {
   "columns": ["Location"],
   "entries": [{
-    "Roll": "01-04",
-    "weight": 4.0,
-    "Location": "A building in a city"
+    "weight": 4,
+    "roll": "01-04",
+    "values": ["A building in a city"]
   }, {
-    "Roll": "05-08",
-    "weight": 4.0,
-    "Location": "Catacombs or sewers beneath a city"
+    "weight": 4,
+    "roll": "05-08",
+    "values": ["Catacombs or sewers beneath a city"]
   }, {
-    "Roll": "09-12",
-    "weight": 4.0,
-    "Location": "Beneath a farmhouse"
+    "weight": 4,
+    "roll": "09-12",
+    "values": ["Beneath a farmhouse"]
   }, {
-    "Roll": "13-16",
-    "weight": 4.0,
-    "Location": "Beneath a graveyard"
+    "weight": 4,
+    "roll": "13-16",
+    "values": ["Beneath a graveyard"]
   }, {
-    "Roll": "17-22",
-    "weight": 6.0,
-    "Location": "Beneath a ruined castle"
+    "weight": 6,
+    "roll": "17-22",
+    "values": ["Beneath a ruined castle"]
   }, {
-    "Roll": "23-26",
-    "weight": 4.0,
-    "Location": "Beneath a ruined city"
+    "weight": 4,
+    "roll": "23-26",
+    "values": ["Beneath a ruined city"]
   }, {
-    "Roll": "27-30",
-    "weight": 4.0,
-    "Location": "Beneath a temple"
+    "weight": 4,
+    "roll": "27-30",
+    "values": ["Beneath a temple"]
   }, {
-    "Roll": "31-34",
-    "weight": 4.0,
-    "Location": "In a chasm"
+    "weight": 4,
+    "roll": "31-34",
+    "values": ["In a chasm"]
   }, {
-    "Roll": "35-38",
-    "weight": 4.0,
-    "Location": "In a cliff face"
+    "weight": 4,
+    "roll": "35-38",
+    "values": ["In a cliff face"]
   }, {
-    "Roll": "39-42",
-    "weight": 4.0,
-    "Location": "In a desert"
+    "weight": 4,
+    "roll": "39-42",
+    "values": ["In a desert"]
   }, {
-    "Roll": "43-46",
-    "weight": 4.0,
-    "Location": "In a forest"
+    "weight": 4,
+    "roll": "43-46",
+    "values": ["In a forest"]
   }, {
-    "Roll": "47-50",
-    "weight": 4.0,
-    "Location": "In a glacier"
+    "weight": 4,
+    "roll": "47-50",
+    "values": ["In a glacier"]
   }, {
-    "Roll": "51-54",
-    "weight": 4.0,
-    "Location": "In a gorge"
+    "weight": 4,
+    "roll": "51-54",
+    "values": ["In a gorge"]
   }, {
-    "Roll": "55-58",
-    "weight": 4.0,
-    "Location": "In a jungle"
+    "weight": 4,
+    "roll": "55-58",
+    "values": ["In a jungle"]
   }, {
-    "Roll": "59-62",
-    "weight": 4.0,
-    "Location": "In a mountain pass"
+    "weight": 4,
+    "roll": "59-62",
+    "values": ["In a mountain pass"]
   }, {
-    "Roll": "63-66",
-    "weight": 4.0,
-    "Location": "In a swamp"
+    "weight": 4,
+    "roll": "63-66",
+    "values": ["In a swamp"]
   }, {
-    "Roll": "67-70",
-    "weight": 4.0,
-    "Location": "Beneath or on top of a mesa"
+    "weight": 4,
+    "roll": "67-70",
+    "values": ["Beneath or on top of a mesa"]
   }, {
-    "Roll": "71-74",
-    "weight": 4.0,
-    "Location": "In sea caves"
+    "weight": 4,
+    "roll": "71-74",
+    "values": ["In sea caves"]
   }, {
-    "Roll": "75-78",
-    "weight": 4.0,
-    "Location": "In several connected mesas"
+    "weight": 4,
+    "roll": "75-78",
+    "values": ["In several connected mesas"]
   }, {
-    "Roll": "79-82",
-    "weight": 4.0,
-    "Location": "On a mountain peak"
+    "weight": 4,
+    "roll": "79-82",
+    "values": ["On a mountain peak"]
   }, {
-    "Roll": "83-86",
-    "weight": 4.0,
-    "Location": "On a promontory"
+    "weight": 4,
+    "roll": "83-86",
+    "values": ["On a promontory"]
   }, {
-    "Roll": "87-90",
-    "weight": 4.0,
-    "Location": "On an island"
+    "weight": 4,
+    "roll": "87-90",
+    "values": ["On an island"]
   }, {
-    "Roll": "91-95",
-    "weight": 5.0,
-    "Location": "Underwater"
+    "weight": 5,
+    "roll": "91-95",
+    "values": ["Underwater"]
   }, {
-    "Roll": "96-100",
-    "weight": 5.0,
-    "Location": {
-      "table_path": "Adventure.Dungeons.Locations.Exotic"
-    }
+    "weight": 5,
+    "roll": "96-100",
+    "values": [""]
   }],
   "maxRoll": 100,
   "name": "Locations"

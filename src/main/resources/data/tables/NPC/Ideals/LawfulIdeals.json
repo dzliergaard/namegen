@@ -1,29 +1,29 @@
 {
   "columns": ["Lawful Ideal"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Lawful Ideal": "Community"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Community"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Lawful Ideal": "Fairness"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Fairness"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Lawful Ideal": "Honor"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Honor"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Lawful Ideal": "Logic"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Logic"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Lawful Ideal": "Responsibility"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Responsibility"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Lawful Ideal": "Tradition"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Tradition"]
   }],
   "maxRoll": 6,
   "name": "Lawful"

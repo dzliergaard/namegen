@@ -1,137 +1,53 @@
 {
   "columns": ["Class", "Hit Die", "Str", "Dex", "Con", "Int", "Wis", "Cha"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Class": "Barbarian",
-    "Hit Die": "d12",
-    "Str": "+",
-    "Dex": "-",
-    "Con": "+",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "-"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Barbarian", "d12", "+", "-", "+", "-", "-", "-"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Class": "Bard",
-    "Hit Die": "d8",
-    "Str": "-",
-    "Dex": "+",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "+"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Bard", "d8", "-", "+", "-", "-", "-", "+"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Class": "Cleric",
-    "Hit Die": "d8",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "+",
-    "Cha": "+"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Cleric", "d8", "-", "-", "-", "-", "+", "+"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Class": "Druid",
-    "Hit Die": "d8",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "-",
-    "Int": "+",
-    "Wis": "-",
-    "Cha": "+"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Druid", "d8", "-", "-", "-", "+", "-", "+"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Class": "Fighter",
-    "Hit Die": "d10",
-    "Str": "+",
-    "Dex": "-",
-    "Con": "+",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "-"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Fighter", "d10", "+", "-", "+", "-", "-", "-"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Class": "Monk",
-    "Hit Die": "d8",
-    "Str": "+",
-    "Dex": "+",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "-"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Monk", "d8", "+", "+", "-", "-", "-", "-"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Class": "Paladin",
-    "Hit Die": "d10",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "+",
-    "Cha": "+"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Paladin", "d10", "-", "-", "-", "-", "+", "+"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Class": "Ranger",
-    "Hit Die": "d10",
-    "Str": "+",
-    "Dex": "+",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "-"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Ranger", "d10", "+", "+", "-", "-", "-", "-"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Class": "Rogue",
-    "Hit Die": "d8",
-    "Str": "-",
-    "Dex": "+",
-    "Con": "-",
-    "Int": "+",
-    "Wis": "-",
-    "Cha": "-"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Rogue", "d8", "-", "+", "-", "+", "-", "-"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Class": "Sorcerer",
-    "Hit Die": "d6",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "+",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "+"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Sorcerer", "d6", "-", "-", "+", "-", "-", "+"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Class": "Warlock",
-    "Hit Die": "d8",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "+",
-    "Cha": "+"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Warlock", "d8", "-", "-", "-", "-", "+", "+"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Class": "Wizard",
-    "Hit Die": "d6",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "-",
-    "Int": "+",
-    "Wis": "-",
-    "Cha": "+"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Wizard", "d6", "-", "-", "-", "+", "-", "+"]
   }],
   "maxRoll": 12,
   "name": "Classes"

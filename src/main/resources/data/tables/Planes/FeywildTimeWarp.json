@@ -1,29 +1,29 @@
 {
   "columns": ["Time Distortion"],
   "entries": [{
-    "Roll": "1-2",
-    "weight": 2.0,
-    "Time Distortion": "Days become minutes"
+    "weight": 2,
+    "roll": "1-2",
+    "values": ["Days become minutes"]
   }, {
-    "Roll": "3-6",
-    "weight": 4.0,
-    "Time Distortion": "Days become hours months"
+    "weight": 4,
+    "roll": "3-6",
+    "values": ["Days become hours months"]
   }, {
-    "Roll": "7-13",
-    "weight": 7.0,
-    "Time Distortion": "No change"
+    "weight": 7,
+    "roll": "7-13",
+    "values": ["No change"]
   }, {
-    "Roll": "14-17",
-    "weight": 4.0,
-    "Time Distortion": "Days become weeks"
+    "weight": 4,
+    "roll": "14-17",
+    "values": ["Days become weeks"]
   }, {
-    "Roll": "18-19",
-    "weight": 2.0,
-    "Time Distortion": "Days become"
+    "weight": 2,
+    "roll": "18-19",
+    "values": ["Days become"]
   }, {
-    "Roll": "20",
-    "weight": 1.0,
-    "Time Distortion": "Days become years"
+    "weight": 1,
+    "roll": "20",
+    "values": ["Days become years"]
   }],
   "maxRoll": 20,
   "name": "Feywild Time Warp"

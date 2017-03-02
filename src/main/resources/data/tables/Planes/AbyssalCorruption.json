@@ -1,21 +1,21 @@
 {
   "columns": ["Result"],
   "entries": [{
-    "Roll": "1-4",
-    "weight": 4.0,
-    "Result": "Treachery. The character gains the following flaw: \"I can only achieve my goals by making sure that my companions don't achieve theirs.\""
+    "weight": 4,
+    "roll": "1-4",
+    "values": ["Treachery. The character gains the following flaw: \"I can only achieve my goals by making sure that my companions don't achieve theirs.\""]
   }, {
-    "Roll": "5-7",
-    "weight": 3.0,
-    "Result": "Bloodlust. The character gains the following flaw: \"I enjoy killing for its own sake, and once I start, it's hard to stop.\""
+    "weight": 3,
+    "roll": "5-7",
+    "values": ["Bloodlust. The character gains the following flaw: \"I enjoy killing for its own sake, and once I start, it's hard to stop.\""]
   }, {
-    "Roll": "8-9",
-    "weight": 2.0,
-    "Result": "Mad Ambition. The character gains the following flaw: \"I am destined to rule the Abyss, and my companions are tools to that end.\""
+    "weight": 2,
+    "roll": "8-9",
+    "values": ["Mad Ambition. The character gains the following flaw: \"I am destined to rule the Abyss, and my companions are tools to that end.\""]
   }, {
-    "Roll": "10",
-    "weight": 1.0,
-    "Result": "Demonic Possession. The character is possessed by a demonic entity until freed by dispel evil and good or similar magic. Whenever the possessed character rolls a 1 on an attack roll, ability check, or saving throw, the demon takes control of the character and determines the character's behavior. At the end of each of the possessed character's turns, he or she can make a DC 15 Charisma saving throw. On a success, the character regains control until he or she rolls another 1."
+    "weight": 1,
+    "roll": "10",
+    "values": ["Demonic Possession. The character is possessed by a demonic entity until freed by dispel evil and good or similar magic. Whenever the possessed character rolls a 1 on an attack roll, ability check, or saving throw, the demon takes control of the character and determines the character's behavior. At the end of each of the possessed character's turns, he or she can make a DC 15 Charisma saving throw. On a success, the character regains control until he or she rolls another 1."]
   }],
   "maxRoll": 10,
   "name": "Abyssal Corruption"

@@ -1,29 +1,29 @@
 {
   "columns": ["Method"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Method": "Acid"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Acid"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Method": "Blinding"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Blinding"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Method": "Branding"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Branding"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Method": "Racking"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Racking"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Method": "Thumbscrews"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Thumbscrews"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Method": "Whipping"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Whipping"]
   }],
   "maxRoll": 6,
   "name": "Torture"

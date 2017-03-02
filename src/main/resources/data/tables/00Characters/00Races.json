@@ -1,236 +1,89 @@
 {
   "columns": ["Race", "Str", "Dex", "Con", "Int", "Wis", "Cha", "Notes"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Race": "Aarakocra",
-    "Str": "-",
-    "Dex": "+2",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "+1",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Aarakocra", "-", "+2", "-", "-", "+1", "-", "-"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Race": "Dwarf, Hill",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "+2",
-    "Int": "-",
-    "Wis": "+1",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Dwarf, Hill", "-", "-", "+2", "-", "+1", "-", "-"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Race": "Dwarf, Mountain",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "+2",
-    "Int": "-",
-    "Wis": "+1",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Dwarf, Mountain", "-", "-", "+2", "-", "+1", "-", "-"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Race": "Elf, High",
-    "Str": "-",
-    "Dex": "+2",
-    "Con": "-",
-    "Int": "+1",
-    "Wis": "-",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Elf, High", "-", "+2", "-", "+1", "-", "-", "-"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Race": "Elf, Wood",
-    "Str": "-",
-    "Dex": "+2",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "+1",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Elf, Wood", "-", "+2", "-", "-", "+1", "-", "-"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Race": "Elf, Dark",
-    "Str": "-",
-    "Dex": "+2",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "+1",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Elf, Dark", "-", "+2", "-", "-", "+1", "-", "-"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Race": "Halfling, Lightfoot",
-    "Str": "-",
-    "Dex": "+2",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "+1",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Halfling, Lightfoot", "-", "+2", "-", "-", "-", "+1", "-"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Race": "Halfling, Stout",
-    "Str": "-",
-    "Dex": "+2",
-    "Con": "+1",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Halfling, Stout", "-", "+2", "+1", "-", "-", "-", "-"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Race": "Human",
-    "Str": "+1",
-    "Dex": "+1",
-    "Con": "+1",
-    "Int": "+1",
-    "Wis": "+1",
-    "Cha": "+1",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Human", "+1", "+1", "+1", "+1", "+1", "+1", "-"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Race": "Dragonborn",
-    "Str": "+2",
-    "Dex": "-",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "+1",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Dragonborn", "+2", "-", "-", "-", "-", "+1", "-"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Race": "Genasi, Air",
-    "Str": "-",
-    "Dex": "+1",
-    "Con": "+2",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Genasi, Air", "-", "+1", "+2", "-", "-", "-", "-"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Race": "Genasi, Earth",
-    "Str": "+1",
-    "Dex": "-",
-    "Con": "+2",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Genasi, Earth", "+1", "-", "+2", "-", "-", "-", "-"]
   }, {
-    "Roll": 13.0,
-    "weight": 1.0,
-    "Race": "Genasi, Fire",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "+2",
-    "Int": "+1",
-    "Wis": "-",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "13",
+    "values": ["Genasi, Fire", "-", "-", "+2", "+1", "-", "-", "-"]
   }, {
-    "Roll": 14.0,
-    "weight": 1.0,
-    "Race": "Genasi, Water",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "+2",
-    "Int": "-",
-    "Wis": "+1",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "14",
+    "values": ["Genasi, Water", "-", "-", "+2", "-", "+1", "-", "-"]
   }, {
-    "Roll": 15.0,
-    "weight": 1.0,
-    "Race": "Gnome, Forest",
-    "Str": "-",
-    "Dex": "+1",
-    "Con": "-",
-    "Int": "+2",
-    "Wis": "-",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "15",
+    "values": ["Gnome, Forest", "-", "+1", "-", "+2", "-", "-", "-"]
   }, {
-    "Roll": 16.0,
-    "weight": 1.0,
-    "Race": "Gnome, Rock",
-    "Str": "-",
-    "Dex": "+1",
-    "Con": "-",
-    "Int": "+2",
-    "Wis": "-",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "16",
+    "values": ["Gnome, Rock", "-", "+1", "-", "+2", "-", "-", "-"]
   }, {
-    "Roll": 17.0,
-    "weight": 1.0,
-    "Race": "Gnome, Svirfneblin",
-    "Str": "-",
-    "Dex": "+1",
-    "Con": "-",
-    "Int": "+2",
-    "Wis": "-",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "17",
+    "values": ["Gnome, Svirfneblin", "-", "+1", "-", "+2", "-", "-", "-"]
   }, {
-    "Roll": 18.0,
-    "weight": 1.0,
-    "Race": "Goliath",
-    "Str": "+2",
-    "Dex": "-",
-    "Con": "+1",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "18",
+    "values": ["Goliath", "+2", "-", "+1", "-", "-", "-", "-"]
   }, {
-    "Roll": 19.0,
-    "weight": 1.0,
-    "Race": "Half-Elf",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "-",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "+2",
-    "Notes": "+1 to 2 others"
+    "weight": 1,
+    "roll": "19",
+    "values": ["Half-Elf", "-", "-", "-", "-", "-", "+2", "+1 to 2 others"]
   }, {
-    "Roll": 20.0,
-    "weight": 1.0,
-    "Race": "Half-Orc",
-    "Str": "+2",
-    "Dex": "-",
-    "Con": "+1",
-    "Int": "-",
-    "Wis": "-",
-    "Cha": "-",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "20",
+    "values": ["Half-Orc", "+2", "-", "+1", "-", "-", "-", "-"]
   }, {
-    "Roll": 21.0,
-    "weight": 1.0,
-    "Race": "Tiefling",
-    "Str": "-",
-    "Dex": "-",
-    "Con": "-",
-    "Int": "+1",
-    "Wis": "-",
-    "Cha": "+2",
-    "Notes": "-"
+    "weight": 1,
+    "roll": "21",
+    "values": ["Tiefling", "-", "-", "-", "+1", "-", "+2", "-"]
   }],
   "maxRoll": 21,
   "name": "Race"

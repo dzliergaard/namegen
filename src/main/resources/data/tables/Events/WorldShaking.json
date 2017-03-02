@@ -1,45 +1,45 @@
 {
   "columns": ["Event"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Event": "Rise of a leader or an era"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Rise of a leader or an era"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Event": "Fall of a leader or an era"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Fall of a leader or an era"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Event": "Cataclysmic disaster"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Cataclysmic disaster"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Event": "Assault or invasion"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Assault or invasion"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Event": "Rebellion, revolution, overthrow"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Rebellion, revolution, overthrow"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Event": "Extinction or depletion"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Extinction or depletion"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Event": "New organization"
+    "weight": 1,
+    "roll": "7",
+    "values": ["New organization"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Event": "Discovery, expansion, invention"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Discovery, expansion, invention"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Event": "Prediction, omen, prophecy"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Prediction, omen, prophecy"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Event": "Myth and legend"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Myth and legend"]
   }],
   "maxRoll": 10,
   "name": "World Shaking"

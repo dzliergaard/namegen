@@ -1,133 +1,133 @@
 {
   "columns": ["Invocation"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Invocation": "Agonizing Blast"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Agonizing Blast"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Invocation": "Armor of Shadows"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Armor of Shadows"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Invocation": "Ascendant Step"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Ascendant Step"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Invocation": "Beast Speech"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Beast Speech"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Invocation": "Beguiling Influence"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Beguiling Influence"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Invocation": "Bewitching Whispers"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Bewitching Whispers"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Invocation": "Book of Ancient Secrets"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Book of Ancient Secrets"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Invocation": "Chains of Carceri"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Chains of Carceri"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Invocation": "Devil's Sight"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Devil's Sight"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Invocation": "Dreadful Word"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Dreadful Word"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Invocation": "Eldritch Sight"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Eldritch Sight"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Invocation": "Eldritch Spear"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Eldritch Spear"]
   }, {
-    "Roll": 13.0,
-    "weight": 1.0,
-    "Invocation": "Eyes of the Rune Keeper"
+    "weight": 1,
+    "roll": "13",
+    "values": ["Eyes of the Rune Keeper"]
   }, {
-    "Roll": 14.0,
-    "weight": 1.0,
-    "Invocation": "Fiendish Vigor"
+    "weight": 1,
+    "roll": "14",
+    "values": ["Fiendish Vigor"]
   }, {
-    "Roll": 15.0,
-    "weight": 1.0,
-    "Invocation": "Gaze of Two Minds"
+    "weight": 1,
+    "roll": "15",
+    "values": ["Gaze of Two Minds"]
   }, {
-    "Roll": 16.0,
-    "weight": 1.0,
-    "Invocation": "Lifedrinker"
+    "weight": 1,
+    "roll": "16",
+    "values": ["Lifedrinker"]
   }, {
-    "Roll": 17.0,
-    "weight": 1.0,
-    "Invocation": "Mask of Many Faces"
+    "weight": 1,
+    "roll": "17",
+    "values": ["Mask of Many Faces"]
   }, {
-    "Roll": 18.0,
-    "weight": 1.0,
-    "Invocation": "Master of Myriad Forms"
+    "weight": 1,
+    "roll": "18",
+    "values": ["Master of Myriad Forms"]
   }, {
-    "Roll": 19.0,
-    "weight": 1.0,
-    "Invocation": "Minions of Chaos"
+    "weight": 1,
+    "roll": "19",
+    "values": ["Minions of Chaos"]
   }, {
-    "Roll": 20.0,
-    "weight": 1.0,
-    "Invocation": "Mire the Mind"
+    "weight": 1,
+    "roll": "20",
+    "values": ["Mire the Mind"]
   }, {
-    "Roll": 21.0,
-    "weight": 1.0,
-    "Invocation": "Misty Visions"
+    "weight": 1,
+    "roll": "21",
+    "values": ["Misty Visions"]
   }, {
-    "Roll": 22.0,
-    "weight": 1.0,
-    "Invocation": "One with Shadows"
+    "weight": 1,
+    "roll": "22",
+    "values": ["One with Shadows"]
   }, {
-    "Roll": 23.0,
-    "weight": 1.0,
-    "Invocation": "Otherworldly Leap"
+    "weight": 1,
+    "roll": "23",
+    "values": ["Otherworldly Leap"]
   }, {
-    "Roll": 24.0,
-    "weight": 1.0,
-    "Invocation": "Repelling Blast"
+    "weight": 1,
+    "roll": "24",
+    "values": ["Repelling Blast"]
   }, {
-    "Roll": 25.0,
-    "weight": 1.0,
-    "Invocation": "Sculptor of Flesh"
+    "weight": 1,
+    "roll": "25",
+    "values": ["Sculptor of Flesh"]
   }, {
-    "Roll": 26.0,
-    "weight": 1.0,
-    "Invocation": "Sign of Ill Omen"
+    "weight": 1,
+    "roll": "26",
+    "values": ["Sign of Ill Omen"]
   }, {
-    "Roll": 27.0,
-    "weight": 1.0,
-    "Invocation": "Thief of Five Fates"
+    "weight": 1,
+    "roll": "27",
+    "values": ["Thief of Five Fates"]
   }, {
-    "Roll": 28.0,
-    "weight": 1.0,
-    "Invocation": "Thirsting Blade"
+    "weight": 1,
+    "roll": "28",
+    "values": ["Thirsting Blade"]
   }, {
-    "Roll": 29.0,
-    "weight": 1.0,
-    "Invocation": "Visions of Distant Realms"
+    "weight": 1,
+    "roll": "29",
+    "values": ["Visions of Distant Realms"]
   }, {
-    "Roll": 30.0,
-    "weight": 1.0,
-    "Invocation": "Voice of the Chain Master"
+    "weight": 1,
+    "roll": "30",
+    "values": ["Voice of the Chain Master"]
   }, {
-    "Roll": 31.0,
-    "weight": 1.0,
-    "Invocation": "Whispers of the Grave"
+    "weight": 1,
+    "roll": "31",
+    "values": ["Whispers of the Grave"]
   }, {
-    "Roll": 32.0,
-    "weight": 1.0,
-    "Invocation": "Witch Sight"
+    "weight": 1,
+    "roll": "32",
+    "values": ["Witch Sight"]
   }],
   "maxRoll": 32,
   "name": "Warlock Eldritch Invocations"

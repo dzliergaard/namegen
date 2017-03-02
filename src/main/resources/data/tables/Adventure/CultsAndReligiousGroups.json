@@ -1,41 +1,41 @@
 {
   "columns": ["Cult or Religious Group"],
   "entries": [{
-    "Roll": "1",
-    "weight": 1.0,
-    "Cult or Religious Group": "Demon-worshiping cult"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Demon-worshiping cult"]
   }, {
-    "Roll": "2",
-    "weight": 1.0,
-    "Cult or Religious Group": "Devil-worshiping cult"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Devil-worshiping cult"]
   }, {
-    "Roll": "3-4",
-    "weight": 2.0,
-    "Cult or Religious Group": "Elemental Air cult"
+    "weight": 2,
+    "roll": "3-4",
+    "values": ["Elemental Air cult"]
   }, {
-    "Roll": "5-6",
-    "weight": 2.0,
-    "Cult or Religious Group": "Elemental Earth cult"
+    "weight": 2,
+    "roll": "5-6",
+    "values": ["Elemental Earth cult"]
   }, {
-    "Roll": "7-8",
-    "weight": 2.0,
-    "Cult or Religious Group": "Elemental Fire cult"
+    "weight": 2,
+    "roll": "7-8",
+    "values": ["Elemental Fire cult"]
   }, {
-    "Roll": "9-10",
-    "weight": 2.0,
-    "Cult or Religious Group": "Elemental Water cult"
+    "weight": 2,
+    "roll": "9-10",
+    "values": ["Elemental Water cult"]
   }, {
-    "Roll": "11-15",
-    "weight": 5.0,
-    "Cult or Religious Group": "Worshipers of an evil deity"
+    "weight": 5,
+    "roll": "11-15",
+    "values": ["Worshipers of an evil deity"]
   }, {
-    "Roll": "16-17",
-    "weight": 2.0,
-    "Cult or Religious Group": "Worshipers of a good deity"
+    "weight": 2,
+    "roll": "16-17",
+    "values": ["Worshipers of a good deity"]
   }, {
-    "Roll": "18-20",
-    "weight": 3.0,
-    "Cult or Religious Group": "Worshipers of a neutral deity"
+    "weight": 3,
+    "roll": "18-20",
+    "values": ["Worshipers of a neutral deity"]
   }],
   "maxRoll": 20,
   "name": "Cults And Religious Groups"

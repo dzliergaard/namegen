@@ -1,50 +1,41 @@
 {
   "columns": ["Purpose", "Description"],
   "entries": [{
-    "Roll": "1",
-    "weight": 1.0,
-    "Purpose": "Death trap",
-    "Description": "This dungeon is built to eliminate any creature that dares to enter it. A death trap might guard the treasure of an insane wizard, or it might be designed to lure adventurers to their demise for some nefarious purpose, such as to feed souls to a lich's phylactery."
+    "weight": 1,
+    "roll": "1",
+    "values": ["Death trap", "This dungeon is built to eliminate any creature that dares to enter it. A death trap might guard the treasure of an insane wizard, or it might be designed to lure adventurers to their demise for some nefarious purpose, such as to feed souls to a lich's phylactery."]
   }, {
-    "Roll": "2-5",
-    "weight": 4.0,
-    "Purpose": "Lair",
-    "Description": "A lair is a place where monsters live. Typical airs include ruins and caves."
+    "weight": 4,
+    "roll": "2-5",
+    "values": ["Lair", "A lair is a place where monsters live. Typical airs include ruins and caves."]
   }, {
-    "Roll": "6",
-    "weight": 1.0,
-    "Purpose": "Maze",
-    "Description": "A maze is intended to deceive or confuse those who enter it. Some mazes are elaborate obstacles that protect treasure, while others are gauntlets for prisoners banished there to be hunted and devoured by the monsters within."
+    "weight": 1,
+    "roll": "6",
+    "values": ["Maze", "A maze is intended to deceive or confuse those who enter it. Some mazes are elaborate obstacles that protect treasure, while others are gauntlets for prisoners banished there to be hunted and devoured by the monsters within."]
   }, {
-    "Roll": "7-9",
-    "weight": 3.0,
-    "Purpose": "Mine",
-    "Description": "An abandoned mine can quickly become infested with monsters, while miners who delve too deep can break through into the Underdark."
+    "weight": 3,
+    "roll": "7-9",
+    "values": ["Mine", "An abandoned mine can quickly become infested with monsters, while miners who delve too deep can break through into the Underdark."]
   }, {
-    "Roll": "10",
-    "weight": 1.0,
-    "Purpose": "Planar gate",
-    "Description": "Dungeons built around planar portals are often transformed by the planar energy seeping out through those portals."
+    "weight": 1,
+    "roll": "10",
+    "values": ["Planar gate", "Dungeons built around planar portals are often transformed by the planar energy seeping out through those portals."]
   }, {
-    "Roll": "11-14",
-    "weight": 4.0,
-    "Purpose": "Stronghold",
-    "Description": "A stronghold dungeon provides a secure base of operations for villains and monsters. It is usually ruled by a powerful individual, such as a wizard, vampire, or dragon, and it is larger and more complex than a simple lair."
+    "weight": 4,
+    "roll": "11-14",
+    "values": ["Stronghold", "A stronghold dungeon provides a secure base of operations for villains and monsters. It is usually ruled by a powerful individual, such as a wizard, vampire, or dragon, and it is larger and more complex than a simple lair."]
   }, {
-    "Roll": "15-17",
-    "weight": 3.0,
-    "Purpose": "Temple or shrine",
-    "Description": "This dungeon is consecrated to a deity or other planar entity. The entity's worshipers control the dungeon and conduct their rites there."
+    "weight": 3,
+    "roll": "15-17",
+    "values": ["Temple or shrine", "This dungeon is consecrated to a deity or other planar entity. The entity's worshipers control the dungeon and conduct their rites there."]
   }, {
-    "Roll": "18-19",
-    "weight": 2.0,
-    "Purpose": "Tomb",
-    "Description": "Tombs are magnets for treasure hunters, as well as monsters that hunger for the bones of the dead."
+    "weight": 2,
+    "roll": "18-19",
+    "values": ["Tomb", "Tombs are magnets for treasure hunters, as well as monsters that hunger for the bones of the dead."]
   }, {
-    "Roll": "20",
-    "weight": 1.0,
-    "Purpose": "Treasure vault",
-    "Description": "Built to protect powerful magic items and great material wealth, treasure vault dungeons are heavily guarded by monsters and traps."
+    "weight": 1,
+    "roll": "20",
+    "values": ["Treasure vault", "Built to protect powerful magic items and great material wealth, treasure vault dungeons are heavily guarded by monsters and traps."]
   }],
   "maxRoll": 20,
   "name": "Purpose"

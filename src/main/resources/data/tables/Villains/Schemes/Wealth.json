@@ -1,21 +1,21 @@
 {
   "columns": ["Scheme"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Scheme": "Control natural resources or trade"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Control natural resources or trade"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Scheme": "Marry into wealth"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Marry into wealth"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Scheme": "Plunder ancient ruins"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Plunder ancient ruins"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Scheme": "Steal land, goods, or money"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Steal land, goods, or money"]
   }],
   "maxRoll": 4,
   "name": "Wealth"

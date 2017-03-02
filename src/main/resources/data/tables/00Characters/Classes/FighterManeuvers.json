@@ -1,69 +1,69 @@
 {
   "columns": ["Maneuver"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Maneuver": "Commander’s Strike"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Commander’s Strike"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Maneuver": "Disarming Attack"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Disarming Attack"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Maneuver": "Distracting Strike"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Distracting Strike"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Maneuver": "Evasive Footwork"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Evasive Footwork"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Maneuver": "Feinting Attack"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Feinting Attack"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Maneuver": "Goading Attack"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Goading Attack"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Maneuver": "Lunging Attack"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Lunging Attack"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Maneuver": "Maneuvering Attack"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Maneuvering Attack"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Maneuver": "Menacing Attack"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Menacing Attack"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Maneuver": "Parry"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Parry"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Maneuver": "Precision Attack"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Precision Attack"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Maneuver": "Pushing Attack"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Pushing Attack"]
   }, {
-    "Roll": 13.0,
-    "weight": 1.0,
-    "Maneuver": "Rally"
+    "weight": 1,
+    "roll": "13",
+    "values": ["Rally"]
   }, {
-    "Roll": 14.0,
-    "weight": 1.0,
-    "Maneuver": "Riposte"
+    "weight": 1,
+    "roll": "14",
+    "values": ["Riposte"]
   }, {
-    "Roll": 15.0,
-    "weight": 1.0,
-    "Maneuver": "Sweeping Attack"
+    "weight": 1,
+    "roll": "15",
+    "values": ["Sweeping Attack"]
   }, {
-    "Roll": 16.0,
-    "weight": 1.0,
-    "Maneuver": "Trip Attack"
+    "weight": 1,
+    "roll": "16",
+    "values": ["Trip Attack"]
   }],
   "maxRoll": 16,
   "name": "Fighter Maneuvers"

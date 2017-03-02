@@ -1,21 +1,21 @@
 {
   "columns": ["Scheme"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Scheme": "Avenge a past humiliation or insult"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Avenge a past humiliation or insult"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Scheme": "Avenge a past imprisonment or injury"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Avenge a past imprisonment or injury"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Scheme": "Avenge the death of a loved one"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Avenge the death of a loved one"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Scheme": "Retrieve stolen property and punish the thief"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Retrieve stolen property and punish the thief"]
   }],
   "maxRoll": 4,
   "name": "Revenge"

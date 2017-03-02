@@ -1,37 +1,37 @@
 {
   "columns": ["Method"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Method": "Beheading"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Beheading"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Method": "Burning at the stake"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Burning at the stake"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Method": "Burying alive"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Burying alive"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Method": "Crucifixion"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Crucifixion"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Method": "Drawing and quartering"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Drawing and quartering"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Method": "Hanging"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Hanging"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Method": "Impalement"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Impalement"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Method": "Sacrifice"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Sacrifice"]
   }],
   "maxRoll": 8,
   "name": "Execution"

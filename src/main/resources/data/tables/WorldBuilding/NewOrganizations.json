@@ -1,45 +1,45 @@
 {
   "columns": ["New Organization"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "New Organization": "Crime syndicate/bandit confederacy"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Crime syndicate/bandit confederacy"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "New Organization": "Guild (masons, apothecaries, goldsmiths)"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Guild (masons, apothecaries, goldsmiths)"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "New Organization": "Magical circle/society"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Magical circle/society"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "New Organization": "Military/knightly order"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Military/knightly order"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "New Organization": "New family dynasty/tribe/clan"
+    "weight": 1,
+    "roll": "5",
+    "values": ["New family dynasty/tribe/clan"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "New Organization": "Philosophy/discipline dedicated to a principle or ideal"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Philosophy/discipline dedicated to a principle or ideal"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "New Organization": "Realm (village, town, duchy, kingdom)"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Realm (village, town, duchy, kingdom)"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "New Organization": "Religion/sect/denomination"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Religion/sect/denomination"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "New Organization": "School/university"
+    "weight": 1,
+    "roll": "9",
+    "values": ["School/university"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "New Organization": "Secret society/cult/cabal"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Secret society/cult/cabal"]
   }],
   "maxRoll": 10,
   "name": "New Organizations"

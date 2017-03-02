@@ -14,7 +14,7 @@
 
 <dom-module id="npc-card">
   <template>
-    <style is="custom-style" include="dark-theme iron-flex iron-flex-alignment">
+    <style include="dark-theme iron-flex iron-flex-alignment">
       :host ::content iron-icon {
         padding-left: -16px;
         margin-right: 16px;
@@ -144,8 +144,9 @@
         this.fire("primary-tap");
       },
       getEntry: function (table) {
-        var column = table.columns[0];
-        return this.getRandomEntry(table).entry[column];
+        var entry = this.getRandomEntry(table);
+        var computedEntry = entry.redirectEntry || entry.entry;
+        return computedEntry.values[0];
       },
       generate: function () {
         this.set('npc', {attributes: []});

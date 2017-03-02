@@ -26,7 +26,6 @@
       return null;
     },
     getRandomEntry: function (table) {
-      var mainColumn = table.columns[0];
       this.roll = Math.floor(Math.random() * table.maxRoll);
       var ind = this.roll;
       var i = 0;
@@ -35,8 +34,8 @@
         entry = table.entries[i++];
         ind -= entry.weight;
       }
-      if (typeof entry[mainColumn] == 'object') {
-        var tablePath = entry[mainColumn].table_path;
+      if (!entry.values) {
+        var tablePath = entry.values[0].table_path;
         if (tablePath) {
           // TODO: Address results that call for multiple rolls on current table.
           if (tablePath != 'this') {

@@ -1,29 +1,29 @@
 {
   "columns": ["Scheme"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Scheme": "Fulfill an apocalyptic prophecy"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Fulfill an apocalyptic prophecy"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Scheme": "Enact the vengeful will of a god or patron"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Enact the vengeful will of a god or patron"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Scheme": "Spread a vile contagion"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Spread a vile contagion"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Scheme": "Overthrow a government"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Overthrow a government"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Scheme": "Trigger a natural disaster"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Trigger a natural disaster"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Scheme": "Utterly destroy a bloodline or clan"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Utterly destroy a bloodline or clan"]
   }],
   "maxRoll": 6,
   "name": "Mayhem"

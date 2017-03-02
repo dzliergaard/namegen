@@ -1,69 +1,69 @@
 {
   "columns": ["Locale"],
   "entries": [{
-    "Roll": "1-2",
-    "weight": 2.0,
-    "Locale": "Dead magic zone (similar to an anti magic field)"
+    "weight": 2,
+    "roll": "1-2",
+    "values": ["Dead magic zone (similar to an anti magic field)"]
   }, {
-    "Roll": "3",
-    "weight": 1.0,
-    "Locale": "Wild magic zone (roll on the Wild Magic Surge table in the Player's Handbook whenever a spell is cast with in the zone)"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Wild magic zone (roll on the Wild Magic Surge table in the Player's Handbook whenever a spell is cast with in the zone)"]
   }, {
-    "Roll": "4",
-    "weight": 1.0,
-    "Locale": "Boulder carved with talking faces"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Boulder carved with talking faces"]
   }, {
-    "Roll": "5",
-    "weight": 1.0,
-    "Locale": "Crystal cave that mystically answers questions"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Crystal cave that mystically answers questions"]
   }, {
-    "Roll": "6",
-    "weight": 1.0,
-    "Locale": "Ancient tree containing a trapped spirit"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Ancient tree containing a trapped spirit"]
   }, {
-    "Roll": "7-8",
-    "weight": 2.0,
-    "Locale": "Battlefield where lingering fog occasionally assumes humanoid forms"
+    "weight": 2,
+    "roll": "7-8",
+    "values": ["Battlefield where lingering fog occasionally assumes humanoid forms"]
   }, {
-    "Roll": "9-10",
-    "weight": 2.0,
-    "Locale": "Permanent portal to another plane of existence"
+    "weight": 2,
+    "roll": "9-10",
+    "values": ["Permanent portal to another plane of existence"]
   }, {
-    "Roll": "11",
-    "weight": 1.0,
-    "Locale": "Wishing well"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Wishing well"]
   }, {
-    "Roll": "12",
-    "weight": 1.0,
-    "Locale": "Giant crystal shard protruding from the ground"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Giant crystal shard protruding from the ground"]
   }, {
-    "Roll": "13",
-    "weight": 1.0,
-    "Locale": "Wrecked ship, which might be nowhere near water"
+    "weight": 1,
+    "roll": "13",
+    "values": ["Wrecked ship, which might be nowhere near water"]
   }, {
-    "Roll": "14-15",
-    "weight": 2.0,
-    "Locale": "Haunted hill or barrow mound"
+    "weight": 2,
+    "roll": "14-15",
+    "values": ["Haunted hill or barrow mound"]
   }, {
-    "Roll": "16",
-    "weight": 1.0,
-    "Locale": "River ferry guided by a skeletal captain"
+    "weight": 1,
+    "roll": "16",
+    "values": ["River ferry guided by a skeletal captain"]
   }, {
-    "Roll": "17",
-    "weight": 1.0,
-    "Locale": "Field of petrified soldiers or other creatures"
+    "weight": 1,
+    "roll": "17",
+    "values": ["Field of petrified soldiers or other creatures"]
   }, {
-    "Roll": "18",
-    "weight": 1.0,
-    "Locale": "Forest of petrified or awakened trees"
+    "weight": 1,
+    "roll": "18",
+    "values": ["Forest of petrified or awakened trees"]
   }, {
-    "Roll": "19",
-    "weight": 1.0,
-    "Locale": "Can yon containing a dragons' graveyard"
+    "weight": 1,
+    "roll": "19",
+    "values": ["Can yon containing a dragons' graveyard"]
   }, {
-    "Roll": "20",
-    "weight": 1.0,
-    "Locale": "Floating earth mote with a tower on it"
+    "weight": 1,
+    "roll": "20",
+    "values": ["Floating earth mote with a tower on it"]
   }],
   "maxRoll": 20,
   "name": "Weird Locales"

@@ -1,29 +1,21 @@
 {
   "columns": ["Hazard", "Saving throw", "Effect"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Hazard": "Brown Mold",
-    "Saving throw": "Constitution DC 12",
-    "Effect": "22 (4d10) cold damage on failed save, half on success."
+    "weight": 1,
+    "roll": "1",
+    "values": ["Brown Mold", "Constitution DC 12", "22 (4d10) cold damage on failed save, half on success."]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Hazard": "Green Slime",
-    "Saving throw": "Dexterity DC 10",
-    "Effect": "5 (1d10) acid damage on failed save."
+    "weight": 1,
+    "roll": "2",
+    "values": ["Green Slime", "Dexterity DC 10", "5 (1d10) acid damage on failed save."]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Hazard": "Webs",
-    "Saving throw": "Dexterity DC 12",
-    "Effect": "Restrained."
+    "weight": 1,
+    "roll": "3",
+    "values": ["Webs", "Dexterity DC 12", "Restrained."]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Hazard": "Yellow Mold",
-    "Saving throw": "Constitution DC 15",
-    "Effect": "11 (2d10) poison damage and poisoned for 1 minute, taking 5 (1d10) damage each turn."
+    "weight": 1,
+    "roll": "4",
+    "values": ["Yellow Mold", "Constitution DC 15", "11 (2d10) poison damage and poisoned for 1 minute, taking 5 (1d10) damage each turn."]
   }],
   "maxRoll": 4,
   "name": "Hazards"

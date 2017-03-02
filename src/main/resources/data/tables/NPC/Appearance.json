@@ -1,73 +1,73 @@
 {
   "columns": ["Appearance"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Appearance": "Distinctive jewelry: earrings, necklace, circlet, bracelets"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Distinctive jewelry: earrings, necklace, circlet, bracelets"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Appearance": "Piercings"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Piercings"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Appearance": "Flamboyand or outlandish clothes"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Flamboyand or outlandish clothes"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Appearance": "Formal, clean clothes"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Formal, clean clothes"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Appearance": "Ragged, dirty clothes"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Ragged, dirty clothes"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Appearance": "Pronounced scar"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Pronounced scar"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Appearance": "Missing teeth"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Missing teeth"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Appearance": "Missing fingers"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Missing fingers"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Appearance": "Unusual eye color (or two different colors)"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Unusual eye color (or two different colors)"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Appearance": "Tattoos"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Tattoos"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Appearance": "Birthmark"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Birthmark"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Appearance": "Unusual skin color"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Unusual skin color"]
   }, {
-    "Roll": 13.0,
-    "weight": 1.0,
-    "Appearance": "Nervous eye twitch"
+    "weight": 1,
+    "roll": "13",
+    "values": ["Nervous eye twitch"]
   }, {
-    "Roll": 14.0,
-    "weight": 1.0,
-    "Appearance": "Distinctive Nose"
+    "weight": 1,
+    "roll": "14",
+    "values": ["Distinctive Nose"]
   }, {
-    "Roll": 15.0,
-    "weight": 1.0,
-    "Appearance": "Distinctive posture (crooked or rigid)"
+    "weight": 1,
+    "roll": "15",
+    "values": ["Distinctive posture (crooked or rigid)"]
   }, {
-    "Roll": 16.0,
-    "weight": 1.0,
-    "Appearance": "Exceptionally beautiful"
+    "weight": 1,
+    "roll": "16",
+    "values": ["Exceptionally beautiful"]
   }, {
-    "Roll": 17.0,
-    "weight": 1.0,
-    "Appearance": "Exceptionally ugly"
+    "weight": 1,
+    "roll": "17",
+    "values": ["Exceptionally ugly"]
   }],
   "maxRoll": 17,
   "name": "Appearance"

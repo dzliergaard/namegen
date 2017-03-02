@@ -1,37 +1,37 @@
 {
   "columns": ["Lost Resource"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Lost Resource": "A kind of animal (insect, bird, fish, livestock)"
+    "weight": 1,
+    "roll": "1",
+    "values": ["A kind of animal (insect, bird, fish, livestock)"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Lost Resource": "Habitable land"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Habitable land"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Lost Resource": "Magic or magic-users (all magic, or specific kinds or schools of magic)"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Magic or magic-users (all magic, or specific kinds or schools of magic)"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Lost Resource": "A mineral resource (gems, metals, ores)"
+    "weight": 1,
+    "roll": "4",
+    "values": ["A mineral resource (gems, metals, ores)"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Lost Resource": "A type of monster (unicorn, manticore, dragon)"
+    "weight": 1,
+    "roll": "5",
+    "values": ["A type of monster (unicorn, manticore, dragon)"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Lost Resource": "A people (family line, clan, culture, race)"
+    "weight": 1,
+    "roll": "6",
+    "values": ["A people (family line, clan, culture, race)"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Lost Resource": "A kind of plant (crop, tree, herb, forest)"
+    "weight": 1,
+    "roll": "7",
+    "values": ["A kind of plant (crop, tree, herb, forest)"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Lost Resource": "A waterway (river, lake, ocean)"
+    "weight": 1,
+    "roll": "8",
+    "values": ["A waterway (river, lake, ocean)"]
   }],
   "maxRoll": 8,
   "name": "Extinction Or Depletion"

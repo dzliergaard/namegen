@@ -1,21 +1,21 @@
 {
   "columns": ["Scheme"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Scheme": "Acquire a legendary item to prolong life"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Acquire a legendary item to prolong life"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Scheme": "Ascend to godhood"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Ascend to godhood"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Scheme": "Become undead or obtain a younger body"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Become undead or obtain a younger body"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Scheme": "Steal a planar creature's essence"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Steal a planar creature's essence"]
   }],
   "maxRoll": 4,
   "name": "Immortality"

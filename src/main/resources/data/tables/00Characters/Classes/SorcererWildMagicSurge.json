@@ -1,201 +1,201 @@
 {
   "columns": ["Effect"],
   "entries": [{
-    "Roll": "01-02",
-    "weight": 2.0,
-    "Effect": "Roll on this table at the start of each of your turns for the next minute, ignoring this result on subsequent"
+    "weight": 2,
+    "roll": "01-02",
+    "values": ["Roll on this table at the start of each of your turns for the next minute, ignoring this result on subsequent"]
   }, {
-    "Roll": "03-04",
-    "weight": 2.0,
-    "Effect": "For the next minute, you can see any invisible creature if you have line of sight to it."
+    "weight": 2,
+    "roll": "03-04",
+    "values": ["For the next minute, you can see any invisible creature if you have line of sight to it."]
   }, {
-    "Roll": "05-06",
-    "weight": 2.0,
-    "Effect": "A modron chosen and controlled by the DM appears in an unoccupied space within 5 feet of you, then disappears 1 minute later."
+    "weight": 2,
+    "roll": "05-06",
+    "values": ["A modron chosen and controlled by the DM appears in an unoccupied space within 5 feet of you, then disappears 1 minute later."]
   }, {
-    "Roll": "07-08",
-    "weight": 2.0,
-    "Effect": "You cast fireball as a 3rd-level spell centered on yourself."
+    "weight": 2,
+    "roll": "07-08",
+    "values": ["You cast fireball as a 3rd-level spell centered on yourself."]
   }, {
-    "Roll": "09-10",
-    "weight": 2.0,
-    "Effect": "You cast magic missile as a 5th-level spell."
+    "weight": 2,
+    "roll": "09-10",
+    "values": ["You cast magic missile as a 5th-level spell."]
   }, {
-    "Roll": "11-12",
-    "weight": 2.0,
-    "Effect": "Roll a d10. Your height changes by a number of inches equal to the roll. If the roll is odd, you shrink. If the roll is even, you grow."
+    "weight": 2,
+    "roll": "11-12",
+    "values": ["Roll a d10. Your height changes by a number of inches equal to the roll. If the roll is odd, you shrink. If the roll is even, you grow."]
   }, {
-    "Roll": "13-14",
-    "weight": 2.0,
-    "Effect": "You cast confusion centered on yourself."
+    "weight": 2,
+    "roll": "13-14",
+    "values": ["You cast confusion centered on yourself."]
   }, {
-    "Roll": "15-16",
-    "weight": 2.0,
-    "Effect": "For the next minute, you regain 5 hit points at the start of each of your turns."
+    "weight": 2,
+    "roll": "15-16",
+    "values": ["For the next minute, you regain 5 hit points at the start of each of your turns."]
   }, {
-    "Roll": "17-18",
-    "weight": 2.0,
-    "Effect": "You grow a long beard made of feathers that remains until you sneeze, at which point the feathers explode out from your face."
+    "weight": 2,
+    "roll": "17-18",
+    "values": ["You grow a long beard made of feathers that remains until you sneeze, at which point the feathers explode out from your face."]
   }, {
-    "Roll": "19-20",
-    "weight": 2.0,
-    "Effect": "You cast grease centered on yourself."
+    "weight": 2,
+    "roll": "19-20",
+    "values": ["You cast grease centered on yourself."]
   }, {
-    "Roll": "21-22",
-    "weight": 2.0,
-    "Effect": "Creatures have disadvantage on saving throws against the next spell you cast in the next minute that involves a saving throw."
+    "weight": 2,
+    "roll": "21-22",
+    "values": ["Creatures have disadvantage on saving throws against the next spell you cast in the next minute that involves a saving throw."]
   }, {
-    "Roll": "23-24",
-    "weight": 2.0,
-    "Effect": "Your skin turns a vibrant shade of blue. A remove curse spell can end this effect."
+    "weight": 2,
+    "roll": "23-24",
+    "values": ["Your skin turns a vibrant shade of blue. A remove curse spell can end this effect."]
   }, {
-    "Roll": "25-26",
-    "weight": 2.0,
-    "Effect": "An eye appears on your forehead for the next minute. During that time, you have advantage on Wisdom (Perception) checks that rely on sight."
+    "weight": 2,
+    "roll": "25-26",
+    "values": ["An eye appears on your forehead for the next minute. During that time, you have advantage on Wisdom (Perception) checks that rely on sight."]
   }, {
-    "Roll": "27-28",
-    "weight": 2.0,
-    "Effect": "For the next minute, all your spells with a casting time of 1 action have a casting time of 1 bonus action."
+    "weight": 2,
+    "roll": "27-28",
+    "values": ["For the next minute, all your spells with a casting time of 1 action have a casting time of 1 bonus action."]
   }, {
-    "Roll": "29-30",
-    "weight": 2.0,
-    "Effect": "You teleport up to 60 feet to an unoccupied space of your choice that you can see."
+    "weight": 2,
+    "roll": "29-30",
+    "values": ["You teleport up to 60 feet to an unoccupied space of your choice that you can see."]
   }, {
-    "Roll": "31-32",
-    "weight": 2.0,
-    "Effect": "You are transported to the Astral Plane until the end of your next turn, after which time you return to the space you previously occupied or the nearest unoccupied space if that space is occupied."
+    "weight": 2,
+    "roll": "31-32",
+    "values": ["You are transported to the Astral Plane until the end of your next turn, after which time you return to the space you previously occupied or the nearest unoccupied space if that space is occupied."]
   }, {
-    "Roll": "33-34",
-    "weight": 2.0,
-    "Effect": "Maximize the damage of the next damaging spell you cast within the next minute."
+    "weight": 2,
+    "roll": "33-34",
+    "values": ["Maximize the damage of the next damaging spell you cast within the next minute."]
   }, {
-    "Roll": "35-36",
-    "weight": 2.0,
-    "Effect": "Roll a d10. Your age changes by a number of years equal to the roll. If the roll is odd, you get younger (minimum 1 year old). If the roll is even, you get older."
+    "weight": 2,
+    "roll": "35-36",
+    "values": ["Roll a d10. Your age changes by a number of years equal to the roll. If the roll is odd, you get younger (minimum 1 year old). If the roll is even, you get older."]
   }, {
-    "Roll": "37-38",
-    "weight": 2.0,
-    "Effect": "1d6 flumphs controlled by the DM appear in unoccupied spaces within 60 feet of you and are frightened of you. They vanish after 1 minute."
+    "weight": 2,
+    "roll": "37-38",
+    "values": ["1d6 flumphs controlled by the DM appear in unoccupied spaces within 60 feet of you and are frightened of you. They vanish after 1 minute."]
   }, {
-    "Roll": "39-40",
-    "weight": 2.0,
-    "Effect": "You regain 2d10 hit points."
+    "weight": 2,
+    "roll": "39-40",
+    "values": ["You regain 2d10 hit points."]
   }, {
-    "Roll": "41-42",
-    "weight": 2.0,
-    "Effect": "You turn into a potted plant until the start of your next turn. While a plant, you are incapacitated and have vulnerability to all damage. If you drop to 0 hit points, your pot breaks, and your form reverts."
+    "weight": 2,
+    "roll": "41-42",
+    "values": ["You turn into a potted plant until the start of your next turn. While a plant, you are incapacitated and have vulnerability to all damage. If you drop to 0 hit points, your pot breaks, and your form reverts."]
   }, {
-    "Roll": "43-44",
-    "weight": 2.0,
-    "Effect": "For the next minute, you can teleport up to 20 feet as a bonus action on each of your turns."
+    "weight": 2,
+    "roll": "43-44",
+    "values": ["For the next minute, you can teleport up to 20 feet as a bonus action on each of your turns."]
   }, {
-    "Roll": "45-46",
-    "weight": 2.0,
-    "Effect": "You cast levitate on yourself."
+    "weight": 2,
+    "roll": "45-46",
+    "values": ["You cast levitate on yourself."]
   }, {
-    "Roll": "47-48",
-    "weight": 2.0,
-    "Effect": "A unicorn controlled by the DM appears in a space within 5 feet of you, then disappears 1 minute later."
+    "weight": 2,
+    "roll": "47-48",
+    "values": ["A unicorn controlled by the DM appears in a space within 5 feet of you, then disappears 1 minute later."]
   }, {
-    "Roll": "49-50",
-    "weight": 2.0,
-    "Effect": "You can’t speak for the next minute. Whenever you try, pink bubbles float out of your mouth."
+    "weight": 2,
+    "roll": "49-50",
+    "values": ["You can’t speak for the next minute. Whenever you try, pink bubbles float out of your mouth."]
   }, {
-    "Roll": "51-52",
-    "weight": 2.0,
-    "Effect": "A spectral shield hovers near you for the next minute, granting you a +2 bonus to AC and immunity to magic missile."
+    "weight": 2,
+    "roll": "51-52",
+    "values": ["A spectral shield hovers near you for the next minute, granting you a +2 bonus to AC and immunity to magic missile."]
   }, {
-    "Roll": "53-54",
-    "weight": 2.0,
-    "Effect": "You are immune to being intoxicated by alcohol for the next 5d6 days."
+    "weight": 2,
+    "roll": "53-54",
+    "values": ["You are immune to being intoxicated by alcohol for the next 5d6 days."]
   }, {
-    "Roll": "55-56",
-    "weight": 2.0,
-    "Effect": "Your hair falls out but grows back within 24 hours."
+    "weight": 2,
+    "roll": "55-56",
+    "values": ["Your hair falls out but grows back within 24 hours."]
   }, {
-    "Roll": "57-58",
-    "weight": 2.0,
-    "Effect": "For the next minute, any flammable object you touch that isn’t being worn or carried by another creature bursts into flame."
+    "weight": 2,
+    "roll": "57-58",
+    "values": ["For the next minute, any flammable object you touch that isn’t being worn or carried by another creature bursts into flame."]
   }, {
-    "Roll": "59-60",
-    "weight": 2.0,
-    "Effect": "You regain your lowest-level expended spell slot."
+    "weight": 2,
+    "roll": "59-60",
+    "values": ["You regain your lowest-level expended spell slot."]
   }, {
-    "Roll": "61-62",
-    "weight": 2.0,
-    "Effect": "For the next minute, you must shout when you speak."
+    "weight": 2,
+    "roll": "61-62",
+    "values": ["For the next minute, you must shout when you speak."]
   }, {
-    "Roll": "63-64",
-    "weight": 2.0,
-    "Effect": "You cast fog cloud centered on yourself."
+    "weight": 2,
+    "roll": "63-64",
+    "values": ["You cast fog cloud centered on yourself."]
   }, {
-    "Roll": "65-66",
-    "weight": 2.0,
-    "Effect": "Up to three creatures you choose within 30 feet of you take 4d10 lightning damage."
+    "weight": 2,
+    "roll": "65-66",
+    "values": ["Up to three creatures you choose within 30 feet of you take 4d10 lightning damage."]
   }, {
-    "Roll": "67-68",
-    "weight": 2.0,
-    "Effect": "You are frightened by the nearest creature until the end of your next turn."
+    "weight": 2,
+    "roll": "67-68",
+    "values": ["You are frightened by the nearest creature until the end of your next turn."]
   }, {
-    "Roll": "69-70",
-    "weight": 2.0,
-    "Effect": "Each creature within 30 feet of you becomes invisible for the next minute. The invisibility ends on a creature when it attacks or casts a spell."
+    "weight": 2,
+    "roll": "69-70",
+    "values": ["Each creature within 30 feet of you becomes invisible for the next minute. The invisibility ends on a creature when it attacks or casts a spell."]
   }, {
-    "Roll": "71-72",
-    "weight": 2.0,
-    "Effect": "You gain resistance to all damage for the next minute."
+    "weight": 2,
+    "roll": "71-72",
+    "values": ["You gain resistance to all damage for the next minute."]
   }, {
-    "Roll": "73-74",
-    "weight": 2.0,
-    "Effect": "A random creature within 60 feet of you becomes poisoned for 1d4 hours."
+    "weight": 2,
+    "roll": "73-74",
+    "values": ["A random creature within 60 feet of you becomes poisoned for 1d4 hours."]
   }, {
-    "Roll": "75-76",
-    "weight": 2.0,
-    "Effect": "You glow with bright light in a 30-foot radius for the next minute. Any creature that ends its turn within 5 feet of you is blinded until the end of its next turn."
+    "weight": 2,
+    "roll": "75-76",
+    "values": ["You glow with bright light in a 30-foot radius for the next minute. Any creature that ends its turn within 5 feet of you is blinded until the end of its next turn."]
   }, {
-    "Roll": "77-78",
-    "weight": 2.0,
-    "Effect": "You cast polymorph on yourself. If you fail the saving throw, you turn into a sheep for the spell’s duration."
+    "weight": 2,
+    "roll": "77-78",
+    "values": ["You cast polymorph on yourself. If you fail the saving throw, you turn into a sheep for the spell’s duration."]
   }, {
-    "Roll": "79-80",
-    "weight": 2.0,
-    "Effect": "Illusory butterflies and flower petals flutter in the air within 10 feet of you for the next minute."
+    "weight": 2,
+    "roll": "79-80",
+    "values": ["Illusory butterflies and flower petals flutter in the air within 10 feet of you for the next minute."]
   }, {
-    "Roll": "81-82",
-    "weight": 2.0,
-    "Effect": "You can take one additional action immediately."
+    "weight": 2,
+    "roll": "81-82",
+    "values": ["You can take one additional action immediately."]
   }, {
-    "Roll": "83-84",
-    "weight": 2.0,
-    "Effect": "Each creature within 30 feet of you takes 1d10 necrotic damage. You regain hit points equal to the sum of the necrotic damage dealt."
+    "weight": 2,
+    "roll": "83-84",
+    "values": ["Each creature within 30 feet of you takes 1d10 necrotic damage. You regain hit points equal to the sum of the necrotic damage dealt."]
   }, {
-    "Roll": "87-88",
-    "weight": 2.0,
-    "Effect": "You cast fly on a random creature within 60 feet of you."
+    "weight": 2,
+    "roll": "87-88",
+    "values": ["You cast fly on a random creature within 60 feet of you."]
   }, {
-    "Roll": "89-90",
-    "weight": 2.0,
-    "Effect": "You become invisible for the next minute. During that time, other creatures can’t hear you. The invisibility ends if you attack or cast a spell."
+    "weight": 2,
+    "roll": "89-90",
+    "values": ["You become invisible for the next minute. During that time, other creatures can’t hear you. The invisibility ends if you attack or cast a spell."]
   }, {
-    "Roll": "91-92",
-    "weight": 2.0,
-    "Effect": "If you die within the next minute, you immediately come back to life as if by the reincarnate spell."
+    "weight": 2,
+    "roll": "91-92",
+    "values": ["If you die within the next minute, you immediately come back to life as if by the reincarnate spell."]
   }, {
-    "Roll": "93-94",
-    "weight": 2.0,
-    "Effect": "Your size increases by one size category for the next minute."
+    "weight": 2,
+    "roll": "93-94",
+    "values": ["Your size increases by one size category for the next minute."]
   }, {
-    "Roll": "95-96",
-    "weight": 2.0,
-    "Effect": "You and all creatures within 30 feet of you gain vulnerability to piercing damage for the next minute."
+    "weight": 2,
+    "roll": "95-96",
+    "values": ["You and all creatures within 30 feet of you gain vulnerability to piercing damage for the next minute."]
   }, {
-    "Roll": "97-98",
-    "weight": 2.0,
-    "Effect": "You are surrounded by faint, ethereal music for the next minute."
+    "weight": 2,
+    "roll": "97-98",
+    "values": ["You are surrounded by faint, ethereal music for the next minute."]
   }, {
-    "Roll": "99-100",
-    "weight": 2.0,
-    "Effect": "You regain all expended sorcery points."
+    "weight": 2,
+    "roll": "99-100",
+    "values": ["You regain all expended sorcery points."]
   }],
   "maxRoll": 98,
   "name": "Sorcerer Wild Magic Surge"

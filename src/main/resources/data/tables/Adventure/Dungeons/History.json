@@ -1,53 +1,53 @@
 {
   "columns": ["History"],
   "entries": [{
-    "Roll": "1-3",
-    "weight": 3.0,
-    "History": "Abandoned by creators"
+    "weight": 3,
+    "roll": "1-3",
+    "values": ["Abandoned by creators"]
   }, {
-    "Roll": "4",
-    "weight": 1.0,
-    "History": "Abandoned due to plague"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Abandoned due to plague"]
   }, {
-    "Roll": "5-8",
-    "weight": 4.0,
-    "History": "Conquered by invaders"
+    "weight": 4,
+    "roll": "5-8",
+    "values": ["Conquered by invaders"]
   }, {
-    "Roll": "9-10",
-    "weight": 2.0,
-    "History": "Creators destroyed by attacking raiders"
+    "weight": 2,
+    "roll": "9-10",
+    "values": ["Creators destroyed by attacking raiders"]
   }, {
-    "Roll": "11",
-    "weight": 1.0,
-    "History": "Creators destroyed by discovery made within the site"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Creators destroyed by discovery made within the site"]
   }, {
-    "Roll": "12",
-    "weight": 1.0,
-    "History": "Creators destroyed by internal conflict"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Creators destroyed by internal conflict"]
   }, {
-    "Roll": "13",
-    "weight": 1.0,
-    "History": "Creators destroyed by magical catastrophe"
+    "weight": 1,
+    "roll": "13",
+    "values": ["Creators destroyed by magical catastrophe"]
   }, {
-    "Roll": "14-15",
-    "weight": 2.0,
-    "History": "Creators destroyed by natural disaster"
+    "weight": 2,
+    "roll": "14-15",
+    "values": ["Creators destroyed by natural disaster"]
   }, {
-    "Roll": "16",
-    "weight": 1.0,
-    "History": "Location cursed by the gods and shunned"
+    "weight": 1,
+    "roll": "16",
+    "values": ["Location cursed by the gods and shunned"]
   }, {
-    "Roll": "17-18",
-    "weight": 2.0,
-    "History": "Original creator still in control"
+    "weight": 2,
+    "roll": "17-18",
+    "values": ["Original creator still in control"]
   }, {
-    "Roll": "19",
-    "weight": 1.0,
-    "History": "Overrun by planar creatures"
+    "weight": 1,
+    "roll": "19",
+    "values": ["Overrun by planar creatures"]
   }, {
-    "Roll": "20",
-    "weight": 1.0,
-    "History": "Site of a great miracle"
+    "weight": 1,
+    "roll": "20",
+    "values": ["Site of a great miracle"]
   }],
   "maxRoll": 20,
   "name": "History"

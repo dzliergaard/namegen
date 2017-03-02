@@ -1,88 +1,85 @@
 {
   "columns": ["Goal"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Goal": "Locate a dungeon or other site of interest (roll on the Dungeon Goals table to find out why)."
+    "weight": 1,
+    "roll": "1",
+    "values": ["Locate a dungeon or other site of interest (roll on the Dungeon Goals table to find out why)."]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Goal": "Assess the scope of a natural or unnatural disaster."
+    "weight": 1,
+    "roll": "2",
+    "values": ["Assess the scope of a natural or unnatural disaster."]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Goal": "Escort an NPC to a destination."
+    "weight": 1,
+    "roll": "3",
+    "values": ["Escort an NPC to a destination."]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Goal": "Arrive at a destination without being seen by the villain's forces."
+    "weight": 1,
+    "roll": "4",
+    "values": ["Arrive at a destination without being seen by the villain's forces."]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Goal": "Stop monsters from raiding caravans and farms."
+    "weight": 1,
+    "roll": "5",
+    "values": ["Stop monsters from raiding caravans and farms."]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Goal": "Establish trade with a distant town."
+    "weight": 1,
+    "roll": "6",
+    "values": ["Establish trade with a distant town."]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Goal": "Protect a caravan traveling to a distant town."
+    "weight": 1,
+    "roll": "7",
+    "values": ["Protect a caravan traveling to a distant town."]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Goal": "Map a new land."
+    "weight": 1,
+    "roll": "8",
+    "values": ["Map a new land."]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Goal": "Find a place to establish a colony."
+    "weight": 1,
+    "roll": "9",
+    "values": ["Find a place to establish a colony."]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Goal": "Find a natural resource."
+    "weight": 1,
+    "roll": "10",
+    "values": ["Find a natural resource."]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Goal": "Hunt a specific monster."
+    "weight": 1,
+    "roll": "11",
+    "values": ["Hunt a specific monster."]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Goal": "Return home from a distant place."
+    "weight": 1,
+    "roll": "12",
+    "values": ["Return home from a distant place."]
   }, {
-    "Roll": 13.0,
-    "weight": 1.0,
-    "Goal": "Obtain information from a reclusive hermit."
+    "weight": 1,
+    "roll": "13",
+    "values": ["Obtain information from a reclusive hermit."]
   }, {
-    "Roll": 14.0,
-    "weight": 1.0,
-    "Goal": "Find an object that was lost in the wilds."
+    "weight": 1,
+    "roll": "14",
+    "values": ["Find an object that was lost in the wilds."]
   }, {
-    "Roll": 15.0,
-    "weight": 1.0,
-    "Goal": "Discover the fate of a missing group of explorers."
+    "weight": 1,
+    "roll": "15",
+    "values": ["Discover the fate of a missing group of explorers."]
   }, {
-    "Roll": 16.0,
-    "weight": 1.0,
-    "Goal": "Pursue fleeing foes."
+    "weight": 1,
+    "roll": "16",
+    "values": ["Pursue fleeing foes."]
   }, {
-    "Roll": 17.0,
-    "weight": 1.0,
-    "Goal": "Assess the size of an approaching army."
+    "weight": 1,
+    "roll": "17",
+    "values": ["Assess the size of an approaching army."]
   }, {
-    "Roll": 18.0,
-    "weight": 1.0,
-    "Goal": "Escape the reign of a tyrant."
+    "weight": 1,
+    "roll": "18",
+    "values": ["Escape the reign of a tyrant."]
   }, {
-    "Roll": 19.0,
-    "weight": 1.0,
-    "Goal": "Protect a wilderness site from attackers."
+    "weight": 1,
+    "roll": "19",
+    "values": ["Protect a wilderness site from attackers."]
   }, {
-    "Roll": 20.0,
-    "weight": 1.0,
-    "Goal": {
-      "table_path": "this",
-      "num_rolls": 2.0
-    }
+    "weight": 1,
+    "roll": "20",
+    "values": [""]
   }],
   "maxRoll": 20,
   "name": "Wilderness"

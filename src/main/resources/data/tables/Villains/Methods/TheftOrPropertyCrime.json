@@ -1,45 +1,45 @@
 {
   "columns": ["Method"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Method": "Arson"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Arson"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Method": "Blackmail or extortion"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Blackmail or extortion"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Method": "Burglary"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Burglary"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Method": "Counterfeiting"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Counterfeiting"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Method": "Highway robbery"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Highway robbery"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Method": "Looting"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Looting"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Method": "Mugging"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Mugging"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Method": "Poaching"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Poaching"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Method": "Seizing property"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Seizing property"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Method": "Smuggling"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Smuggling"]
   }],
   "maxRoll": 10,
   "name": "Theft Or Property Crime"

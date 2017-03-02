@@ -1,29 +1,29 @@
 {
   "columns": ["Other Ideal"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Other Ideal": "Aspiration"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Aspiration"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Other Ideal": "Discovery"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Discovery"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Other Ideal": "Glory"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Glory"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Other Ideal": "Nation"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Nation"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Other Ideal": "Redemption"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Redemption"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Other Ideal": "Self-knowledge"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Self-knowledge"]
   }],
   "maxRoll": 6,
   "name": "Other"

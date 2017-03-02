@@ -1,35 +1,29 @@
 {
   "columns": ["High Ability", "Description"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "High Ability": "Strength",
-    "Description": "Powerful, brawny, strong as an ox"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Strength", "Powerful, brawny, strong as an ox"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "High Ability": "Dexterity",
-    "Description": "Lithe, agile, graceful"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Dexterity", "Lithe, agile, graceful"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "High Ability": "Constitution",
-    "Description": "Hard, hale, healthy"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Constitution", "Hard, hale, healthy"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "High Ability": "Intelligence",
-    "Description": "Studious, learned, inquisitive"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Intelligence", "Studious, learned, inquisitive"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "High Ability": "Wisdom",
-    "Description": "Perceptive, spiritual, insightful"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Wisdom", "Perceptive, spiritual, insightful"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "High Ability": "Charisma",
-    "Description": "Persuasive, forceful, born leader"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Charisma", "Persuasive, forceful, born leader"]
   }],
   "maxRoll": 6,
   "name": "High"

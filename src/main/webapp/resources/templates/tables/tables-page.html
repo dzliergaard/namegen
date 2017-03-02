@@ -1,11 +1,12 @@
 <link rel="import" href="../behavior/table-roll-behavior.html">
-<link rel="import" href="rptools-table.html">
 <link rel="import" href="/bower/iron-ajax/iron-ajax.html">
 <link rel="import" href="/bower/iron-icon/iron-icon.html">
 <link rel="import" href="/bower/iron-icons/iron-icons.html">
 <link rel="import" href="/bower/iron-icons/places-icons.html">
 <link rel="import" href="/bower/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="/bower/paper-card/paper-card.html">
+<link rel="import" href="/bower/paper-datatable-api/dist/paper-datatable-api.html">
+<link rel="import" href="/bower/paper-datatable-api/dist/paper-datatable-api-column.html">
 <link rel="import" href="/bower/paper-item/paper-item.html">
 <link rel="import" href="/bower/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="/bower/paper-listbox/paper-listbox.html">
@@ -28,10 +29,15 @@
       :host paper-item {
         white-space: nowrap;
       }
+
+      :host ::content tr > :first-child {
+        display: none;
+      }
     </style>
-    <div class$="card-content [[layoutClass(pageColumns)]] layout">
-      <paper-dropdown-menu allow-outside-scroll class="flex" label="Choose Table" horizontal-align="left">
-        <paper-menu class="dropdown-content">
+    <div class$="[[layoutClass(pageColumns)]] layout">
+      <paper-dropdown-menu allow-outside-scroll class="flex" label="Choose Table"
+                           horizontal-align="left">
+        <paper-menu id="topmenu" class="dropdown-content">
           <template is="dom-repeat" items="[[tables.tablesArray]]">
             <template is="dom-if" if="[[!item.tablesArray]]">
               <paper-item on-tap="selectTable">[[item.name]]</paper-item>
@@ -72,18 +78,34 @@
         </paper-menu>
       </paper-dropdown-menu>
       <div class="flex-3 layout horizontal">
-        <paper-card hidden id="table-card" class="flex">
+        <paper-card hidden id="tablecard" class="flex">
           <div class="header paper-card">
             <div class="title-text paper-card layout horizontal justified">
               <span>[[table.name]]</span>
-              <paper-fab mini id="roll-button" icon="places:casino" on-tap="selectRandom"></paper-fab>
+              <paper-fab mini id="roll-button" icon="places:casino"
+                         on-tap="selectRandom"></paper-fab>
               <paper-tooltip for="roll-button" position="left">Select random</paper-tooltip>
             </div>
           </div>
           <div id="card-content" class="card-content">
-            <template is="dom-repeat" items="[[tables.tablesArray]]">
-              <rptools-table table="[[item]]" tables="[[tables]]" roll="{{roll}}"></rptools-table>
-            </template>
+            <paper-datatable-api selectable selected-rows={{selectedRows}}
+                                 selectable-data-key="roll" id="table"
+                                 data="[[table.entries]]">
+              <paper-datatable-api-column id="roll-column" header="Roll"
+                                          property="roll">
+                <template>
+                  [[value]]
+                </template>
+              </paper-datatable-api-column>
+              <template is="dom-repeat" items="[[headers]]">
+                <paper-datatable-api-column header="[[item]]" id="[[item]]" property="[[item]]"
+                                            other-properties='["values"]'>
+                  <template>
+                    [[parseValue(otherValues.values, index)]]
+                  </template>
+                </paper-datatable-api-column>
+              </template>
+            </paper-datatable-api>
           </div>
         </paper-card>
       </div>
@@ -95,13 +117,30 @@
       is: 'tables-page',
       behaviors: [rptools.TableRollBehavior],
       properties: {
+        headers: {
+          type: Array,
+          value: ["placeholder"]
+        },
+        selectedRows: {
+          type: Array,
+          value: []
+        },
         table: {
-          type: Object
+          type: Object,
+          value: {entries: [{"placeholder": ""}]}
         },
         pageColumns: {
           type: Array,
           value: []
         }
+      },
+      attached: function () {
+        this.async(function () {
+          this.headers = [];
+        }.bind(this));
+      },
+      parseValue: function (values, index) {
+        return values[index];
       },
       // when selecting a subcategory, toggle the submenu but keep the dropdown open
       keepDropdownOpen: function (event) {
@@ -119,17 +158,26 @@
       layoutClass: function (columns) {
         return columns == 12 ? 'horizontal start' : 'vertical';
       },
+      deselectRows: function () {
+        this.set('selectedRows', []);
+        this.$.table.querySelectorAll('tr.selected, paper-checkbox[checked]').forEach(
+            function (el) {
+              el.classList.remove('selected');
+              el.checked = false;
+            });
+      },
       selectRandom: function (event) {
-        this.table.datatable.selectRandom(true);
+        var entry = this.getRandomEntry(this.table);
+        // Deselect stupid selected rows
+        this.deselectRows();
+        this.$.table.selectRow(entry.entry.roll);
       },
       selectTable: function (event) {
-        if (this.table) {
-          this.table.datatable.show(false);
-        }
-        this.$['table-card'].hidden = false;
+        this.$.tablecard.hidden = false;
         this.set('table', event.model.item);
-        this.set('roll', null);
-        this.table.datatable.show(true);
+        this.$.topmenu.select(event.model.item);
+        this.set('headers', event.model.item.columns);
+        this.deselectRows();
       }
     });
   </script>

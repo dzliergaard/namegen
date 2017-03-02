@@ -1,29 +1,29 @@
 {
   "columns": ["Neutral Ideal"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Neutral Ideal": "Balance"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Balance"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Neutral Ideal": "Knowledge"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Knowledge"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Neutral Ideal": "Live and let live"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Live and let live"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Neutral Ideal": "Moderation"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Moderation"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Neutral Ideal": "Neutrality"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Neutrality"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Neutral Ideal": "People"
+    "weight": 1,
+    "roll": "6",
+    "values": ["People"]
   }],
   "maxRoll": 6,
   "name": "Neutral"

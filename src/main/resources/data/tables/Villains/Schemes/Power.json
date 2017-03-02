@@ -1,21 +1,21 @@
 {
   "columns": ["Scheme"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Scheme": "Conquer a region or incite a rebellion"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Conquer a region or incite a rebellion"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Scheme": "Seize control of an army"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Seize control of an army"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Scheme": "Become the power behind the throne"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Become the power behind the throne"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Scheme": "Gain the favor of a ruler"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Gain the favor of a ruler"]
   }],
   "maxRoll": 4,
   "name": "Power"

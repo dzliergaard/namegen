@@ -1,85 +1,85 @@
 {
   "columns": ["Government"],
   "entries": [{
-    "Roll": "01-08",
-    "weight": 8.0,
-    "Government": "Autocracy"
+    "weight": 8,
+    "roll": "01-08",
+    "values": ["Autocracy"]
   }, {
-    "Roll": "09-13",
-    "weight": 5.0,
-    "Government": "Bureaucracy"
+    "weight": 5,
+    "roll": "09-13",
+    "values": ["Bureaucracy"]
   }, {
-    "Roll": "14-19",
-    "weight": 6.0,
-    "Government": "Confederacy"
+    "weight": 6,
+    "roll": "14-19",
+    "values": ["Confederacy"]
   }, {
-    "Roll": "20-22",
-    "weight": 3.0,
-    "Government": "Democracy"
+    "weight": 3,
+    "roll": "20-22",
+    "values": ["Democracy"]
   }, {
-    "Roll": "23-27",
-    "weight": 5.0,
-    "Government": "Dictatorship"
+    "weight": 5,
+    "roll": "23-27",
+    "values": ["Dictatorship"]
   }, {
-    "Roll": "28-42",
-    "weight": 15.0,
-    "Government": "Feudalism"
+    "weight": 15,
+    "roll": "28-42",
+    "values": ["Feudalism"]
   }, {
-    "Roll": "43-44",
-    "weight": 2.0,
-    "Government": "Gerontocracy"
+    "weight": 2,
+    "roll": "43-44",
+    "values": ["Gerontocracy"]
   }, {
-    "Roll": "45-53",
-    "weight": 9.0,
-    "Government": "Hierarchy"
+    "weight": 9,
+    "roll": "45-53",
+    "values": ["Hierarchy"]
   }, {
-    "Roll": "54-56",
-    "weight": 3.0,
-    "Government": "Magocracy"
+    "weight": 3,
+    "roll": "54-56",
+    "values": ["Magocracy"]
   }, {
-    "Roll": "57-58",
-    "weight": 2.0,
-    "Government": "Matriarchy"
+    "weight": 2,
+    "roll": "57-58",
+    "values": ["Matriarchy"]
   }, {
-    "Roll": "59-64",
-    "weight": 6.0,
-    "Government": "Militocracy"
+    "weight": 6,
+    "roll": "59-64",
+    "values": ["Militocracy"]
   }, {
-    "Roll": "65-74",
-    "weight": 10.0,
-    "Government": "Monarchy"
+    "weight": 10,
+    "roll": "65-74",
+    "values": ["Monarchy"]
   }, {
-    "Roll": "75-78",
-    "weight": 4.0,
-    "Government": "Oligarchy"
+    "weight": 4,
+    "roll": "75-78",
+    "values": ["Oligarchy"]
   }, {
-    "Roll": "79-80",
-    "weight": 2.0,
-    "Government": "Patriarchy"
+    "weight": 2,
+    "roll": "79-80",
+    "values": ["Patriarchy"]
   }, {
-    "Roll": "81-83",
-    "weight": 3.0,
-    "Government": "Meritocracy"
+    "weight": 3,
+    "roll": "81-83",
+    "values": ["Meritocracy"]
   }, {
-    "Roll": "84-85",
-    "weight": 2.0,
-    "Government": "Plutocracy"
+    "weight": 2,
+    "roll": "84-85",
+    "values": ["Plutocracy"]
   }, {
-    "Roll": "86-92",
-    "weight": 7.0,
-    "Government": "Republic"
+    "weight": 7,
+    "roll": "86-92",
+    "values": ["Republic"]
   }, {
-    "Roll": "93-94",
-    "weight": 2.0,
-    "Government": "Satrapy"
+    "weight": 2,
+    "roll": "93-94",
+    "values": ["Satrapy"]
   }, {
-    "Roll": "95",
-    "weight": 1.0,
-    "Government": "Kleptocracy"
+    "weight": 1,
+    "roll": "95",
+    "values": ["Kleptocracy"]
   }, {
-    "Roll": "96-100",
-    "weight": 5.0,
-    "Government": "Theocracy"
+    "weight": 5,
+    "roll": "96-100",
+    "values": ["Theocracy"]
   }],
   "maxRoll": 100,
   "name": "Government"

@@ -1,29 +1,29 @@
 {
   "columns": ["Good Ideal"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Good Ideal": "Beauty"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Beauty"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Good Ideal": "Charity"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Charity"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Good Ideal": "Greater good"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Greater good"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Good Ideal": "Life"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Life"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Good Ideal": "Respect"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Respect"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Good Ideal": "Self-sacrifice"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Self-sacrifice"]
   }],
   "maxRoll": 6,
   "name": "Good"

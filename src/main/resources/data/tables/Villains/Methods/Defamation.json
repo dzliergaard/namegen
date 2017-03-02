@@ -1,21 +1,21 @@
 {
   "columns": ["Method"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Method": "Framing"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Framing"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Method": "Gossiping or slander"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Gossiping or slander"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Method": "Humiliation"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Humiliation"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Method": "Libel or insults"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Libel or insults"]
   }],
   "maxRoll": 4,
   "name": "Defamation"

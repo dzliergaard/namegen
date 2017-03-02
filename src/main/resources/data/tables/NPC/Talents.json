@@ -1,85 +1,85 @@
 {
   "columns": ["Talent"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Talent": "Plays a musical instrument"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Plays a musical instrument"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Talent": "Speaks several languages fluently"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Speaks several languages fluently"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Talent": "Unbelievably lucky"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Unbelievably lucky"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Talent": "Perfect memory"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Perfect memory"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Talent": "Great with animals"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Great with animals"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Talent": "Great with children"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Great with children"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Talent": "Great at solving puzzles"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Great at solving puzzles"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Talent": "Great at one game"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Great at one game"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Talent": "Great at impersonations"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Great at impersonations"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Talent": "Draws beautifully"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Draws beautifully"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Talent": "Paints beautifully"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Paints beautifully"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Talent": "Sings beautifully"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Sings beautifully"]
   }, {
-    "Roll": 13.0,
-    "weight": 1.0,
-    "Talent": "Drinks everyone under the table"
+    "weight": 1,
+    "roll": "13",
+    "values": ["Drinks everyone under the table"]
   }, {
-    "Roll": 14.0,
-    "weight": 1.0,
-    "Talent": "Expert carpenter"
+    "weight": 1,
+    "roll": "14",
+    "values": ["Expert carpenter"]
   }, {
-    "Roll": 15.0,
-    "weight": 1.0,
-    "Talent": "Expert cook"
+    "weight": 1,
+    "roll": "15",
+    "values": ["Expert cook"]
   }, {
-    "Roll": 16.0,
-    "weight": 1.0,
-    "Talent": "Expert dart thrower and rock skipper"
+    "weight": 1,
+    "roll": "16",
+    "values": ["Expert dart thrower and rock skipper"]
   }, {
-    "Roll": 17.0,
-    "weight": 1.0,
-    "Talent": "Expert juggler"
+    "weight": 1,
+    "roll": "17",
+    "values": ["Expert juggler"]
   }, {
-    "Roll": 18.0,
-    "weight": 1.0,
-    "Talent": "Skilled actor and master of disguise"
+    "weight": 1,
+    "roll": "18",
+    "values": ["Skilled actor and master of disguise"]
   }, {
-    "Roll": 19.0,
-    "weight": 1.0,
-    "Talent": "Skilled dancer"
+    "weight": 1,
+    "roll": "19",
+    "values": ["Skilled dancer"]
   }, {
-    "Roll": 20.0,
-    "weight": 1.0,
-    "Talent": "Knows thieves' cant"
+    "weight": 1,
+    "roll": "20",
+    "values": ["Knows thieves' cant"]
   }],
   "maxRoll": 20,
   "name": "Talents"

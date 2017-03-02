@@ -1,45 +1,45 @@
 {
   "columns": ["Method"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Method": "Bribery"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Bribery"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Method": "Enticement"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Enticement"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Method": "Eviction"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Eviction"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Method": "Imprisonment"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Imprisonment"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Method": "Kidnapping"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Kidnapping"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Method": "Legal intimidation"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Legal intimidation"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Method": "Press gangs"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Press gangs"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Method": "Shackling"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Shackling"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Method": "Slavery"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Slavery"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Method": "Threats or harassment"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Threats or harassment"]
   }],
   "maxRoll": 10,
   "name": "Captivity Or Coercion"

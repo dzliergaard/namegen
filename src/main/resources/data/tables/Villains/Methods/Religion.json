@@ -1,21 +1,21 @@
 {
   "columns": ["Method"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Method": "Curses"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Curses"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Method": "Desecration"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Desecration"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Method": "False gods"
+    "weight": 1,
+    "roll": "3",
+    "values": ["False gods"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Method": "Heresy or cults"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Heresy or cults"]
   }],
   "maxRoll": 4,
   "name": "Religion"

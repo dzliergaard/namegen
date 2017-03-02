@@ -1,41 +1,41 @@
 {
   "columns": ["Alignment"],
   "entries": [{
-    "Roll": "1-2",
-    "weight": 2.0,
-    "Alignment": "Lawful good"
+    "weight": 2,
+    "roll": "1-2",
+    "values": ["Lawful good"]
   }, {
-    "Roll": "3-4",
-    "weight": 2.0,
-    "Alignment": "Neutral good"
+    "weight": 2,
+    "roll": "3-4",
+    "values": ["Neutral good"]
   }, {
-    "Roll": "5-6",
-    "weight": 2.0,
-    "Alignment": "Chaotic good"
+    "weight": 2,
+    "roll": "5-6",
+    "values": ["Chaotic good"]
   }, {
-    "Roll": "7-9",
-    "weight": 3.0,
-    "Alignment": "Lawful neutral"
+    "weight": 3,
+    "roll": "7-9",
+    "values": ["Lawful neutral"]
   }, {
-    "Roll": "10-11",
-    "weight": 2.0,
-    "Alignment": "Neutral"
+    "weight": 2,
+    "roll": "10-11",
+    "values": ["Neutral"]
   }, {
-    "Roll": "12",
-    "weight": 1.0,
-    "Alignment": "Chaotic neutral"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Chaotic neutral"]
   }, {
-    "Roll": "13-15",
-    "weight": 3.0,
-    "Alignment": "Lawful evil"
+    "weight": 3,
+    "roll": "13-15",
+    "values": ["Lawful evil"]
   }, {
-    "Roll": "16-18",
-    "weight": 3.0,
-    "Alignment": "Neutral evil"
+    "weight": 3,
+    "roll": "16-18",
+    "values": ["Neutral evil"]
   }, {
-    "Roll": "19-20",
-    "weight": 2.0,
-    "Alignment": "Chaotic evil"
+    "weight": 2,
+    "roll": "19-20",
+    "values": ["Chaotic evil"]
   }],
   "maxRoll": 20,
   "name": "NPC Alignment"

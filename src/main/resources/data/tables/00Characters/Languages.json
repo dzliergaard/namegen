@@ -1,69 +1,69 @@
 {
   "columns": ["Language"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Language": "Common"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Common"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Language": "Dwarvish"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Dwarvish"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Language": "Elvish"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Elvish"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Language": "Giant"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Giant"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Language": "Gnomish"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Gnomish"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Language": "Goblin"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Goblin"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Language": "Halfling"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Halfling"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Language": "Orc"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Orc"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Language": "Abyssal"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Abyssal"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Language": "Celestial"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Celestial"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Language": "Draconic"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Draconic"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Language": "Deep Speech"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Deep Speech"]
   }, {
-    "Roll": 13.0,
-    "weight": 1.0,
-    "Language": "Infernal"
+    "weight": 1,
+    "roll": "13",
+    "values": ["Infernal"]
   }, {
-    "Roll": 14.0,
-    "weight": 1.0,
-    "Language": "Primordial"
+    "weight": 1,
+    "roll": "14",
+    "values": ["Primordial"]
   }, {
-    "Roll": 15.0,
-    "weight": 1.0,
-    "Language": "Sylvan"
+    "weight": 1,
+    "roll": "15",
+    "values": ["Sylvan"]
   }, {
-    "Roll": 16.0,
-    "weight": 1.0,
-    "Language": "Undercommon"
+    "weight": 1,
+    "roll": "16",
+    "values": ["Undercommon"]
   }],
   "maxRoll": 16,
   "name": "Languages"

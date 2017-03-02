@@ -1,29 +1,29 @@
 {
   "columns": ["Type"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Type": "Political"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Political"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Type": "Religious"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Religious"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Type": "Military"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Military"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Type": "Crime/underworld"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Crime/underworld"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Type": "Art/culture"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Art/culture"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Type": "Philosophy/learning/magic"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Philosophy/learning/magic"]
   }],
   "maxRoll": 6,
   "name": "Leaders"

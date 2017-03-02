@@ -1,21 +1,21 @@
 {
   "columns": ["Method"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Method": "Blight"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Blight"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Method": "Crop failure"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Crop failure"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Method": "Drought"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Drought"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Method": "Famine"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Famine"]
   }],
   "maxRoll": 4,
   "name": "Agricultural Devastation"

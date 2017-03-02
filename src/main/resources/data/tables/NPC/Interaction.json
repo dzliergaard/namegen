@@ -1,53 +1,53 @@
 {
   "columns": ["Interaction"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Interaction": "Argumentative"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Argumentative"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Interaction": "Arrogant"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Arrogant"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Interaction": "Blustering"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Blustering"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Interaction": "Rude"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Rude"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Interaction": "Curious"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Curious"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Interaction": "Friendly"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Friendly"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Interaction": "Honest"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Honest"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Interaction": "Hot tempered"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Hot tempered"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Interaction": "Irritable"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Irritable"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Interaction": "Ponderous"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Ponderous"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Interaction": "Quiet"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Quiet"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Interaction": "Suspicious"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Suspicious"]
   }],
   "maxRoll": 12,
   "name": "Interaction"

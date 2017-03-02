@@ -1,29 +1,29 @@
 {
   "columns": ["Method"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Method": "Betrayal or treason"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Betrayal or treason"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Method": "Conspiracy"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Conspiracy"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Method": "Espionage or spying"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Espionage or spying"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Method": "Genocide"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Genocide"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Method": "Oppression"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Oppression"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Method": "Raising taxes"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Raising taxes"]
   }],
   "maxRoll": 6,
   "name": "Politics"

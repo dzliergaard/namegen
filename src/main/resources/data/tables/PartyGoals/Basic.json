@@ -1,53 +1,53 @@
 {
   "columns": ["Goal"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Goal": "Seize control of a fortified location such as a fortress, town, or ship."
+    "weight": 1,
+    "roll": "1",
+    "values": ["Seize control of a fortified location such as a fortress, town, or ship."]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Goal": "Defend a location from attackers."
+    "weight": 1,
+    "roll": "2",
+    "values": ["Defend a location from attackers."]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Goal": "Retrieve an object from inside a secure location in a settlement."
+    "weight": 1,
+    "roll": "3",
+    "values": ["Retrieve an object from inside a secure location in a settlement."]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Goal": "Retrieve an object from a caravan."
+    "weight": 1,
+    "roll": "4",
+    "values": ["Retrieve an object from a caravan."]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Goal": "Salvage an object or goods from a lost vessel or caravan."
+    "weight": 1,
+    "roll": "5",
+    "values": ["Salvage an object or goods from a lost vessel or caravan."]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Goal": "Break a prisoner out of a jail or prison camp."
+    "weight": 1,
+    "roll": "6",
+    "values": ["Break a prisoner out of a jail or prison camp."]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Goal": "Escape from a jail or prison camp."
+    "weight": 1,
+    "roll": "7",
+    "values": ["Escape from a jail or prison camp."]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Goal": "Successfully travel through an obstacle course to gain recognition or reward."
+    "weight": 1,
+    "roll": "8",
+    "values": ["Successfully travel through an obstacle course to gain recognition or reward."]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Goal": "Infiltrate a fortified location."
+    "weight": 1,
+    "roll": "9",
+    "values": ["Infiltrate a fortified location."]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Goal": "Find the source of strange occurrences in a haunted house or other location."
+    "weight": 1,
+    "roll": "10",
+    "values": ["Find the source of strange occurrences in a haunted house or other location."]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Goal": "Interfere with the operation of a business."
+    "weight": 1,
+    "roll": "11",
+    "values": ["Interfere with the operation of a business."]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Goal": "Rescue a character, monster, or object from a natural or unnatural disaster."
+    "weight": 1,
+    "roll": "12",
+    "values": ["Rescue a character, monster, or object from a natural or unnatural disaster."]
   }],
   "maxRoll": 12,
   "name": "Basic"

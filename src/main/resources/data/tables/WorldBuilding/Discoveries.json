@@ -1,45 +1,45 @@
 {
   "columns": ["Discovery"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Discovery": "Ancient ruin/lost city of a legendary race"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Ancient ruin/lost city of a legendary race"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Discovery": "Animal/monster/magical mutation"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Animal/monster/magical mutation"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Discovery": "Invention/technology/magic (helpful, destructive)"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Invention/technology/magic (helpful, destructive)"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Discovery": "New (or forgotten) god or planar entity"
+    "weight": 1,
+    "roll": "4",
+    "values": ["New (or forgotten) god or planar entity"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Discovery": "New (or rediscovered) artifact or religious relic"
+    "weight": 1,
+    "roll": "5",
+    "values": ["New (or rediscovered) artifact or religious relic"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Discovery": "New land (island, continent, lost world, demiplane)"
+    "weight": 1,
+    "roll": "6",
+    "values": ["New land (island, continent, lost world, demiplane)"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Discovery": "Otherworldly object (planar portal, alien spacecraft)"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Otherworldly object (planar portal, alien spacecraft)"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Discovery": "People (race, tribe, lost civilization, colony)"
+    "weight": 1,
+    "roll": "8",
+    "values": ["People (race, tribe, lost civilization, colony)"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Discovery": "Plant (miracle herb, fungal parasite, sentient plant)"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Plant (miracle herb, fungal parasite, sentient plant)"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Discovery": "Resource or wealth (gold, gems, mithral)"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Resource or wealth (gold, gems, mithral)"]
   }],
   "maxRoll": 10,
   "name": "Discoveries"

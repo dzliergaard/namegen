@@ -1,29 +1,29 @@
 {
   "columns": ["Method"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Method": "Breach of contract"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Breach of contract"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Method": "Cheating"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Cheating"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Method": "Fast talking"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Fast talking"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Method": "Fine print"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Fine print"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Method": "Fraud or swindling"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Fraud or swindling"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Method": "Quackery or tricks"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Quackery or tricks"]
   }],
   "maxRoll": 6,
   "name": "Confidence Scams"

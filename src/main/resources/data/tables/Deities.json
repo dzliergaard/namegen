@@ -1,165 +1,85 @@
 {
   "columns": ["Deity", "Realm", "Alignment", "Domains", "Symbol"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Deity": "Asmodeus",
-    "Realm": "tyranny",
-    "Alignment": "LE",
-    "Domains": "Trickery",
-    "Symbol": "Three triangles in tight formation"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Asmodeus", "tyranny", "LE", "Trickery", "Three triangles in tight formation"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Deity": "Avandra",
-    "Realm": "change and luck",
-    "Alignment": "CG",
-    "Domains": "Trickery",
-    "Symbol": "Three stacked wavy lines"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Avandra", "change and luck", "CG", "Trickery", "Three stacked wavy lines"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Deity": "Bahamut",
-    "Realm": "justice and nobility",
-    "Alignment": "LG",
-    "Domains": "Life, War",
-    "Symbol": "Dragon's head, in profile, facing left"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Bahamut", "justice and nobility", "LG", "Life, War", "Dragon's head, in profile, facing left"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Deity": "Bane",
-    "Realm": "war and conquest",
-    "Alignment": "LE",
-    "Domains": "War",
-    "Symbol": "Claw with three talons pointing down"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Bane", "war and conquest", "LE", "War", "Claw with three talons pointing down"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Deity": "Corellon",
-    "Realm": "magic and the arts",
-    "Alignment": "CG",
-    "Domains": "Light",
-    "Symbol": "Eight-pointed star"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Corellon", "magic and the arts", "CG", "Light", "Eight-pointed star"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Deity": "Erathis",
-    "Realm": "civilization and invention",
-    "Alignment": "LN",
-    "Domains": "Knowledge",
-    "Symbol": "Upper half of a clockwork gear"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Erathis", "civilization and invention", "LN", "Knowledge", "Upper half of a clockwork gear"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Deity": "Gruumsh",
-    "Realm": "destruction",
-    "Alignment": "CE",
-    "Domains": "Tempest, War",
-    "Symbol": "Triangular eye with bony protrusions"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Gruumsh", "destruction", "CE", "Tempest, War", "Triangular eye with bony protrusions"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Deity": "loun",
-    "Realm": "knowledge",
-    "Alignment": "N",
-    "Domains": "Knowledge",
-    "Symbol": "Crook shaped like a stylized eye"
+    "weight": 1,
+    "roll": "8",
+    "values": ["loun", "knowledge", "N", "Knowledge", "Crook shaped like a stylized eye"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Deity": "Kord",
-    "Realm": "strength and storms",
-    "Alignment": "CN",
-    "Domains": "Tempest",
-    "Symbol": "Sword with a lightning bolt cross guard"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Kord", "strength and storms", "CN", "Tempest", "Sword with a lightning bolt cross guard"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Deity": "Lolth",
-    "Realm": "spiders and lies",
-    "Alignment": "CE",
-    "Domains": "Trickery",
-    "Symbol": "Eight pointed star with a web motif"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Lolth", "spiders and lies", "CE", "Trickery", "Eight pointed star with a web motif"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Deity": "Melora",
-    "Realm": "wilderness and the sea",
-    "Alignment": "N",
-    "Domains": "Nature, Tempest",
-    "Symbol": "Wavelike swirl"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Melora", "wilderness and the sea", "N", "Nature, Tempest", "Wavelike swirl"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Deity": "Moradin",
-    "Realm": "creation",
-    "Alignment": "LG",
-    "Domains": "Knowledge, War",
-    "Symbol": "Flaming anvil"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Moradin", "creation", "LG", "Knowledge, War", "Flaming anvil"]
   }, {
-    "Roll": 13.0,
-    "weight": 1.0,
-    "Deity": "Pelor",
-    "Realm": "the sun and agriculture",
-    "Alignment": "NG",
-    "Domains": "Life, Light",
-    "Symbol": "Circle with six outwardly radiating points"
+    "weight": 1,
+    "roll": "13",
+    "values": ["Pelor", "the sun and agriculture", "NG", "Life, Light", "Circle with six outwardly radiating points"]
   }, {
-    "Roll": 14.0,
-    "weight": 1.0,
-    "Deity": "Raven",
-    "Realm": "death",
-    "Alignment": "LN",
-    "Domains": "Life, Death",
-    "Symbol": "Raven's head, in profile, facing left"
+    "weight": 1,
+    "roll": "14",
+    "values": ["Raven", "death", "LN", "Life, Death", "Raven's head, in profile, facing left"]
   }, {
-    "Roll": 15.0,
-    "weight": 1.0,
-    "Deity": "Sehanine",
-    "Realm": "the moon",
-    "Alignment": "CG",
-    "Domains": "Trickery",
-    "Symbol": "Crescent moon"
+    "weight": 1,
+    "roll": "15",
+    "values": ["Sehanine", "the moon", "CG", "Trickery", "Crescent moon"]
   }, {
-    "Roll": 16.0,
-    "weight": 1.0,
-    "Deity": "Tharizdun",
-    "Realm": "madness",
-    "Alignment": "CE",
-    "Domains": "Trickery",
-    "Symbol": "Jagged counter-clockwise spiral"
+    "weight": 1,
+    "roll": "16",
+    "values": ["Tharizdun", "madness", "CE", "Trickery", "Jagged counter-clockwise spiral"]
   }, {
-    "Roll": 17.0,
-    "weight": 1.0,
-    "Deity": "Tiamat",
-    "Realm": "wealth, greed, and vengeance",
-    "Alignment": "LE",
-    "Domains": "Trickery, War",
-    "Symbol": "Five-pointed star with curved points"
+    "weight": 1,
+    "roll": "17",
+    "values": ["Tiamat", "wealth, greed, and vengeance", "LE", "Trickery, War", "Five-pointed star with curved points"]
   }, {
-    "Roll": 18.0,
-    "weight": 1.0,
-    "Deity": "Torog",
-    "Realm": "the Underdark",
-    "Alignment": "NE",
-    "Domains": "Death",
-    "Symbol": "T attached to a circular shackle"
+    "weight": 1,
+    "roll": "18",
+    "values": ["Torog", "the Underdark", "NE", "Death", "T attached to a circular shackle"]
   }, {
-    "Roll": 19.0,
-    "weight": 1.0,
-    "Deity": "Vecna",
-    "Realm": "evil secrets",
-    "Alignment": "NE",
-    "Domains": "Death, Knowledge",
-    "Symbol": "Partially shattered one-eyed skull"
+    "weight": 1,
+    "roll": "19",
+    "values": ["Vecna", "evil secrets", "NE", "Death, Knowledge", "Partially shattered one-eyed skull"]
   }, {
-    "Roll": 20.0,
-    "weight": 1.0,
-    "Deity": "Zehir",
-    "Realm": "darkness and poison",
-    "Alignment": "CE",
-    "Domains": "Trickery, Death",
-    "Symbol": "Snake in the shape of a dagger"
+    "weight": 1,
+    "roll": "20",
+    "values": ["Zehir", "darkness and poison", "CE", "Trickery, Death", "Snake in the shape of a dagger"]
   }],
   "maxRoll": 20,
   "name": "Deities"

@@ -1,53 +1,53 @@
 {
   "columns": ["Introduction"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Introduction": "While traveling in the wilderness, the characters fall into a sinkhole that opens beneath their feet, dropping them into the adventure location."
+    "weight": 1,
+    "roll": "1",
+    "values": ["While traveling in the wilderness, the characters fall into a sinkhole that opens beneath their feet, dropping them into the adventure location."]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Introduction": "While traveling in the wilderness, the characters notice the entrance to the adventure location."
+    "weight": 1,
+    "roll": "2",
+    "values": ["While traveling in the wilderness, the characters notice the entrance to the adventure location."]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Introduction": "While traveling on a road, the characters are attacked by monsters that flee into the nearby adventure location."
+    "weight": 1,
+    "roll": "3",
+    "values": ["While traveling on a road, the characters are attacked by monsters that flee into the nearby adventure location."]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Introduction": "The adventurers find a map on a dead body. In addition to the map setting up the adventure, the adventure's villain wants the map."
+    "weight": 1,
+    "roll": "4",
+    "values": ["The adventurers find a map on a dead body. In addition to the map setting up the adventure, the adventure's villain wants the map."]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Introduction": "A mysterious magic item or a cruel villain teleports the characters to the adventure location."
+    "weight": 1,
+    "roll": "5",
+    "values": ["A mysterious magic item or a cruel villain teleports the characters to the adventure location."]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Introduction": "A stranger approaches the characters in a tavern and urges them toward the adventure location."
+    "weight": 1,
+    "roll": "6",
+    "values": ["A stranger approaches the characters in a tavern and urges them toward the adventure location."]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Introduction": "A town or village needs volunteers to go to the adventure location."
+    "weight": 1,
+    "roll": "7",
+    "values": ["A town or village needs volunteers to go to the adventure location."]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Introduction": "An NPC the characters care about needs them to go to the adventure location."
+    "weight": 1,
+    "roll": "8",
+    "values": ["An NPC the characters care about needs them to go to the adventure location."]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Introduction": "An NPC the characters must obey orders them to go to the adventure location."
+    "weight": 1,
+    "roll": "9",
+    "values": ["An NPC the characters must obey orders them to go to the adventure location."]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Introduction": "An NPC the characters respect asks them to go to the adventure location."
+    "weight": 1,
+    "roll": "10",
+    "values": ["An NPC the characters respect asks them to go to the adventure location."]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Introduction": "One night, the characters all dream about entering the adventure location."
+    "weight": 1,
+    "roll": "11",
+    "values": ["One night, the characters all dream about entering the adventure location."]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Introduction": "A ghost appears and terrorizes a village. Research reveals that it can be put to rest only by entering the adventure location."
+    "weight": 1,
+    "roll": "12",
+    "values": ["A ghost appears and terrorizes a village. Research reveals that it can be put to rest only by entering the adventure location."]
   }],
   "maxRoll": 12,
   "name": "Introduction"

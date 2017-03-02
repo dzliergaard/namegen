@@ -1,53 +1,37 @@
 {
   "columns": ["Metamagic", "Sorcery Point Cost", "Description"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Metamagic": "Careful Spell",
-    "Sorcery Point Cost": "1",
-    "Description": "Choose up to Charisma mod (min 1) creatures in spell range to automatically succeed spell saving throw."
+    "weight": 1,
+    "roll": "1",
+    "values": ["Careful Spell", "1", "Choose up to Charisma mod (min 1) creatures in spell range to automatically succeed spell saving throw."]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Metamagic": "Distant Spell",
-    "Sorcery Point Cost": "1",
-    "Description": "Spell range is doubled, or 30 feet if range is 'touch.'"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Distant Spell", "1", "Spell range is doubled, or 30 feet if range is 'touch.'"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Metamagic": "Empowered Spell",
-    "Sorcery Point Cost": "1",
-    "Description": "Reroll up to Charisma mod (min 1) damage dice."
+    "weight": 1,
+    "roll": "3",
+    "values": ["Empowered Spell", "1", "Reroll up to Charisma mod (min 1) damage dice."]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Metamagic": "Extended Spell",
-    "Sorcery Point Cost": "1",
-    "Description": "Double duration of spell with duration at least 1 minute, up to 24 hours."
+    "weight": 1,
+    "roll": "4",
+    "values": ["Extended Spell", "1", "Double duration of spell with duration at least 1 minute, up to 24 hours."]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Metamagic": "Heightened Spell",
-    "Sorcery Point Cost": "3",
-    "Description": "Give one target of spell disadvantage on first saving throw made against the spell."
+    "weight": 1,
+    "roll": "5",
+    "values": ["Heightened Spell", "3", "Give one target of spell disadvantage on first saving throw made against the spell."]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Metamagic": "Quickened Spell",
-    "Sorcery Point Cost": "2",
-    "Description": "Change casting time of 1 action to 1 bonus action."
+    "weight": 1,
+    "roll": "6",
+    "values": ["Quickened Spell", "2", "Change casting time of 1 action to 1 bonus action."]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Metamagic": "Subtle Spell",
-    "Sorcery Point Cost": "1",
-    "Description": "Cast spell without somatic or verbal components."
+    "weight": 1,
+    "roll": "7",
+    "values": ["Subtle Spell", "1", "Cast spell without somatic or verbal components."]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Metamagic": "Thinned Spell",
-    "Sorcery Point Cost": "Spell level, min 1",
-    "Description": "Target second creature with spell that normally has 1 non-self target."
+    "weight": 1,
+    "roll": "8",
+    "values": ["Thinned Spell", "Spell level, min 1", "Target second creature with spell that normally has 1 non-self target."]
   }],
   "maxRoll": 8,
   "name": "Sorcerer Metamagic"

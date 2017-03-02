@@ -1,45 +1,45 @@
 {
   "columns": ["Method"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Method": "Assassination"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Assassination"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Method": "Cannibalism"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Cannibalism"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Method": "Dismemberment"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Dismemberment"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Method": "Drowning"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Drowning"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Method": "Electrocution"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Electrocution"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Method": "Euthanasia"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Euthanasia"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Method": "Disease"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Disease"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Method": "Poisoning"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Poisoning"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Method": "Stabbing"
+    "weight": 1,
+    "roll": "9",
+    "values": ["Stabbing"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Method": "Strangulation or suffocation"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Strangulation or suffocation"]
   }],
   "maxRoll": 10,
   "name": "Murder"

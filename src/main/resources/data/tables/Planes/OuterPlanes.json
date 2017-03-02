@@ -1,85 +1,69 @@
 {
   "columns": ["Outer Plane", "Alignment"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Outer Plane": "Mount Celestia, the Seven Heavens of",
-    "Alignment": "LG"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Mount Celestia, the Seven Heavens of", "LG"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Outer Plane": "Bytopia, the Twin Paradises of",
-    "Alignment": "NG, LG"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Bytopia, the Twin Paradises of", "NG, LG"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Outer Plane": "Elysium, the Blessed Fields of",
-    "Alignment": "NG"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Elysium, the Blessed Fields of", "NG"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Outer Plane": "The Beastlands, the Wilderness of",
-    "Alignment": "NG, CG"
+    "weight": 1,
+    "roll": "4",
+    "values": ["The Beastlands, the Wilderness of", "NG, CG"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Outer Plane": "Arborea, the Olympian Glades of",
-    "Alignment": "CG"
+    "weight": 1,
+    "roll": "5",
+    "values": ["Arborea, the Olympian Glades of", "CG"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Outer Plane": "Ysgard, the Heroic Domains of",
-    "Alignment": "CN, CG"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Ysgard, the Heroic Domains of", "CN, CG"]
   }, {
-    "Roll": 7.0,
-    "weight": 1.0,
-    "Outer Plane": "Limbo, the Ever-Changing Chaos of",
-    "Alignment": "CN"
+    "weight": 1,
+    "roll": "7",
+    "values": ["Limbo, the Ever-Changing Chaos of", "CN"]
   }, {
-    "Roll": 8.0,
-    "weight": 1.0,
-    "Outer Plane": "Pandemonium, the Windswept Depths of",
-    "Alignment": "CN, CE"
+    "weight": 1,
+    "roll": "8",
+    "values": ["Pandemonium, the Windswept Depths of", "CN, CE"]
   }, {
-    "Roll": 9.0,
-    "weight": 1.0,
-    "Outer Plane": "The Abyss, the Infinite Layers of",
-    "Alignment": "CE"
+    "weight": 1,
+    "roll": "9",
+    "values": ["The Abyss, the Infinite Layers of", "CE"]
   }, {
-    "Roll": 10.0,
-    "weight": 1.0,
-    "Outer Plane": "Carceri, the Tarterian Depths of",
-    "Alignment": "NE, CE"
+    "weight": 1,
+    "roll": "10",
+    "values": ["Carceri, the Tarterian Depths of", "NE, CE"]
   }, {
-    "Roll": 11.0,
-    "weight": 1.0,
-    "Outer Plane": "Hades, the Gray Waste of",
-    "Alignment": "NE"
+    "weight": 1,
+    "roll": "11",
+    "values": ["Hades, the Gray Waste of", "NE"]
   }, {
-    "Roll": 12.0,
-    "weight": 1.0,
-    "Outer Plane": "Gehenna, the Bleak Eternity of",
-    "Alignment": "NE, LE"
+    "weight": 1,
+    "roll": "12",
+    "values": ["Gehenna, the Bleak Eternity of", "NE, LE"]
   }, {
-    "Roll": 13.0,
-    "weight": 1.0,
-    "Outer Plane": "The Nine Hells of Baator",
-    "Alignment": "LE"
+    "weight": 1,
+    "roll": "13",
+    "values": ["The Nine Hells of Baator", "LE"]
   }, {
-    "Roll": 14.0,
-    "weight": 1.0,
-    "Outer Plane": "Acheron, the Infinite Battlefield of",
-    "Alignment": "LN, LE"
+    "weight": 1,
+    "roll": "14",
+    "values": ["Acheron, the Infinite Battlefield of", "LN, LE"]
   }, {
-    "Roll": 15.0,
-    "weight": 1.0,
-    "Outer Plane": "Mechanus, the Clockwork Nirvana of",
-    "Alignment": "LN"
+    "weight": 1,
+    "roll": "15",
+    "values": ["Mechanus, the Clockwork Nirvana of", "LN"]
   }, {
-    "Roll": 16.0,
-    "weight": 1.0,
-    "Outer Plane": "Arcadia, the Peaceable Kingdoms of",
-    "Alignment": "LN, LG"
+    "weight": 1,
+    "roll": "16",
+    "values": ["Arcadia, the Peaceable Kingdoms of", "LN, LG"]
   }],
   "maxRoll": 16,
   "name": "Outer Planes"

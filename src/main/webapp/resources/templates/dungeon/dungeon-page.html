@@ -103,16 +103,15 @@
         this.dungeonTables.tablesArray.forEach(function (table) {
           var column = table.columns[0];
           var entry = this.getRandomEntry(table);
-          var value = entry.entry[column];
+          var value = entry.entry.values[0];
           if (!entry.redirectEntry) {
             dungeon.attributes.push({name: column, value: value});
           } else {
             dungeon.attributes.push({name: column, value: this.redirectEntryText(value)});
-            var redirectColumn = entry.redirectTable.columns[0];
             dungeon.attributes.push(
                 {
                   name: value.table_path.replace(/\./g, '->'),
-                  value: entry.redirectEntry[redirectColumn]
+                  value: entry.redirectEntry.values[0]
                 });
           }
         }.bind(this));

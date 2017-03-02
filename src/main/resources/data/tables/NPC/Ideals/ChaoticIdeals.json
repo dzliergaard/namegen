@@ -1,29 +1,29 @@
 {
   "columns": ["Chaotic Ideal"],
   "entries": [{
-    "Roll": 1.0,
-    "weight": 1.0,
-    "Chaotic Ideal": "Change"
+    "weight": 1,
+    "roll": "1",
+    "values": ["Change"]
   }, {
-    "Roll": 2.0,
-    "weight": 1.0,
-    "Chaotic Ideal": "Creativity"
+    "weight": 1,
+    "roll": "2",
+    "values": ["Creativity"]
   }, {
-    "Roll": 3.0,
-    "weight": 1.0,
-    "Chaotic Ideal": "Freedom"
+    "weight": 1,
+    "roll": "3",
+    "values": ["Freedom"]
   }, {
-    "Roll": 4.0,
-    "weight": 1.0,
-    "Chaotic Ideal": "Independence"
+    "weight": 1,
+    "roll": "4",
+    "values": ["Independence"]
   }, {
-    "Roll": 5.0,
-    "weight": 1.0,
-    "Chaotic Ideal": "No limits"
+    "weight": 1,
+    "roll": "5",
+    "values": ["No limits"]
   }, {
-    "Roll": 6.0,
-    "weight": 1.0,
-    "Chaotic Ideal": "Whimsy"
+    "weight": 1,
+    "roll": "6",
+    "values": ["Whimsy"]
   }],
   "maxRoll": 6,
   "name": "Chaotic"

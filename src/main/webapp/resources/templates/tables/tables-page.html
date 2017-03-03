@@ -176,7 +176,10 @@
         this.$.tablecard.hidden = false;
         this.set('table', event.model.item);
         this.$.topmenu.select(event.model.item);
-        this.set('headers', event.model.item.columns);
+        this.set('headers', []);
+        this.async(function() {
+          this.set('headers', event.model.item.columns);
+        }.bind(this));
         this.deselectRows();
       }
     });

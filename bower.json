@@ -77,7 +77,8 @@
     "paper-toggle-button": "PolymerElements/paper-toggle-button#^1.0.0",
     "paper-toolbar": "PolymerElements/paper-toolbar#^1.0.0",
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.0.0",
-    "paper-datatable-api": "^0.2.9"
+    "paper-datatable-api": "^0.2.9",
+    "paper-datatable": "^0.9.8"
   },
   "homepage": "https://github.com/dzliergaard/namegen",
   "authors": [

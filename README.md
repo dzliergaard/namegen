@@ -10,6 +10,22 @@ There is also a feature to "train" the name generator. When there is enough trai
 
 The city generator provides various customizable parameters to generate a city, from a tiny hamlet to a sprawling metropolis. The definitions of these sizes and races come directly from the D&D DM's guide, but the level of diversity is application specific.
 
+# Dungeon Generator
+
+The dungeon generator tool creates a simple graphical map of a dungeon, and provides some random values from the DMG tables on the purpose/history/population of said dungeon.
+
+# NPC Generator
+
+The NPC generator creates an NPC including name, race, class, background, appearance, alignment, and motivation, based on the NPC generation tables in the DMG.
+
+# Party Tracker
+
+The party management tool allows the user to create adventuring parties, populate them with members and add common values like current/max HP, initiative roll, and AC.
+
+# Tables
+
+The table tools has many of the tables that can be found in the D&D Players' Handbook and DMG, and includes a function to roll randomly on the table. The tables are organized by topic and purpose.
+
 # Development
 
 Required for development:
